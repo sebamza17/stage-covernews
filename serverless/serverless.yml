@@ -1,0 +1,26 @@
+service: serverless
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+
+functions:
+  getArticle:
+    handler: article/article.get
+    events:
+      - http:
+          path: article/get
+          method: get
+          cors: true
+          authorizer: false
