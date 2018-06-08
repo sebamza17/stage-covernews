@@ -1,0 +1,317 @@
+/*
+    Fonts CSS classes
+    Author: sebamza17
+*/
+@import "guards";
+@import "../variables";
+
+/*--- Font families ---*/
+/*--- end Font families ---*/
+
+/*--- Font colors ---*/
+.font-color-default {
+  color: @font-color-base;
+}
+
+.font-color-white {
+  color: white;
+}
+
+.variation-dark(color, font-color-white, white, 20);
+
+.font-color-black {
+  color: black;
+}
+
+.variation-light(color, font-color-black, black, 20);
+
+.font-color-brand-sky {
+  color: @color-brand-sky;
+}
+
+.variation-dark(color, font-color-brand-sky, @color-brand-sky, 10);
+.variation-light(color, font-color-brand-sky, @color-brand-sky, 10);
+
+.font-color-brand-blue {
+  color: @color-brand-blue;
+}
+
+.variation-dark(color, font-color-brand-blue, @color-brand-blue, 10);
+.variation-light(color, font-color-brand-blue, @color-brand-blue, 10);
+
+.font-color-brand-blue-electric {
+  color: @color-brand-blue-electric;
+}
+
+.variation-dark(color, font-color-brand-blue-electric, @color-brand-blue-electric, 10);
+.variation-light(color, font-color-brand-blue-electric, @color-brand-blue-electric, 10);
+
+.font-color-brand-green {
+  color: @color-brand-green;
+}
+
+.variation-dark(color, font-color-brand-green, @color-brand-green, 10);
+.variation-light(color, font-color-brand-green, @color-brand-green, 10);
+
+.font-color-brand-red {
+  color: @color-brand-red;
+}
+
+.variation-dark(color, font-color-brand-red, @color-brand-red, 10);
+.variation-light(color, font-color-brand-red, @color-brand-red, 10);
+/*--- end Font colors ---*/
+
+/*--- Helper classes ---*/
+
+// Mixin for dynamic font size
+.font-size(@size-value) {
+  @rem-value: @size-value;
+  @px-value: (@size-value * 10);
+  font-size: ~"@{px-value}px";
+  font-size: ~"@{rem-value}rem";
+}
+
+// Sizes => Giant + 2
+.font-size-giant--2, .material-icons.font-size-giant--2 {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(4.4);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(4);
+  }
+  @media (max-width: @breakpoint-s) {
+    .font-size(3.2);
+  }
+  .font-size(4.4);
+}
+
+// Sizes => Giant + 1
+.font-size-giant--1, .material-icons.font-size-giant--1 {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(4);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(3.6);
+  }
+  @media (max-width: @breakpoint-s) {
+    .font-size(2.8);
+  }
+  .font-size(4);
+}
+
+// Sizes => Giant
+.font-size-giant, .material-icons.font-size-giant {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(3.6);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(3.2);
+  }
+  @media (max-width: @breakpoint-s) {
+    .font-size(2.4);
+  }
+  .font-size(3.6);
+}
+
+// Sizes => XXL + 1
+.font-size-xxl--1, .material-icons.font-size-xxl--1 {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(2.8);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(2.8);
+  }
+  @media (max-width: @breakpoint-s) {
+    .font-size(2.6);
+  }
+  .font-size(3);
+}
+
+// Sizes => XXL
+.font-size-xxl, .material-icons.font-size-xxl {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(2.4);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(2.4);
+  }
+  @media (max-width: @breakpoint-s) {
+    .font-size(2.2);
+  }
+  .font-size(2.6);
+}
+
+// Sizes => XL
+.font-size-xl, .material-icons.font-size-xl {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(2);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(2);
+  }
+  @media (max-width: @breakpoint-s) {
+    .font-size(1.8);
+  }
+  .font-size(2.2);
+}
+
+// Sizes => L
+.font-size-l, .material-icons.font-size-l {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(1.8);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(1.8);
+  }
+  @media (max-width: @breakpoint-s) {
+    .font-size(1.6);
+  }
+  .font-size(1.8);
+}
+
+// Sizes => N
+.font-size-n, .material-icons.font-size-n {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(1.6);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(1.6);
+  }
+  @media (max-width: @breakpoint-s) {
+    .font-size(1.4);
+  }
+  .font-size(1.6);
+}
+
+// Sizes => S
+.font-size-s, .material-icons.font-size-s {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(1);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(0.9);
+  }
+  .font-size(1.1);
+}
+
+// Sizes => S + something
+.font-size-s--0, .material-icons.font-size-s--0 {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(1.15);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(1.05);
+  }
+  .font-size(1.05);
+}
+
+// Sizes => S + 1
+.font-size-s--1, .material-icons.font-size-s--1 {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(1.3);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(0.9);
+  }
+  .font-size(1.1);
+}
+
+// Sizes => S + 2
+.font-size-s--2, .material-icons.font-size-s--2 {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(1.4);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(1.3);
+  }
+  .font-size(1.4);
+}
+
+// Sizes => XS
+.font-size-xs, .material-icons.font-size-xs {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(0.8);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(0.7);
+  }
+  .font-size(0.8);
+}
+
+// Sizes => XXS
+.font-size-xxs, .material-icons.font-size-xxs {
+  @media (max-width: @breakpoint-l--1) {
+    .font-size(0.8);
+  }
+  @media (max-width: @breakpoint-m) {
+    .font-size(0.7);
+  }
+  .font-size(0.6);
+}
+
+// Weight
+.font-weight-light {
+  font-weight: 100;
+}
+
+.font-weight-thin {
+  font-weight: 300;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-normal--1 {
+  font-weight: 500;
+}
+
+.font-weight-normal--2 {
+  font-weight: 600;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+.font-weight-heavy {
+  font-weight: 800;
+}
+
+.font-weight-black {
+  font-weight: 900;
+}
+
+// Transform
+.font-transform {
+
+  &-uppercase {
+    text-transform: uppercase;
+  }
+  &-smallcaps {
+    font-variant: small-caps;
+  }
+  &-italic {
+    font-style: italic;
+  }
+
+}
+
+// Shadow
+.text-shadow {
+
+  &--xs {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  &--s {
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  &--n {
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2), 3px 3px 4px rgba(0, 0, 0, 0.2);
+  }
+
+}
+
+/*--- end Helper classes ---*/

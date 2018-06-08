@@ -1,0 +1,41 @@
+/* 
+    LESS Guards
+    Created on : 11/04/2016
+    Author     : sebamza17
+*/
+
+/*--- Variation color mixin guard ---*/
+.variation-light(@property; @color-name; @color; @quantity) when (@quantity > 0) {
+
+  .variation-light(@property; @color-name; @color; (@quantity - 1));
+
+  @percentage: (@quantity*5)/100;
+
+  .@{color-name}-lighten-@{quantity} {
+      @{property}: lighten(@color, percentage(@percentage));
+  }
+}
+
+.variation-dark(@property; @color-name; @color; @quantity) when (@quantity > 0) {
+
+  .variation-dark(@property; @color-name; @color; (@quantity - 1));
+
+  @percentage: (@quantity*5)/100;
+
+  .@{color-name}-darken-@{quantity} {
+      @{property}: darken(@color, percentage(@percentage));
+  }
+}
+
+.variation-opacity(@property; @color-name; @color; @quantity) when (@quantity > 0) {
+
+  .variation-opacity(@property; @color-name; @color; (@quantity - 1));
+
+  @percentage: (@quantity*5)/100;
+
+  .@{color-name}-opacity-@{quantity} {
+      @{property}: fadeout(@color, percentage(@percentage));
+  }
+}
+
+/*--- end Variation color mixin guard ---*/

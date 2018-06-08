@@ -1,0 +1,335 @@
+/*
+    Buttons CSS classes
+*/
+@import "../variables";
+@import "backgrounds";
+@import "helpers";
+@import "fonts";
+
+//Base button
+.button, a.button {
+  transition: all 200ms ease;
+  .padding-horizontal-half;
+  .padding-vertical-quarter;
+  .font-size-s--2;
+  .font-color-white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  outline: none !important;
+  line-height: initial;
+  text-decoration: none;
+
+  @media (max-width: @breakpoint-l--2) {
+    .padding-horizontal-half;
+    .padding-vertical-eighth;
+  }
+
+  &:hover, &:focus {
+    outline: none !important;
+  }
+
+  &.button--icon {
+    line-height: 0;
+  }
+
+  /* Button no shrink */
+  .button--no-shrink {
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+
+  &.button--radius {
+    border-radius: 40px;
+
+    &.button--no-border {
+      border-color: transparent !important;
+      background-color: transparent;
+    }
+
+    &.button-radius--outline {
+      background-color: transparent;
+      border: 1px solid;
+      border-color: grey;
+      color: grey;
+
+      &:hover, &:focus {
+        border-color: black;
+        color: black;
+      }
+
+      /* &.button--green {
+         border-color: @color-brand-green;
+         .font-color-brand-green;
+         background-color: initial;
+       }*/
+
+      &.button--white {
+        border-color: white;
+        .font-color-white;
+        background-color: initial;
+
+        &.button--no-border {
+          .font-color-white;
+          opacity: 0.9;
+
+          &:hover {
+            .z-depth-0;
+            opacity: 1;
+          }
+
+        }
+
+      }
+
+      /* &.button--red {
+         border-color: @color-brand-red;
+         .font-color-brand-red;
+         background-color: initial;
+       }
+ */
+      &.button--blue {
+        border-color: @color-brand-blue;
+        .font-color-brand-blue;
+        background-color: initial;
+      }
+
+    }
+  }
+
+  //Colors
+  &.button--transparent {
+    .font-color-white-darken-12;
+    background-color: transparent;
+    border: none;
+
+    i {
+      .margin-left-quarter;
+    }
+
+    &:hover,
+    &:focus {
+      .font-color-black;
+      .z-depth-0;
+    }
+
+  }
+
+  &.button--blue {
+    .bg-color-brand-blue;
+    border: 1px solid @color-brand-blue;
+  }
+
+  //&.button--red {
+  //  .bg-color-brand-red;
+  //  border: 1px solid @color-brand-red;
+  //}
+
+  //&.button--green {
+  //  .bg-color-brand-green;
+  //  border: 1px solid @color-brand-green;
+  //}
+
+  &.button--black {
+    .bg-color-black;
+    border: 1px solid black;
+  }
+
+  &.button--white {
+    .bg-color-white;
+    border: 1px solid white;
+    .font-color-brand-blue-electric;
+    &:hover, &:focus {
+      .font-color-brand-blue-electric-darken-2;
+    }
+  }
+
+  &.button--grey {
+    .bg-color-white-darken-12;
+  }
+
+  //Icons
+  i {
+    .font-size-l;
+    .margin-right-quarter;
+  }
+
+  //Actions on hover/focus
+  &:hover, &:focus {
+    .font-color-white;
+    .z-depth-1;
+  }
+
+}
+
+// Button wrapper
+.button-wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+
+  &.button-wrapper--display-block {
+    display: block;
+    text-align: right;
+    @media (max-width: @breakpoint-s) {
+      text-align: center;
+    }
+  }
+
+  &.button-wrapper--wrap {
+    flex-wrap: wrap;
+
+    .button {
+      .margin-bottom-half;
+    }
+  }
+
+  &.button-wrapper--fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    .padding-vertical-half;
+    .z-depth-2;
+    z-index: 3;
+
+    /* &.button-wrapper--full {
+       width: ~"calc(100vw - @{main-sidebar-width})";
+       left: @main-sidebar-width;
+       .border--top;
+     }*/
+
+    &.button-wrapper--auto {
+      width: auto;
+    }
+
+  }
+
+  .button {
+    .margin-right-quarter;
+    outline: none !important;
+
+    &:hover, &:focus {
+      outline: none !important;
+    }
+
+    &:last-of-type {
+      margin-right: initial;
+    }
+
+  }
+
+}
+
+//Links
+.link {
+
+  //Inline block
+  &.link-inline-block {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  cursor: pointer;
+}
+
+// Bootstrap Button
+.btn, input.btn {
+  opacity: 0.9;
+  .padding-horizontal-full;
+  .font-size-n;
+  font-weight: 700;
+  transition: all 200ms;
+  outline: none !important;
+
+  &:hover, &:focus, &.active {
+    opacity: 1;
+    outline: none !important;
+  }
+
+  // Green
+  /*  &.btn-green {
+      .bg-color-brand-green;
+      .font-color-white;
+    }*/
+
+  // White
+  &.btn-white {
+    .bg-color-white;
+    .font-color-black-lighten-10;
+  }
+
+  &.btn-rounded {
+    border-radius: 30px;
+  }
+
+  &.btn-outline {
+    border: 1px solid;
+    border-color: grey;
+    color: grey;
+
+    &:hover, &:focus {
+      border-color: black;
+      color: black;
+    }
+  }
+}
+
+.btn.btn-primary.button-repeat {
+  background-color: transparent;
+  outline: none !important;
+  &:hover, &:focus {
+    border-color: black;
+    color: black;
+    outline: none !important;
+
+  }
+}
+
+.btn-toggle {
+
+  &.btn-group {
+
+    .btn {
+      .font-size-s--2;
+      .padding-horizontal-half;
+      outline: none !important;
+
+      &:hover, &:focus {
+        outline: none !important;
+      }
+
+      &:first-of-type {
+        border-radius: 50px 0 0 50px;
+      }
+      &:last-of-type {
+        border-radius: 0 50px 50px 0;
+      }
+
+      /*  &.btn-white.active {
+          .bg-color-brand-green;
+          .font-color-white;
+        }*/
+
+      &.btn-white.btn-active--grey.active {
+        .bg-color-white-darken-10;
+
+      }
+
+      &.btn--big {
+        .font-size-n;
+      }
+
+      &[disabled] {
+        pointer-events: none;
+      }
+
+    }
+
+  }
+
+}
