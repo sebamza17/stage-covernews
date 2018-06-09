@@ -1,0 +1,146 @@
+/*
+    Base flex wrapper
+    Date: 10/04/2017, 23:51
+    Author: sebamza17
+*/
+
+/*--- Wrapper applicable classes ---*/
+.flex-wrapper, .fw {
+  display: flex;
+
+  &.flex-wrapper--inline,
+  &.fw--inline {
+    display: inline-flex;
+  }
+
+  // Variation => On responsive S goes to block
+  &.fw--responsive-block,
+  &.fw--s-block {
+    @media (max-width: @breakpoint-s) {
+      display: block;
+    }
+  }
+
+  // Variation => Align: center (Vertically aligns children)
+  &.fw--a-center, &.flex-wrapper--align-center {
+    align-items: center;
+  }
+  // Variation => Align: start (All childrens on top of wrapper)
+  &.fw--a-start, &.flex-wrapper--align-start {
+    align-items: flex-start;
+  }
+  // Variation => Align: end (All childrens on bottom of wrapper)
+  &.fw--a-end, &.flex-wrapper--align-end {
+    align-items: flex-end;
+  }
+  // Variation => Align: stretch (All childrens of the same height)
+  &.fw--a-stretch, &.flex-wrapper--align-stretch {
+    align-items: stretch;
+  }
+  // Variation => Align: baseline (All childrens aligned on their baseline)
+  &.fw--a-baseline, &.flex-wrapper--align-baseline {
+    align-items: baseline;
+  }
+
+  // Variation => Justify: center (Horizontally centers children)
+  &.fw--j-center, &.flex-wrapper--justify-center {
+    justify-content: center;
+  }
+  // Variation => Justify: start (Left justification for children)
+  &.fw--j-start, &.flex-wrapper--justify-start {
+    justify-content: flex-start;
+  }
+  // Variation => Justify: end (Right justification for children)
+  &.fw--j-end, &.flex-wrapper--justify-end {
+    justify-content: flex-end;
+  }
+  // Variation => Justify: space-between (Space between childrens)
+  &.fw--j-space-between, &.flex-wrapper--justify-space-between {
+    justify-content: space-between;
+  }
+  // Variation => Justify: space-around (Space around childrens)
+  &.fw--j-space-around, &.flex-wrapper--justify-space-around {
+    justify-content: space-around;
+  }
+
+  // Variation => Wrap (wrap children if they can overflow this wrapper)
+  &.fw--wrap, &.flex-wrapper--wrap {
+    flex-wrap: wrap;
+  }
+  // Variation => Wrap: reverse (wrap children if they can overflow this wrapper, reverse order)
+  &.fw--wrap-reverse, &.flex-wrapper--wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+  // Variation => Wrap: nowrap (not allow children to wrap)
+  &.fw--wrap-none, &.flex-wrapper--wrap-none {
+    flex-wrap: nowrap;
+  }
+
+  // Variation => Direction: column (vertically direct childrens)
+  &.fw--d-column, &.flex-wrapper--direction-column {
+    flex-direction: column;
+  }
+  // Variation => Direction: column reverse (vertically direct childrens, backwards order)
+  &.fw--d-column-r, &.flex-wrapper--direction-column-reverse {
+    flex-direction: column-reverse;
+  }
+  // Variation => Direction: row (horizontally direct children)
+  &.fw--d-row, &.flex-wrapper--direction-row {
+    flex-direction: row;
+  }
+  // Variation => Direction: row (horizontally direct children, backwards order)
+  &.fw--d-row-r, &.flex-wrapper--direction-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+}
+
+/*--- end Wrapper applicable classes ---*/
+
+/*--- Item applicable classes ---*/
+.flex-item--shrink-0 {
+  flex-shrink: 0;
+}
+
+flex-item--shrink-1 {
+  flex-shrink: 1;
+}
+
+;
+
+.flex-item--grow-0 {
+  flex-grow: 0;
+}
+
+flex-item--grow-1 {
+  flex-grow: 1;
+}
+
+;
+/*--- end Item applicable classes ---*/
+
+/*
+Wrap on media*/
+.fw--wrap-m {
+  @media (max-width: @breakpoint-m) {
+    flex-wrap: wrap;
+  }
+}
+
+.fw--wrap-s {
+  @media (max-width: @breakpoint-s) {
+    flex-wrap: wrap;
+  }
+}
+
+.fw--wrap-l {
+  @media (max-width: @breakpoint-l) {
+    flex-wrap: wrap;
+  }
+}
+
+.fw--wrap-xl {
+  @media (max-width: @breakpoint-xl) {
+    flex-wrap: wrap;
+  }
+}

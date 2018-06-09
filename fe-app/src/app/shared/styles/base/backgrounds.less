@@ -1,0 +1,122 @@
+/*
+    Background classes
+    Created on : 06/04/2016
+    Author     : sebamza17
+*/
+@import "../variables";
+@import "guards";
+
+//Bases
+.bg-color-transparent {
+  background: transparent;
+}
+
+//Gradients
+.bg-gray-gradient {
+  background-image: linear-gradient(
+    to right,
+    #F1F1F1, #E6E6E6
+  );
+}
+
+.bg-color-brand-blue {
+  background-color: @color-brand-blue;
+}
+
+.variation-dark(background-color, bg-color-brand-blue, @color-brand-blue, 20);
+.variation-light(background-color, bg-color-brand-blue, @color-brand-blue, 20);
+.variation-opacity(background-color, bg-color-brand-blue, @color-brand-blue, 20);
+
+//Colors
+.bg-color-white {
+  background-color: white;
+}
+
+.variation-dark(background-color, bg-color-white, white, 20);
+.variation-opacity(background-color, bg-color-white, white, 20);
+
+.bg-color-black {
+  background-color: black;
+}
+
+.variation-light(background-color, bg-color-black, black, 20);
+.variation-opacity(background-color, bg-color-black, black, 20);
+
+/*--- Blend modes ---*/
+
+//Multiply: Target * Blend
+.bg-blend-multiply {
+  mix-blend-mode: multiply;
+}
+
+//Darken: min(Target,Blend)
+.bg-blend-darken {
+  mix-blend-mode: darken;
+}
+
+//Lighten: max(Target,Blend)
+.bg-blend-lighten {
+  mix-blend-mode: lighten;
+}
+
+//Color dodge: Target / (1-Blend)
+.bg-blend-color-dodge {
+  mix-blend-mode: color-dodge;
+}
+
+//Color burn: 1 - (1-Target) / Blend
+.bg-blend-color-burn {
+  mix-blend-mode: color-burn;
+}
+
+//Screen: 1 - (1-Target) * (1-Blend)
+.bg-blend-screen {
+  mix-blend-mode: screen;
+}
+
+//Overlay: (Target > 0.5) * (1 - (1-2*(Target-0.5)) * (1-Blend)) + (Target <= 0.5) * ((2*Target) * Blend)
+.bg-blend-overlay {
+  mix-blend-mode: overlay;
+}
+
+//Soft light: (Blend > 0.5) * (1 - (1-Target) * (1-(Blend-0.5))) + (Blend <= 0.5) * (Target * (Blend+0.5))
+.bg-blend-soft-light {
+  mix-blend-mode: soft-light;
+}
+
+//Hard light: (Blend > 0.5) * (1 - (1-Target) * (1-2*(Blend-0.5))) + (Blend <= 0.5) * (Target * (2*Blend))
+.bg-blend-hard-light {
+  mix-blend-mode: hard-light;
+}
+
+//Difference: | Target - Blend |
+.bg-blend-difference {
+  mix-blend-mode: difference;
+}
+
+//Hue: no formula (yet)
+.bg-blend-hue {
+  mix-blend-mode: hue;
+}
+
+//Saturation: no formula (yet)
+.bg-blend-saturation {
+  mix-blend-mode: saturation;
+}
+
+//Color: no formula (yet)
+.bg-blend-color {
+  mix-blend-mode: color;
+}
+
+//Luminosity: no formula (yet)
+.bg-blend-luminosity {
+  mix-blend-mode: luminosity;
+}
+
+//Normal: No blend mode
+.bg-blend-normal, .bg-blend-reset {
+  mix-blend-mode: normal;
+}
+
+/*--- end Blend modes ---*/
