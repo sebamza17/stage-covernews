@@ -23,3 +23,27 @@ export async function get (event, context, callback) {
     }
 
 };
+
+export async function search (event, context, callback) {
+
+    console.log(event.pathParameters.criteria);
+
+    const params = {
+      TableName : "Movies",
+      KeyConditionExpression: "#yr = :yyyy",
+      ExpressionAttributeNames:{
+          "#yr": "year"
+      },
+      ExpressionAttributeValues: {
+          ":yyyy": parseInt(event.pathParameters.criteria)
+      }
+    };
+    
+    try{
+        const result = await dynamoDbLib.call('query',params);
+        callback(null, success(result.Items));
+    }catch(err){
+        callback(null, failure(err));
+    }
+
+};
