@@ -3,6 +3,7 @@
  * @param {*} body 
  */
 export function success(body) {
+  console.log("Success",500);
   return buildResponse(200, body);
 }
 
@@ -10,8 +11,9 @@ export function success(body) {
  * Fail response status 500
  * @param {*} body 
  */
-export function failure(body) {
-  return buildResponse(500, body);
+export function failure(err) {
+  console.log("Failure",err);
+  return buildResponse(500, err);
 }
 
 /**
@@ -26,6 +28,6 @@ function buildResponse(statusCode, body) {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Credentials": true
     },
-    body: body
+    body: JSON.stringify(body)
   };
 }
