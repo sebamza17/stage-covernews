@@ -27,6 +27,7 @@ provider:
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
+  # ARTICLES SECCIONT
   getArticle:
     handler: article/article.get
     events:
@@ -43,6 +44,7 @@ functions:
           method: get
           cors: true
           authorizer: false
+  # JOURNALIST SECCION
   getJournalist:
     handler: journalist/journalist.get
     events:
@@ -56,6 +58,15 @@ functions:
     events:
       - http:
           path: journalist/search/{name}
+          method: get
+          cors: true
+          authorizer: false
+  # CATEGORY SECCION
+  getCategory:
+    handler: category/category.get
+    events:
+      - http:
+          path: category/get/{name}
           method: get
           cors: true
           authorizer: false
