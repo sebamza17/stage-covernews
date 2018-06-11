@@ -31,7 +31,7 @@ functions:
     handler: article/article.get
     events:
       - http:
-          path: article/get
+          path: article/get/{canonical}
           method: get
           cors: true
           authorizer: false
@@ -39,7 +39,23 @@ functions:
     handler: article/article.search
     events:
       - http:
-          path: article/search/{criteria}
+          path: article/search/{title}
+          method: get
+          cors: true
+          authorizer: false
+  getJournalist:
+    handler: journalist/journalist.get
+    events:
+      - http:
+          path: journalist/get/{name}
+          method: get
+          cors: true
+          authorizer: false
+  searchJournalist:
+    handler: journalist/journalist.search
+    events:
+      - http:
+          path: journalist/search/{name}
           method: get
           cors: true
           authorizer: false

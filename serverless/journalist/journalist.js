@@ -11,10 +11,10 @@ import * as dynamoDbLib from '../libs/dynamodb-lib';
 export async function get (event, context, callback) {
 
     const params = {
-        TableName: "Articles",
-        KeyConditionExpression: "canonical = :canonical",
+        TableName: "Journalist",
+        KeyConditionExpression: "author = :t",
         ExpressionAttributeValues: {
-             ":canonical": event.pathParameters.canonical
+             ":t": event.pathParameters.name
         }
       };
     
@@ -41,11 +41,11 @@ export async function search (event, context, callback) {
     }
 
     const params = {
-        TableName: "Articles",
-        ProjectionExpression: "title, canonical, url",
-        FilterExpression: "contains(title,:t)",
+        TableName: "Journalist",
+        ProjectionExpression: "author, isShow, avatar",
+        FilterExpression: "contains(author,:t)",
         ExpressionAttributeValues: {
-             ":t": event.pathParameters.title
+             ":t": event.pathParameters.name
         }
       };
     

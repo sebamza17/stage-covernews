@@ -3,7 +3,7 @@
  * @param {*} body 
  */
 export function success(body) {
-  console.log("Success",500);
+  console.log("Success",200);
   return buildResponse(200, body);
 }
 
