@@ -4,8 +4,8 @@ AWS.config.update({ region: "us-east-1" });
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 const MongoClient = require('mongodb').MongoClient;
+
 const url = 'mongodb://dictiozproduction-shard-00-00-v9lbp.mongodb.net:27017,dictiozproduction-shard-00-01-v9lbp.mongodb.net:27017,dictiozproduction-shard-00-02-v9lbp.mongodb.net:27017/netflix?ssl=true&replicaSet=DictiozProduction-shard-0&authSource=admin';
-// Database Name
 const dbName = 'netflix';
 
 let i = 0;
