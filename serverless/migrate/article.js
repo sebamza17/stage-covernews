@@ -154,9 +154,8 @@ class Article{
                 console.log("Error insert new",err);
                 return;
             }
-            
+            console.log("Insert",this.articleObject.title);
             this.createBodyFile();
-
         });
     }
 
@@ -217,6 +216,7 @@ class Article{
                     console.log("Error uploading file",resp)
                     return;
                 }
+                console.log("Upload file: ",this.articleObject.title);
                 this.removeBodyFile();
                 this.updateOld(this.handlers.netflix);
             });
