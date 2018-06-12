@@ -11,7 +11,7 @@ import * as dynamoDbLib from '../libs/dynamodb-lib';
 export async function get (event, context, callback) {
 
     const params = {
-        TableName: "Articles",
+        TableName: "Article",
         KeyConditionExpression: "canonical = :canonical",
         ExpressionAttributeValues: {
              ":canonical": event.pathParameters.canonical
@@ -35,15 +35,20 @@ export async function get (event, context, callback) {
  */
 export async function search (event, context, callback) {
 
-    if(!event.pathParameters || !event.pathParameters.name){
-        callback(null, failure(event.pathParameters));
+    if(!event.pathParameters || !event.pathParameters.title){
+        callback(null, failure({error: 'No event parameters',stack: event.pathParameters}));
         return;
     }
 
+    event.pathParameters.title = decodeURI(event.pathParameters.title).toLowerCase();
+
     const params = {
-        TableName: "Articles",
-        ProjectionExpression: "title, canonical, url",
-        FilterExpression: "contains(title,:t)",
+        TableName: "Article",
+        ProjectionExpression: "title, #url, canonical, authorName",
+        FilterExpression: "contains(lowerTitle,:t)",
+        ExpressionAttributeNames: {
+            "#url": "url"
+        },
         ExpressionAttributeValues: {
              ":t": event.pathParameters.title
         }
