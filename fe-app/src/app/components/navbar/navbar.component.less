@@ -1,0 +1,129 @@
+@import "variables";
+@import "base/flex";
+@import "base/fonts";
+@import "base/helpers";
+@import "base/backgrounds";
+
+.navbar {
+  .bg-color-brand-gray;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: @navbar-height-medium-up;
+  z-index: @navbar-z-index;
+
+  @media (max-width: @breakpoint-s) {
+    transition: all 300ms ease;
+    transform: translateX(-100%);
+    display: block;
+    min-height: 100vh;
+    max-height: 100vh;
+    width: 280px;
+  }
+
+  // Status => Open
+  &.navbar--open {
+    transform: translateX(0);
+  }
+
+  // Materialize container
+  .container {
+    @media (max-width: @breakpoint-s) {
+      padding: 0;
+      width: 100%;
+    }
+  }
+
+  // Container
+  .navbar__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: @breakpoint-s) {
+      display: block;
+      max-height: 100vh;
+      overflow: auto;
+    }
+
+  }
+
+  // Logo
+  .navbar__logo {
+
+    cursor: pointer;
+
+    @media (max-width: @breakpoint-s) {
+      .padding-half;
+      .bg-color-brand-red;
+      text-align: center;
+    }
+
+    img {
+      //width: 100px;
+      max-height: @navbar-height-medium-up - 20px;
+    }
+
+  }
+
+  // Links
+  .navbar__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: @breakpoint-s) {
+      .margin-half;
+      display: block;
+    }
+
+    a {
+      .font-color-white;
+      .margin-horizontal-half;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 700;
+      display: inline-block;
+      transition: all 200ms ease;
+
+      @media (max-width: @breakpoint-s) {
+        .margin-horizontal-none;
+        .margin-bottom-half;
+        display: block;
+      }
+
+      &:hover {
+        .font-color-brand-red;
+      }
+
+    }
+  }
+
+  // Toggle
+  .navbar__toggle {
+    .padding-half;
+    cursor: pointer;
+    transform: translateY(-100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 100%;
+
+    @media (max-width: @breakpoint-s) {
+      transform: translateY(0);
+    }
+
+    i {
+      .font-size-giant;
+      line-height: 0;
+    }
+
+  }
+
+}

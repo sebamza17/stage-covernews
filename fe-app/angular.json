@@ -23,11 +23,12 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/materialize-css/dist/css/materialize.min.css",
               "src/app/shared/styles/styles.less"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/app/shared/styles/*",
+                "src/app/shared/styles/",
                 "src/app/shared/styles/**/*.less"
               ]
             },

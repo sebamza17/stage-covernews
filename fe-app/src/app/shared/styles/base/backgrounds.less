@@ -14,9 +14,13 @@
 //Gradients
 .bg-gray-gradient {
   background-image: linear-gradient(
-    to right,
-    #F1F1F1, #E6E6E6
+          to right,
+          #F1F1F1, #E6E6E6
   );
+}
+
+.bg-color-brand-gray {
+  background-color: @color-brand-gray;
 }
 
 .bg-color-brand-blue {
@@ -26,6 +30,14 @@
 .variation-dark(background-color, bg-color-brand-blue, @color-brand-blue, 20);
 .variation-light(background-color, bg-color-brand-blue, @color-brand-blue, 20);
 .variation-opacity(background-color, bg-color-brand-blue, @color-brand-blue, 20);
+
+.bg-color-brand-red {
+  background-color: @color-brand-red;
+}
+
+.variation-dark(background-color, bg-color-brand-red, @color-brand-red, 20);
+.variation-light(background-color, bg-color-brand-red, @color-brand-red, 20);
+.variation-opacity(background-color, bg-color-brand-red, @color-brand-red, 20);
 
 //Colors
 .bg-color-white {
