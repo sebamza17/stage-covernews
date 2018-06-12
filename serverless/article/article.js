@@ -62,3 +62,40 @@ export async function search (event, context, callback) {
     }
 
 };
+
+
+/**
+ * Search by year
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export async function getByAuthor (event, context, callback) {
+
+    if(!event.pathParameters || !event.pathParameters.authorName){
+        callback(null, failure({error: 'No event parameters',stack: event.pathParameters}));
+        return;
+    }
+
+    event.pathParameters.authorName = decodeURI(event.pathParameters.authorName).toLowerCase();
+
+    const params = {
+        TableName: "Article",
+        ProjectionExpression: "title, #url, canonical, authorName, authorNameLower",
+        FilterExpression: "contains(authorNameLower,:t)",
+        ExpressionAttributeNames: {
+            "#url": "url"
+        },
+        ExpressionAttributeValues: {
+             ":t": event.pathParameters.authorName
+        }
+      };
+    
+    try{
+        const result = await dynamoDbLib.call('scan',params);
+        callback(null, success(result.Items));
+    }catch(err){
+        callback(null, failure(err));
+    }
+
+};

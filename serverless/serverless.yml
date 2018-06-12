@@ -44,6 +44,14 @@ functions:
           method: get
           cors: true
           authorizer: false
+  getByAuthor:
+    handler: article/article.getByAuthor
+    events:
+      - http:
+          path: article/journalist/{authorName}
+          method: get
+          cors: true
+          authorizer: false
   # JOURNALIST SECCION
   getJournalist:
     handler: journalist/journalist.get

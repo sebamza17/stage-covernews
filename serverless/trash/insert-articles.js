@@ -86,7 +86,7 @@ function insertArticle(article,cb){
     clean(article);
     clean(article.article);
 
-    if(article._id)item.mongoId = article._id;
+    if(article._id)item.mongoId = article._id.toString();
 
     if(article.stats)item.stats = true;
     if(!article.stats)item.stats = false;
@@ -113,10 +113,13 @@ function insertArticle(article,cb){
     
     item.newspaperIdMongo = article.newspaper || 'No Newspaper';
     item.url = article.url || 'No url';
-    item.categoryIdMongo = article.category || 'No category';
-    item.crawlerIdMongo = article.crawlerId || 'No Crawler id';
+    item.categoryIdMongo = (article.category)?article.category.toString() : 'No category';
+    item.crawlerIdMongo = (article.crawlerId)?article.crawlerId.toString() : 'No Crawler id';
     item.createdAt = article.createdAt || '2018-01-01 00:00:00';
+    
     item.authorName = article.article.author || 'No author name';
+
+    item.authorNameLower = item.authorName.toLowerCase();
 
     item.watson = article.watson || 'No Watson';
     
