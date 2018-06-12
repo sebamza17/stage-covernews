@@ -1,0 +1,44 @@
+<!-- Navbar -->
+<div class="navbar" [ngClass]="{'navbar--open': status}">
+
+    <div class="container">
+
+        <!-- Toggle -->
+        <div class="navbar__toggle" (click)="toggle()">
+            <i class="icon ion-md-close" *ngIf="status"></i>
+            <i class="icon ion-md-menu" *ngIf="!status"></i>
+        </div>
+        <!-- end Toggle -->
+
+        <!-- Main container -->
+        <div class="navbar__container">
+
+            <!-- Logo -->
+            <div class="navbar__logo">
+                <img src="../../../assets/images/landing-logo.png" alt="">
+            </div>
+            <!-- end Logo -->
+
+            <!-- Links -->
+            <div class="navbar__links">
+
+                <a>
+                    Home
+                </a>
+                <a>
+                    Autores
+                </a>
+                <a>
+                    Mi cuenta
+                </a>
+
+            </div>
+            <!-- end Links -->
+
+        </div>
+        <!-- end Main container -->
+
+    </div>
+
+</div>
+<!-- end Navbar -->
