@@ -14,17 +14,6 @@ provider:
   runtime: nodejs8.10
   stage: prod
   region: us-east-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:DescribeTable
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
   # ARTICLES SECCIONT
@@ -32,58 +21,7 @@ functions:
     handler: article/article.get
     events:
       - http:
-          path: article/get/{canonical}
+          path: article/get
           method: get
-          cors: true
-          authorizer: false
-  searchArticle:
-    handler: article/article.search
-    events:
-      - http:
-          path: article/search/{title}
-          method: get
-          cors: true
-          authorizer: false
-  getByAuthor:
-    handler: article/article.getByAuthor
-    events:
-      - http:
-          path: article/journalist/{authorName}
-          method: get
-          cors: true
-          authorizer: false
-  # JOURNALIST SECCION
-  getJournalist:
-    handler: journalist/journalist.get
-    events:
-      - http:
-          path: journalist/get/{name}
-          method: get
-          cors: true
-          authorizer: false
-  searchJournalist:
-    handler: journalist/journalist.search
-    events:
-      - http:
-          path: journalist/search/{name}
-          method: get
-          cors: true
-          authorizer: false
-  # CATEGORY SECCION
-  getCategory:
-    handler: category/category.get
-    events:
-      - http:
-          path: category/get/{name}
-          method: get
-          cors: true
-          authorizer: false
-  # ADMIN SECCION
-  getAdmin:
-    handler: admin/admin.get
-    events:
-      - http:
-          path: admin/login
-          method: post
           cors: true
           authorizer: false
