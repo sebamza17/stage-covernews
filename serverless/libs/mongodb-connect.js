@@ -1,4 +1,3 @@
-// const MongoClient = require('mongodb').MongoClient;
 import MongoClient from 'mongodb'
 
 const url = 'mongodb://dictiozproduction-shard-00-00-v9lbp.mongodb.net:27017,dictiozproduction-shard-00-01-v9lbp.mongodb.net:27017,dictiozproduction-shard-00-02-v9lbp.mongodb.net:27017/dictioznews?ssl=true&replicaSet=DictiozProduction-shard-0&authSource=admin';
@@ -28,6 +27,7 @@ export function connectToDatabase () {
                     reject(err);
                     return;
                 }
+                console.log("Connected",err);
                 const db = client.db(dbName);
                 isConnected = db;
                 resolve(isConnected);
