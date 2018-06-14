@@ -12,13 +12,13 @@ export async function get (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
-    console.log("Start","Before connected")
+    console.log("GET Articles","Before connected");
 
     connectToDatabase()
     .then((db)=>{
         console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
-        articles.find({},{sort:{scrapedAt: -1},limit: 50},(err,doc)=>{
+        articles.find({},{limit: 50}).toArray((err,doc)=>{
             if(err){
                 console.log("Error getting",err);
                 callback(null, failure(err));

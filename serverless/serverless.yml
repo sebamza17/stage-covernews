@@ -14,11 +14,13 @@ provider:
   runtime: nodejs8.10
   stage: prod
   region: us-east-1
+  timeout: 90 
 
 functions:
   # ARTICLES SECCION
   getArticles:
     handler: article/article.get
+    timeout: 60
     events:
       - http:
           path: article/all

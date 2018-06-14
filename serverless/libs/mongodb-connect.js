@@ -17,24 +17,31 @@ export function connectToDatabase () {
             return resolve(isConnected);
         }
 
-        console.log('=> using new database connection');
-
-        MongoClient.connect(url,{
-            auth: {
-                user: 'netflix',
-                password: 'netflix2017$'
-            }
-        }, (err, client)=> {
-            if(err){
-                console.log('Error connection to database',err);
-                reject(err);
-                return;
-            }
-            console.log("Connected",err);
-            const db = client.db(dbName);
-            isConnected = db;
-            resolve(isConnected);
-        });
+        console.log('Using new database connection');
+    
+        try{
+            console.log("Try");
+            MongoClient.connect(url,{
+                auth: {
+                    user: 'netflix',
+                    password: 'netflix2017$'
+                }
+            }, function (err, client){
+                if(err){
+                    console.log('Error connection to database',err);
+                    reject(err);
+                    return;
+                }
+                console.log("Connected",err);
+                const db = client.db(dbName);
+                isConnected = db;
+                resolve(isConnected);
+            });
+        }catch(e){
+            console.log("Catch",e)
+            reject(err);
+        }
+        
     });
 
 };
