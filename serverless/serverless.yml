@@ -16,12 +16,104 @@ provider:
   region: us-east-1
 
 functions:
-  # ARTICLES SECCIONT
-  getArticle:
+  # ARTICLES SECCION
+  getArticles:
     handler: article/article.get
     events:
       - http:
-          path: article/get
+          path: article/all
           method: get
           cors: true
           authorizer: false
+  showArticle:
+    handler: article/article.show
+    events:
+      - http:
+          path: article/show/{articleId}
+          method: get
+          cors: true
+          authorizer: false
+  getByCanonical:
+    handler: article/article.getByCanonical
+    events:
+      - http:
+          path: article/canonical/{canonical}
+          method: get
+          cors: true
+          authorizer: false
+  getArticlesByCategory:
+      handler: article/article.getByCategory
+      events:
+        - http:
+            path: article/category/{categoryId}
+            method: get
+            cors: true
+            authorizer: false
+  getArticlesByAuthor:
+      handler: article/article.getByAuthor
+      events:
+        - http:
+            path: article/author/{authorId}
+            method: get
+            cors: true
+            authorizer: false
+  searchArticles:
+      handler: article/article.search
+      events:
+        - http:
+            path: article/search/{criteria}
+            method: get
+            cors: true
+            authorizer: false
+# AUTHOR SECCION
+  getAuthors:
+    handler: author/author.get
+    events:
+      - http:
+          path: author/all
+          method: get
+          cors: true
+          authorizer: false
+  showAuthor:
+    handler: author/author.show
+    events:
+      - http:
+          path: author/show/{authorId}
+          method: get
+          cors: true
+          authorizer: false
+  searchAuthors:
+      handler: author/author.search
+      events:
+        - http:
+            path: author/author/{criteria}
+            method: get
+            cors: true
+            authorizer: false
+# CATEGORY SECCION
+  getCategories:
+    handler: category/category.get
+    events:
+      - http:
+          path: category/all
+          method: get
+          cors: true
+          authorizer: false
+  showCategory:
+    handler: category/category.show
+    events:
+      - http:
+          path: author/show/{authorId}
+          method: get
+          cors: true
+          authorizer: false
+  searchCategories:
+      handler: category/category.search
+      events:
+        - http:
+            path: category/category/{criteria}
+            method: get
+            cors: true
+            authorizer: false
+# USER SECCION
+# ADMIN SECCION

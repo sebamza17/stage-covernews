@@ -5,6 +5,9 @@ const dbName = 'dictioznews';
 
 let isConnected;
 
+/**
+ * Connect to Database
+ */
 export function connectToDatabase () {
 
     return new Promise((resolve,reject)=>{
@@ -21,17 +24,17 @@ export function connectToDatabase () {
                 user: 'netflix',
                 password: 'netflix2017$'
             }
-            }, (err, client)=> {
-                if(err){
-                    console.log('Error connection to database',err);
-                    reject(err);
-                    return;
-                }
-                console.log("Connected",err);
-                const db = client.db(dbName);
-                isConnected = db;
-                resolve(isConnected);
-            });
+        }, (err, client)=> {
+            if(err){
+                console.log('Error connection to database',err);
+                reject(err);
+                return;
+            }
+            console.log("Connected",err);
+            const db = client.db(dbName);
+            isConnected = db;
+            resolve(isConnected);
+        });
     });
 
 };
