@@ -1,6 +1,6 @@
 
 import {success, failure} from '../libs/response-lib';
-import {connectToDatabase} from '../libs/mongodb-connect';
+import {getConnection} from '../libs/mongodb-connect';
 
 /**
  * Get last articles
@@ -8,26 +8,25 @@ import {connectToDatabase} from '../libs/mongodb-connect';
  * @param {*} context 
  * @param {*} callback 
  */
-export async function get (event, context, callback) {
+export function get (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
-    console.log("GET Articles","Before connected");
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
         articles.find({},{limit: 50}).toArray((err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
-            console.log("Before Callback");
             callback(null, success(doc));
         })
+
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
+
 };
 
 /**
@@ -45,9 +44,7 @@ export async function show (event, context, callback) {
         return;
     }
 
-    console.log("Start","Before connected")
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
         console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
@@ -60,6 +57,8 @@ export async function show (event, context, callback) {
             console.log("Before Callback");
             callback(null, success(doc));
         })
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
 };
 
@@ -78,9 +77,7 @@ export async function getByCanonical (event, context, callback) {
         return;
     }
 
-    console.log("Start","Before connected")
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
         console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
@@ -93,6 +90,8 @@ export async function getByCanonical (event, context, callback) {
             console.log("Before Callback");
             callback(null, success(doc));
         })
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
 };
 
@@ -110,9 +109,7 @@ export async function getByCategory(event,context,callback){
         return;
     }
 
-    console.log("Start","Before connected")
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
         console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
@@ -125,6 +122,8 @@ export async function getByCategory(event,context,callback){
             console.log("Before Callback");
             callback(null, success(doc));
         })
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
 }
 
@@ -142,9 +141,7 @@ export async function getByAuthor(event,context,callback){
         return;
     }
 
-    console.log("Start","Before connected")
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
         console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
@@ -166,6 +163,8 @@ export async function getByAuthor(event,context,callback){
                 callback(null, success(doc));
             })
         });
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
 }
 
@@ -183,9 +182,7 @@ export async function search(event,context,callback){
         return;
     }
 
-    console.log("Start","Before connected")
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
         console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
@@ -207,5 +204,7 @@ export async function search(event,context,callback){
             console.log("Before Callback");
             callback(null, success(doc));
         });
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
 }

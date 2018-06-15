@@ -1,6 +1,6 @@
 
 import {success, failure} from '../libs/response-lib';
-import {connectToDatabase} from '../libs/mongodb-connect';
+import {getConnection} from '../libs/mongodb-connect';
 
 /**
  * Get 20 authors
@@ -12,11 +12,8 @@ export async function get (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
-    console.log("Start","Before connected")
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
         const authors = db.collection('journalist');
         authors.find({},{limit: 20},(err,doc)=>{
             if(err){
@@ -27,6 +24,8 @@ export async function get (event, context, callback) {
             console.log("Before Callback");
             callback(null, success(doc));
         })
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
 };
 
@@ -45,11 +44,8 @@ export async function show (event, context, callback) {
         return;
     }
 
-    console.log("Start","Before connected")
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
         const author = db.collection('journalist');
         author.findOne({_id: event.pathParameters.authorId},(err,doc)=>{
             if(err){
@@ -60,6 +56,8 @@ export async function show (event, context, callback) {
             console.log("Before Callback");
             callback(null, success(doc));
         })
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
 };
 
@@ -77,11 +75,9 @@ export async function search(event,context,callback){
         return;
     }
 
-    console.log("Start","Before connected")
-
-    connectToDatabase()
+    getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
+        
         const authors = db.collection('journalist');
 
         let query = {};
@@ -101,5 +97,7 @@ export async function search(event,context,callback){
             console.log("Before Callback");
             callback(null, success(doc));
         });
+    }).catch((err)=>{
+        callback(null, failure(err));
     });
 }
