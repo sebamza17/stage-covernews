@@ -17,7 +17,6 @@ export async function get (event, context, callback) {
         const category = db.collection('category');
         category.find({},{limit: 20},(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
@@ -49,7 +48,6 @@ export async function show (event, context, callback) {
         const category = db.collection('category');
         category.findOne({_id: event.pathParameters.categoryId},(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
@@ -88,7 +86,6 @@ export async function search(event,context,callback){
         
         category.find(query,(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }

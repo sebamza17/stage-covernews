@@ -46,15 +46,12 @@ export async function show (event, context, callback) {
 
     getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
         articles.findOne({_id: event.pathParameters.articleId},(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
-            console.log("Before Callback");
             callback(null, success(doc));
         })
     }).catch((err)=>{
@@ -79,15 +76,12 @@ export async function getByCanonical (event, context, callback) {
 
     getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
         articles.findOne({canonical: event.pathParameters.canonical},(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
-            console.log("Before Callback");
             callback(null, success(doc));
         })
     }).catch((err)=>{
@@ -111,15 +105,12 @@ export async function getByCategory(event,context,callback){
 
     getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
         articles.find({category: event.pathParameters.categoryId},(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
-            console.log("Before Callback");
             callback(null, success(doc));
         })
     }).catch((err)=>{
@@ -143,23 +134,19 @@ export async function getByAuthor(event,context,callback){
 
     getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
         const author = db.collection('journalist');
         author.findOne({_id: event.pathParameters.authorId},(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
 
             articles.find({authorName: doc.name},(err,doc)=>{
                 if(err){
-                    console.log("Error getting",err);
                     callback(null, failure(err));
                     return;
                 }
-                console.log("Before Callback");
                 callback(null, success(doc));
             })
         });
@@ -184,9 +171,7 @@ export async function search(event,context,callback){
 
     getConnection()
     .then((db)=>{
-        console.log("Start 2","Connected, before collection");
         const articles = db.collection('note');
-
         let query = {};
         query.$text = {
             $search: '"'+event.pathParameters.criteria+'"',
@@ -197,11 +182,9 @@ export async function search(event,context,callback){
         
         articles.find(query,(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
-            console.log("Before Callback");
             callback(null, success(doc));
         });
     }).catch((err)=>{

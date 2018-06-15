@@ -12,7 +12,7 @@ export function success(body) {
  * @param {*} body 
  */
 export function failure(err) {
-  console.log("Failure",err);
+  console.log("FAIL",err);
   return buildResponse(500, err);
 }
 

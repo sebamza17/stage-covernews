@@ -17,11 +17,9 @@ export async function get (event, context, callback) {
         const authors = db.collection('journalist');
         authors.find({},{limit: 20},(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
-            console.log("Before Callback");
             callback(null, success(doc));
         })
     }).catch((err)=>{
@@ -49,11 +47,9 @@ export async function show (event, context, callback) {
         const author = db.collection('journalist');
         author.findOne({_id: event.pathParameters.authorId},(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
-            console.log("Before Callback");
             callback(null, success(doc));
         })
     }).catch((err)=>{
@@ -90,11 +86,9 @@ export async function search(event,context,callback){
         
         authors.find(query,(err,doc)=>{
             if(err){
-                console.log("Error getting",err);
                 callback(null, failure(err));
                 return;
             }
-            console.log("Before Callback");
             callback(null, success(doc));
         });
     }).catch((err)=>{
