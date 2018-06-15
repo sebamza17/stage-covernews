@@ -1,4 +1,4 @@
-
+import mongodb from 'mongodb';
 import {success, failure} from '../libs/response-lib';
 import {getConnection} from '../libs/mongodb-connect';
 
@@ -8,14 +8,14 @@ import {getConnection} from '../libs/mongodb-connect';
  * @param {*} context 
  * @param {*} callback 
  */
-export async function get (event, context, callback) {
+export function get (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
     getConnection()
     .then((db)=>{
         const category = db.collection('category');
-        category.find({},{limit: 20},(err,doc)=>{
+        category.find({},{limit: 20}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -33,7 +33,7 @@ export async function get (event, context, callback) {
  * @param {*} context 
  * @param {*} callback 
  */
-export async function show (event, context, callback) {
+export function show (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
@@ -42,11 +42,13 @@ export async function show (event, context, callback) {
         return;
     }
 
+    let categoryId = mongodb.ObjectID(event.pathParameters.categoryId);
+
     getConnection()
     .then((db)=>{
         
         const category = db.collection('category');
-        category.findOne({_id: event.pathParameters.categoryId},(err,doc)=>{
+        category.findOne({_id: categoryId},(err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -64,7 +66,7 @@ export async function show (event, context, callback) {
  * @param {*} context 
  * @param {*} callback 
  */
-export async function search(event,context,callback){
+export function search(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
 
     if(!event.pathParameters.criteria){
@@ -84,7 +86,7 @@ export async function search(event,context,callback){
             $caseSensitive: false
         };
         
-        category.find(query,(err,doc)=>{
+        category.find(query).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;

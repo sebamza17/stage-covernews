@@ -1,4 +1,4 @@
-
+import mongodb from 'mongodb';
 import {success, failure} from '../libs/response-lib';
 import {getConnection} from '../libs/mongodb-connect';
 
@@ -35,7 +35,7 @@ export function get (event, context, callback) {
  * @param {*} context 
  * @param {*} callback 
  */
-export async function show (event, context, callback) {
+export function show (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
@@ -44,10 +44,12 @@ export async function show (event, context, callback) {
         return;
     }
 
+    let articleId = mongodb.ObjectID(event.pathParameters.articleId);
+
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.findOne({_id: event.pathParameters.articleId},(err,doc)=>{
+        articles.findOne({_id: articleId},(err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -65,7 +67,7 @@ export async function show (event, context, callback) {
  * @param {*} context 
  * @param {*} callback 
  */
-export async function getByCanonical (event, context, callback) {
+export function getByCanonical (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
@@ -95,7 +97,7 @@ export async function getByCanonical (event, context, callback) {
  * @param {*} context 
  * @param {*} callback 
  */
-export async function getByCategory(event,context,callback){
+export function getByCategory(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
 
     if(!event.pathParameters.categoryId){
@@ -103,10 +105,12 @@ export async function getByCategory(event,context,callback){
         return;
     }
 
+    let categoryId = mongodb.ObjectID(event.pathParameters.categoryId);
+
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.find({category: event.pathParameters.categoryId},(err,doc)=>{
+        articles.find({category: categoryId},(err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -124,7 +128,7 @@ export async function getByCategory(event,context,callback){
  * @param {*} context 
  * @param {*} callback 
  */
-export async function getByAuthor(event,context,callback){
+export function getByAuthor(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
 
     if(!event.pathParameters.authorId){
@@ -132,17 +136,19 @@ export async function getByAuthor(event,context,callback){
         return;
     }
 
+    let authorId = mongodb.ObjectID(event.pathParameters.authorId);
+
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
         const author = db.collection('journalist');
-        author.findOne({_id: event.pathParameters.authorId},(err,doc)=>{
+        author.findOne({_id: authorId},(err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
             }
 
-            articles.find({authorName: doc.name},(err,doc)=>{
+            articles.find({authorName: doc.name}).toArray((err,doc)=>{
                 if(err){
                     callback(null, failure(err));
                     return;
@@ -161,7 +167,7 @@ export async function getByAuthor(event,context,callback){
  * @param {*} context 
  * @param {*} callback 
  */
-export async function search(event,context,callback){
+export function search(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
 
     if(!event.pathParameters.criteria){
@@ -180,7 +186,7 @@ export async function search(event,context,callback){
             $caseSensitive: false
         };
         
-        articles.find(query,(err,doc)=>{
+        articles.find(query).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
