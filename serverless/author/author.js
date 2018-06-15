@@ -86,7 +86,7 @@ export function search(event,context,callback){
             $caseSensitive: false
         };
         
-        authors.find(query).toArray((err,doc)=>{
+        authors.find(query,{limit: 20}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;

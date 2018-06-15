@@ -110,7 +110,7 @@ export function getByCategory(event,context,callback){
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.find({category: categoryId},(err,doc)=>{
+        articles.find({category: categoryId},{limit: 20}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -148,7 +148,7 @@ export function getByAuthor(event,context,callback){
                 return;
             }
 
-            articles.find({authorName: doc.name}).toArray((err,doc)=>{
+            articles.find({authorName: doc.name},{limit: 20}).toArray((err,doc)=>{
                 if(err){
                     callback(null, failure(err));
                     return;
@@ -186,7 +186,7 @@ export function search(event,context,callback){
             $caseSensitive: false
         };
         
-        articles.find(query).toArray((err,doc)=>{
+        articles.find(query,{limit: 20}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;

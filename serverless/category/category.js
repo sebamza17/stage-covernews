@@ -86,7 +86,7 @@ export function search(event,context,callback){
             $caseSensitive: false
         };
         
-        category.find(query).toArray((err,doc)=>{
+        category.find(query,{limit: 20}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
