@@ -73,6 +73,8 @@ export function search(event,context,callback){
         return;
     }
 
+    let criteria = decodeURI(event.pathParameters.criteria);
+
     getConnection()
     .then((db)=>{
         
@@ -80,7 +82,7 @@ export function search(event,context,callback){
 
         let query = {};
         query.$text = {
-            $search: '"'+event.pathParameters.criteria+'"',
+            $search: '"'+criteria+'"',
             $language: 'spanish',
             $diacriticSensitive: false,
             $caseSensitive: false

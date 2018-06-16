@@ -1,6 +1,9 @@
 import mongodb from 'mongodb';
 import {success, failure} from '../libs/response-lib';
 import {getConnection} from '../libs/mongodb-connect';
+import AWS from 'aws-sdk';
+
+const s3 = new AWS.S3();
 
 /**
  * Get last articles
@@ -175,12 +178,14 @@ export function search(event,context,callback){
         return;
     }
 
+    let criteria = decodeURI(event.pathParameters.criteria);
+
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
         let query = {};
         query.$text = {
-            $search: '"'+event.pathParameters.criteria+'"',
+            $search: '"'+criteria+'"',
             $language: 'spanish',
             $diacriticSensitive: false,
             $caseSensitive: false
@@ -195,5 +200,84 @@ export function search(event,context,callback){
         });
     }).catch((err)=>{
         callback(null, failure(err));
+    });
+}
+
+/**
+ * Get Full Article from ID
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export function getFullArticle(event,context, callback){
+
+    context.callbackWaitsForEmptyEventLoop = false;
+
+    if(!event.pathParameters.articleId){
+        callback(null, failure("Article Id undefined"));
+        return;
+    }
+
+    let articleId = mongodb.ObjectID(event.pathParameters.articleId);
+
+    getConnection()
+    .then((db)=>{
+        const articles = db.collection('note');
+        articles.findOne({_id: articleId},(err,doc)=>{
+            if(err){
+                callback(null, failure(err));
+                return;
+            }
+
+            let params = {
+                Bucket: 'dictioznewz',
+                Key: 'articles/'+doc._id+'.json'
+            };
+        
+            s3.getObject(params, function (err, data) {
+                if (err){
+                    callback(null, failure(err));
+                    return;
+                }
+
+                let body = JSON.parse(data.Body.toString('utf-8'));
+                doc.content = body.content;
+                callback(null, success(doc));
+            });
+        })
+    }).catch((err)=>{
+        callback(null, failure(err));
+    });
+}
+
+/**
+ * Get only content from Id article
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export function getArticleContent(event,context, callback){
+
+    context.callbackWaitsForEmptyEventLoop = false;
+
+    if(!event.pathParameters.articleId){
+        callback(null, failure("Article Id undefined"));
+        return;
+    }
+
+    let params = {
+        Bucket: 'dictioznewz',
+        Key: 'articles/'+event.pathParameters.articleId+'.json'
+    };
+
+    s3.getObject(params, function (err, data) {
+        if (err){
+            callback(null, failure(err));
+            return;
+        }
+
+        let body = JSON.parse(data.Body.toString('utf-8'));
+
+        callback(null, success(body));
     });
 }

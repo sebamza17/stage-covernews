@@ -74,13 +74,15 @@ export function search(event,context,callback){
         return;
     }
 
+    let criteria = decodeURI(event.pathParameters.criteria);
+
     getConnection()
     .then((db)=>{
         
         const category = db.collection('category');
         let query = {};
         query.$text = {
-            $search: '"'+event.pathParameters.criteria+'"',
+            $search: '"'+criteria+'"',
             $language: 'spanish',
             $diacriticSensitive: false,
             $caseSensitive: false

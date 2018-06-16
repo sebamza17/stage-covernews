@@ -36,6 +36,24 @@ functions:
           method: get
           cors: true
           authorizer: false
+  showFullArticle:
+    handler: article/article.getFullArticle
+    timeout: 60
+    events:
+      - http:
+          path: article/showFull/{articleId}
+          method: get
+          cors: true
+          authorizer: false
+  showArticleContent:
+    handler: article/article.getArticleContent
+    timeout: 60
+    events:
+      - http:
+          path: article/content/{articleId}
+          method: get
+          cors: true
+          authorizer: false
   getByCanonical:
     handler: article/article.getByCanonical
     timeout: 60
@@ -115,7 +133,7 @@ functions:
     timeout: 60
     events:
       - http:
-          path: author/show/{authorId}
+          path: category/show/{categoryId}
           method: get
           cors: true
           authorizer: false
