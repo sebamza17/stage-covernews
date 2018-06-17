@@ -4,18 +4,23 @@ var s3 = new AWS.S3();
 AWS.config.update({ region: "us-east-1" });
 
 const MongoClient = require('mongodb').MongoClient;
+const awsES = {};
+awsES.region = 'us-east-1'; // e.g. us-west-1
+awsES.domain = 'search-dictioz-crimcecy3hmsk6uy3mwc7zshie.us-east-1.es.amazonaws.com'; // e.g. search-domain.region.es.amazonaws.com
+awsES.index = 'notes';
+awsES.type = 'note';
+awsES.id = 1;
 
 
 const url = 'mongodb://dictiozproduction-shard-00-00-v9lbp.mongodb.net:27017,dictiozproduction-shard-00-01-v9lbp.mongodb.net:27017,dictiozproduction-shard-00-02-v9lbp.mongodb.net:27017/netflix?ssl=true&replicaSet=DictiozProduction-shard-0&authSource=admin';
 const dbNameNetflix = 'netflix';
-const dbNameNews = 'dictioznews';
 
 
 //GENERAL FLAGS
 let init = false;
 let amount = 0;
 let total = 0;
-let limit = 10;
+let limit = 1;
 
 function connection(){
     MongoClient.connect(url,{
@@ -34,12 +39,18 @@ function connection(){
         console.log("Connected successfully to servers");
     
         const dbNetflix = client.db(dbNameNetflix);
-        const dbNews = client.db(dbNameNews);
     
         const articlesNet = dbNetflix.collection('note');
-        const articlesNews = dbNews.collection('note');
-    
-        start(articlesNet,articlesNews);
+        const articlesES = {};
+        
+        articlesES.endpoint = new AWS.Endpoint(awsES.domain);
+        articlesES.request = new AWS.HttpRequest(articlesES.endpoint, awsES.region);
+        articlesES.request.method = 'PUT';
+        articlesES.request.path += awsES.index + '/' + awsES.type + '/' + awsES.id++;
+        articlesES.request.headers['host'] = awsES.domain;
+        articlesES.request.headers['Content-Type'] = 'application/json';   
+        
+        start(articlesNet,articlesES);
     
         client.on('close', function (err) {
             console.log("Conexion error",err)
@@ -55,20 +66,18 @@ connection();
  * @param {*} dbNetflix 
  * @param {*} dbNews 
  */
-function start(articlesNet,articlesNews){
+function start(articlesNet,articlesES){
 
     console.log("Find Next ",limit);
 
-    articlesNet.find({$or:[{isMigrated: false},{isMigrated: {$exists: false}}]},{limit: limit}).toArray(function(err,doc){
-
+    articlesNet.find({$or:[{isInElastic: false},{isInElastic: {$exists: false}}]},{limit: limit}).toArray(function(err,doc){
         if(err || !doc || doc.length <= 0){
             console.log("Doc is undefined",err);
             return;
         }
-
         doc.forEach(function(art){
             let article = new Article(art);
-            article.migrate(articlesNet,articlesNews);
+            article.migrate(articlesNet,articlesES);
         });
 
     });
@@ -83,7 +92,7 @@ class Article{
 
         this.handlers = {
             netflix: null,
-            news: null
+            es: null
         };
         
         this.articleObject = {};
@@ -126,7 +135,7 @@ class Article{
         this.articleObject.articleDate = (articleObj.article.date)?articleObj.article.date: new Date();
         this.articleObject.keywords = (keywords)?keywords: [];
         this.articleObject.authorName = (articleObj.article.author)?articleObj.article.author: 'Sin Autor';
-        this.articleObject.title = (articleObj.article.title)?articleObj.article.title: 'Sin titulo';;
+        this.articleObject.title = (articleObj.article.title)?articleObj.article.title: 'Sin titulo';
         this.articleObject.category = articleObj.category || '5b202ef5d03337b3a0227daf'; //Other category
         this.articleObject.createdAt = articleObj.createdAt || new Date();
         this.articleObject.scrapedAt = articleObj.scrapedAt || new Date();
@@ -138,10 +147,10 @@ class Article{
         };
     }
 
-    migrate(handlerNet,handlerNews){
+    migrate(handlerNet,handlerES){
         this.handlers.netflix = handlerNet;
-        this.handlers.news = handlerNews;
-        this.save(handlerNews);
+        this.handlers.es = handlerES;
+        this.indexDocument(handlerES);
     }
 
     /**
@@ -165,7 +174,7 @@ class Article{
      */
     updateOld(handler){
         let articleId = this.articleObject._id;
-        handler.update({_id: articleId},{$set:{isMigrated:true}},{new: true},(err,doc)=>{
+        handler.update({_id: articleId},{$set:{isInElastic:true}},{new: true},(err,doc)=>{
             if(err){
                 console.log("Error Update old",err);
                 return;
@@ -174,67 +183,41 @@ class Article{
             amount++;
             if(amount >= limit){
                 amount = 0;
-                start(this.handlers.netflix,this.handlers.news);
+                start(this.handlers.netflix,this.handlers.es);
             }
         });
     }
 
-    /**
-     * Create Body File
-     */
-    createBodyFile(){
-        let articleId = this.articleObject._id.toString();
-        fs.writeFile(articleId+'.json',JSON.stringify(this.body),'utf8',(err)=>{
-            if(err){
-                console.log("Error Creating file",err);
-                return;
-            }
-            this.uploadBodyFile();
-        })
-    }
+    indexDocument(handler) {
+ 
+        //console.log(handler);
+        handler.request.body = JSON.stringify(this.articleObject);
+        
+      
+        var credentials = new AWS.EnvironmentCredentials('AWS');
+        console.log(credentials);
+        var signer = new AWS.Signers.V4(handler.request, 'es');
+        signer.addAuthorization(credentials, new Date());
+        console.log(signer);
 
-    /**
-     * Upload Body FIle
-     */
-    uploadBodyFile(){
-        let articleId = this.articleObject._id.toString();
+        var client = new AWS.HttpClient();
+        client.handleRequest(handler.request, null, function(response) {
+          console.log("ES - response: ",response.statusCode + ' ' + response.statusMessage);
+          console.log(response.contnet);
 
-        fs.readFile(articleId+'.json', (err, data)=>{
-            if (err) { 
-                console.log("Error reading file",err); 
-                return; 
-            }
-            var base64data = new Buffer(data, 'binary');
-            s3.putObject({
-              Bucket: 'dictioznewz',
-              Key: 'articles/'+articleId+'.json',
-              Body: base64data,
-              'ContentType':'application/json',
-              ACL: 'public-read'
-            }, (resp) =>{
-                if(resp){
-                    console.log("Error uploading file",resp)
-                    return;
-                }
-                console.log("Upload file: ",this.articleObject.title);
-                this.removeBodyFile();
-                this.updateOld(this.handlers.netflix);
-            });
-          });
-    }
+          //this.updateOld(this.handlers.netflix);
 
-    /**
-     * Remove Body File
-     */
-    removeBodyFile(){
-        let articleId = this.articleObject._id.toString();
-        fs.unlink(articleId+'.json',function(err){
-            if(err){
-                console.log("Error deleting file",err)
-                return;
-            }
-       });  
-    }
+        //   var responseBody = '';
+        //   response.on('data', function (chunk) {
+        //     responseBody += chunk;
+        //   });
+        //   response.on('end', function (chunk) {
+        //     callback(null, 'Response body: ' + responseBody);
+        //   });
+        }, function(error) {
+          console.log(error, 'Error: ' + error);
+        });
+      }
 };
 
 /**
