@@ -118,6 +118,33 @@ functions:
             method: get
             cors: true
             authorizer: false
+  updateAuthor:
+      handler: author/author-admin.update
+      timeout: 60
+      events:
+        - http:
+            path: author/update/{authorId}
+            method: post
+            cors: true
+            authorizer: false 
+  removeAuthor:
+      handler: author/author-admin.remove
+      timeout: 60
+      events:
+        - http:
+            path: author/remove/{authorId}
+            method: post
+            cors: true
+            authorizer: false   
+  addAuthor:
+      handler: author/author-admin.add
+      timeout: 60
+      events:
+        - http:
+            path: author/add
+            method: post
+            cors: true
+            authorizer: false              
 # CATEGORY SECCION
   getCategories:
     handler: category/category.get
@@ -148,3 +175,12 @@ functions:
             authorizer: false
 # USER SECCION
 # ADMIN SECCION
+  loginAdmin:
+      handler: admin/admin.login
+      timeout: 60
+      events:
+        - http:
+            path: admin/admin
+            method: post
+            cors: true
+            authorizer: false

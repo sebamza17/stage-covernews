@@ -1,6 +1,13 @@
 {
     "pathParameters": {
-        "authorId": "messi",
+        "authorId": "5b2593765f5d3a0914499300",
         "criteria": "Juan"
+    },
+    "body":{
+        "author":{
+            "name": "Actualiza",
+            "show": true,
+            "_id": "5b2593765f5d3a0914499300"
+        }
     }
 }
