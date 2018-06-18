@@ -1,3 +1,11 @@
-<p>
-  home works!
-</p>
+<div>
+
+    <div class="container padding-vertical-full">
+
+        <div *ngFor="let category of categories">
+            <app-article-slider [category]="category"></app-article-slider>
+        </div>
+
+    </div>
+
+</div>
