@@ -1,3 +1,65 @@
-<p>
-  author works!
-</p>
+<div>
+    <div class="example-container">
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="autoCompleteAuthor" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of autoCompletefilteredOptions | async" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Se muestra?">
+              <mat-option value="1">Se muestra</mat-option>
+              <mat-option value="0">No se muestra</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="authors">
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let author"> {{author.name}} </td>
+          </ng-container>
+      
+          <!-- Show Column -->
+          <ng-container matColumnDef="show">
+            <th mat-header-cell *matHeaderCellDef> Show </th>
+            <td mat-cell *matCellDef="let author"> {{author.show}} </td>
+          </ng-container>
+      
+          <!-- Review Column -->
+          <ng-container matColumnDef="reviewAuthor">
+            <th mat-header-cell *matHeaderCellDef> Review </th>
+            <td mat-cell *matCellDef="let author"> {{author.reviewAuthor}} </td>
+          </ng-container>
+      
+          <!-- _id Column -->
+          <ng-container matColumnDef="_id">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let author"> {{author._id}} </td>
+          </ng-container>
+
+          <!-- Options Column -->
+          <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef> Opciones </th>
+            <td mat-cell *matCellDef="let author"> 
+              <button (click)="editAuthor(author)"><mat-icon>edit</mat-icon></button>
+              <button (click)="removeAuthor(author)"><mat-icon>delete</mat-icon></button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator showFirstLastButtons></mat-paginator>
+      </div>
+</div>

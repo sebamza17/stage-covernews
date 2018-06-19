@@ -1,18 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
+import { MatDialogModule,MatAutocompleteModule,MatPaginatorModule,MatTableModule,MatInputModule,MatSelectModule,MatOptionModule,MatFormFieldModule, MatExpansionModule, MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DashboardComponent } from './app.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { AuthorComponent } from './author/author.component';
+import { AuthorComponent,AuthorEditComponent } from './author/author.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule,ReactiveFormsModule }    from '@angular/forms';
 import { ArticlesComponent } from './articles/articles.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
     DashboardComponent,
     AuthorComponent,
+    AuthorEditComponent,
     ArticlesComponent
   ],
   imports: [
@@ -26,7 +29,21 @@ import { ArticlesComponent } from './articles/articles.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatDialogModule,
     AppRoutingModule,
+  ],
+  entryComponents:[
+    AuthorEditComponent
   ],
   providers: [],
   bootstrap: [DashboardComponent]
