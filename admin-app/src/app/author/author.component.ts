@@ -4,6 +4,7 @@ import {AuthorService} from './author.service'
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material';
+import {Author} from './author-interface'
 
 @Component({
   selector: 'app-author',
@@ -55,26 +56,36 @@ export class AuthorComponent implements OnInit {
   }
 }
 
-export interface Author {
-  name: string;
-  show: boolean;
-  reviewAuthor: boolean,
-  amount: number;
-  _id: string
-}
 
 @Component({
   selector: 'app-author-edit',
   templateUrl: 'author-edit.component.html',
+  styleUrls: ['./author.component.css']
 })
 export class AuthorEditComponent  implements OnInit{
-  constructor(public dialogRef: MatDialogRef<AuthorEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any){
-      console.log(this.data);
-    }
+  author: Author;
+  options: object[];
+
+  constructor(public authorSvc: AuthorService,public dialogRef: MatDialogRef<AuthorEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Author){
+      this.author = data;
+      this.options = [{
+        value: true,
+        label: "Se muestra"
+      },{
+        value: false,
+        label: "No se muestra"
+      }]
+  }
+
   ngOnInit(){}
 
-  onNoClick(): void {
+  onCancel(): void {
+    this.dialogRef.close();
+  }
+
+  onSave(): void {
+    this.authorSvc.update(this.author);
     this.dialogRef.close();
   }
 }

@@ -17,8 +17,24 @@ export function update (event, context, callback) {
         return;
     }
 
+    let body = event.body;
+
+    if(typeof body == "string"){
+        try{
+            body = JSON.parse(body);
+        }catch(e){
+            callback(null, failure(e));
+            return;
+        }
+    }
+
     let authorId = mongodb.ObjectID(event.pathParameters.authorId);
-    let authorObj = event.body.author;
+    let authorObj = body.author;
+
+    if(!authorObj){
+        callback(null, failure("Author Obj is udenfined"));
+        return;
+    }
 
     if(authorObj._id){
         delete authorObj._id;

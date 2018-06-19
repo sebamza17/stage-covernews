@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {Author} from './author-interface'
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,16 @@ export class AuthorService {
       return this.get();
     }
     return this.http.get(environment.api+"author/search/"+criteria);
+  }
+
+  /**
+   * Update one author
+   * @param author 
+   */
+  update(author: Author){
+    this.http.post(environment.api+"author/update/"+author._id,{author: author})
+    .subscribe((data)=>{
+      return data;
+    });
   }
 }

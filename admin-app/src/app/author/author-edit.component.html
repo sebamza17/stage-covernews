@@ -1,3 +1,32 @@
-<div>
-    AUTHOR
+<div class="example-container">
+    <h2>Eidtar author {{author.name}}</h2>
+    <mat-form-field>
+        <input type="text" [(ngModel)]="author.name" placeholder="name" aria-label="Number" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput [(ngModel)]="author.description" placeholder="Descripcion"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <input type="email" [(ngModel)]="author.email" placeholder="email" aria-label="Number" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <input type="text" [(ngModel)]="author.facebook" placeholder="facebook" aria-label="Number" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <input type="text" [(ngModel)]="author.twitter" placeholder="twitter" aria-label="Number" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <input type="text" [(ngModel)]="author.instagram" placeholder="instagram" aria-label="Number" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select [(value)]="author.show" placeholder="Se muestra?">
+            <mat-option *ngFor="let isShow of options" [value]="isShow.value">
+                {{ isShow.label }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <button mat-raised-button (click)="onCancel()">Cancel</button>
+        <button mat-raised-button (click)="onSave()">Guardar</button>
+    </div>
 </div>
