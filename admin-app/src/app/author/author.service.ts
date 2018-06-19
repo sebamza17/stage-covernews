@@ -40,4 +40,19 @@ export class AuthorService {
       return data;
     });
   }
+
+  /**
+   * Add new author
+   */
+  add(author: Author){
+    return this.http.post(environment.api+"author/add",{author: author});
+  }
+  
+  /**
+   * Author Id
+   * @param authorId 
+   */
+  remove(authorId: string){
+    return this.http.post(environment.api+"author/remove/"+authorId,{});
+  }
 }

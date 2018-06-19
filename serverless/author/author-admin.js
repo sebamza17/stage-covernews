@@ -101,7 +101,23 @@ export function remove (event, context, callback) {
 export function add(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
 
-    let authorObj = event.body.author;
+    let body = event.body;
+
+    if(typeof body == "string"){
+        try{
+            body = JSON.parse(body);
+        }catch(e){
+            callback(null, failure(e));
+            return;
+        }
+    }
+
+    if(!body.author){
+        callback(null, failure("Author is udenfined"));
+        return;
+    }
+
+    let authorObj = body.author;
 
     getConnection()
     .then((db)=>{

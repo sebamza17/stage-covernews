@@ -15,6 +15,7 @@
               <mat-option value="0">No se muestra</mat-option>
             </mat-select>
           </mat-form-field>
+          <button (click)="addAuthor()"><mat-icon>add</mat-icon></button>
         </form>
     </div>
 </div>
@@ -52,7 +53,7 @@
             <th mat-header-cell *matHeaderCellDef> Opciones </th>
             <td mat-cell *matCellDef="let author"> 
               <button (click)="editAuthor(author)"><mat-icon>edit</mat-icon></button>
-              <button (click)="removeAuthor(author)"><mat-icon>delete</mat-icon></button>
+              <button (click)="removeAuthor(author._id)"><mat-icon>delete</mat-icon></button>
             </td>
           </ng-container>
       
