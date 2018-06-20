@@ -25,10 +25,7 @@ export class CategoryService extends BaseService {
    * @returns {Observable<any>}
    */
   getAllCategories(): Observable<any> {
-    return this.http.get(this.url(this.urls.getAllCategories))
-      .pipe(map(data => {
-        console.log(data);
-      }));
+    return this.http.get(this.url(this.urls.getAllCategories));
   }
   
 }

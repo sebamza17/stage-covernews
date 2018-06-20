@@ -14,13 +14,11 @@ provider:
   runtime: nodejs8.10
   stage: prod
   region: us-east-1
-  timeout: 90 
 
 functions:
   # ARTICLES SECCION
   getArticles:
     handler: article/article.get
-    timeout: 60
     events:
       - http:
           path: article/all
@@ -29,7 +27,6 @@ functions:
           authorizer: false
   showArticle:
     handler: article/article.show
-    timeout: 60
     events:
       - http:
           path: article/show/{articleId}
@@ -38,7 +35,6 @@ functions:
           authorizer: false
   showFullArticle:
     handler: article/article.getFullArticle
-    timeout: 60
     events:
       - http:
           path: article/showFull/{articleId}
@@ -47,7 +43,6 @@ functions:
           authorizer: false
   showArticleContent:
     handler: article/article.getArticleContent
-    timeout: 60
     events:
       - http:
           path: article/content/{articleId}
@@ -56,7 +51,6 @@ functions:
           authorizer: false
   getByCanonical:
     handler: article/article.getByCanonical
-    timeout: 60
     events:
       - http:
           path: article/canonical/{canonical}
@@ -65,7 +59,6 @@ functions:
           authorizer: false
   getArticlesByCategory:
       handler: article/article.getByCategory
-      timeout: 60
       events:
         - http:
             path: article/category/{categoryId}
@@ -74,7 +67,6 @@ functions:
             authorizer: false
   getArticlesByAuthor:
       handler: article/article.getByAuthor
-      timeout: 60
       events:
         - http:
             path: article/author/{authorId}
@@ -83,7 +75,6 @@ functions:
             authorizer: false
   searchArticles:
       handler: article/article.search
-      timeout: 60
       events:
         - http:
             path: article/search/{criteria}
@@ -93,7 +84,6 @@ functions:
 # AUTHOR SECCION
   getAuthors:
     handler: author/author.get
-    timeout: 60
     events:
       - http:
           path: author/all
@@ -102,7 +92,6 @@ functions:
           authorizer: false
   showAuthor:
     handler: author/author.show
-    timeout: 60
     events:
       - http:
           path: author/show/{authorId}
@@ -111,7 +100,6 @@ functions:
           authorizer: false
   searchAuthors:
       handler: author/author.search
-      timeout: 60
       events:
         - http:
             path: author/search/{criteria}
@@ -120,7 +108,6 @@ functions:
             authorizer: false
   updateAuthor:
       handler: author/author-admin.update
-      timeout: 60
       events:
         - http:
             path: author/update/{authorId}
@@ -129,7 +116,6 @@ functions:
             authorizer: false 
   removeAuthor:
       handler: author/author-admin.remove
-      timeout: 60
       events:
         - http:
             path: author/remove/{authorId}
@@ -138,7 +124,6 @@ functions:
             authorizer: false   
   addAuthor:
       handler: author/author-admin.add
-      timeout: 60
       events:
         - http:
             path: author/add
@@ -148,7 +133,6 @@ functions:
 # CATEGORY SECCION
   getCategories:
     handler: category/category.get
-    timeout: 60
     events:
       - http:
           path: category/all
@@ -157,7 +141,6 @@ functions:
           authorizer: false
   showCategory:
     handler: category/category.show
-    timeout: 60
     events:
       - http:
           path: category/show/{categoryId}
@@ -166,7 +149,6 @@ functions:
           authorizer: false
   searchCategories:
       handler: category/category.search
-      timeout: 60
       events:
         - http:
             path: category/search/{criteria}
@@ -174,10 +156,17 @@ functions:
             cors: true
             authorizer: false
 # USER SECCION
+  refreshToken:
+      handler: user/user.refreshToken
+      events:
+        - http:
+            path: user/refreshToken
+            method: post
+            cors: true
+            authorizer: false
 # ADMIN SECCION
   loginAdmin:
       handler: admin/admin.login
-      timeout: 60
       events:
         - http:
             path: admin/admin
