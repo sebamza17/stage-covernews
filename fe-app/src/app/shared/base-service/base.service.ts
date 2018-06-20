@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export default abstract class BaseService {
 
-  protected apiUrl: string = 'https://1meiqciyd1.execute-api.us-east-1.amazonaws.com/prod';
+  protected apiUrl: string = environment.api;
 
   urls: Object;
 

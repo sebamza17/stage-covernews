@@ -4,8 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import BaseService from '../base-service/base.service';
 
-@Injectable()
-export class ArticleService extends BaseService {
+@Injectable({
+  providedIn: 'root'
+})
+export class CategoryService extends BaseService {
 
   // Define all service URLs
   urls = {
@@ -22,7 +24,7 @@ export class ArticleService extends BaseService {
    * Get all categories from API
    * @returns {Observable<any>}
    */
-  private getAllCategories(): Observable<any> {
+  getAllCategories(): Observable<any> {
     return this.http.get(this.url(this.urls.getAllCategories))
       .pipe(map(data => {
         console.log(data);
