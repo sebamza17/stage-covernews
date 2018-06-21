@@ -1,29 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from './home.service';
 import { Category } from '../../shared/category/Category';
-import { CategoryService } from '../../shared/category/category.service'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.less'],
-  providers: [CategoryService]
+  providers: []
 })
 export class HomeComponent implements OnInit {
 
-  public loading: boolean;
   public categories: Category[];
+  public loading: boolean;
 
   constructor(
-    private categoryService: CategoryService) {
+    private homeService: HomeService) {
   }
 
   ngOnInit() {
+    this.walkThrough();
+  }
 
-    // Get all categories from API
-    this.categoryService.getAllCategories().subscribe(categories => {
-      this.categories = categories;
+  /**
+   * Walk Trhougt
+   */
+  private walkThrough(){
+    this.homeService.getCategories()
+    .subscribe(data=> {
+      this.categories = data;
+      this.homeService.categories = data;
     });
-
   }
 
 }

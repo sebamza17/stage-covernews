@@ -3,17 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import BaseService from '../base-service/base.service';
-import { Category } from './Category';
+import { Author } from './Author';
 import 'rxjs/add/operator/map';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService extends BaseService {
+export class AuthorService extends BaseService {
 
   // Define all service URLs
   urls = {
-    getAllCategories: '/category/all'
+    getAllAuthors: '/author/all'
   };
 
   constructor(
@@ -23,11 +23,11 @@ export class CategoryService extends BaseService {
   }
 
   /**
-   * Get all categories from API
-   * @returns Observable<Category[]>
+   * Get all authors from API
+   * @returns Observable<Author[]>
    */
-  public getAllCategories(): Observable<Category[]>{
-    return this.http.get<Category[]>(this.url(this.urls.getAllCategories));
+  public getAllAuthors(): Observable<Author[]>{
+    return this.http.get<Author[]>(this.url(this.urls.getAllAuthors));
   }
   
 }
