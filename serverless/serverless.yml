@@ -164,6 +164,22 @@ functions:
             method: post
             cors: true
             authorizer: false
+  getByToken:
+      handler: user/user.getByToken
+      events:
+        - http:
+            path: user/getByToken
+            method: post
+            cors: true
+            authorizer: false
+  getFollowAuthors:
+      handler: author/author-follow.get
+      events:
+        - http:
+            path: author/follow
+            method: get
+            cors: true
+            authorizer: false
 # ADMIN SECCION
   loginAdmin:
       handler: admin/admin.login
