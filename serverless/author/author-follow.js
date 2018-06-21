@@ -20,12 +20,22 @@ export function get (event, context, callback) {
         (async () =>{
             const userCollection = db.collection('user');
             const user  = await userCollection.findOne({refreshToken: header.token});
-            const authorsCollection = db.collection('authorFollow');
-            const authors = await authorsCollection.find(
+            const authorsFollowCollection = db.collection('authorFollow');
+            const authorsFollowing = await authorsFollowCollection.find(
                 {user: user._id},
+                {author: 1, user: 0,_id: 0},
                 {limit: 20})
                 .toArray();
-                
+            if(!authorsFollowing || authorsFollowing.length <=0){
+                callback(null, success([]));
+                return;
+            }
+            let authorsId = []
+            authorsFollowing.forEach((item)=>{
+                authorsId.push(item.author);
+            });
+            const authorsCollection = db.collection('authors');
+            const authors = await authorsCollection.find({$in:authorsId},{limit: 20}).toArray();
             callback(null, success(authors));
         })()
         .catch((err)=>{
@@ -36,12 +46,6 @@ export function get (event, context, callback) {
         callback(null, failure(err));
     });
 };
-
-async function getUserByToken(user,token){
-    
-    console.log(doc);
-}
-
 
 function parseHeader(event,cb){
     let header = event.headers;
