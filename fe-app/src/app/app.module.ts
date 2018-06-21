@@ -15,6 +15,7 @@ import { MaterialModule } from "./shared/material.module";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ArticleSliderComponent } from './shared/article/article-slider/article-slider.component';
 import { ArticleCardComponent } from './shared/article/article-card/article-card.component';
+import { HomeUserComponent } from './components/home-user/home-user/home-user.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ArticleCardComponent } from './shared/article/article-card/article-card
     HomeComponent,
     NavbarComponent,
     ArticleSliderComponent,
-    ArticleCardComponent
+    ArticleCardComponent,
+    HomeUserComponent
   ],
   imports: [
     BrowserModule,
