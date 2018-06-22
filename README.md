@@ -5,6 +5,10 @@
 
 `npm install -g serverless`
 
+### Install angular cli
+
+`npm install -g @angluar-cli`
+
 ### Install Node Modules 
 `cd serverless`
 
