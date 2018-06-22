@@ -5,7 +5,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DashboardComponent } from './app.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AuthorComponent,AuthorEditComponent } from './author/author.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule,ReactiveFormsModule }    from '@angular/forms';
 import { ArticlesComponent } from './articles/articles.component';
 import { HttpClientModule } from '@angular/common/http';

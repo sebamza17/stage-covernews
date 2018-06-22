@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { Category } from '../../shared/category/Category';
+import { Author } from '../../shared/author/Author';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { Category } from '../../shared/category/Category';
 export class HomeComponent implements OnInit {
 
   public categories: Category[];
+  public authors: Author[];
   public loading: boolean;
 
   constructor(
@@ -21,10 +23,25 @@ export class HomeComponent implements OnInit {
     this.walkThrough();
   }
 
+  public follow(author: string){
+    this.homeService.followAuthor(author)
+    .subscribe((data)=>{
+      console.log(data);
+    })
+  }
+
   /**
    * Walk Trhougt
    */
   private walkThrough(){
+    this.getCategories();
+    this.getAuthors();
+  }
+
+  /**
+   * Get Categories
+   */
+  private getCategories(){
     this.homeService.getCategories()
     .subscribe(data=> {
       this.categories = data;
@@ -32,4 +49,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * Get Authors
+   */
+  private getAuthors(){
+    this.homeService.getAuthors()
+    .subscribe((res)=>{
+      this.authors = res;
+    });
+  };
 }

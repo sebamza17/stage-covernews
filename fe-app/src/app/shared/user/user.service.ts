@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter,Output } from '@angular/core';
 import { User } from './User';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase';
@@ -12,6 +12,7 @@ export class UserService extends BaseService{
 
   provider: any;
   user: User;
+  @Output() public event: EventEmitter<any> = new EventEmitter();
 
   urls = {
     token: '/user/refreshToken'

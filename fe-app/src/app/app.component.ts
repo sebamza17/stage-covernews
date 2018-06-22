@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter} from '@angular/core';
 import { auth } from 'firebase';
 import { UserService} from './shared/user/user.service'
 import { User } from './shared/user/User';
@@ -15,14 +15,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     auth().onAuthStateChanged((user)=>{
+      
       if(!user){
         //TODO: Manage logout
         return;
       }
       this.userSvc.user = user as User;
       this.userSvc.registerUserToken(user.refreshToken,()=>{
+        this.userSvc.event.emit(user);
         this.userData.walkUserData();
       });
     });
   }
+
 }

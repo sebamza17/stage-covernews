@@ -13,7 +13,8 @@ export class AuthorService extends BaseService {
 
   // Define all service URLs
   urls = {
-    getAllAuthors: '/author/all'
+    getAllAuthors: '/author/all',
+    follow: '/author/follow'
   };
 
   constructor(
@@ -29,5 +30,16 @@ export class AuthorService extends BaseService {
   public getAllAuthors(): Observable<Author[]>{
     return this.http.get<Author[]>(this.url(this.urls.getAllAuthors));
   }
-  
+
+  public getFollowAuthors(): Observable<Author[]>{
+    return this.http.get<Author[]>(this.url(this.urls.follow));
+  }
+ 
+  /**
+   * Follow author
+   * @param author 
+   */
+  public followAuthor(author: string){
+    return this.http.post(this.url(this.urls.follow),{follow:{author:author}});
+  }
 }

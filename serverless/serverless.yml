@@ -23,7 +23,21 @@ functions:
       - http:
           path: article/all
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   showArticle:
     handler: article/article.show
@@ -31,7 +45,21 @@ functions:
       - http:
           path: article/show/{articleId}
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   showFullArticle:
     handler: article/article.getFullArticle
@@ -39,7 +67,21 @@ functions:
       - http:
           path: article/showFull/{articleId}
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   showArticleContent:
     handler: article/article.getArticleContent
@@ -47,7 +89,21 @@ functions:
       - http:
           path: article/content/{articleId}
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   getByCanonical:
     handler: article/article.getByCanonical
@@ -55,7 +111,21 @@ functions:
       - http:
           path: article/canonical/{canonical}
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   getArticlesByCategory:
       handler: article/article.getByCategory
@@ -63,7 +133,21 @@ functions:
         - http:
             path: article/category/{categoryId}
             method: get
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false
   getArticlesByAuthor:
       handler: article/article.getByAuthor
@@ -71,7 +155,21 @@ functions:
         - http:
             path: article/author/{authorId}
             method: get
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false
   searchArticles:
       handler: article/article.search
@@ -79,7 +177,21 @@ functions:
         - http:
             path: article/search/{criteria}
             method: get
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false
 # AUTHOR SECCION
   getAuthors:
@@ -88,7 +200,21 @@ functions:
       - http:
           path: author/all
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   showAuthor:
     handler: author/author.show
@@ -96,7 +222,21 @@ functions:
       - http:
           path: author/show/{authorId}
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   searchAuthors:
       handler: author/author.search
@@ -104,7 +244,21 @@ functions:
         - http:
             path: author/search/{criteria}
             method: get
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false
   updateAuthor:
       handler: author/author-admin.update
@@ -112,7 +266,21 @@ functions:
         - http:
             path: author/update/{authorId}
             method: post
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false 
   removeAuthor:
       handler: author/author-admin.remove
@@ -120,7 +288,21 @@ functions:
         - http:
             path: author/remove/{authorId}
             method: post
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false   
   addAuthor:
       handler: author/author-admin.add
@@ -128,8 +310,66 @@ functions:
         - http:
             path: author/add
             method: post
-            cors: true
-            authorizer: false              
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  getFollowAuthors:
+      handler: author/author-follow.get
+      events:
+        - http:
+            path: author/follow
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  followAuthor:
+      handler: author/author-follow.follow
+      events:
+        - http:
+            path: author/follow
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
 # CATEGORY SECCION
   getCategories:
     handler: category/category.get
@@ -137,7 +377,21 @@ functions:
       - http:
           path: category/all
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   showCategory:
     handler: category/category.show
@@ -145,7 +399,21 @@ functions:
       - http:
           path: category/show/{categoryId}
           method: get
-          cors: true
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
           authorizer: false
   searchCategories:
       handler: category/category.search
@@ -153,7 +421,21 @@ functions:
         - http:
             path: category/search/{criteria}
             method: get
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false
 # USER SECCION
   refreshToken:
@@ -162,7 +444,21 @@ functions:
         - http:
             path: user/refreshToken
             method: post
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false
   getByToken:
       handler: user/user.getByToken
@@ -170,15 +466,21 @@ functions:
         - http:
             path: user/getByToken
             method: post
-            cors: true
-            authorizer: false
-  getFollowAuthors:
-      handler: author/author-follow.get
-      events:
-        - http:
-            path: author/follow
-            method: get
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false
 # ADMIN SECCION
   loginAdmin:
@@ -187,5 +489,19 @@ functions:
         - http:
             path: admin/admin
             method: post
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
             authorizer: false

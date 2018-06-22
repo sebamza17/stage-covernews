@@ -6,6 +6,10 @@
             <app-article-slider [category]="category"></app-article-slider>
         </div>
 
+        <div *ngFor="let author of authors">
+            <a (click)="follow(author._id)">{{author.name}}</a>
+        </div>
+
     </div>
 
 </div>
