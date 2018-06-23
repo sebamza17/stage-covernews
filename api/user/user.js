@@ -1,5 +1,5 @@
-import {success, failure} from '../libs/response-lib';
-import {getConnection} from '../libs/mongodb-connect';
+import {success, failure} from './libs/response-lib';
+import {getConnection} from './libs/mongodb-connect';
 
 /**
  * Get 20 authors
