@@ -1,1 +1,42 @@
+@import "variables";
 @import "base/helpers";
+@import "base/fonts";
+@import "base/backgrounds";
+
+.article-slider {
+
+  @visible-cards: 4;
+
+  // Title
+  .article-slider__title {
+    .font-size-giant;
+    .font-weight-bold;
+    .bg-color-white;
+    .padding-horizontal-half;
+    .padding-vertical-half;
+    position: sticky;
+    top: @navbar-height-medium-up;
+    z-index: 1;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  // Cards general container
+  .article-slider__cards {
+    .margin-bottom-double;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow: auto;
+
+    // Article container, each card has a wrapper
+    .article-container {
+      .padding-horizontal-half;
+      .margin-bottom-full;
+      width: ~"calc((100% / @{visible-cards}))";
+      flex-shrink: 0;
+    }
+
+  }
+
+}

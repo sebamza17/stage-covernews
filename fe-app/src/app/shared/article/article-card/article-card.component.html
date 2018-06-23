@@ -1,7 +1,42 @@
 <!-- Article card -->
 <div class="article-card">
 
+    <!-- Image -->
+    <div class="article-card__image" [style.background-image]="'url(' + article.image + ')'"></div>
+    <!-- end Image -->
 
+    <!-- Content -->
+    <div class="article-card__content">
+
+        <!-- Author -->
+        <div class="article-card__author">
+            Por {{article.authorName}}
+        </div>
+        <!-- end Author -->
+
+        <!-- Title -->
+        <div class="article-card__title">
+            {{article.title}}
+        </div>
+        <!-- end Title -->
+
+        <!-- Footer -->
+        <div class="article-card__footer">
+
+            <div class="article-card__source">
+                Fuente: {{article.news}}
+            </div>
+
+            <div class="article-card__read-later">
+                Leer mas tarde
+                <i class="icon ion-md-bookmark"></i>
+            </div>
+
+        </div>
+        <!-- end Footer -->
+
+    </div>
+    <!-- end Content -->
 
 </div>
 <!-- end Article card -->
