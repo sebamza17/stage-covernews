@@ -117,7 +117,7 @@ export class UserService extends BaseService{
    * @param token 
    */
   public registerUserToken(token: string, cb: Function = function(){}){
-    this.http.post(this.url(this.urls.token),{user: this.user, refreshToken: token})
+    this.http.post(this.url('user',this.urls.token),{user: this.user, refreshToken: token})
     .subscribe((data)=>{
       cb(data);
     })

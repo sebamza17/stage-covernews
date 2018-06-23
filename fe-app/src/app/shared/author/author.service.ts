@@ -28,11 +28,11 @@ export class AuthorService extends BaseService {
    * @returns Observable<Author[]>
    */
   public getAllAuthors(): Observable<Author[]>{
-    return this.http.get<Author[]>(this.url(this.urls.getAllAuthors));
+    return this.http.get<Author[]>(this.url('author',this.urls.getAllAuthors));
   }
 
   public getFollowAuthors(): Observable<Author[]>{
-    return this.http.get<Author[]>(this.url(this.urls.follow));
+    return this.http.get<Author[]>(this.url('author',this.urls.follow));
   }
  
   /**
@@ -40,6 +40,6 @@ export class AuthorService extends BaseService {
    * @param author 
    */
   public followAuthor(author: string){
-    return this.http.post(this.url(this.urls.follow),{follow:{author:author}});
+    return this.http.post(this.url('author',this.urls.follow),{follow:{author:author}});
   }
 }
