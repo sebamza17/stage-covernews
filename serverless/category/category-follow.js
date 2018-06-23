@@ -3,7 +3,7 @@ import {success, failure} from '../libs/response-lib';
 import {getConnection} from '../libs/mongodb-connect';
 
 /**
- * Get 20 authors
+ * Get 20 category
  * @param {*} event 
  * @param {*} context 
  * @param {*} callback 
@@ -29,13 +29,13 @@ export function get (event, context, callback) {
                 callback(null, failure("User undefined"));
                 return;
             }
-            if(!user.authors || user.authors.length <=0){
+            if(!user.categories || user.categories.length <=0){
                 callback(null, success([]));
                 return;
             }
-            const authorsCollection = db.collection('journalist');
-            const authors = await authorsCollection.find({_id:{$in:user.authors}},{limit: 20}).toArray();
-            callback(null, success(authors));
+            const categoryCollection = db.collection('category');
+            const category = await categoryCollection.find({_id:{$in:user.categories}},{limit: 20}).toArray();
+            callback(null, success(category));
         })()
         .catch((err)=>{
             callback(null, failure(err));
@@ -47,7 +47,7 @@ export function get (event, context, callback) {
 };
 
 /**
- * follow authors
+ * follow category
  * @param {*} event 
  * @param {*} context 
  * @param {*} callback 
@@ -66,11 +66,11 @@ export function follow (event, context, callback) {
 
         (async () =>{
             const userCollection = db.collection('user');
-            let authorId = mongodb.ObjectID(follow.author);
+            let categoryId = mongodb.ObjectID(follow.category);
             const user  = await userCollection
                 .update(
                     {refreshToken: header.token},
-                    {$addToSet :{authors:authorId}}
+                    {$addToSet :{category:categoryId}}
                 );
             
             callback(null, success(user,header.token));
@@ -86,7 +86,7 @@ export function follow (event, context, callback) {
 
 
 /**
- * Un Follow authors
+ * Un Follow category
  * @param {*} event 
  * @param {*} context 
  * @param {*} callback 
@@ -105,11 +105,11 @@ export function unFollow (event, context, callback) {
 
         (async () =>{
             const userCollection = db.collection('user');
-            let authorId = mongodb.ObjectID(follow.author);
+            let categoryId = mongodb.ObjectID(follow.category);
             const user  = await userCollection
                 .update(
                     {refreshToken: header.token},
-                    {$pull :{authors:authorId}}
+                    {$pull :{category:categoryId}}
                 );
             
             callback(null, success(user,header.token));

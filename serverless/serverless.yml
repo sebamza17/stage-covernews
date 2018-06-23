@@ -459,6 +459,72 @@ functions:
                 - Token
               allowCredentials: false
             authorizer: false
+  getFollowCategories:
+      handler: category/category-follow.get
+      events:
+        - http:
+            path: category/follow
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  followCategory:
+      handler: category/category-follow.follow
+      events:
+        - http:
+            path: category/follow
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  unFollowCategory:
+      handler: category/category-follow.unFollow
+      events:
+        - http:
+            path: category/unfollow
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
 # USER SECCION
   refreshToken:
       handler: user/user.refreshToken
