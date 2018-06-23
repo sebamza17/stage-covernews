@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Category } from "../../category/Category";
+import { Article } from '../../article/Article';
+import { ArticleService } from '../../article/article.service';
+import { Category } from '../../category/Category';
 
 @Component({
   selector: 'app-article-slider',
@@ -9,11 +11,24 @@ import { Category } from "../../category/Category";
 export class ArticleSliderComponent implements OnInit {
   @Input() category: Category;
 
-  constructor() {
+  public articles: Article[];
+
+  constructor(
+    private articleService: ArticleService) {
   }
 
   ngOnInit() {
-    console.log(this.category);
+    this.getArticles();
+  }
+
+  /**
+   * Get articles for given category
+   */
+  private getArticles() {
+    this.articleService.getArticlesByCategory(this.category._id)
+      .subscribe(data => {
+        this.articles = data;
+      });
   }
 
 }

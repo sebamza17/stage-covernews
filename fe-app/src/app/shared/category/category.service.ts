@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -26,8 +26,8 @@ export class CategoryService extends BaseService {
    * Get all categories from API
    * @returns Observable<Category[]>
    */
-  public getAllCategories(): Observable<Category[]>{
+  public getAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url(this.urls.getAllCategories));
   }
-  
+
 }

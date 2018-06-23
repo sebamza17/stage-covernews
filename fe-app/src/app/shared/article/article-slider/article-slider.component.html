@@ -1,18 +1,15 @@
-<div>
+<div class="article-slider">
 
-    <h2 class="margin-none padding-bottom-half">
+    <h2 class="article-slider__title">
         {{category.name}}
     </h2>
 
-    <app-article-card></app-article-card>
+    <div class="article-slider__cards">
 
-    <app-article-card></app-article-card>
+        <div class="article-container" *ngFor="let article of articles">
+            <app-article-card [article]="article"></app-article-card>
+        </div>
 
-    <app-article-card></app-article-card>
-
-    <app-article-card></app-article-card>
-
-    <app-article-card></app-article-card>
-
+    </div>
 
 </div>

@@ -23,17 +23,17 @@ export class HomeComponent implements OnInit {
     this.walkThrough();
   }
 
-  public follow(author: string){
+  public follow(author: string) {
     this.homeService.followAuthor(author)
-    .subscribe((data)=>{
-      console.log(data);
-    })
+      .subscribe((data) => {
+        console.log(data);
+      })
   }
 
   /**
-   * Walk Trhougt
+   * Walk Through
    */
-  private walkThrough(){
+  private walkThrough() {
     this.getCategories();
     this.getAuthors();
   }
@@ -41,21 +41,30 @@ export class HomeComponent implements OnInit {
   /**
    * Get Categories
    */
-  private getCategories(){
+  private getCategories() {
     this.homeService.getCategories()
-    .subscribe(data=> {
-      this.categories = data;
-      this.homeService.categories = data;
-    });
+      .subscribe(data => {
+
+        let counter = 0;
+        let categories = data.filter((category) => {
+          counter++;
+          if (counter < 8) {
+            return category;
+          }
+        });
+
+        this.categories = categories;
+        this.homeService.categories = categories;
+      });
   }
 
   /**
    * Get Authors
    */
-  private getAuthors(){
+  private getAuthors() {
     this.homeService.getAuthors()
-    .subscribe((res)=>{
-      this.authors = res;
-    });
+      .subscribe((res) => {
+        this.authors = res;
+      });
   };
 }
