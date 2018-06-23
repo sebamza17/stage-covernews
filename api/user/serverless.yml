@@ -1,0 +1,48 @@
+service: serverless-user
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+
+functions:
+  refreshToken:
+      handler: user.refreshToken
+      events:
+        - http:
+            path: user/refreshToken
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  getByToken:
+      handler: user.getByToken
+      events:
+        - http:
+            path: user/getByToken
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false

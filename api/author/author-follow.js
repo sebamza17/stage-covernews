@@ -21,8 +21,9 @@ export function get (event, context, callback) {
 
     getConnection()
     .then((db)=>{
-
+        console.log("Before");
         (async () =>{
+            console.log("Inside");
             const userCollection = db.collection('user');
             const user  = await userCollection.findOne({refreshToken: header.token});
             if(!user){
@@ -35,6 +36,7 @@ export function get (event, context, callback) {
             }
             const authorsCollection = db.collection('journalist');
             const authors = await authorsCollection.find({_id:{$in:user.authors}},{limit: 20}).toArray();
+            console.log("Callback");
             callback(null, success(authors));
         })()
         .catch((err)=>{

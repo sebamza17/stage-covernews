@@ -1,6 +1,6 @@
 import mongodb from 'mongodb';
-import {success, failure} from '../libs/response-lib';
-import {getConnection} from '../libs/mongodb-connect';
+import {success, failure} from './libs/response-lib';
+import {getConnection} from './libs/mongodb-connect';
 import AWS from 'aws-sdk';
 
 const s3 = new AWS.S3();
@@ -280,4 +280,136 @@ export function getArticleContent(event,context, callback){
 
         callback(null, success(body));
     });
+}
+
+/**
+ * Get articles for following authors
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export function getArticlesByFollowingAuthors(event,context,callback){
+    context.callbackWaitsForEmptyEventLoop = false;
+
+    let header = parseHeader(event,callback);
+
+    getConnection()
+    .then((db)=>{
+        (async () =>{
+            const userCollection = db.collection('user');
+            const user  = await userCollection.findOne({refreshToken: header.token});
+            if(!user){
+                callback(null, failure("User undefined"));
+                return;
+            }
+            if(!user.authors || user.authors.length <=0){
+                callback(null, success([]));
+                return;
+            }
+
+            const articlesColl = db.collection('note');
+            const articles = await articlesColl.aggregate([
+                {$match: {"authorId":{$in: user.authors}}},
+                {$sort: { createdAt: -1 }},
+                {
+                    $group: {
+                        _id: "$authorId",
+                        note: { $first: "$$ROOT" }
+                    }
+                },
+                {$replaceRoot: { newRoot: "$note" }}
+            ],{allowDiskUse: true}).toArray();
+            callback(null, success(articles));
+        })()
+        .catch((err)=>{
+            callback(null, failure(err));
+        });
+    }).catch((err)=>{
+        callback(null, failure(err));
+    });
+}
+
+
+/**
+ * Get articles for following categories
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export function getArticlesByFollowingCategories(event,context,callback){
+    context.callbackWaitsForEmptyEventLoop = false;
+
+    let header = parseHeader(event,callback);
+
+    getConnection()
+    .then((db)=>{
+        (async () =>{
+            const userCollection = db.collection('user');
+            const user  = await userCollection.findOne({refreshToken: header.token});
+            if(!user){
+                callback(null, failure("User undefined"));
+                return;
+            }
+            if(!user.categories || user.categories.length <=0){
+                callback(null, success([]));
+                return;
+            }
+
+            const articlesColl = db.collection('note');
+            const articles = await articlesColl.aggregate([
+                {$match: {"category":{$in: user.categories}}},
+                {$sort: { createdAt: -1 }},
+                {
+                    $group: {
+                        _id: "$category",
+                        note: { $first: "$$ROOT" }
+                    }
+                },
+                {$replaceRoot: { newRoot: "$note" }}
+            ],{allowDiskUse: true}).toArray();
+            callback(null, success(articles));
+        })()
+        .catch((err)=>{
+            callback(null, failure(err));
+        });
+    }).catch((err)=>{
+        callback(null, failure(err));
+    });
+}
+
+// PRIVATE
+
+function parseHeader(event,cb){
+    let header = event.headers;
+
+    if(typeof header == "string"){
+        try{
+            header = JSON.parse(header);
+        }catch(e){
+            cb(null, failure(e));
+            return header;
+        }
+    }
+
+    return header;
+}
+
+/**
+ * Parse Body
+ * @param {*} event 
+ * @param {*} cb 
+ */
+function parseBody(event,cb){
+    let body = event.body;
+
+    if(typeof body == "string"){
+        try{
+            body = JSON.parse(body);
+        }catch(e){
+            cb(null, failure(e));
+            return body;
+        }
+    }
+
+    return body;
 }

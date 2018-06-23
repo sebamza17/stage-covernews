@@ -1,0 +1,34 @@
+service: serverless-admin
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+
+functions:
+# ADMIN SECCION
+  loginAdmin:
+      handler: admin.login
+      events:
+        - http:
+            path: admin/login
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false

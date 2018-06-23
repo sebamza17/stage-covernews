@@ -1,0 +1,153 @@
+service: serverless-author
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+
+functions:
+  getAuthors:
+    handler: author.get
+    events:
+      - http:
+          path: author/all
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  showAuthor:
+    handler: author.show
+    events:
+      - http:
+          path: author/show/{authorId}
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  searchAuthors:
+      handler: author.search
+      events:
+        - http:
+            path: author/search/{criteria}
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  updateAuthor:
+      handler: author-admin.update
+      events:
+        - http:
+            path: author/update/{authorId}
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false 
+  removeAuthor:
+      handler: author-admin.remove
+      events:
+        - http:
+            path: author/remove/{authorId}
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false   
+  addAuthor:
+      handler: author-admin.add
+      events:
+        - http:
+            path: author/add
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  getFollowAuthors:
+      handler: author-follow.get
+      events:
+        - http:
+            path: author/follow
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  followAuthor:
+      handler: author-follow.follow
+      events:
+        - http:
+            path: author/follow
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  unFollowAuthor:
+      handler: author-follow.unFollow
+      events:
+        - http:
+            path: author/unfollow
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false

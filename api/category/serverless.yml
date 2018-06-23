@@ -1,0 +1,108 @@
+service: serverless-category
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+
+functions:
+  getCategories:
+    handler: category.get
+    events:
+      - http:
+          path: category/all
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  showCategory:
+    handler: category.show
+    events:
+      - http:
+          path: category/show/{categoryId}
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  searchCategories:
+      handler: category.search
+      events:
+        - http:
+            path: category/search/{criteria}
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  getFollowCategories:
+      handler: category-follow.get
+      events:
+        - http:
+            path: category/follow
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  followCategory:
+      handler: category-follow.follow
+      events:
+        - http:
+            path: category/follow
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  unFollowCategory:
+      handler: category-follow.unFollow
+      events:
+        - http:
+            path: category/unfollow
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false

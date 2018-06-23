@@ -1,0 +1,169 @@
+service: serverless
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+
+functions:
+  # ARTICLES SECCION
+  getArticles:
+    handler: article.get
+    events:
+      - http:
+          path: article/all
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  getArticlesByFollowingAuthors:
+    handler: article.getArticlesByFollowingAuthors
+    events:
+      - http:
+          path: article/following/authors
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  getArticlesByFollowingCategories:
+    handler: article.getArticlesByFollowingCategories
+    events:
+      - http:
+          path: article/following/categories
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  showArticle:
+    handler: article.show
+    events:
+      - http:
+          path: article/show/{articleId}
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  showFullArticle:
+    handler: article.getFullArticle
+    events:
+      - http:
+          path: article/showFull/{articleId}
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  showArticleContent:
+    handler: article.getArticleContent
+    events:
+      - http:
+          path: article/content/{articleId}
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  getByCanonical:
+    handler: article.getByCanonical
+    events:
+      - http:
+          path: article/canonical/{canonical}
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  getArticlesByCategory:
+      handler: article.getByCategory
+      events:
+        - http:
+            path: article/category/{categoryId}
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  getArticlesByAuthor:
+      handler: article.getByAuthor
+      events:
+        - http:
+            path: article/author/{authorId}
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
+  searchArticles:
+      handler: article.search
+      events:
+        - http:
+            path: article/search/{criteria}
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false

@@ -1,0 +1,13 @@
+{
+    "pathParameters": {
+        "authorId": "5a66d368486631e55a4ed05c",
+        "criteria": "Juan"
+    },
+    "body":{
+        "author":{
+            "name": "Actualiza",
+            "show": true,
+            "_id": "5b2593765f5d3a0914499300"
+        }
+    }
+}
