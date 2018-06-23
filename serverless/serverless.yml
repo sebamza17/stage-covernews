@@ -370,6 +370,28 @@ functions:
                 - Token
               allowCredentials: false
             authorizer: false
+  unFollowAuthor:
+      handler: author/author-follow.unFollow
+      events:
+        - http:
+            path: author/unfollow
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - Startlower
+                - Text
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
 # CATEGORY SECCION
   getCategories:
     handler: category/category.get

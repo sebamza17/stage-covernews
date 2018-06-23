@@ -14,7 +14,7 @@ export function get (event, context, callback) {
 
     let header = parseHeader(event,callback);
 
-    if(!header.token || !header.Token){
+    if(!header.token){
         callback(null, failure("Token undefined"));
         return;
     }
@@ -29,19 +29,13 @@ export function get (event, context, callback) {
                 callback(null, failure("User undefined"));
                 return;
             }
-            const authorsFollowCollection = db.collection('authorFollow');
-            const authorsFollowing = await authorsFollowCollection.find(
-                {user: user._id},
-                {author: 1, user: 0,_id: 0},
-                {limit: 20})
-                .toArray();
-            if(!authorsFollowing || authorsFollowing.length <=0){
+            if(!user.authors || user.authors.length <=0){
                 callback(null, success([]));
                 return;
             }
             let authorsId = []
-            authorsFollowing.forEach((item)=>{
-                authorsId.push(item.author);
+            user.authors.forEach((item)=>{
+                authorsId.push(item);
             });
             const authorsCollection = db.collection('journalist');
             const authors = await authorsCollection.find({_id:{$in:authorsId}},{limit: 20}).toArray();
@@ -57,7 +51,7 @@ export function get (event, context, callback) {
 };
 
 /**
- * Get 20 authors
+ * follow authors
  * @param {*} event 
  * @param {*} context 
  * @param {*} callback 
@@ -76,19 +70,14 @@ export function follow (event, context, callback) {
 
         (async () =>{
             const userCollection = db.collection('user');
-            const user  = await userCollection.findOne({refreshToken: header.token});
-            if(!user){
-                callback(null, failure("User undefined"));
-                return;
-            }
-            const authorsFollowCollection = db.collection('authorFollow');
             let authorId = mongodb.ObjectID(follow.author);
-            const authorsFollowing = await authorsFollowCollection.update(
-                {user: user._id,author: authorId},
-                {$set:{user: user._id,author: authorId}},
-                {upsert: true, new: true}
-            );
-            callback(null, success(authorsFollowing,header.token));
+            const user  = await userCollection
+                .update(
+                    {refreshToken: header.token},
+                    {$addToSet :{authors:authorId}}
+                );
+            
+            callback(null, success(user,header.token));
         })()
         .catch((err)=>{
             callback(null, failure(err,header.token));
@@ -99,6 +88,44 @@ export function follow (event, context, callback) {
     });
 };
 
+
+/**
+ * Un Follow authors
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export function unFollow (event, context, callback) {
+
+    context.callbackWaitsForEmptyEventLoop = false;
+
+    let header = parseHeader(event,callback);
+    let body = parseBody(event,callback);
+
+    let follow = body.follow;
+
+    getConnection()
+    .then((db)=>{
+
+        (async () =>{
+            const userCollection = db.collection('user');
+            let authorId = mongodb.ObjectID(follow.author);
+            const user  = await userCollection
+                .update(
+                    {refreshToken: header.token},
+                    {$pull :{authors:authorId}}
+                );
+            
+            callback(null, success(user,header.token));
+        })()
+        .catch((err)=>{
+            callback(null, failure(err,header.token));
+        });
+
+    }).catch((err)=>{
+        callback(null, failure(err,header.token));
+    });
+};
 
 
 // PRIVATE
