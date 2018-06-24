@@ -109,11 +109,23 @@ export function getByCategory(event,context,callback){
     }
 
     let categoryId = mongodb.ObjectID(event.pathParameters.categoryId);
+    let queryString = parseQueryString(event);
+    
+    let limit = 5;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
 
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.find({category: categoryId},{limit: 20}).toArray((err,doc)=>{
+        articles.find({category: categoryId},{limit: limit, skip: skip}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -412,4 +424,27 @@ function parseBody(event,cb){
     }
 
     return body;
+}
+
+/**
+ * Parse Body
+ * @param {*} event 
+ * @param {*} cb 
+ */
+function parseQueryString(event,cb){
+    let query = event.queryStringParameters;
+
+    if(!query){
+        return {};
+    }
+
+    if(typeof query == "string"){
+        try{
+            query = JSON.parse(query);
+        }catch(e){
+            return {};
+        }
+    }
+
+    return query;
 }

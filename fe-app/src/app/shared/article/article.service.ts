@@ -12,7 +12,7 @@ export class ArticleService extends BaseService {
 
   // Define all service URLs
   urls = {
-    getArticlesByCategory: '/article/category/{{categoryId}}',
+    // getArticlesByCategory: '/article/category/{{categoryId}}',
   };
 
   constructor(
@@ -27,8 +27,7 @@ export class ArticleService extends BaseService {
    * @returns {Observable<Article[]>}
    */
   public getArticlesByCategory(categoryId): Observable<Article[]> {
-    return this.http.get<Article[]>(this.url(
-      this.urls.getArticlesByCategory.replace('{{categoryId}}', categoryId)
+    return this.http.get<Article[]>(this.url('article',`/article/category/${categoryId}`
     ));
   }
 
