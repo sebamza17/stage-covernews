@@ -12,10 +12,23 @@ export function get (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
+    let queryString = parseQueryString(event);
+    
+    let limit = 5;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
+
     getConnection()
     .then((db)=>{
         const category = db.collection('category');
-        category.find({},{limit: 20}).toArray((err,doc)=>{
+        category.find({},{limit: limit, skip: skip}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -76,6 +89,19 @@ export function search(event,context,callback){
 
     let criteria = decodeURI(event.pathParameters.criteria);
 
+    let queryString = parseQueryString(event);
+    
+    let limit = 5;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
+
     getConnection()
     .then((db)=>{
         
@@ -88,7 +114,7 @@ export function search(event,context,callback){
             $caseSensitive: false
         };
         
-        category.find(query,{limit: 20}).toArray((err,doc)=>{
+        category.find(query,{limit: limit, skip: skip}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -98,4 +124,28 @@ export function search(event,context,callback){
     }).catch((err)=>{
         callback(null, failure(err));
     });
+}
+
+
+/**
+ * Parse Body
+ * @param {*} event 
+ * @param {*} cb 
+ */
+function parseQueryString(event,cb){
+    let query = event.queryStringParameters;
+
+    if(!query){
+        return {};
+    }
+
+    if(typeof query == "string"){
+        try{
+            query = JSON.parse(query);
+        }catch(e){
+            return {};
+        }
+    }
+
+    return query;
 }

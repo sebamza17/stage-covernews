@@ -15,10 +15,23 @@ export function get (event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
+    let queryString = parseQueryString(event);
+    
+    let limit = 5;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
+
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.find({},{limit: 50}).toArray((err,doc)=>{
+        articles.find({},{limit: limit, skip: skip}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -117,7 +130,7 @@ export function getByCategory(event,context,callback){
     if(queryString.limit){
         limit = parseInt(queryString.limit);
     }
-    
+
     if(queryString.skip){
         skip = parseInt(queryString.skip);
     }
@@ -152,6 +165,18 @@ export function getByAuthor(event,context,callback){
     }
 
     let authorId = mongodb.ObjectID(event.pathParameters.authorId);
+    let queryString = parseQueryString(event);
+    
+    let limit = 5;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
 
     getConnection()
     .then((db)=>{
@@ -163,7 +188,7 @@ export function getByAuthor(event,context,callback){
                 return;
             }
 
-            articles.find({authorName: doc.name},{limit: 20}).toArray((err,doc)=>{
+            articles.find({authorName: doc.name},{limit: limit, skip: skip}).toArray((err,doc)=>{
                 if(err){
                     callback(null, failure(err));
                     return;
@@ -192,6 +217,19 @@ export function search(event,context,callback){
 
     let criteria = decodeURI(event.pathParameters.criteria);
 
+    let queryString = parseQueryString(event);
+    
+    let limit = 5;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
+
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
@@ -203,7 +241,7 @@ export function search(event,context,callback){
             $caseSensitive: false
         };
         
-        articles.find(query,{limit: 20}).toArray((err,doc)=>{
+        articles.find(query,{limit: limit, skip: skip}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;

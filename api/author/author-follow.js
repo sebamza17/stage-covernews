@@ -19,6 +19,19 @@ export function get (event, context, callback) {
         return;
     }
 
+    let queryString = parseQueryString(event);
+    
+    let limit = 5;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
+
     getConnection()
     .then((db)=>{
         console.log("Before");
@@ -35,7 +48,10 @@ export function get (event, context, callback) {
                 return;
             }
             const authorsCollection = db.collection('journalist');
-            const authors = await authorsCollection.find({_id:{$in:user.authors}},{limit: 20}).toArray();
+            const authors = await authorsCollection.find(
+                {_id:{$in:user.authors}},
+                {limit: limit, skip: skip})
+                .toArray();
             console.log("Callback");
             callback(null, success(authors));
         })()
@@ -161,4 +177,27 @@ function parseBody(event,cb){
     }
 
     return body;
+}
+
+/**
+ * Parse Body
+ * @param {*} event 
+ * @param {*} cb 
+ */
+function parseQueryString(event,cb){
+    let query = event.queryStringParameters;
+
+    if(!query){
+        return {};
+    }
+
+    if(typeof query == "string"){
+        try{
+            query = JSON.parse(query);
+        }catch(e){
+            return {};
+        }
+    }
+
+    return query;
 }

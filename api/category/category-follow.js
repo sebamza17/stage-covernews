@@ -19,6 +19,19 @@ export function get (event, context, callback) {
         return;
     }
 
+    let queryString = parseQueryString(event);
+    
+    let limit = 5;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
+
     getConnection()
     .then((db)=>{
 
@@ -34,7 +47,10 @@ export function get (event, context, callback) {
                 return;
             }
             const categoryCollection = db.collection('category');
-            const category = await categoryCollection.find({_id:{$in:user.categories}},{limit: 20}).toArray();
+            const category = await categoryCollection.find(
+                {_id:{$in:user.categories}},
+                {limit: limit, skip: skip})
+                .toArray();
             callback(null, success(category));
         })()
         .catch((err)=>{
@@ -159,4 +175,28 @@ function parseBody(event,cb){
     }
 
     return body;
+}
+
+
+/**
+ * Parse Body
+ * @param {*} event 
+ * @param {*} cb 
+ */
+function parseQueryString(event,cb){
+    let query = event.queryStringParameters;
+
+    if(!query){
+        return {};
+    }
+
+    if(typeof query == "string"){
+        try{
+            query = JSON.parse(query);
+        }catch(e){
+            return {};
+        }
+    }
+
+    return query;
 }
