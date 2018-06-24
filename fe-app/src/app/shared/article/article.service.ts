@@ -31,5 +31,22 @@ export class ArticleService extends BaseService {
     ));
   }
 
+  /**
+   * Get one article for each category that user follow
+   * @returns {Observable<Article[]>}
+   */
+  public getOneArticlesByEachFollowCategory(): Observable<Article[]> {
+    return this.http.get<Article[]>(this.url('article','/article/following/categories'
+    ));
+  }
+
+  /**
+   * Get one article for eache author that user follow
+   * @returns {Observable<Article[]>}
+   */
+  public getOneArticlesByEachFollowAuthor(): Observable<Article[]> {
+    return this.http.get<Article[]>(this.url('article','/article/following/authors'
+    ));
+  }
 
 }
