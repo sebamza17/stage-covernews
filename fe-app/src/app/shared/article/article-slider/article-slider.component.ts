@@ -10,8 +10,9 @@ import { Category } from '../../category/Category';
 })
 export class ArticleSliderComponent implements OnInit {
   @Input() category: Category;
-
   public articles: Article[];
+
+  private defaultArticleLimit = 4;
 
   constructor(
     private articleService: ArticleService) {
@@ -25,7 +26,7 @@ export class ArticleSliderComponent implements OnInit {
    * Get articles for given category
    */
   private getArticles() {
-    this.articleService.getArticlesByCategory(this.category._id)
+    this.articleService.getArticlesByCategory(this.category._id, this.defaultArticleLimit)
       .subscribe(data => {
         this.articles = data;
       });

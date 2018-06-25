@@ -4,6 +4,11 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export default abstract class BaseService {
 
+  /**
+   * Defines which entity we are pointing
+   */
+  entity: string;
+
   protected api: object = environment.api;
 
   urls: Object;
@@ -13,8 +18,8 @@ export default abstract class BaseService {
    * @param {string} specificUrl
    * @returns {string}
    */
-  url(entity: string, specificUrl: string) {
-    return this.api[entity] + specificUrl;
+  url(specificUrl: string) {
+    return this.api[this.entity] + specificUrl;
   };
 
 }

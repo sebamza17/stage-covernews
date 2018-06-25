@@ -11,6 +11,8 @@ import 'rxjs/add/operator/map';
 })
 export class CategoryService extends BaseService {
 
+  entity = 'category';
+
   // Define all service URLs
   urls = {
     getAllCategories: '/category/all'
@@ -27,7 +29,7 @@ export class CategoryService extends BaseService {
    * @returns Observable<Category[]>
    */
   public getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url('category',this.urls.getAllCategories));
+    return this.http.get<Category[]>(this.url(this.urls.getAllCategories));
   }
 
 }

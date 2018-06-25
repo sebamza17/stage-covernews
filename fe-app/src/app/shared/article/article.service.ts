@@ -10,9 +10,11 @@ import { Article } from "./Article";
 })
 export class ArticleService extends BaseService {
 
+  entity = 'article';
+
   // Define all service URLs
   urls = {
-    // getArticlesByCategory: '/article/category/{{categoryId}}',
+    getArticlesByCategory: '/article/category/{{categoryId}}',
   };
 
   constructor(
@@ -26,27 +28,36 @@ export class ArticleService extends BaseService {
    * @param categoryId
    * @returns {Observable<Article[]>}
    */
-  public getArticlesByCategory(categoryId): Observable<Article[]> {
-    return this.http.get<Article[]>(this.url('article',`/article/category/${categoryId}`
-    ));
+  public getArticlesByCategory(categoryId, limit = 0, skip = 0): Observable<Article[]> {
+
+    let url = this.urls.getArticlesByCategory;
+
+    if (limit > 0) {
+      url += '?limit=' + limit;
+    }
+    if (skip > 0) {
+      url += '?skip=' + skip;
+    }
+
+    url = url.replace('{{categoryId}}', categoryId);
+
+    return this.http.get<Article[]>(this.url(url));
   }
 
   /**
-   * Get one article for each category that user follow
+   * Get one article for each category that the user follows
    * @returns {Observable<Article[]>}
    */
   public getOneArticlesByEachFollowCategory(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.url('article','/article/following/categories'
-    ));
+    return this.http.get<Article[]>(this.url('/article/following/categories'));
   }
 
   /**
-   * Get one article for eache author that user follow
+   * Get one article for eache author that the user follows
    * @returns {Observable<Article[]>}
    */
   public getOneArticlesByEachFollowAuthor(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.url('article','/article/following/authors'
-    ));
+    return this.http.get<Article[]>(this.url('/article/following/authors'));
   }
 
 }
