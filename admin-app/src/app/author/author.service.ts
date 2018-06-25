@@ -16,7 +16,7 @@ export class AuthorService {
    * Get all authors
    */
   get(){
-    return this.http.get(environment.api+"author/all");
+    return this.http.get(environment.api.author+"/author/all");
   }
 
   /**
@@ -27,7 +27,7 @@ export class AuthorService {
     if(!criteria){
       return this.get();
     }
-    return this.http.get(environment.api+"author/search/"+criteria);
+    return this.http.get(environment.api.author+"/author/search/"+criteria);
   }
 
   /**
@@ -35,7 +35,7 @@ export class AuthorService {
    * @param author 
    */
   update(author: Author){
-    this.http.post(environment.api+"author/update/"+author._id,{author: author})
+    this.http.post(environment.api.author+"/author/update/"+author._id,{author: author})
     .subscribe((data)=>{
       return data;
     });
@@ -45,7 +45,7 @@ export class AuthorService {
    * Add new author
    */
   add(author: Author){
-    return this.http.post(environment.api+"author/add",{author: author});
+    return this.http.post(environment.api.author+"/author/add",{author: author});
   }
   
   /**
@@ -53,6 +53,6 @@ export class AuthorService {
    * @param authorId 
    */
   remove(authorId: string){
-    return this.http.post(environment.api+"author/remove/"+authorId,{});
+    return this.http.post(environment.api.author+"/author/remove/"+authorId,{});
   }
 }
