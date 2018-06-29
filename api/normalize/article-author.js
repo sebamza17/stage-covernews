@@ -5,7 +5,7 @@ AWS.config.update({ region: "us-east-1" });
 
 const MongoClient = require('mongodb').MongoClient;
 
-const url = 'mongodb://dictiozproduction-shard-00-00-v9lbp.mongodb.net:27017,dictiozproduction-shard-00-01-v9lbp.mongodb.net:27017,dictiozproduction-shard-00-02-v9lbp.mongodb.net:27017/netflix?ssl=true&replicaSet=DictiozProduction-shard-0&authSource=admin';
+const url = 'mongodb://dictioztest-shard-00-00-v9lbp.mongodb.net:27017,dictioztest-shard-00-01-v9lbp.mongodb.net:27017,dictioztest-shard-00-02-v9lbp.mongodb.net:27017/dictioznews?ssl=true&replicaSet=dictiozTest-shard-0&authSource=admin';
 const dbName = 'dictioznews';
 
 function connection(){
