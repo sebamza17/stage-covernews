@@ -44,6 +44,7 @@ export class ArticleSliderComponent implements OnInit {
   private getAuthors() {
     this.authorService.getAuthorsByCategory(this.category._id)
       .subscribe(data => {
+        console.log(data);
         this.authors = data;
       });
   }
