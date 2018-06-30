@@ -1,1 +1,55 @@
+@import "base/fonts";
 @import "base/helpers";
+
+.home {
+
+  // Category carousel
+  .category-carousel {
+
+    // Selectors container
+    .category-carousel__selectors {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      overflow: auto;
+
+      // Selector
+      .category-carousel__selector {
+        .padding-vertical-quarter;
+        .padding-horizontal-half;
+        .font-weight-bold;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        text-transform: uppercase;
+        text-align: center;
+        width: 100%;
+        min-width: 140px;
+
+        &:hover,
+        &.selected {
+          border-bottom: 4px solid @color-brand-red;
+        }
+
+      }
+
+    }
+
+    // Wrapper for items
+    .category-carousel__wrapper {
+
+      display: flex;
+      flex-wrap: nowrap;
+      overflow: hidden;
+
+      // Items
+      .category-carousel__item {
+        width: 100%;
+        flex-shrink: 0;
+      }
+
+    }
+
+  }
+
+}

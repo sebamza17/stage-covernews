@@ -1,15 +1,44 @@
-<div>
+<div class="home">
 
-    <div>
+    <div class="bg-color-white-darken-1">
+        <div class="container padding-vertical-double fw fw--a-center fw--j-center">
 
-        <div *ngFor="let category of categories">
-            <app-article-slider [category]="category"></app-article-slider>
+            TODO: Main container for top news
+
         </div>
+    </div>
 
-        <div *ngFor="let author of authors">
-            <a (click)="follow(author._id)">{{author.name}}</a>
+    <!-- Carousel for categories -->
+    <div class="category-carousel">
+
+        <!-- Selectors -->
+        <div class="">
+            <div class="category-carousel__selectors">
+
+                <a *ngFor="let category of categories"
+                   class="category-carousel__selector"
+                   (click)="selectCategory(category)"
+                   [ngClass]="{'selected': selectedCategory._id === category._id}">
+                    {{category.name}}
+                </a>
+
+            </div>
         </div>
+        <!-- end Selectors -->
+
+        <!-- Items -->
+        <div class="category-carousel__wrapper">
+
+            <div *ngFor="let category of categories"
+                 class="category-carousel__item"
+                 attr.category="{{category._id}}">
+                <app-article-slider [category]="category"></app-article-slider>
+            </div>
+
+        </div>
+        <!-- end Items -->
 
     </div>
+    <!-- end Carousel for categories -->
 
 </div>

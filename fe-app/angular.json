@@ -32,7 +32,9 @@
                 "src/app/shared/styles/**/*.less"
               ]
             },
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js"
+            ]
           },
           "configurations": {
             "production": {

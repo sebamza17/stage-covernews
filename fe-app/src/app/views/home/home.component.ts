@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { Category } from '../../shared/category/Category';
-import { Author } from '../../shared/author/Author';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +12,8 @@ import { Author } from '../../shared/author/Author';
 export class HomeComponent implements OnInit {
 
   public categories: Category[];
-  public authors: Author[];
   public loading: boolean;
+  public selectedCategory: Category;
 
   constructor(
     private homeService: HomeService) {
@@ -23,11 +23,21 @@ export class HomeComponent implements OnInit {
     this.walkThrough();
   }
 
-  public follow(author: string) {
-    this.homeService.followAuthor(author)
-      .subscribe((data) => {
-        console.log(data);
-      })
+  /**
+   * Scrolls the category slider to a specific category item
+   * @param category
+   */
+  public selectCategory(category) {
+
+    this.selectedCategory = category;
+
+    const categorySliderDOM = $('.category-carousel__wrapper');
+    const currentScroll = categorySliderDOM.scrollLeft();
+    const selectedCategoryOffset = $('[category="' + category._id + '"]').offset().left;
+
+    categorySliderDOM.animate({
+      scrollLeft: currentScroll + selectedCategoryOffset
+    });
   }
 
   /**
@@ -35,7 +45,6 @@ export class HomeComponent implements OnInit {
    */
   private walkThrough() {
     this.getCategories();
-    this.getAuthors();
   }
 
   /**
@@ -54,17 +63,8 @@ export class HomeComponent implements OnInit {
         });
 
         this.categories = categories;
+        this.selectedCategory = categories[0];
         this.homeService.categories = categories;
       });
   }
-
-  /**
-   * Get Authors
-   */
-  private getAuthors() {
-    this.homeService.getAuthors()
-      .subscribe((res) => {
-        this.authors = res;
-      });
-  };
 }
