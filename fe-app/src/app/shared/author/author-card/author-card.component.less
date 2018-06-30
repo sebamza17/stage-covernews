@@ -1,0 +1,74 @@
+@import 'base/fonts';
+@import 'base/helpers';
+@import 'base/backgrounds';
+
+.author-card {
+
+  transition: all 200ms ease;
+  cursor: pointer;
+  border: 1px solid rgba(210, 210, 210, 1);
+
+  &:hover {
+    .z-depth-1;
+  }
+
+  // Head
+  .author-card__head {
+    .padding-vertical-eighth;
+    .padding-horizontal-quarter;
+    .bg-color-white-darken-1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // Body
+  .author-card__body {
+    .padding-quarter;
+    .bg-color-white;
+    display: flex;
+    justify-content: space-between;
+
+    // Avatar
+    .author-card__avatar {
+      .image-ratio;
+      .image-ratio-1-1;
+      .bg-color-white-darken-1;
+      width: 48px;
+      flex-shrink: 0;
+    }
+
+    // Info container
+    .author-card__info {
+      .padding-left-quarter;
+      display: flex;
+      width: 100%;
+
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      // Name
+      .author-card__name {
+        .font-weight-bold;
+        padding-bottom: 2px;
+        font-size: 13px;
+        line-height: 13px;
+        max-height: 26px;
+        overflow: hidden;
+      }
+
+      // Follow button
+      .button.button--xs {
+        .font-weight-bold;
+        padding: 2px 3px;
+      }
+
+    }
+
+  }
+
+}

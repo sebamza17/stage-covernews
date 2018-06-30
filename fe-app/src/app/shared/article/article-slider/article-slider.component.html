@@ -1,15 +1,47 @@
 <div class="article-slider">
 
-    <h2 class="article-slider__title">
-        {{category.name}}
-    </h2>
+    <!-- Top -->
+    <div class="article-slider__top">
 
-    <div class="article-slider__cards">
+        <!-- Title -->
+        <div class="container">
 
-        <div class="article-container" *ngFor="let article of articles">
-            <app-article-card [article]="article"></app-article-card>
+            <div class="wrapper">
+
+                <h2 class="article-slider__title">
+                    {{category.name}}
+                </h2>
+
+                <a href="" class="button button--outline button--red button--uppercase">
+                    + Sobre {{category.name}}
+                </a>
+
+            </div>
+
+        </div>
+        <!-- end Title -->
+
+        <!-- Author slider -->
+        <div class="container">
+            <app-author-slider [authors]="authors"></app-author-slider>
+        </div>
+        <!-- end Author slider -->
+
+    </div>
+    <!-- end Top -->
+
+    <!-- Article list -->
+    <div class="container">
+
+        <div class="article-slider__cards">
+
+            <div class="article-container" *ngFor="let article of articles">
+                <app-article-card [article]="article"></app-article-card>
+            </div>
+
         </div>
 
     </div>
+    <!-- end Article list -->
 
 </div>

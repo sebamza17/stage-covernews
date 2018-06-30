@@ -32,16 +32,48 @@
     outline: none !important;
   }
 
+  // Variation => XS Button
+  &.button--xs {
+    .font-size-xs--1;
+    .padding-vertical-eighth;
+    .padding-horizontal-quarter;
+  }
+
+  // Variation => Uppercase
+  &.button--uppercase {
+    text-transform: uppercase;
+  }
+
+  // Variation => With icon
   &.button--icon {
     line-height: 0;
   }
 
-  /* Button no shrink */
+  // Variation => No shrink
   .button--no-shrink {
     min-width: 130px;
     flex-shrink: 0;
   }
 
+  // Variation => Outline
+  &.button--outline {
+    background-color: transparent;
+    border: 1px solid;
+    border-color: grey;
+
+    &.button--blue {
+      .font-color-brand-blue;
+      background-color: transparent;
+    }
+
+    &.button--red {
+      .font-color-brand-red;
+      background-color: transparent;
+    }
+
+  }
+
+  // Variation => Radius
   &.button--radius {
     border-radius: 40px;
 
@@ -61,12 +93,6 @@
         color: black;
       }
 
-      /* &.button--green {
-         border-color: @color-brand-green;
-         .font-color-brand-green;
-         background-color: initial;
-       }*/
-
       &.button--white {
         border-color: white;
         .font-color-white;
@@ -85,12 +111,12 @@
 
       }
 
-      /* &.button--red {
-         border-color: @color-brand-red;
-         .font-color-brand-red;
-         background-color: initial;
-       }
- */
+      &.button--red {
+        border-color: @color-brand-red;
+        .font-color-brand-red;
+        background-color: initial;
+      }
+
       &.button--blue {
         border-color: @color-brand-blue;
         .font-color-brand-blue;
@@ -123,15 +149,10 @@
     border: 1px solid @color-brand-blue;
   }
 
-  //&.button--red {
-  //  .bg-color-brand-red;
-  //  border: 1px solid @color-brand-red;
-  //}
-
-  //&.button--green {
-  //  .bg-color-brand-green;
-  //  border: 1px solid @color-brand-green;
-  //}
+  &.button--red {
+    .bg-color-brand-red;
+    border: 1px solid @color-brand-red;
+  }
 
   &.button--black {
     .bg-color-black;
@@ -194,12 +215,6 @@
     .padding-vertical-half;
     .z-depth-2;
     z-index: 3;
-
-    /* &.button-wrapper--full {
-       width: ~"calc(100vw - @{main-sidebar-width})";
-       left: @main-sidebar-width;
-       .border--top;
-     }*/
 
     &.button-wrapper--auto {
       width: auto;

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import BaseService from '../base-service/base.service';
 import { Author } from './Author';
+import { Category } from "../category/Category";
 import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -11,10 +12,13 @@ import 'rxjs/add/operator/map';
 })
 export class AuthorService extends BaseService {
 
+  entity = 'author';
+
   // Define all service URLs
   urls = {
-    getAllAuthors: '/author/all',
-    follow: '/author/follow'
+    getAll: '/author/all',
+    getByCategory: '/author/category/{{categoryId}}',
+    follow: '/author/follow',
   };
 
   constructor(
@@ -27,19 +31,35 @@ export class AuthorService extends BaseService {
    * Get all authors from API
    * @returns Observable<Author[]>
    */
-  public getAllAuthors(): Observable<Author[]>{
-    return this.http.get<Author[]>(this.url('author',this.urls.getAllAuthors));
+  public getAllAuthors(): Observable<Author[]> {
+    return this.http.get<Author[]>(this.url(this.urls.getAll));
   }
 
-  public getFollowAuthors(): Observable<Author[]>{
-    return this.http.get<Author[]>(this.url('author',this.urls.follow));
-  }
- 
   /**
-   * Follow author
-   * @param author 
+   * TODO: Add description to this method
+   * @returns {Observable<Author[]>}
    */
-  public followAuthor(author: string){
-    return this.http.post(this.url('author',this.urls.follow),{follow:{author:author}});
+  public getFollowAuthors(): Observable<Author[]> {
+    return this.http.get<Author[]>(this.url(this.urls.follow));
   }
+
+  /**
+   * Follows a given author
+   * @param author
+   */
+  public followAuthor(author: string) {
+    return this.http.post(this.url(this.urls.follow), {follow: {author: author}});
+  }
+
+  /**
+   * Get all authors by a given category
+   * TODO: Replace this endpoint when ready! Now is returning all authors
+   * @param {string} categoryId
+   * @returns {Observable<Object>}
+   */
+  public getAuthorsByCategory(categoryId: string) {
+    // return this.http.get(this.url(this.urls.getByCategory.replace('{{categoryId}}', categoryId)));
+    return this.http.get<Author[]>(this.url(this.urls.getAll));
+  }
+
 }

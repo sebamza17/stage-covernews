@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter,Output } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { User } from './User';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase';
@@ -8,7 +8,9 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends BaseService{
+export class UserService extends BaseService {
+
+  entity: 'user';
 
   provider: any;
   user: User;
@@ -18,21 +20,21 @@ export class UserService extends BaseService{
     token: '/user/refreshToken'
   };
 
-  constructor(public fireAuth: AngularFireAuth, public http: HttpClient) { 
+  constructor(public fireAuth: AngularFireAuth, public http: HttpClient) {
     super();
   }
 
   /**
    * Login or register with google or facebook
-   * @param prov 
+   * @param prov
    */
   async socialLogin(prov: string) {
 
-    if(prov === 'google'){
+    if (prov === 'google') {
       this.provider = new auth.GoogleAuthProvider();
     }
 
-    if(prov === 'facebook'){
+    if (prov === 'facebook') {
       this.provider = new auth.FacebookAuthProvider();
     }
 
@@ -41,20 +43,20 @@ export class UserService extends BaseService{
 
   /**
    * Login witht email and password
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    */
-  async login(email: string, password: string){
-    return await this.loginByEmail(email,password);
+  async login(email: string, password: string) {
+    return await this.loginByEmail(email, password);
   }
 
   /**
    * Register by email and password
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    */
-  async register(email: string, password: string){
-    return await this.registerByEmail(email,password);
+  async register(email: string, password: string) {
+    return await this.registerByEmail(email, password);
   }
 
   /**
@@ -67,59 +69,61 @@ export class UserService extends BaseService{
   /**
    * Login With Provider
    */
-  private async loginWithProvider(){
+  private async loginWithProvider() {
     return await this.fireAuth.auth.signInWithPopup(this.provider)
-    .then((result)=> {
-      this.user = result.user;
-      this.registerUserToken(this.user.refreshToken);
-      return this.user;
-    }).catch(function(error) {
-      //TODO: Manage error of user authetication
-    });;
+      .then((result) => {
+        this.user = result.user;
+        this.registerUserToken(this.user.refreshToken);
+        return this.user;
+      }).catch(function (error) {
+        //TODO: Manage error of user authetication
+      });
+    ;
   }
 
   /**
    * Login by Email
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    */
-  private async loginByEmail(email: string, password: string){
+  private async loginByEmail(email: string, password: string) {
     return await auth().signInWithEmailAndPassword(email, password)
-    .then((result)=>{
-      this.user = result.user;
-      this.registerUserToken(this.user.refreshToken);
-      return this.user;
-    })
-    .catch((error)=>{
-      //TODO: Manage error
-    });
+      .then((result) => {
+        this.user = result.user;
+        this.registerUserToken(this.user.refreshToken);
+        return this.user;
+      })
+      .catch((error) => {
+        //TODO: Manage error
+      });
   }
 
   /**
    * Register by Email
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    */
-  private async registerByEmail(email: string, password: string){
+  private async registerByEmail(email: string, password: string) {
     return await auth().createUserWithEmailAndPassword(email, password)
-    .then((result)=>{
-      this.user = result.user;
-      this.registerUserToken(this.user.refreshToken);
-      return this.user;
-    })
-    .catch((error)=>{
-      //TODO: Manage error
-    });
+      .then((result) => {
+        this.user = result.user;
+        this.registerUserToken(this.user.refreshToken);
+        return this.user;
+      })
+      .catch((error) => {
+        //TODO: Manage error
+      });
   }
 
   /**
    * Register user token
-   * @param token 
+   * @param token
    */
-  public registerUserToken(token: string, cb: Function = function(){}){
-    this.http.post(this.url('user',this.urls.token),{user: this.user, refreshToken: token})
-    .subscribe((data)=>{
-      cb(data);
-    })
+  public registerUserToken(token: string, cb: Function = function () {
+  }) {
+    this.http.post(this.url(this.urls.token), {user: this.user, refreshToken: token})
+      .subscribe((data) => {
+        cb(data);
+      })
   }
 }

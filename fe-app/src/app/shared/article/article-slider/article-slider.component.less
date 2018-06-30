@@ -6,14 +6,44 @@
 .article-slider {
 
   @visible-cards: 4;
+  @visible-cards-l: 3.5;
+  @visible-cards-s: 2.5;
+  @visible-cards-xs: 1.2;
+
+  // Top body
+  .article-slider__top {
+    .bg-color-white-darken-1;
+    .padding-vertical-half;
+
+    .wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (max-width: @breakpoint-xxs--2) {
+        display: block;
+      }
+
+    }
+
+    // Button for more articles
+    .button {
+      .font-weight-bold;
+      @media (max-width: @breakpoint-xxs--2) {
+        display: block;
+      }
+    }
+
+  }
 
   // Title
   .article-slider__title {
-    .font-size-giant;
-    .font-weight-bold;
-    .bg-color-white;
-    .padding-horizontal-half;
+    .font-size-xxl--1;
+    .font-weight-heavy;
     .padding-vertical-half;
+    .font-color-black;
+    letter-spacing: 2px;
     position: sticky;
     top: @navbar-height-medium-up;
     z-index: 1;
@@ -23,11 +53,16 @@
 
   // Cards general container
   .article-slider__cards {
-    .margin-bottom-double;
+    .padding-top-full;
+    width: calc(100% + 30px);
+    margin-left: -15px;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
     overflow: auto;
+
+    @media (max-width: @breakpoint-l) {
+      flex-wrap: nowrap;
+    }
 
     // Article container, each card has a wrapper
     .article-container {
@@ -35,6 +70,18 @@
       .margin-bottom-full;
       width: ~"calc((100% / @{visible-cards}))";
       flex-shrink: 0;
+
+      @media (max-width: @breakpoint-l) {
+        width: ~"calc((100% / @{visible-cards-l}))";
+      }
+
+      @media (max-width: @breakpoint-s) {
+        width: ~"calc((100% / @{visible-cards-s}))";
+      }
+
+      @media (max-width: @breakpoint-xs) {
+        width: ~"calc((100% / @{visible-cards-xs}))";
+      }
     }
 
   }

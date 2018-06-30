@@ -1,0 +1,44 @@
+@import "variables";
+@import "base/helpers";
+
+.author-slider {
+
+  @visible-cards: 5;
+  @visible-cards-l: 3.5;
+  @visible-cards-s: 2.5;
+  @visible-cards-xs: 1.2;
+
+  .author-slider__cards {
+    .padding-top-full;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+
+    @media (max-width: @breakpoint-l) {
+      flex-wrap: nowrap;
+    }
+
+    .author-slider__card-container {
+      .padding-horizontal-half;
+      .margin-bottom-full;
+      width: ~"calc((100% / @{visible-cards}))";
+      flex-shrink: 0;
+
+      @media (max-width: @breakpoint-l) {
+        width: ~"calc((100% / @{visible-cards-l}))";
+      }
+
+      @media (max-width: @breakpoint-s) {
+        width: ~"calc((100% / @{visible-cards-s}))";
+      }
+
+      @media (max-width: @breakpoint-xs) {
+        width: ~"calc((100% / @{visible-cards-xs}))";
+      }
+    }
+
+  }
+
+}
