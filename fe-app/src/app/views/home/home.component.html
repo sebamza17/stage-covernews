@@ -32,7 +32,9 @@
             <div *ngFor="let category of categories"
                  class="category-carousel__item"
                  attr.category="{{category._id}}">
-                <app-article-slider [category]="category"></app-article-slider>
+                <app-article-slider [category]="category"
+                                    [lazyLoad]="true"
+                                    [loadFlag]="selectedCategory._id === category._id"></app-article-slider>
             </div>
 
         </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { Category } from '../../shared/category/Category';
 import * as $ from 'jquery';
+import { CategoryService } from "../../shared/category/category.service";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit {
   public selectedCategory: Category;
 
   constructor(
-    private homeService: HomeService) {
+    private homeService: HomeService,
+    private categoryService: CategoryService) {
   }
 
   ngOnInit() {
@@ -51,20 +53,13 @@ export class HomeComponent implements OnInit {
    * Get Categories
    */
   private getCategories() {
-    this.homeService.getCategories()
-      .subscribe(data => {
-
-        let counter = 0;
-        let categories = data.filter((category) => {
-          counter++;
-          if (counter < 8) {
-            return category;
-          }
-        });
-
-        this.categories = categories;
-        this.selectedCategory = categories[0];
-        this.homeService.categories = categories;
-      });
+    this.categoryService.getCategories({
+      limit: 100
+    }).subscribe(data => {
+      console.log(data);
+      this.categories = data;
+      this.selectedCategory = data[0];
+      this.homeService.categories = data;
+    });
   }
 }

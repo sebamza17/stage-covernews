@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Article } from '../../article/Article';
 import { ArticleService } from '../../article/article.service';
 import { Author } from '../../author/Author';
@@ -12,11 +12,16 @@ import { Category } from '../../category/Category';
 })
 
 export class ArticleSliderComponent implements OnInit {
+  @Input() lazyLoad: boolean;
+  @Input() loadFlag: boolean;
   @Input() category: Category;
   public articles: Article[];
   public authors: Author[];
+  public articleLoading: boolean = true;
+  public authorLoading: boolean = true;
 
-  private defaultArticleLimit = 4;
+  private defaultArticleLimit: number = 4;
+  private alreadyLoaded: boolean = false;
 
   constructor(
     private articleService: ArticleService,
@@ -24,8 +29,28 @@ export class ArticleSliderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getArticles();
-    this.getAuthors();
+
+    this.authors = this.authorService.generatePlaceholders(5, {
+      name: '██ ██████',
+    });
+    this.articles = this.articleService.generatePlaceholders(4, {
+      title: '██ ███ ██████',
+      authorName: '██ ██████'
+    });
+
+    if (!this.lazyLoad) {
+      this.getArticles();
+      this.getAuthors();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // If lazyLoad option is enabled, only load when loadFlag changes to true, start init process
+    if (this.lazyLoad && !this.alreadyLoaded && changes['loadFlag'] && changes['loadFlag'].currentValue) {
+      this.alreadyLoaded = true;
+      this.getArticles();
+      this.getAuthors();
+    }
   }
 
   /**
@@ -34,6 +59,7 @@ export class ArticleSliderComponent implements OnInit {
   private getArticles() {
     this.articleService.getArticlesByCategory(this.category._id, this.defaultArticleLimit)
       .subscribe(data => {
+        this.articleLoading = false;
         this.articles = data;
       });
   }
@@ -44,7 +70,7 @@ export class ArticleSliderComponent implements OnInit {
   private getAuthors() {
     this.authorService.getAuthorsByCategory(this.category._id)
       .subscribe(data => {
-        console.log(data);
+        this.authorLoading = false;
         this.authors = data;
       });
   }

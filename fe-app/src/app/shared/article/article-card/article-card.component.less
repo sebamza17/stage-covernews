@@ -7,6 +7,7 @@
 
   .bg-color-white-darken-1;
   transition: all 200ms ease;
+  opacity: 1;
   cursor: pointer;
 
   &:hover {
@@ -17,11 +18,22 @@
     }
   }
 
+  // Status => Placeholder
+  &.article-card--placeholder {
+    opacity: 0.8;
+    .article-card__image {
+      background-image: url('../../../../assets/images/landing-logo.png') !important;
+      background-repeat: no-repeat;
+      background-size: 80% !important;
+    }
+  }
+
   // Image
   .article-card__image {
     .image-ratio;
     .image-ratio-4-3;
     .bg-color-white-darken-2;
+    background-position: center center;
   }
 
   // Content

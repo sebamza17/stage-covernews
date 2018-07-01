@@ -1,5 +1,6 @@
 <!-- Article card -->
-<div class="article-card">
+<div class="article-card"
+     [ngClass]="{'article-card--placeholder': !article._id}">
 
     <!-- Image -->
     <div class="article-card__image" [style.background-image]="'url(' + article.image + ')'"></div>

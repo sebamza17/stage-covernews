@@ -12,6 +12,16 @@
     .z-depth-1;
   }
 
+  // Status => Placeholder
+  &.author-card--placeholder {
+    opacity: 0.6;
+    .author-card__avatar {
+      background-image: url('../../../../assets/images/landing-logo.png') !important;
+      background-repeat: no-repeat;
+      background-size: 80% !important;
+    }
+  }
+
   // Head
   .author-card__head {
     .padding-vertical-eighth;
@@ -34,6 +44,7 @@
       .image-ratio;
       .image-ratio-1-1;
       .bg-color-white-darken-1;
+      background-position: center center;
       width: 48px;
       flex-shrink: 0;
     }

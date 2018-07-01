@@ -1,5 +1,6 @@
 <div class="author-card"
-     (click)="follow(author._id)">
+     (click)="follow(author._id)"
+     [ngClass]="{'author-card--placeholder': !author._id}">
 
     <!-- Head -->
     <div class="author-card__head">
