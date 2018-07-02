@@ -12,12 +12,16 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: prod
+  stage: ${opt:stage, 'test'}
   region: us-east-1
+  environment:
+    ENV: ${opt:stage}
 
 functions:
   getAuthors:
     handler: author.get
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: author/all
@@ -33,6 +37,8 @@ functions:
           authorizer: false
   showAuthor:
     handler: author.show
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: author/show/{authorId}
@@ -48,6 +54,8 @@ functions:
           authorizer: false
   searchAuthors:
       handler: author.search
+      stageVariables: 
+        - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: author/search/{criteria}
@@ -63,6 +71,8 @@ functions:
             authorizer: false
   updateAuthor:
       handler: author-admin.update
+      stageVariables: 
+        - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: author/update/{authorId}
@@ -78,6 +88,8 @@ functions:
             authorizer: false 
   removeAuthor:
       handler: author-admin.remove
+      stageVariables: 
+        - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: author/remove/{authorId}
@@ -93,6 +105,8 @@ functions:
             authorizer: false   
   addAuthor:
       handler: author-admin.add
+      stageVariables: 
+        - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: author/add
@@ -108,6 +122,8 @@ functions:
             authorizer: false
   getFollowAuthors:
       handler: author-follow.get
+      stageVariables: 
+        - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: author/follow
@@ -123,6 +139,8 @@ functions:
             authorizer: false
   followAuthor:
       handler: author-follow.follow
+      stageVariables: 
+        - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: author/follow
@@ -138,6 +156,8 @@ functions:
             authorizer: false
   unFollowAuthor:
       handler: author-follow.unFollow
+      stageVariables: 
+        - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: author/unfollow
