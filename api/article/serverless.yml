@@ -12,13 +12,17 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: prod
+  stage: ${opt:stage, 'test'}
   region: us-east-1
+  environment:
+    ENV: ${opt:stage}
 
 functions:
   # ARTICLES SECCION
   getArticles:
     handler: article.get
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: article/all
@@ -34,6 +38,8 @@ functions:
           authorizer: false
   getArticlesByFollowingAuthors:
     handler: article.getArticlesByFollowingAuthors
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: article/following/authors
@@ -49,6 +55,8 @@ functions:
           authorizer: false
   getArticlesByFollowingCategories:
     handler: article.getArticlesByFollowingCategories
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: article/following/categories
@@ -64,6 +72,8 @@ functions:
           authorizer: false
   showArticle:
     handler: article.show
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: article/show/{articleId}
@@ -79,6 +89,8 @@ functions:
           authorizer: false
   showFullArticle:
     handler: article.getFullArticle
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: article/showFull/{articleId}
@@ -94,6 +106,8 @@ functions:
           authorizer: false
   showArticleContent:
     handler: article.getArticleContent
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: article/content/{articleId}
@@ -109,6 +123,8 @@ functions:
           authorizer: false
   getByCanonical:
     handler: article.getByCanonical
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
     events:
       - http:
           path: article/canonical/{canonical}
@@ -124,6 +140,8 @@ functions:
           authorizer: false
   getArticlesByCategory:
       handler: article.getByCategory
+      stageVariables: 
+      - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: article/category/{categoryId}
@@ -139,6 +157,8 @@ functions:
             authorizer: false
   getArticlesByAuthor:
       handler: article.getByAuthor
+      stageVariables: 
+      - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: article/author/{authorId}
@@ -154,6 +174,8 @@ functions:
             authorizer: false
   searchArticles:
       handler: article.search
+      stageVariables: 
+      - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: article/search/{criteria}

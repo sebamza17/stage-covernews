@@ -12,13 +12,17 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: prod
+  stage: ${opt:stage, 'test'}
   region: us-east-1
+  environment:
+    ENV: ${opt:stage}
 
 functions:
 # ADMIN SECCION
   loginAdmin:
       handler: admin.login
+      stageVariables: 
+        - stage : ${opt:stage, 'test'}
       events:
         - http:
             path: admin/login
