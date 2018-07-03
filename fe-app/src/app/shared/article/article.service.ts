@@ -15,6 +15,7 @@ export class ArticleService extends BaseService {
   // Define all service URLs
   urls = {
     getArticlesByCategory: '/article/category/{{categoryId}}',
+    getLatestArticles: '/article/all',
   };
 
   constructor(
@@ -40,6 +41,27 @@ export class ArticleService extends BaseService {
     }
 
     url = url.replace('{{categoryId}}', categoryId);
+
+    return this.http.get<Article[]>(this.url(url));
+  }
+
+  /**
+   * Get latest articles
+   * TODO: Change this URL to match the enpoint when ready
+   * @param {number} limit
+   * @param {number} skip
+   * @returns {Observable<Article[]>}
+   */
+  public getLatestArticles(limit = 0, skip = 0) {
+
+    let url = this.urls.getLatestArticles;
+
+    if (limit > 0) {
+      url += '?limit=' + limit;
+    }
+    if (skip > 0) {
+      url += '?skip=' + skip;
+    }
 
     return this.http.get<Article[]>(this.url(url));
   }

@@ -20,12 +20,14 @@ import { ArticleCardComponent } from './shared/article/article-card/article-card
 import { HomeUserComponent } from './components/home-user/home-user.component';
 import { AuthorSliderComponent } from "./shared/author/author-slider/author-slider.component";
 import { AuthorCardComponent } from "./shared/author/author-card/author-card.component";
+import { ArticleLatestComponent } from "./shared/article/article-latest/article-latest.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
+    ArticleLatestComponent,
     ArticleSliderComponent,
     ArticleCardComponent,
     AuthorSliderComponent,
