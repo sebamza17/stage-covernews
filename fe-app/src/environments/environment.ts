@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
   api: {
-    article: "https://jskopm2r2l.execute-api.us-east-1.amazonaws.com/prod",
-    author: "https://29w05vcxd1.execute-api.us-east-1.amazonaws.com/prod",
-    category: "https://docwjx3a3k.execute-api.us-east-1.amazonaws.com/prod",
-    user: "https://cidp4k5462.execute-api.us-east-1.amazonaws.com/prod"
+    article: "https://5cufvngwok.execute-api.us-east-1.amazonaws.com/stage",
+    author: "https://breb1wv546.execute-api.us-east-1.amazonaws.com/stage",
+    category: "https://cdr12lpah1.execute-api.us-east-1.amazonaws.com/stage",
+    user: "https://mjxdq979n3.execute-api.us-east-1.amazonaws.com/stage"
   },
   firebase:{
     apiKey: "AIzaSyD7nmlxbZyPyOoWFrIiKHfS1ryeBWtcu_U",
