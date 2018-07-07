@@ -1,34 +1,39 @@
 <div class="home">
 
-    <!-- Latest articles -->
-    <div class="bg-color-brand-gray">
+    <div class="position-relative">
 
-       <app-side-menu></app-side-menu>
-        <div class="padding-top-full padding-bottom-half">
-            <app-article-latest [isLoggedIn]="false"></app-article-latest>
+        <!-- Latest articles -->
+        <div class="bg-color-brand-gray">
+
+            <app-side-menu></app-side-menu>
+
+            <div class="padding-top-full padding-bottom-half">
+                <app-article-latest [isLoggedIn]="false"></app-article-latest>
+            </div>
+
         </div>
+        <!-- end Latest articles -->
+
+        <!-- Most popular authors -->
+        <div class="bg-color-black-lighten-4 padding-top-full padding-bottom-half">
+            <div class="container">
+                <div class="wrapper">
+                    <h2 class="main-title">
+                        Autores sugeridos
+                    </h2>
+
+                    <a href="" class="button button--outline button--red button--uppercase">
+                        + Autores
+                    </a>
+                </div>
+                <div class="">
+                    <app-author-slider [authors]="authors"></app-author-slider>
+                </div>
+            </div>
+        </div>
+        <!-- end Most popular authors -->
 
     </div>
-    <!-- end Latest articles -->
-
-    <!-- Most popular authors -->
-    <div class="bg-color-black-lighten-4 padding-top-full padding-bottom-half">
-        <div class="container">
-            <div class="wrapper">
-                <h2 class="main-title">
-                    Autores sugeridos
-                </h2>
-
-                <a href="" class="button button--outline button--red button--uppercase">
-                    + Autores
-                </a>
-            </div>
-            <div class="">
-                <app-author-slider [authors]="authors"></app-author-slider>
-            </div>
-        </div>
-    </div>
-    <!-- end Most popular authors -->
 
     <!-- Carousel for categories -->
     <div class="category-carousel">

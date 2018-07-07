@@ -17,9 +17,7 @@ export class ArticleLatestComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.getLatestArticles();
-
   }
 
   /**
