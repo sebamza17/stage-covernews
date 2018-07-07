@@ -6,7 +6,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 @NgModule({
   imports: [MatButtonModule, MatCheckboxModule],
   exports: [MatButtonModule, MatCheckboxModule],
-  declarations: [SideMenuComponent],
+  declarations: [],
 })
 export class MaterialModule {
 }
