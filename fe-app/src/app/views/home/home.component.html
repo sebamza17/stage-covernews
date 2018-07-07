@@ -1,73 +1,72 @@
 <div class="home">
 
-    <div class="position-relative">
+  <div class="position-relative">
 
-        <!-- Latest articles -->
-        <div class="bg-color-brand-gray">
+    <app-side-menu></app-side-menu>
 
-            <app-side-menu></app-side-menu>
+    <div class="bg-color-brand-gray">
 
-            <div class="padding-top-full padding-bottom-half">
-                <app-article-latest [isLoggedIn]="false"></app-article-latest>
-            </div>
-
-        </div>
-        <!-- end Latest articles -->
-
-        <!-- Most popular authors -->
-        <div class="bg-color-black-lighten-4 padding-top-full padding-bottom-half">
-            <div class="container">
-                <div class="wrapper">
-                    <h2 class="main-title">
-                        Autores sugeridos
-                    </h2>
-
-                    <a href="" class="button button--outline button--red button--uppercase">
-                        + Autores
-                    </a>
-                </div>
-                <div class="">
-                    <app-author-slider [authors]="authors"></app-author-slider>
-                </div>
-            </div>
-        </div>
-        <!-- end Most popular authors -->
+      <div class="padding-top-full padding-bottom-half">
+        <app-article-latest [isLoggedIn]="false"></app-article-latest>
+      </div>
 
     </div>
+    <!-- end Latest articles -->
 
-    <!-- Carousel for categories -->
-    <div class="category-carousel">
+    <!-- Most popular authors -->
+    <div class="bg-color-black-lighten-4 padding-top-full padding-bottom-half">
+      <div class="container">
+        <div class="wrapper">
+          <h2 class="main-title">
+            Autores sugeridos
+          </h2>
 
-        <!-- Selectors -->
+          <a href="" class="button button--outline button--red button--uppercase">
+            + Autores
+          </a>
+        </div>
         <div class="">
-            <div class="category-carousel__selectors">
-
-                <a *ngFor="let category of categories"
-                   class="category-carousel__selector"
-                   (click)="selectCategory(category)"
-                   [ngClass]="{'selected': selectedCategory._id === category._id}">
-                    {{category.name}}
-                </a>
-
-            </div>
+          <app-author-slider [authors]="authors"></app-author-slider>
         </div>
-        <!-- end Selectors -->
+      </div>
+    </div>
+    <!-- end Most popular authors -->
 
-        <!-- Items -->
-        <div class="category-carousel__wrapper">
+  </div>
 
-            <div *ngFor="let category of categories"
-                 class="category-carousel__item"
-                 attr.category="{{category._id}}">
-                <app-article-slider [category]="category"
-                                    [lazyLoad]="true"
-                                    [loadFlag]="selectedCategory._id === category._id"></app-article-slider>
-            </div>
+  <!-- Carousel for categories -->
+  <div class="category-carousel">
 
-        </div>
-        <!-- end Items -->
+    <!-- Selectors -->
+    <div class="">
+      <div class="category-carousel__selectors">
+
+        <a *ngFor="let category of categories"
+           class="category-carousel__selector"
+           (click)="selectCategory(category)"
+           [ngClass]="{'selected': selectedCategory._id === category._id}">
+          {{category.name}}
+        </a>
+
+      </div>
+    </div>
+    <!-- end Selectors -->
+
+    <!-- Items -->
+    <div class="category-carousel__wrapper">
+
+      <div *ngFor="let category of categories"
+           class="category-carousel__item"
+           attr.category="{{category._id}}">
+        <app-article-slider [category]="category"
+                            [lazyLoad]="true"
+                            [loadFlag]="selectedCategory._id === category._id"></app-article-slider>
+      </div>
 
     </div>
-    <!-- end Carousel for categories -->
+    <!-- end Items -->
+
+  </div>
+  <!-- end Carousel for categories -->
 
 </div>
