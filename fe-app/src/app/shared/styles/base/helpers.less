@@ -186,10 +186,47 @@
 
 /*--- Styling helpers ---*/
 
-//Borders
+/* Borders */
+
+//Border radius
 .border-radius-none {
   border-radius: 0;
 }
+
+//Border Type
+.border--left {
+  border-left: 1px solid;
+  border-color: lightgray;
+}
+
+.border--right {
+  border-right: 1px solid;
+  border-color: lightgray;
+}
+
+.border--top {
+  border-top: 1px solid;
+  border-color: lightgray;
+}
+
+.border--bottom {
+  border-bottom: 1px solid;
+  border-color: lightgray;
+}
+
+.border--full {
+  border: 1px solid;
+  border-color: lightgray;
+}
+
+// Border Color
+.border--left, .border--right, .border--top, .border--bottom, .border--full {
+
+  &.border--red {
+    border-color: @color-brand-red;
+  }
+}
+
 
 //Shadow
 .z-depth-0 {

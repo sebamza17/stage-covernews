@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Article} from "../Article";
 
 @Component({
   selector: 'app-article-card-horizontal',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./article-card-horizontal.component.less']
 })
 export class ArticleCardHorizontalComponent implements OnInit {
+  @Input() article: Article;
 
-constructor() { }
+  constructor() {
+  }
 
-ngOnInit() {
-}
+  ngOnInit() {
+  }
 
 }
