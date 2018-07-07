@@ -4,31 +4,54 @@
 @import "base/fonts";
 
 .article-card {
-
-  .bg-color-white-darken-1;
   transition: all 200ms ease;
   opacity: 1;
   cursor: pointer;
 
   &:hover {
-    .bg-color-brand-red;
+
+    .article-card__wrapper {
+      .bg-color-brand-red;
+    }
+
+    .article-card__category {
+      .font-color-brand-red;
+    }
 
     .article-card__content {
       .font-color-white;
     }
+
   }
 
   // Status => Placeholder
   &.article-card--placeholder {
     opacity: 0.8;
+
     .article-card__image {
       background-image: url('../../../../assets/images/landing-logo.png') !important;
       background-repeat: no-repeat;
       background-size: 80% !important;
     }
+
     .article-card__author, .article-card__title {
       opacity: 0.4;
     }
+
+  }
+
+  // Category
+  .article-card__category {
+    .font-size-l;
+    .font-weight-bold;
+    transition: all 200ms ease;
+    text-transform: uppercase;
+  }
+
+  // BG color Wrapper
+  .article-card__wrapper {
+    .bg-color-white-darken-1;
+    transition: all 200ms ease;
   }
 
   // Image
@@ -66,14 +89,15 @@
   .article-card__title {
 
     @font-size: 1.8rem;
+    @line-height: 2rem;
 
     .font-weight-bold;
     .margin-top-quarter;
     .margin-bottom-half;
     font-size: @font-size;
-    line-height: @font-size;
-    min-height: ~"calc(@{font-size} * 3 + 1px)";
-    max-height: ~"calc(@{font-size} * 3 + 1px)";
+    line-height: @line-height;
+    min-height: ~"calc(@{line-height} * 3 + 1px)";
+    max-height: ~"calc(@{line-height} * 3 + 1px)";
     overflow: hidden;
   }
 
@@ -104,4 +128,38 @@
 
   }
 
+}
+
+// Variation =>
+.article-card.article-card--transparent {
+
+  .padding-vertical-quarter;
+  .padding-horizontal-half;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &:hover {
+    .bg-color-brand-red;
+  }
+
+  .article-card__category {
+    .font-color-white;
+  }
+
+  // BG Color wrapper
+  .article-card__wrapper {
+    background-color: transparent;
+  }
+
+  // Content
+  .article-card__content {
+    .font-color-white;
+    .padding-horizontal-none;
+    .padding-top-full;
+    .padding-bottom-none;
+
+    > div {
+      transition: all 200ms ease;
+    }
+
+  }
 }

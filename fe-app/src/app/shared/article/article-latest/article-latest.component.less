@@ -1,0 +1,61 @@
+@import "variables";
+@import "base/helpers";
+@import "base/fonts";
+@import "base/backgrounds";
+
+.article-latest {
+
+  @visible-cards: 5;
+  @visible-cards-l: 3.5;
+  @visible-cards-s: 2.5;
+  @visible-cards-xs: 1.2;
+
+  // Title
+  .article-latest__title {
+    .font-size-xxl--1;
+    .font-weight-heavy;
+    .padding-vertical-half;
+    .font-color-black;
+    letter-spacing: 2px;
+    position: sticky;
+    z-index: 1;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  // Cards general container
+  .article-latest__cards {
+    .padding-top-full;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+
+    @media (max-width: @breakpoint-l) {
+      flex-wrap: nowrap;
+    }
+
+    // Article container, each card has a wrapper
+    .article-container {
+      .padding-horizontal-half;
+      .margin-bottom-full;
+      width: ~"calc((100% / @{visible-cards}))";
+      flex-shrink: 0;
+
+      @media (max-width: @breakpoint-l) {
+        width: ~"calc((100% / @{visible-cards-l}))";
+      }
+
+      @media (max-width: @breakpoint-s) {
+        width: ~"calc((100% / @{visible-cards-s}))";
+      }
+
+      @media (max-width: @breakpoint-xs) {
+        width: ~"calc((100% / @{visible-cards-xs}))";
+      }
+    }
+
+  }
+
+}

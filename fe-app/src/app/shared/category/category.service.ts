@@ -15,7 +15,8 @@ export class CategoryService extends BaseService {
 
   // Define all service URLs
   urls = {
-    getAllCategories: '/category/all'
+    getAllCategories: '/category/all',
+    getCategory: '/category/show/{{categoryId}}',
   };
 
   constructor(
@@ -32,8 +33,22 @@ export class CategoryService extends BaseService {
     return this.http.get<Category[]>(this.url(this.urls.getAllCategories));
   }
 
+  /**
+   * Get all categories with a given options
+   * @param {any} options
+   * @returns {Observable<Category[]>}
+   */
   public getCategories(options = null): Observable<Category[]> {
     return this.http.get<Category[]>(this.url(this.urls.getAllCategories, options));
+  }
+
+  /**
+   * Get a specific category by a given id
+   * @param categoryId
+   * @returns {Observable<Category>}
+   */
+  public getCategoryById(categoryId): Observable<Category> {
+    return this.http.get<Category>(this.url(this.urls.getCategory.replace('{{categoryId}}', categoryId)));
   }
 
 }

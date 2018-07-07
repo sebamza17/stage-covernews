@@ -1,43 +1,55 @@
 <!-- Article card -->
 <div class="article-card"
-     [ngClass]="{'article-card--placeholder': !article._id}">
+     [ngClass]="{'article-card--placeholder': !article._id, 'article-card--transparent': isTransparent}">
 
-    <!-- Image -->
-    <div class="article-card__image" [style.background-image]="'url(' + article.image + ')'"></div>
-    <!-- end Image -->
+    <!-- Category -->
+    <div class="article-card__category" *ngIf="category">
+        {{category.name}}
+    </div>
+    <!-- end Category -->
 
-    <!-- Content -->
-    <div class="article-card__content">
+    <!-- Wrapper -->
+    <div class="article-card__wrapper">
 
-        <!-- Author -->
-        <div class="article-card__author">
-            Por {{article.authorName}}
-        </div>
-        <!-- end Author -->
+        <!-- Image -->
+        <div class="article-card__image" [style.background-image]="'url(' + article.image + ')'"></div>
+        <!-- end Image -->
 
-        <!-- Title -->
-        <div class="article-card__title">
-            {{article.title}}
-        </div>
-        <!-- end Title -->
+        <!-- Content -->
+        <div class="article-card__content">
 
-        <!-- Footer -->
-        <div class="article-card__footer">
-
-            <div class="article-card__source">
-                Fuente: {{article.newspaper}}
+            <!-- Author -->
+            <div class="article-card__author">
+                Por {{article.authorName}}
             </div>
+            <!-- end Author -->
 
-            <div class="article-card__read-later">
-                Leer mas tarde
-                <i class="icon ion-md-bookmark"></i>
+            <!-- Title -->
+            <div class="article-card__title">
+                {{article.title}}
             </div>
+            <!-- end Title -->
+
+            <!-- Footer -->
+            <div class="article-card__footer">
+
+                <div class="article-card__source">
+                    Fuente:
+                    <!--{{article.newspaper}}-->
+                </div>
+
+                <div class="article-card__read-later">
+                    <i class="icon ion-md-bookmark"></i>
+                </div>
+
+            </div>
+            <!-- end Footer -->
 
         </div>
-        <!-- end Footer -->
+        <!-- end Content -->
 
     </div>
-    <!-- end Content -->
+    <!-- end Wrapper -->
 
 </div>
 <!-- end Article card -->
