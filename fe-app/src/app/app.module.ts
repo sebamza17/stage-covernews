@@ -21,6 +21,7 @@ import { HomeUserComponent } from './components/home-user/home-user.component';
 import { AuthorSliderComponent } from "./shared/author/author-slider/author-slider.component";
 import { AuthorCardComponent } from "./shared/author/author-card/author-card.component";
 import { ArticleLatestComponent } from "./shared/article/article-latest/article-latest.component";
+import { ArticleCardHorizontalComponent } from "./shared/article/article-card-horizontal/article-card-horizontal.component";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ArticleLatestComponent } from "./shared/article/article-latest/article-
     ArticleLatestComponent,
     ArticleSliderComponent,
     ArticleCardComponent,
+    ArticleCardHorizontalComponent,
     AuthorSliderComponent,
     AuthorCardComponent,
     HomeUserComponent
