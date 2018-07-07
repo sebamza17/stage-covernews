@@ -1,0 +1,34 @@
+@import "base/helpers";
+@import "base/backgrounds";
+@import "base/flex";
+@import "variables";
+@import "base/fonts";
+@import "base/buttons";
+@import "base/forms";
+
+.side-menu__wrapper {
+  @side-menu-width: 300px;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: @side-menu-width;
+  .bg-color-white-darken-1;
+  .padding-horizontal-half;
+  .padding-vertical-full;
+
+  //Header
+  .side-menu-header {
+    .fw;
+    .fw--a-center;
+    .fw--j-space-between;
+  }
+
+  // Title
+  .side-menu-content {
+    max-height: 90%;
+    overflow: hidden;
+    .width-full;
+  }
+}
