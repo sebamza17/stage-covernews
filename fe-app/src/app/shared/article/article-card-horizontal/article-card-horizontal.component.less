@@ -1,8 +1,85 @@
 @import "base/helpers";
 @import "base/backgrounds";
 @import "base/flex";
+@import "variables";
+@import "base/fonts";
 
 .article-card-horizontal {
-  .padding-full;
-  .bg-color-brand-red;
+  .fw;
+  .fw--a-center;
+  .width-full;
+  .bg-color-white;
+  .border--full;
+  .clickable;
+  transition: all 200ms ease;
+
+  &:hover, &:focus {
+    .bg-color-brand-red;
+
+    .article-card-horizontal__title, .article-card-horizontal__author {
+      .font-color-white;
+    }
+  }
+
+  // Status => Placeholder
+  &.article-card-horizontal--placeholder {
+    opacity: 0.8;
+    .article-card__image {
+      background-image: url('../../../../assets/images/landing-logo.png') !important;
+      background-repeat: no-repeat;
+      background-size: 80% !important;
+    }
+    .article-card-horizontal__author, .article-card-horizontal__title {
+      opacity: 0.4;
+    }
+  }
+
+  // Image
+  .article-card-horizontal__image {
+    .image-ratio;
+    .image-ratio-4-3;
+    .bg-color-white-darken-2;
+    background-position: center center;
+  }
+
+  // Content
+  .article-card-horizontal__content {
+    .font-color-black-lighten-6;
+    .padding-eighth;
+    .width-full;
+    display: flex;
+    flex-direction: column;
+
+    > div {
+      transition: all 200ms ease;
+    }
+
+  }
+
+  // Author
+  .article-card-horizontal__author {
+    .font-size-s;
+    .font-weight-bold;
+    .margin-bottom-quarter;
+    font-style: italic;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: all 200ms ease;
+  }
+
+  // Title
+  .article-card-horizontal__title {
+    @font-size: 1.6rem;
+    @line-height: 1.8rem;
+    .font-weight-bold;
+    font-size: @font-size;
+    line-height: @line-height;
+    min-height: ~"calc(@{line-height} * 3 + 1px)";
+    max-height: ~"calc(@{line-height} * 3 + 1px)";
+    overflow: hidden;
+    transition: all 200ms ease;
+  }
+
 }
