@@ -17,7 +17,7 @@
   z-index: @navbar-z-index - 1;
   .bg-color-white-darken-1;
   .padding-horizontal-half;
-  .padding-vertical-full;
+  .padding-vertical-half;
 
   //Header
   .side-menu-header {
@@ -26,10 +26,34 @@
     .fw--j-space-between;
   }
 
+  //Search Bar
+  .side-menu-header__search {
+    position: relative;
+    .fw;
+    .fw--a-center;
+    .padding-vertical-half;
+
+    input {
+      margin-bottom: 0;
+    }
+    .search-icon {
+      position: absolute;
+      height: 100%;
+      right: 0;
+      top: 0;
+      .font-size-xl;
+      .padding-vertical-eighth;
+      .padding-horizontal-quarter;
+      display: flex;
+      align-items: center;
+    }
+
+  }
+
+  //Search
+
   // Title
   .side-menu-content {
-    max-height: 90%;
-    overflow: hidden;
     .width-full;
   }
 }
