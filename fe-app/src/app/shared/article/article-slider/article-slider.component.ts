@@ -21,6 +21,7 @@ export class ArticleSliderComponent implements OnInit {
   public authorLoading: boolean = true;
 
   private defaultArticleLimit: number = 4;
+  private defaultAuthorLimit: number = 5;
   private alreadyLoaded: boolean = false;
 
   constructor(
@@ -30,10 +31,10 @@ export class ArticleSliderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.authors = this.authorService.generatePlaceholders(5, {
+    this.authors = this.authorService.generatePlaceholders(this.defaultAuthorLimit, {
       name: '██ ██████',
     });
-    this.articles = this.articleService.generatePlaceholders(4, {
+    this.articles = this.articleService.generatePlaceholders(this.defaultArticleLimit, {
       title: '██ ███ ██████',
       authorName: '██ ██████'
     });

@@ -3,6 +3,39 @@
 
 .home {
 
+  // Title wrapper with button
+  .wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: @breakpoint-xxs--2) {
+      display: block;
+    }
+
+    // Button for more articles
+    .button {
+      .font-weight-bold;
+      @media (max-width: @breakpoint-xxs--2) {
+        display: block;
+      }
+    }
+
+    // Title
+    .title {
+      .font-size-xxl--1;
+      .font-weight-heavy;
+      .font-color-white-darken-2;
+      position: sticky;
+      letter-spacing: 2px;
+      z-index: 1;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+  }
+
   // Category carousel
   .category-carousel {
 

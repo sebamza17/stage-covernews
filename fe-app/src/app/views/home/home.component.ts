@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
 import { HomeService } from './home.service';
 import { Category } from '../../shared/category/Category';
-import * as $ from 'jquery';
 import { CategoryService } from "../../shared/category/category.service";
+import { Author } from '../../shared/author/Author';
+import { AuthorService } from "../../shared/author/author.service";
 
 @Component({
   selector: 'app-home',
@@ -13,12 +15,14 @@ import { CategoryService } from "../../shared/category/category.service";
 export class HomeComponent implements OnInit {
 
   public categories: Category[];
+  public authors: Author[];
   public loading: boolean;
   public selectedCategory: Category;
 
   constructor(
     private homeService: HomeService,
-    private categoryService: CategoryService) {
+    private categoryService: CategoryService,
+    private authorService: AuthorService) {
   }
 
   ngOnInit() {
@@ -47,6 +51,7 @@ export class HomeComponent implements OnInit {
    */
   private walkThrough() {
     this.getCategories();
+    this.getPopularAuthors();
   }
 
   /**
@@ -61,5 +66,13 @@ export class HomeComponent implements OnInit {
       this.selectedCategory = data[0];
       this.homeService.categories = data;
     });
+  }
+
+  private getPopularAuthors() {
+    this.authorService.getAllAuthors()
+      .subscribe(data => {
+        console.log(data);
+        this.authors = data;
+      });
   }
 }
