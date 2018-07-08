@@ -1,72 +1,106 @@
 <div class="home">
 
-  <div class="position-relative">
+    <div class="position-relative">
 
-    <app-side-menu></app-side-menu>
+        <div class="bg-color-brand-gray">
 
-    <div class="bg-color-brand-gray">
+            <!-- Top before title -->
+            <div class="container padding-top-full">
 
-      <div class="padding-top-full padding-bottom-half">
-        <app-article-latest [isLoggedIn]="false"></app-article-latest>
-      </div>
+                <div class="fw fw--a-center fw--j-end">
+
+                    <!-- Saved notes count -->
+                    <div class="fw fw--a-center clickable"
+                         (click)="toggleArticleSearchMenu()">
+
+                        <i class="icon ion-md-copy font-size-xl font-color-white"></i>
+
+                        <div class="margin-left-quarter font-weight-bold font-color-white">Notas guardadas</div>
+
+                        <div class="margin-left-quarter font-color-white bg-color-brand-red padding-eighth font-weight-bold">
+                            14
+                        </div>
+
+                    </div>
+                    <!-- endSaved notes count -->
+
+                </div>
+
+            </div>
+            <!-- end Top before title -->
+
+            <div class="padding-top-half padding-bottom-half">
+                <app-article-latest [isLoggedIn]="false"></app-article-latest>
+            </div>
+
+        </div>
+        <!-- end Latest articles -->
+
+        <!-- Most popular authors -->
+        <div class="bg-color-black-lighten-4 padding-top-full padding-bottom-half">
+
+            <div class="container">
+
+                <div class="wrapper">
+
+                    <h2 class="main-title">
+                        Autores sugeridos
+                    </h2>
+
+                    <a href="" class="button button--outline button--red button--uppercase">
+                        + Autores
+                    </a>
+
+                </div>
+
+                <div class="">
+                    <app-author-slider [authors]="authors"></app-author-slider>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end Most popular authors -->
+
+        <!-- Side menu-->
+        <app-side-menu [isOpen]="articleSearchMenuOpen"></app-side-menu>
+        <!-- end Side menu-->
 
     </div>
-    <!-- end Latest articles -->
 
-    <!-- Most popular authors -->
-    <div class="bg-color-black-lighten-4 padding-top-full padding-bottom-half">
-      <div class="container">
-        <div class="wrapper">
-          <h2 class="main-title">
-            Autores sugeridos
-          </h2>
+    <!-- Carousel for categories -->
+    <div class="category-carousel">
 
-          <a href="" class="button button--outline button--red button--uppercase">
-            + Autores
-          </a>
-        </div>
+        <!-- Selectors -->
         <div class="">
-          <app-author-slider [authors]="authors"></app-author-slider>
+            <div class="category-carousel__selectors">
+
+                <a *ngFor="let category of categories"
+                   class="category-carousel__selector"
+                   (click)="selectCategory(category)"
+                   [ngClass]="{'selected': selectedCategory._id === category._id}">
+                    {{category.name}}
+                </a>
+
+            </div>
         </div>
-      </div>
-    </div>
-    <!-- end Most popular authors -->
+        <!-- end Selectors -->
 
-  </div>
+        <!-- Items -->
+        <div class="category-carousel__wrapper">
 
-  <!-- Carousel for categories -->
-  <div class="category-carousel">
+            <div *ngFor="let category of categories"
+                 class="category-carousel__item"
+                 attr.category="{{category._id}}">
+                <app-article-slider [category]="category"
+                                    [lazyLoad]="true"
+                                    [loadFlag]="selectedCategory._id === category._id"></app-article-slider>
+            </div>
 
-    <!-- Selectors -->
-    <div class="">
-      <div class="category-carousel__selectors">
-
-        <a *ngFor="let category of categories"
-           class="category-carousel__selector"
-           (click)="selectCategory(category)"
-           [ngClass]="{'selected': selectedCategory._id === category._id}">
-          {{category.name}}
-        </a>
-
-      </div>
-    </div>
-    <!-- end Selectors -->
-
-    <!-- Items -->
-    <div class="category-carousel__wrapper">
-
-      <div *ngFor="let category of categories"
-           class="category-carousel__item"
-           attr.category="{{category._id}}">
-        <app-article-slider [category]="category"
-                            [lazyLoad]="true"
-                            [loadFlag]="selectedCategory._id === category._id"></app-article-slider>
-      </div>
+        </div>
+        <!-- end Items -->
 
     </div>
-    <!-- end Items -->
-
-  </div>
-  <!-- end Carousel for categories -->
+    <!-- end Carousel for categories -->
 
 </div>

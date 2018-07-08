@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-side-menu',
@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-menu.component.less']
 })
 export class SideMenuComponent implements OnInit {
+  @Input() isOpen: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

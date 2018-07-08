@@ -19,10 +19,17 @@ export class HomeComponent implements OnInit {
   public loading: boolean;
   public selectedCategory: Category;
 
+  // UI Status
+  public articleSearchMenuOpen = false;
+
   constructor(
     private homeService: HomeService,
     private categoryService: CategoryService,
     private authorService: AuthorService) {
+  }
+
+  public toggleArticleSearchMenu() {
+    this.articleSearchMenuOpen = !this.articleSearchMenuOpen;
   }
 
   ngOnInit() {

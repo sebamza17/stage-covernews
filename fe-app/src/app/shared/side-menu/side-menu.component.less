@@ -9,15 +9,23 @@
 .side-menu__wrapper {
   @side-menu-width: 300px;
 
+  .bg-color-white-darken-1;
+  .padding-horizontal-half;
+  .padding-vertical-half;
   position: absolute;
   right: 0;
   top: 0;
   height: 100%;
   width: @side-menu-width;
   z-index: @navbar-z-index - 1;
-  .bg-color-white-darken-1;
-  .padding-horizontal-half;
-  .padding-vertical-half;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 200ms ease;
+
+  &.side-menu-wrapper--is-open {
+    transform: translateX(0);
+    opacity: 1;
+  }
 
   //Header
   .side-menu-header {
