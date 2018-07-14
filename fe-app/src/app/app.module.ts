@@ -22,7 +22,10 @@ import { AuthorSliderComponent } from "./shared/author/author-slider/author-slid
 import { AuthorCardComponent } from "./shared/author/author-card/author-card.component";
 import { ArticleLatestComponent } from "./shared/article/article-latest/article-latest.component";
 import { ArticleCardHorizontalComponent } from "./shared/article/article-card-horizontal/article-card-horizontal.component";
-import {SideMenuComponent} from "./shared/side-menu/side-menu.component";
+import { SideMenuComponent } from "./shared/side-menu/side-menu.component";
+import { ArticleBaseComponent } from "./shared/article/article-base/article-base.component";
+import { FormsModule } from "@angular/forms";
+import { FilterPipeModule } from "ngx-filter-pipe";
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import {SideMenuComponent} from "./shared/side-menu/side-menu.component";
     NavbarComponent,
     ArticleLatestComponent,
     ArticleSliderComponent,
+    ArticleBaseComponent,
     ArticleCardComponent,
     ArticleCardHorizontalComponent,
     AuthorSliderComponent,
@@ -39,6 +43,8 @@ import {SideMenuComponent} from "./shared/side-menu/side-menu.component";
     SideMenuComponent
   ],
   imports: [
+    FilterPipeModule,
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,

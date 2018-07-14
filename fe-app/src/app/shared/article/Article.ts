@@ -17,6 +17,6 @@ export class Article {
   originalUrl: string;
   scrapedAt: Date;
   stats: boolean;
-  title: string;
+  title: String;
   watson: Object;
 }

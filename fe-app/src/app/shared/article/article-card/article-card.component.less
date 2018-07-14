@@ -125,9 +125,16 @@
     align-items: center;
     justify-content: space-between;
 
+    &.active {
+      i {
+        .font-color-brand-red;
+      }
+    }
+
     i {
       .font-size-l;
       .padding-left-quarter;
+      transition: all 200ms ease;
       line-height: 0;
     }
 
@@ -144,6 +151,17 @@
 
   &:hover {
     .bg-color-brand-red;
+
+    .article-card__read-later {
+      i {
+        .font-color-black;
+      }
+      &.active {
+        i {
+          .font-color-white;
+        }
+      }
+    }
   }
 
   .article-card__category {
@@ -164,6 +182,21 @@
 
     > div {
       transition: all 200ms ease;
+    }
+
+  }
+
+  // Read later
+  .article-card__read-later {
+    .font-size-s--1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    i {
+      .font-size-l;
+      .padding-left-quarter;
+      line-height: 0;
     }
 
   }

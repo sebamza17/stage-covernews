@@ -5,6 +5,8 @@ import { Category } from '../../shared/category/Category';
 import { CategoryService } from "../../shared/category/category.service";
 import { Author } from '../../shared/author/Author';
 import { AuthorService } from "../../shared/author/author.service";
+import { Article } from "../../shared/article/Article";
+import { ArticleService } from "../../shared/article/article.service";
 
 @Component({
   selector: 'app-home',
@@ -18,22 +20,45 @@ export class HomeComponent implements OnInit {
   public authors: Author[];
   public loading: boolean;
   public selectedCategory: Category;
+  public readLaterArticleList: Article[];
+  public readLaterArticleCount = 0;
 
   // UI Status
   public articleSearchMenuOpen = false;
+  public readLaterArticleListLoading = false;
 
   constructor(
     private homeService: HomeService,
     private categoryService: CategoryService,
-    private authorService: AuthorService) {
+    private authorService: AuthorService,
+    private articleService: ArticleService) {
   }
 
+  /**
+   * Opens the lateral menu with the read later news, sets loading on UI until API returns articles
+   */
   public toggleArticleSearchMenu() {
     this.articleSearchMenuOpen = !this.articleSearchMenuOpen;
+
+    // Only go to the API if articles are not on the scope yet
+    if (!this.readLaterArticleList || this.readLaterArticleList.length < 1) {
+      this.readLaterArticleListLoading = true;
+      this.getReadLaterArticles().then((articleList) => {
+        this.readLaterArticleListLoading = false;
+        this.readLaterArticleList = articleList;
+      });
+    }
   }
 
   ngOnInit() {
     this.walkThrough();
+  }
+
+  /**
+   * Get read later articles for this user (from LocalStorage)
+   */
+  private getReadLaterArticles() {
+    return this.articleService.getReadLaterArticles();
   }
 
   /**
@@ -59,6 +84,9 @@ export class HomeComponent implements OnInit {
   private walkThrough() {
     this.getCategories();
     this.getPopularAuthors();
+    this.articleService.getCountReadLaterArticles().then((count) => {
+      this.readLaterArticleCount = count;
+    });
   }
 
   /**
@@ -68,7 +96,6 @@ export class HomeComponent implements OnInit {
     this.categoryService.getCategories({
       limit: 100
     }).subscribe(data => {
-      console.log(data);
       this.categories = data;
       this.selectedCategory = data[0];
       this.homeService.categories = data;

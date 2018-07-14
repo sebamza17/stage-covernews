@@ -37,7 +37,10 @@
                     Fuente: {{article.newspaper}}
                 </div>
 
-                <div class="article-card__read-later">
+                <div class="article-card__read-later"
+                     title="Leer mas tarde"
+                     [ngClass]="{'active': isOnReadLaterList}"
+                     (click)="saveToReadLater()">
                     <i class="icon ion-md-bookmark"></i>
                 </div>
 

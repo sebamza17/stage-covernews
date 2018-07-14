@@ -18,7 +18,7 @@
                         <div class="margin-left-quarter font-weight-bold font-color-white">Notas guardadas</div>
 
                         <div class="margin-left-quarter font-color-white bg-color-brand-red padding-eighth font-weight-bold">
-                            14
+                            {{readLaterArticleCount}}
                         </div>
 
                     </div>
@@ -63,7 +63,11 @@
         <!-- end Most popular authors -->
 
         <!-- Side menu-->
-        <app-side-menu [isOpen]="articleSearchMenuOpen"></app-side-menu>
+        <app-side-menu [isOpen]="articleSearchMenuOpen"
+                       (isOpenChange)="articleSearchMenuOpen = $event"
+                       [articles]="readLaterArticleList"
+                       [lazyLoad]="true"
+                       [loadFlag]="!readLaterArticleListLoading"></app-side-menu>
         <!-- end Side menu-->
 
     </div>
