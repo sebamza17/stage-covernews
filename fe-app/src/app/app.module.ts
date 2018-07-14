@@ -26,6 +26,8 @@ import { SideMenuComponent } from "./shared/side-menu/side-menu.component";
 import { ArticleBaseComponent } from "./shared/article/article-base/article-base.component";
 import { FormsModule } from "@angular/forms";
 import { FilterPipeModule } from "ngx-filter-pipe";
+import { ArticleComponent } from './views/article/article.component';
+import { ArticleCardFullComponent } from "./shared/article/article-card-full/article-card-full.component";
 
 @NgModule({
   declarations: [
@@ -36,11 +38,13 @@ import { FilterPipeModule } from "ngx-filter-pipe";
     ArticleSliderComponent,
     ArticleBaseComponent,
     ArticleCardComponent,
+    ArticleCardFullComponent,
     ArticleCardHorizontalComponent,
     AuthorSliderComponent,
     AuthorCardComponent,
     HomeUserComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    ArticleComponent
   ],
   imports: [
     FilterPipeModule,
