@@ -8,6 +8,7 @@ import { Article } from "../Article";
 })
 export class ArticleCardHorizontalComponent implements OnInit {
   @Input() article: Article;
+  @Input() isGiant: boolean;
 
   constructor() {
   }

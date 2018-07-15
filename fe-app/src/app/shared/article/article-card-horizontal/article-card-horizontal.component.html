@@ -1,72 +1,76 @@
 <!-- Article card -->
 <a class="article-card-horizontal"
    href="/article/{{article._id}}"
-   [ngClass]="{'article-card-horizontal--placeholder': !article._id}">
+   [ngClass]="{'article-card-horizontal--placeholder': !article._id, 'article-card-horizontal--giant': isGiant}">
 
-  <!-- Card Wrapper -->
-  <div class="article-card-horizontal__wrapper">
+    <!-- Card Wrapper -->
+    <div class="article-card-horizontal__wrapper">
 
-    <!-- Image -->
-    <div class="article-card-horizontal__image" [style.background-image]="'url(' + article.image + ')'"></div>
-    <!-- end Image -->
+        <!-- Image -->
+        <div class="article-card-horizontal__image" [style.background-image]="'url(' + article.image + ')'"></div>
+        <!-- end Image -->
 
-    <!-- Content -->
-    <div class="article-card-horizontal__content">
+        <!-- Content -->
+        <div class="article-card-horizontal__content">
 
-      <!-- Author -->
-      <div class="article-card-horizontal__author">
-        Por {{article.authorName}}
-      </div>
-      <!-- end Author -->
+            <!-- Author -->
+            <div class="article-card-horizontal__author">
+                Por {{article.authorName}}
+            </div>
+            <!-- end Author -->
 
-      <div>
-        <!-- Title -->
-        <div class="article-card-horizontal__title">
-          {{article.title}}
+            <div>
+                <!-- Title -->
+                <div class="article-card-horizontal__title">
+                    {{article.title}}
+                </div>
+                <!-- end Title -->
+
+                <!--TODO:  UNHARDCODE THIS -->
+                <!-- Summary -->
+                <div class="article-card-horizontal__summary">
+                    Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu
+                    erat.Lorem
+                    ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+                    Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non,
+                    semper
+                    suscipit, posuere a, pede.
+                    Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu
+                    erat.Lorem
+                    ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+                    Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non,
+                    semper
+                    suscipit, posuere a, pede.
+                </div>
+                <!-- end Summary -->
+            </div>
+
+            <!-- Footer -->
+            <div class="article-card-horizontal__footer">
+
+                <!-- Source -->
+                <div class="article-card-horizontal__source">
+                    Fuente: {{article.newspaper}}
+                </div>
+                <!-- end Source -->
+
+                <!-- Read Later -->
+                <div class="article-card-horizontal__read-later"
+                     title="Leer mas tarde"
+                     [ngClass]="{'active': isOnReadLaterList}"
+                     (click)="saveToReadLater()">
+                    <i class="icon ion-md-bookmark"></i>
+                </div>
+                <!-- Read Later -->
+
+            </div>
+            <!-- end Footer -->
+
         </div>
-        <!-- end Title -->
-
-        <!--TODO:  UNHARDCODE THIS -->
-        <!-- Summary -->
-        <div class="article-card-horizontal__summary">
-          Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu erat.Lorem
-          ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
-          Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper
-          suscipit, posuere a, pede.
-          Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu erat.Lorem
-          ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
-          Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper
-          suscipit, posuere a, pede.
-        </div>
-        <!-- end Summary -->
-      </div>
-
-      <!-- Footer -->
-      <div class="article-card-horizontal__footer">
-
-        <!-- Source -->
-        <div class="article-card-horizontal__source">
-          Fuente: {{article.newspaper}}
-        </div>
-        <!-- end Source -->
-
-        <!-- Read Later -->
-        <div class="article-card-horizontal__read-later"
-             title="Leer mas tarde"
-             [ngClass]="{'active': isOnReadLaterList}"
-             (click)="saveToReadLater()">
-          <i class="icon ion-md-bookmark"></i>
-        </div>
-        <!-- Read Later -->
-
-      </div>
-      <!-- end Footer -->
+        <!-- end Content -->
 
     </div>
-    <!-- end Content -->
-
-  </div>
-  <!-- end Card Wrapper -->
+    <!-- end Card Wrapper -->
 
 </a>
 <!-- end Article card -->

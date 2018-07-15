@@ -43,7 +43,7 @@
   // Status => Placeholder
   &.article-card-horizontal--placeholder {
     opacity: 0.6;
-    .article-card__image {
+    .article-card-horizontal__image {
       background-image: url('../../../../assets/images/landing-logo.png') !important;
       background-repeat: no-repeat;
       background-size: 80% !important;
@@ -58,6 +58,7 @@
     .image-ratio;
     .image-ratio-1-1;
     .bg-color-white-darken-2;
+    transition: all 200ms ease;
     flex-shrink: 0;
     flex-grow: 0;
     width: 40%;
@@ -165,7 +166,7 @@
       .bg-color-white-darken-1;
       align-items: initial;
 
-      &:hover, &:focus{
+      &:hover, &:focus {
         .bg-color-brand-red;
       }
     }

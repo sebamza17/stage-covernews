@@ -39,7 +39,8 @@ export class ArticleSliderComponent implements OnInit {
     });
     this.articles = this.articleService.generatePlaceholders(this.defaultArticleLimit, {
       title: '██ ███ ██████',
-      authorName: '██ ██████'
+      authorName: '██ ██████',
+      content: '██████ ███ █████████ ██████ ████████████ ███ ██ ██████ ██ ██████ ████ ████████ ██ ██'
     });
 
     if (!this.lazyLoad) {
