@@ -2,6 +2,7 @@
 @import "base/helpers";
 @import "base/fonts";
 @import "base/backgrounds";
+@import "base/flex";
 
 .article-slider {
 
@@ -68,6 +69,39 @@
 
       @media (max-width: @breakpoint-xs) {
         width: ~"calc((100% / @{visible-cards-xs}))";
+      }
+    }
+
+  }
+
+  /* Filters for each Category */
+  .article-slider__filters {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    .article-slider__date {
+      display: flex;
+      align-items: center;
+      width: 40%;
+      .padding-right-quarter;
+
+      i {
+        .font-size-xl;
+        .padding-left-quarter;
+      }
+    }
+
+    .article-slider__search {
+      position: relative;
+      width: 60%;
+      .padding-left-quarter;
+
+      i {
+        position: absolute;
+        right: 0;
+        top: 0;
+        .font-size-xl;
       }
     }
 

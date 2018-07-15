@@ -35,7 +35,22 @@
 
    <!-- <app-article-card-full [article]="articles[1]"></app-article-card-full>-->
 
-    <div class="padding-top-full">
+   <!-- Filter by category -->
+    <div class="article-slider__filters padding-top-full">
+
+      <div class="article-slider__date">
+        <div>Filtro por fecha</div>
+        <i class="icon ion-md-calendar"></i>
+      </div>
+
+      <div class="article-slider__search">
+        <input type="text" placeholder="Buscar en esta categoria">
+        <i class="icon ion-md-search"></i>
+      </div>
+
+    </div>
+
+    <div class="padding-top-half">
       <app-article-card-horizontal [article]="articles[2]" [isGiant]="true"></app-article-card-horizontal>
     </div>
 
