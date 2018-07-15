@@ -1,49 +1,53 @@
 <div class="article-slider">
 
-    <!-- Top -->
-    <div class="article-slider__top">
+  <!-- Top -->
+  <div class="article-slider__top">
 
-        <!-- Title -->
-        <div class="container">
-
-            <div class="wrapper">
-
-                <h2 class="main-title main-title--gray">
-                    {{category.name}}
-                </h2>
-
-                <a href="" class="button button--outline button--red button--uppercase">
-                    + Sobre {{category.name}}
-                </a>
-
-            </div>
-
-        </div>
-        <!-- end Title -->
-
-        <!-- Author slider -->
-        <div class="container">
-            <app-author-slider [authors]="authors"></app-author-slider>
-        </div>
-        <!-- end Author slider -->
-
-    </div>
-    <!-- end Top -->
-
-    <!-- Article list -->
+    <!-- Title -->
     <div class="container">
 
-        <app-article-card-full [article]="articles[0]"></app-article-card-full>
+      <div class="wrapper">
 
-        <div class="article-slider__cards">
+        <h2 class="main-title main-title--gray">
+          {{category.name}}
+        </h2>
 
-            <div class="article-container" *ngFor="let article of articles">
-                <app-article-card [article]="article"></app-article-card>
-            </div>
+        <a href="" class="button button--outline button--red button--uppercase">
+          + Sobre {{category.name}}
+        </a>
 
-        </div>
+      </div>
 
     </div>
-    <!-- end Article list -->
+    <!-- end Title -->
+
+    <!-- Author slider -->
+    <div class="container">
+      <app-author-slider [authors]="authors"></app-author-slider>
+    </div>
+    <!-- end Author slider -->
+
+  </div>
+  <!-- end Top -->
+
+  <!-- Article list -->
+  <div class="container">
+
+   <!-- <app-article-card-full [article]="articles[1]"></app-article-card-full>-->
+
+    <div class="padding-top-full">
+      <app-article-card-horizontal [article]="articles[2]"></app-article-card-horizontal>
+    </div>
+
+    <div class="article-slider__cards">
+
+      <div class="article-container" *ngFor="let article of articles">
+        <app-article-card [article]="article"></app-article-card>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- end Article list -->
 
 </div>

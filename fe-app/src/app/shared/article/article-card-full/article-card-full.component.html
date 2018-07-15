@@ -1,4 +1,45 @@
-<p>
-    <!-- TODO: UNHARDCODE THIS -->
-    {{article.title}}
-</p>
+<div class="article-card-full" [ngClass]="{'article-card-full--placeholder': !article._id}">
+
+  <!-- Card Wrapper -->
+  <div class="article-card-full__wrapper">
+
+    <!-- Image -->
+    <div class="article-card-full__image" [style.background-image]="'url(' + article.image + ')'"></div>
+    <!-- end Image -->
+
+    <!-- Content -->
+    <div class="article-card-full__content">
+
+      <div>
+
+        <!-- Category -->
+        <div class="article-card-full__category">
+          {{category.name}}
+        </div>
+        <!-- Category -->
+
+        <!-- TODO: UNHARDCODE THIS -->
+        <!--Summary-->
+        <div class="article-card-full__summary margin-vertical-half">
+          Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu erat.Lorem
+          ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+          Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper
+          suscipit, posuere a, pede.
+        </div>
+        <!--end Summary-->
+
+      </div>
+
+      <!-- Source -->
+      <div class="article-card-full__source">
+        Fuente: {{article.newspaper}}
+      </div>
+      <!-- end Source -->
+
+    </div>
+    <!-- end Content -->
+
+  </div>
+  <!-- end Card Wrapper -->
+
+</div>

@@ -1,0 +1,112 @@
+@import "base/helpers";
+@import "base/backgrounds";
+@import "base/flex";
+@import "variables";
+@import "base/fonts";
+
+.article-card-full {
+  opacity: 1;
+  transition: all 200ms ease;
+
+  .article-card-full__wrapper {
+    .fw;
+    .bg-color-white-darken-1;
+    .border--full;
+    .width-full;
+    transition: all 200ms ease;
+
+    // Status => Placeholder
+    &.article-card-full--placeholder {
+      opacity: 0.6;
+      .article-card__image {
+        background-image: url('../../../../assets/images/landing-logo.png') !important;
+        background-repeat: no-repeat;
+        background-size: 80% !important;
+      }
+      .article-card-full__author, .article-card-full__title {
+        opacity: 0.4;
+      }
+    }
+
+    // Content
+    .article-card-full__content {
+      .padding-horizontal-half;
+      .padding-vertical-half;
+      .fw;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    // Image
+    .article-card-full__image {
+      .image-ratio;
+      .image-ratio-16-9;
+      .bg-color-white-darken-2;
+      flex-shrink: 0;
+      flex-grow: 0;
+      width: 40%;
+      background-position: center center;
+    }
+
+    //Title
+    .article-card-full__title {
+      @font-size: 1.6rem;
+      @line-height: 1.8rem;
+      .font-weight-bold;
+      font-size: @font-size;
+      line-height: @line-height;
+      min-height: ~"calc(@{line-height} * 3 + 1px)";
+      max-height: ~"calc(@{line-height} * 3 + 1px)";
+      overflow: hidden;
+      transition: all 200ms ease;
+    }
+
+    // Summary
+    .article-card-full__summary {
+      @font-size: 1.8rem;
+      @line-height: 2rem;
+      font-size: @font-size;
+      line-height: @line-height;
+      min-height: ~"calc(@{line-height} * 7 + 1px)";
+      max-height: ~"calc(@{line-height} * 7 + 1px)";
+      overflow: hidden;
+      transition: all 200ms ease;
+      .font-weight-bold;
+    }
+
+    // Author
+    .article-card-full__author {
+      .font-size-s;
+      .font-weight-bold;
+      .margin-bottom-quarter;
+      font-style: italic;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      transition: all 200ms ease;
+    }
+
+    // Source
+    .article-card-full__source {
+      .font-size-s;
+    }
+
+    // Category
+    .article-card-full__category {
+      .font-size-n;
+      .font-weight-bold;
+      .font-color-white;
+      .bg-color-brand-red;
+      .padding-horizontal-quarter;
+      .padding-vertical-eighth;
+      display: inline;
+      transition: all 200ms ease;
+      text-transform: uppercase;
+    }
+
+  }
+}
+
+
