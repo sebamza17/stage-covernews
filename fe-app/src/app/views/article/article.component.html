@@ -1,26 +1,77 @@
 <div class="article-view">
 
-    <!-- Title -->
-    <div class="container">
-        <h1 class="article-view__title" *ngIf="!loading">
-            {{article.title}}
-        </h1>
-    </div>
-    <!-- end Title -->
+  <!-- Header -->
+  <div class="bg-color-white-darken-2">
+    <div class="fw fw--a-center fw--j-space-between container padding-vertical-quarter">
 
-    <!-- Body -->
-    <div class="container">
-        <div class="article-view__left-container">
+      <div class="fw fw--a-center">
 
-            <div *ngIf="!loading" class="article-view__main-image">
-                <img src="{{article.image}}" alt="">
-            </div>
-
-            <div *ngIf="!loading" class="article-view__body">
-                <app-article-content [articleContent]="article.content"></app-article-content>
-            </div>
+        <div class="bg-color-white-darken-5 image-ratio image-ratio-1-1">
+          image
         </div>
+
+        <div>
+          <div>
+            Full Name
+          </div>
+          <div>
+            Following
+          </div>
+        </div>
+
+      </div>
+
+      <div>
+        <div>Date</div>
+        <div>Source</div>
+      </div>
+
+      <div class="fw fw--a-center">
+        <i class="icon ios-md-logo-facebook padding-horizontal-quarter"></i>
+        <i class="icon ios-md-logo-twitter padding-horizontal-quarter"></i>
+        <i class="icon ios-md--logo-whatsapp padding-horizontal-quarter"></i>
+      </div>
+
     </div>
-    <!-- end Body -->
+
+  </div>
+  <!-- end Header -->
+
+  <!-- Title -->
+  <div class="container">
+    <h1 class="article-view__title" *ngIf="!loading">
+      {{article.title}}
+    </h1>
+  </div>
+  <!-- end Title -->
+
+  <!-- Image card -->
+  <div class="container">
+    <app-article-card-full [article]="article"></app-article-card-full>
+  </div>
+  <!-- end Image card -->
+
+  <!-- Body -->
+  <div class="container fw padding-top-full">
+    <div class="article-view__left-container">
+
+      <div *ngIf="!loading" class="article-view__body">
+        <app-article-content [articleContent]="article.content"></app-article-content>
+      </div>
+    </div>
+
+    <div class="article-view__right-container">
+
+      <h2 class="main-title main-title--gray padding-vertical-half">RELACIONADAS</h2>
+
+      <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+      <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+      <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+      <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+      <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+    </div>
+
+  </div>
+  <!-- end Body -->
 
 </div>
