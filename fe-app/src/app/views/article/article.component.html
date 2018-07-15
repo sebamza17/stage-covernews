@@ -11,6 +11,11 @@
     <!-- Body -->
     <div class="container">
         <div class="article-view__left-container">
+
+            <div *ngIf="!loading" class="article-view__main-image">
+                <img src="{{article.image}}" alt="">
+            </div>
+
             <div *ngIf="!loading" class="article-view__body">
                 <app-article-content [articleContent]="article.content"></app-article-content>
             </div>
