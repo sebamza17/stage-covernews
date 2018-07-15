@@ -1,6 +1,7 @@
 <!-- Article card -->
-<div class="article-card"
-     [ngClass]="{'article-card--placeholder': !article._id, 'article-card--transparent': isTransparent}">
+<a class="article-card"
+   href="/article/{{article._id}}"
+   [ngClass]="{'article-card--placeholder': !article._id, 'article-card--transparent': isTransparent}">
 
     <!-- Category -->
     <div class="article-card__category" *ngIf="category">
@@ -53,5 +54,5 @@
     </div>
     <!-- end Wrapper -->
 
-</div>
+</a>
 <!-- end Article card -->

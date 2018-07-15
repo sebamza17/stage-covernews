@@ -17,12 +17,15 @@ export class ArticleSliderComponent implements OnInit {
   @Input() category: Category;
   public articles: Article[];
   public authors: Author[];
+
+  //UI status
   public articleLoading: boolean = true;
   public authorLoading: boolean = true;
+  private alreadyLoaded: boolean = false;
 
+  // Query params
   private defaultArticleLimit: number = 4;
   private defaultAuthorLimit: number = 5;
-  private alreadyLoaded: boolean = false;
 
   constructor(
     private articleService: ArticleService,

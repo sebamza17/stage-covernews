@@ -1,1 +1,36 @@
+@import 'base/backgrounds';
 @import 'base/helpers';
+@import 'base/fonts';
+
+.article-view {
+
+  // Title
+  .article-view__title {
+    .font-color-brand-red;
+    .font-weight-bold;
+  }
+
+  // Containers
+  .article-view__left-container {
+    width: 70%;
+  }
+  .article-view__right-container {
+    width: 40%;
+  }
+
+  // Content
+  .article-view__body {
+
+    p {
+      transform: scale(4);
+    }
+
+    * {
+      .font-size-l !important;
+      max-width: 100%;
+      min-width: 100%;
+    }
+
+  }
+
+}

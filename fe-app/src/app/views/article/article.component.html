@@ -1,3 +1,21 @@
-<p>
-  article works!
-</p>
+<div class="article-view">
+
+    <!-- Title -->
+    <div class="container">
+        <h1 class="article-view__title" *ngIf="!loading">
+            {{article.title}}
+        </h1>
+    </div>
+    <!-- end Title -->
+
+    <!-- Body -->
+    <div class="container">
+        <div class="article-view__left-container">
+            <div *ngIf="!loading" class="article-view__body">
+                <app-article-content [articleContent]="article.content"></app-article-content>
+            </div>
+        </div>
+    </div>
+    <!-- end Body -->
+
+</div>

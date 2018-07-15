@@ -1,3 +1,5 @@
+import { Category } from "../category/Category";
+
 export class Article {
   _id: string;
   articleDate: Date;
@@ -5,6 +7,7 @@ export class Article {
   authorName: string;
   canonical: string;
   category: string;
+  content: string;
   crawlerId: string;
   createdAt: Date;
   image: string;
@@ -19,4 +22,5 @@ export class Article {
   stats: boolean;
   title: String;
   watson: Object;
+  categoryObject: Category;
 }

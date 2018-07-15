@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import BaseService from '../base-service/base.service';
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { Article } from "./Article";
+import { Article } from './Article';
+import { Category } from '../category/Category';
+import { CategoryService } from '../category/category.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +19,15 @@ export class ArticleService extends BaseService {
   // Define all service URLs
   urls = {
     getArticle: '/article/show/{{articleId}}',
+    getArticleFull: '/article/showFull/{{articleId}}',
     getArticlesByCategory: '/article/category/{{categoryId}}',
     getLatestArticles: '/article/all',
   };
 
   constructor(
     private http: HttpClient,
-    private localStorage: LocalStorage
+    private localStorage: LocalStorage,
+    private categoryService: CategoryService
   ) {
     super();
   }
@@ -34,12 +38,23 @@ export class ArticleService extends BaseService {
    * @returns {Observable<Article>}
    */
   public getArticleById(articleId: string): Observable<Article> {
-
     let url = this.urls.getArticle;
-
     url = url.replace('{{articleId}}', articleId);
-
     return this.http.get<Article>(this.url(url));
+  }
+
+  /**
+   * Get an article with all its data from a given id
+   * @param {string} articleId
+   * @returns {Promise<Article>}
+   */
+  public async getArticleFullById(articleId: string) {
+    let url = this.urls.getArticleFull;
+    url = url.replace('{{articleId}}', articleId);
+    let article = await this.http.get<Article>(this.url(url)).toPromise();
+    let categoryObject = await this.categoryService.getCategoryById(article.category).toPromise();
+    article.categoryObject = categoryObject;
+    return article;
   }
 
   /**

@@ -1,6 +1,7 @@
 <!-- Article card -->
-<div class="article-card-horizontal"
-     [ngClass]="{'article-card-horizontal--placeholder': !article._id}">
+<a class="article-card-horizontal"
+   href="/article/{{article._id}}"
+   [ngClass]="{'article-card-horizontal--placeholder': !article._id}">
 
     <!-- Image -->
     <div class="article-card-horizontal__image" [style.background-image]="'url(' + article.image + ')'"></div>
@@ -24,6 +25,6 @@
     </div>
     <!-- end Content -->
 
-</div>
+</a>
 <!-- end Article card -->
 
