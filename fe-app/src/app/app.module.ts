@@ -13,23 +13,24 @@ import { TokenInterceptor } from './shared/interceptor.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
-import { MaterialModule } from "./shared/material.module";
+import { MaterialModule } from './shared/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ArticleSliderComponent } from './shared/article/article-slider/article-slider.component';
 import { ArticleCardComponent } from './shared/article/article-card/article-card.component';
 import { HomeUserComponent } from './components/home-user/home-user.component';
-import { AuthorSliderComponent } from "./shared/author/author-slider/author-slider.component";
-import { AuthorCardComponent } from "./shared/author/author-card/author-card.component";
-import { ArticleLatestComponent } from "./shared/article/article-latest/article-latest.component";
-import { ArticleCardHorizontalComponent } from "./shared/article/article-card-horizontal/article-card-horizontal.component";
-import { SideMenuComponent } from "./shared/side-menu/side-menu.component";
-import { ArticleBaseComponent } from "./shared/article/article-base/article-base.component";
-import { FormsModule } from "@angular/forms";
-import { FilterPipeModule } from "ngx-filter-pipe";
+import { AuthorSliderComponent } from './shared/author/author-slider/author-slider.component';
+import { AuthorCardComponent } from './shared/author/author-card/author-card.component';
+import { ArticleLatestComponent } from './shared/article/article-latest/article-latest.component';
+import { ArticleCardHorizontalComponent } from './shared/article/article-card-horizontal/article-card-horizontal.component';
+import { SideMenuComponent } from './shared/side-menu/side-menu.component';
+import { ArticleBaseComponent } from './shared/article/article-base/article-base.component';
+import { FormsModule } from '@angular/forms';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 import { ArticleComponent } from './views/article/article.component';
-import { ArticleCardFullComponent } from "./shared/article/article-card-full/article-card-full.component";
+import { ArticleCardFullComponent } from './shared/article/article-card-full/article-card-full.component';
 import { SafeHtmlPipe } from '../app/pipes/safe-html.pipe';
-import { ArticleContentComponent } from "./shared/article/article-content/article-content.component";
+import { ArticleContentComponent } from './shared/article/article-content/article-content.component';
+import { AuthorBaseInfoComponent } from './shared/author/author-base-info/author-base-info.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ArticleContentComponent } from "./shared/article/article-content/articl
     ArticleCardHorizontalComponent,
     AuthorSliderComponent,
     AuthorCardComponent,
+    AuthorBaseInfoComponent,
     HomeUserComponent,
     SideMenuComponent,
     ArticleComponent,

@@ -31,18 +31,29 @@
              class="side-menu__article-container">
             <app-article-card-horizontal [article]="article"></app-article-card-horizontal>
         </div>
+
+        <!-- Message if no articles -->
         <div *ngIf="(articles | filterBy: articleFilter).length === 0"
              class="text-center padding-vertical-full margin-bottom-half bg-color-white">
+
             No se encontraron articulos.
 
-            <div class="padding-top-half">
-                <button *ngIf="articleFilter.title"
-                        (click)="cleanFilter()"
+            <span *ngIf="!articleFilter.title"
+                  class="font-weight-bold display-inline-block padding-top-half">
+                Guarda las notas que te interesen para leer mas tarde, haciendo click en
+                <i class="icon ion-md-bookmark"></i>
+            </span>
+
+            <div class="padding-top-half" *ngIf="articleFilter.title">
+                <button (click)="cleanFilter()"
                         class="button button--outline button--grey button--uppercase">
                     Limpiar filtro
                 </button>
             </div>
+
         </div>
+        <!-- end Message if no articles -->
+
     </div>
     <!-- end Article list -->
 

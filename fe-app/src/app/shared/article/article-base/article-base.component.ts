@@ -43,8 +43,13 @@ export class ArticleBaseComponent implements OnInit {
   /**
    * Saves an article to LS
    */
-  public async saveToReadLater() {
+  public async saveToReadLater($event) {
+    console.log($event);
+    $event.preventDefault();
+    $event.stopPropagation();
     this.isOnReadLaterList = await this.articleService.toggleArticleFromReadLater(this.article);
+    // This stops the proopagation for this event
+    return false;
   }
 
 }

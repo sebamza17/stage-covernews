@@ -41,7 +41,7 @@
                 <div class="article-card__read-later"
                      title="Leer mas tarde"
                      [ngClass]="{'active': isOnReadLaterList}"
-                     (click)="saveToReadLater()">
+                     (click)="saveToReadLater($event); $event.stopPropagation();">
                     <i class="icon ion-md-bookmark"></i>
                 </div>
 
