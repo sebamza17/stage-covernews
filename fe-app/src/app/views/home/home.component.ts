@@ -93,9 +93,9 @@ export class HomeComponent implements OnInit {
    * Get Categories
    */
   private getCategories() {
-    this.categoryService.getCategories({
+    this.categoryService.getAllCategories({
       limit: 100
-    }).subscribe(data => {
+    }).then(data => {
       this.categories = data;
       this.selectedCategory = data[0];
       this.homeService.categories = data;

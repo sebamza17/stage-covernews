@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
 import BaseService from '../base-service/base.service';
 import { Category } from './Category';
 import 'rxjs/add/operator/map';
@@ -11,6 +10,10 @@ import 'rxjs/add/operator/map';
 })
 export class CategoryService extends BaseService {
 
+  // Categories
+  public static staticCategories: Category[] = [];
+
+  // Set local entity
   entity = 'category';
 
   // Define all service URLs
@@ -29,8 +32,13 @@ export class CategoryService extends BaseService {
    * Get all categories from API
    * @returns Observable<Category[]>
    */
-  public getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url(this.urls.getAllCategories));
+  public async getAllCategories(options = null) {
+
+    if (CategoryService.staticCategories.length < 1) {
+      CategoryService.staticCategories = await this.http.get<Category[]>(this.url(this.urls.getAllCategories, options)).toPromise();
+    }
+
+    return CategoryService.staticCategories;
   }
 
   /**
@@ -47,8 +55,17 @@ export class CategoryService extends BaseService {
    * @param categoryId
    * @returns {Observable<Category>}
    */
-  public getCategoryById(categoryId): Observable<Category> {
-    return this.http.get<Category>(this.url(this.urls.getCategory.replace('{{categoryId}}', categoryId)));
+  public async getCategoryById(categoryId) {
+
+    if (CategoryService.staticCategories.length > 0) {
+      const foundCategory = CategoryService.staticCategories.find(category => {
+        return category._id === categoryId;
+      });
+      console.log(foundCategory);
+      return foundCategory;
+    }
+
+    return await this.http.get<Category>(this.url(this.urls.getCategory.replace('{{categoryId}}', categoryId))).toPromise();
   }
 
 }

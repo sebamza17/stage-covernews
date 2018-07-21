@@ -52,13 +52,18 @@
     .category-carousel__selectors {
       .bg-color-white;
       position: sticky;
-      top: @navbar-height-medium-up;
+      top: @navbar-height-medium-up - 1px;
       z-index: 2;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       flex-wrap: nowrap;
       overflow: auto;
+
+      @media (max-width: @breakpoint-s) {
+        padding-left: @navbar-responsive-width;
+        top: -1px;
+      }
 
       // Selector
       .category-carousel__selector {

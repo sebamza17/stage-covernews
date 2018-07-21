@@ -22,6 +22,7 @@ export class ArticleService extends BaseService {
     getArticleFull: '/article/showFull/{{articleId}}',
     getArticlesByCategory: '/article/category/{{categoryId}}',
     getLatestArticles: '/article/all',
+    getArticlesByQuery: '/article/search/{{query}}',
   };
 
   constructor(
@@ -52,7 +53,7 @@ export class ArticleService extends BaseService {
     let url = this.urls.getArticleFull;
     url = url.replace('{{articleId}}', articleId);
     let article = await this.http.get<Article>(this.url(url)).toPromise();
-    let categoryObject = await this.categoryService.getCategoryById(article.category).toPromise();
+    const categoryObject = await this.categoryService.getCategoryById(article.category);
     article.categoryObject = categoryObject;
     return article;
   }
@@ -62,20 +63,23 @@ export class ArticleService extends BaseService {
    * @param categoryId
    * @returns {Observable<Article[]>}
    */
-  public getArticlesByCategory(categoryId, limit = 0, skip = 0): Observable<Article[]> {
-
+  public getArticlesByCategory(categoryId, options = null): Observable<Article[]> {
     let url = this.urls.getArticlesByCategory;
-
-    if (limit > 0) {
-      url += '?limit=' + limit;
-    }
-    if (skip > 0) {
-      url += '?skip=' + skip;
-    }
-
     url = url.replace('{{categoryId}}', categoryId);
+    return this.http.get<Article[]>(this.url(url, options));
+  }
 
-    return this.http.get<Article[]>(this.url(url));
+  /**
+   * Get articles from a given user string query
+   * @param query
+   * @param {any} options
+   * @returns {Observable<Article[]>}
+   */
+  public getArticlesByQuery(query, options = null) {
+    let url = this.urls.getArticlesByQuery;
+    url = url.replace('{{query}}', encodeURIComponent(query));
+
+    return this.http.get<Article[]>(this.url(url, options));
   }
 
   /**
@@ -157,7 +161,7 @@ export class ArticleService extends BaseService {
    * @returns {Promise<boolean>}
    */
   public async isOnReadLaterList(article: Article) {
-    let currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
+    const currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
     return currentSavedArticleIdList.indexOf(article._id) > -1;
   }
 
@@ -166,9 +170,9 @@ export class ArticleService extends BaseService {
    * @returns {Promise<any>}
    */
   public async getCountReadLaterArticles() {
-    let articleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
+    const articleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
     if (!articleIdList) {
-      return 0
+      return 0;
     }
     return articleIdList.length;
   }
@@ -178,13 +182,13 @@ export class ArticleService extends BaseService {
    * @returns {Promise<any>}
    */
   public async getReadLaterArticles() {
-    let articleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
+    const articleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
 
     if (articleIdList.length < 1) {
       return [];
     }
 
-    let articleList = [];
+    const articleList = [];
     for (let i = 0; i < articleIdList.length; i++) {
       const article = await this.getArticleById(articleIdList[i]).toPromise();
       articleList.push(article);

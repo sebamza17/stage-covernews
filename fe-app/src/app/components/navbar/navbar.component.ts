@@ -10,7 +10,8 @@ export class NavbarComponent implements OnInit {
 
   public status: Boolean = false;
 
-  constructor(private user: UserService) {}
+  constructor(private user: UserService) {
+  }
 
   public toggle() {
     console.log(this.status);
@@ -23,17 +24,17 @@ export class NavbarComponent implements OnInit {
   /**
    * Login action
    */
-  onLogin(){
+  onLogin() {
     const user = this.user.socialLogin('facebook');
-    user.then((data)=>{
+    user.then((data) => {
       console.log(data);
-    })
+    });
   }
 
   /**
    * Logout action
    */
-  onLogout(){
+  onLogout() {
     this.user.logout();
   }
 }

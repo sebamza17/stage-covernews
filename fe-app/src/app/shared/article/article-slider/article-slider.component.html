@@ -9,11 +9,11 @@
       <div class="wrapper">
 
         <h2 class="main-title main-title--gray">
-          {{category.name}}
+          {{category.displayName}}
         </h2>
 
         <a href="" class="button button--outline button--red button--uppercase">
-          + Sobre {{category.name}}
+          + Sobre {{category.displayName}}
         </a>
 
       </div>
@@ -33,7 +33,7 @@
   <!-- Article list -->
   <div class="container">
 
-   <!-- Filter by category -->
+    <!-- Filters -->
     <div class="article-slider__filters padding-top-full">
 
       <div class="article-slider__date">
@@ -42,23 +42,33 @@
       </div>
 
       <div class="article-slider__search">
-        <input type="text" placeholder="Buscar en esta categoria">
+        <input (change)="searchForArticles()"
+               [(ngModel)]="articleSearchCriteria"
+               type="text"
+               placeholder="Buscar en esta categoria">
         <i class="icon ion-md-search"></i>
       </div>
 
     </div>
+    <!-- end Filters -->
 
-    <div class="padding-top-half">
-      <app-article-card-horizontal [article]="mainArticle" [isGiant]="true"></app-article-card-horizontal>
-    </div>
+    <!-- Articles -->
+    <div>
 
-    <div class="article-slider__cards">
+      <div class="padding-top-half" *ngIf="mainArticle">
+        <app-article-card-horizontal [article]="mainArticle" [isGiant]="true"></app-article-card-horizontal>
+      </div>
 
-      <div class="article-container" *ngFor="let article of articles">
-        <app-article-card [article]="article"></app-article-card>
+      <div class="article-slider__cards">
+
+        <div class="article-container" *ngFor="let article of articles">
+          <app-article-card [article]="article"></app-article-card>
+        </div>
+
       </div>
 
     </div>
+    <!-- end Articles -->
 
   </div>
   <!-- end Article list -->

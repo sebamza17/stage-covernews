@@ -26,10 +26,8 @@ export class ArticleBaseComponent implements OnInit {
   /**
    * Get category for this article
    */
-  protected getCategory() {
-    this.categoryService.getCategoryById(this.article.category).subscribe(data => {
-      this.category = data;
-    });
+  protected async getCategory() {
+    this.category = await this.categoryService.getCategoryById(this.article.category);
   }
 
   /**

@@ -13,12 +13,13 @@ export class SideMenuComponent implements OnInit {
   @Input() lazyLoad: boolean;
   @Input() loadFlag: boolean;
   @Input() articles: Article[];
-
   public articleFilter: Article = new Article();
 
+  // Query params
   private defaultArticleLimit: number = 5;
   private alreadyLoaded: boolean = false;
 
+  // NgModels
   public searchCriteria: string;
 
   /**
@@ -41,7 +42,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.articles = this.articleService.generatePlaceholders(this.defaultArticleLimit, {
+    this.articles = <Article[]>this.articleService.generatePlaceholders(this.defaultArticleLimit, {
       title: '██ ███ ██████',
       authorName: '██ ██████'
     });

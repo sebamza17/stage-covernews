@@ -7,7 +7,7 @@
 .article-slider {
 
   @visible-cards: 4;
-  @visible-cards-l: 3.5;
+  @visible-cards-m: 3.5;
   @visible-cards-s: 2.5;
   @visible-cards-xs: 1.2;
 
@@ -48,7 +48,7 @@
     flex-wrap: wrap;
     overflow: auto;
 
-    @media (max-width: @breakpoint-l) {
+    @media (max-width: @breakpoint-m) {
       flex-wrap: nowrap;
     }
 
@@ -59,8 +59,8 @@
       width: ~"calc((100% / @{visible-cards}))";
       flex-shrink: 0;
 
-      @media (max-width: @breakpoint-l) {
-        width: ~"calc((100% / @{visible-cards-l}))";
+      @media (max-width: @breakpoint-m) {
+        width: ~"calc((100% / @{visible-cards-m}))";
       }
 
       @media (max-width: @breakpoint-s) {
