@@ -41,20 +41,29 @@
         <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="1" column="23" lean-forward="true" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+              <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.component.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.component.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/views/home/home.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="98" column="42" selection-start-line="98" selection-start-column="42" selection-end-line="98" selection-end-column="42" />
+            <state relative-caret-position="68">
+              <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#div#1;n#div#0;n#div#0;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="landing-banner.component.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/components/landing-banner/landing-banner.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -129,6 +138,8 @@
         <option value="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.html" />
         <option value="$PROJECT_DIR$/src/app/views/home/home.component.html" />
+        <option value="$PROJECT_DIR$/src/app/components/dictioz-features/dictioz-features.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/components/landing-banner/landing-banner.component.ts" />
       </list>
     </option>
   </component>
@@ -223,7 +234,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="home.com&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home/.c&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home.con&#9;null&#9;null&#10;home&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.service.ts&#10;article-card&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html&#10;articleslider&#9;null&#9;null&#10;article-sli&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.html&#10;navbar&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/components/navbar/navbar.component.less&#10;vari&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/styles/variables.less&#10;variables&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/styles/variables.less&#10;side&#9;null&#9;null&#10;article.ser&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;arti&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.html&#10;home.&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;latest&#9;null&#9;null&#10;app.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.component.html&#10;articl&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;article.serv&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;category.ser&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/category/category.service.ts&#10;category.seri&#9;null&#9;null&#10;navba&#9;null&#9;null&#10;home.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.less&#10;sidemenu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/side-menu/side-menu.component.html&#10;material&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/material.module.ts&#10;article-hori&#9;null&#9;null&#10;app&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;app.modu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;article-slider&#9;null&#9;null&#10;article-card.com.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.less&#10;article-card.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html" />
+    <property name="SearchEverywhereHistoryKey" value="home.c&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home.com&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home/.c&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home.con&#9;null&#9;null&#10;home&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.service.ts&#10;article-card&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html&#10;articleslider&#9;null&#9;null&#10;article-sli&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.html&#10;navbar&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/components/navbar/navbar.component.less&#10;vari&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/styles/variables.less&#10;variables&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/styles/variables.less&#10;side&#9;null&#9;null&#10;article.ser&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;arti&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.html&#10;home.&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;latest&#9;null&#9;null&#10;app.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.component.html&#10;articl&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;article.serv&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;category.ser&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/category/category.service.ts&#10;category.seri&#9;null&#9;null&#10;navba&#9;null&#9;null&#10;home.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.less&#10;sidemenu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/side-menu/side-menu.component.html&#10;material&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/material.module.ts&#10;article-hori&#9;null&#9;null&#10;app&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;app.modu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;article-slider&#9;null&#9;null&#10;article-card.com.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.less&#10;article-card.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -256,12 +267,12 @@
       <option name="presentableId" value="Default" />
       <updated>1532178014057</updated>
       <workItem from="1532178016454" duration="1054000" />
-      <workItem from="1532179210774" duration="14166000" />
+      <workItem from="1532179210774" duration="14623000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15220000" />
+    <option name="totallyTimeSpent" value="15677000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -367,16 +378,6 @@
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -539,18 +540,42 @@
     <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="23" lean-forward="true" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="48" column="26" lean-forward="true" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/dictioz-features/dictioz-features.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/views/home/home.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="98" column="42" selection-start-line="98" selection-start-column="42" selection-end-line="98" selection-end-column="42" />
+        <state relative-caret-position="68">
+          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#div#1;n#div#0;n#div#0;n#!!top" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/landing-banner/landing-banner.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
         </state>
       </provider>
     </entry>
