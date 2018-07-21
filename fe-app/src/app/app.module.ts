@@ -31,6 +31,8 @@ import { ArticleCardFullComponent } from './shared/article/article-card-full/art
 import { SafeHtmlPipe } from '../app/pipes/safe-html.pipe';
 import { ArticleContentComponent } from './shared/article/article-content/article-content.component';
 import { AuthorBaseInfoComponent } from './shared/author/author-base-info/author-base-info.component';
+import { LandingBannerComponent } from './components/landing-banner/landing-banner.component';
+import { DictiozFeaturesComponent } from './components/dictioz-features/dictioz-features.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AuthorBaseInfoComponent } from './shared/author/author-base-info/author
     HomeUserComponent,
     SideMenuComponent,
     ArticleComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    LandingBannerComponent,
+    DictiozFeaturesComponent
   ],
   imports: [
     FilterPipeModule,
