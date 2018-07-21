@@ -44,6 +44,11 @@ export default abstract class BaseService {
    * @returns {any[]}
    */
   public generatePlaceholders(quantity: number, placeholderData: Object) {
+
+    if (quantity === 1) {
+      return placeholderData;
+    }
+
     let placeholders = [];
     for (let i = 0; i < quantity; i++) {
       placeholders[i] = placeholderData;

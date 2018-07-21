@@ -17,15 +17,16 @@ export class ArticleSliderComponent implements OnInit {
   @Input() category: Category;
   public articles: Article[];
   public authors: Author[];
+  public mainArticle: Article;
 
   // UI status
-  public articleLoading = true;
-  public authorLoading = true;
-  private alreadyLoaded = false;
+  public articleLoading: boolean = true;
+  public authorLoading: boolean = true;
+  private alreadyLoaded: boolean = false;
 
   // Query params
-  private defaultArticleLimit = 5;
-  private defaultAuthorLimit = 5;
+  private defaultArticleLimit: number = 5;
+  private defaultAuthorLimit: number = 5;
 
   constructor(
     private articleService: ArticleService,
@@ -34,10 +35,15 @@ export class ArticleSliderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.authors = this.authorService.generatePlaceholders(this.defaultAuthorLimit, {
+    this.authors = <Author[]>this.authorService.generatePlaceholders(this.defaultAuthorLimit, {
       name: '██ ██████',
     });
-    this.articles = this.articleService.generatePlaceholders(this.defaultArticleLimit, {
+    this.mainArticle = <Article>this.articleService.generatePlaceholders(1, {
+      title: '██ ███ ██████',
+      authorName: '██ ██████',
+      content: '██████ ███ █████████ ██████ ████████████ ███ ██ ██████ ██ ██████ ████ ████████ ██ ██'
+    });
+    this.articles = <Article[]>this.articleService.generatePlaceholders(this.defaultArticleLimit - 1, {
       title: '██ ███ ██████',
       authorName: '██ ██████',
       content: '██████ ███ █████████ ██████ ████████████ ███ ██ ██████ ██ ██████ ████ ████████ ██ ██'
@@ -65,6 +71,7 @@ export class ArticleSliderComponent implements OnInit {
     this.articleService.getArticlesByCategory(this.category._id, this.defaultArticleLimit)
       .subscribe(data => {
         this.articleLoading = false;
+        this.mainArticle = data.shift();
         this.articles = data;
       });
   }

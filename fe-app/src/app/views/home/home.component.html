@@ -1,6 +1,7 @@
 <div class="home">
 
-    <div class="position-relative">
+    <!-- Latest news -->
+    <div class="latest-news">
 
       <app-dictioz-features></app-dictioz-features>
 
@@ -75,22 +76,21 @@
         <!-- end Side menu-->
 
     </div>
+    <!-- end Latest news -->
 
     <!-- Carousel for categories -->
     <div class="category-carousel">
 
         <!-- Selectors -->
-        <div class="">
-            <div class="category-carousel__selectors">
+        <div class="category-carousel__selectors">
 
-                <a *ngFor="let category of categories"
-                   class="category-carousel__selector"
-                   (click)="selectCategory(category)"
-                   [ngClass]="{'selected': selectedCategory._id === category._id}">
-                    {{category.name}}
-                </a>
+            <a *ngFor="let category of categories"
+               class="category-carousel__selector"
+               (click)="selectCategory(category)"
+               [ngClass]="{'selected': selectedCategory._id === category._id}">
+                {{category.name}}
+            </a>
 
-            </div>
         </div>
         <!-- end Selectors -->
 

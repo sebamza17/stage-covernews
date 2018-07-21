@@ -70,6 +70,23 @@ functions:
                 - Token
               allowCredentials: false
           authorizer: false
+  getArticlesByCategories:
+    handler: article.getArticlesByCategories
+    stageVariables: 
+      - stage : ${opt:stage, 'test'}
+    events:
+      - http:
+          path: article/each/categories
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
   showArticle:
     handler: article.show
     stageVariables: 
