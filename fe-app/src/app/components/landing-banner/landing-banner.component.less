@@ -1,0 +1,81 @@
+/* Landing Banner Home */
+@import "variables";
+@import "base/helpers";
+@import "base/fonts";
+@import "base/backgrounds";
+@import "base/flex";
+
+.landing-banner__wrapper {
+/*  background-image: linear-gradient(to right, #14e5ef, #430ed2);
+  background-image: linear-gradient(to right, #b52f72, #430ed2);*/
+/*  background-image: linear-gradient(to right , @color-brand-red, purple);*/
+  width: 100%;
+  height: 100%;
+  .padding-vertical-full;
+
+  //Gradient backgrounds transition
+  background: linear-gradient(270deg, #b52f72, #430ed2);
+  background-size: 200% 300%;
+
+  animation: AnimationName 10s ease infinite;
+
+  @keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+
+  .landing-banner {
+    width: 100%;
+    height: 100%;
+    .fw;
+    .fw--a-center;
+    .fw--j-center;
+
+    .landing-banner__image-wrapper {
+      width: 40%;
+      flex-shrink: 0;
+      flex-grow: 0;
+      .padding-vertical-full;
+
+      .landing-banner__image {
+        .image-ratio;
+        .image-ratio-1-1;
+        background-image: url('../../../assets/images/banner-draw.svg');
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: contain;
+      }
+    }
+
+    .landing-banner__text {
+      .font-color-white;
+      .fw;
+      .fw--j-center;
+      .fw--a-center;
+      flex-grow: 0;
+      flex-shrink: 0;
+      width: 60%;
+      flex-direction: column;
+      .padding-left-full;
+
+      .landing-banner__button{
+        .fw;
+        .fw--j-center;
+        .padding-top-full;
+      }
+
+      .landing-banner__title {
+        .font-weight-bold;
+        margin-bottom: 0;
+      }
+
+      .landing-banner__subtitle {
+        .font-weight-light;
+      }
+
+    }
+
+  }
+
+}
