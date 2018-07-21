@@ -9,9 +9,54 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="article-slider.component.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="side-menu.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/shared/side-menu/side-menu.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="41" column="81" selection-start-line="41" selection-start-column="81" selection-end-line="41" selection-end-column="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/views/home/home.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="502">
+              <caret line="93" column="46" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="46" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.component.less" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/views/home/home.component.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="458">
+              <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="article-slider.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="485">
@@ -23,14 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.module.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+      <file leaf-file-name="article-slider.component.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#58#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1138">
+              <caret line="96" column="17" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -38,7 +80,7 @@
       <file leaf-file-name="article-slider.component.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
+            <state relative-caret-position="867">
               <caret line="51" column="26" lean-forward="true" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
             </state>
           </provider>
@@ -63,6 +105,10 @@
       <find>&quot;</find>
       <find>articleLoading</find>
       <find>mainArticle</find>
+      <find>article-slider__search</find>
+      <find>position-relative</find>
+      <find>category-carousel__selectors</find>
+      <find>category-carousel__wrapper</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -85,6 +131,9 @@
         <option value="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.html" />
         <option value="$PROJECT_DIR$/src/app/shared/base-service/base.service.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.less" />
+        <option value="$PROJECT_DIR$/src/app/views/home/home.component.html" />
+        <option value="$PROJECT_DIR$/src/app/views/home/home.component.less" />
       </list>
     </option>
   </component>
@@ -179,7 +228,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="material&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/material.module.ts&#10;article-hori&#9;null&#9;null&#10;app&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;app.modu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;article-slider&#9;null&#9;null&#10;article-card.com.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.less&#10;article-card.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html&#10;article-card&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card-full/article-card-full.component.html" />
+    <property name="SearchEverywhereHistoryKey" value="navba&#9;null&#9;null&#10;home.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.less&#10;home.&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;sidemenu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/side-menu/side-menu.component.html&#10;material&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/material.module.ts&#10;article-hori&#9;null&#9;null&#10;app&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;app.modu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;article-slider&#9;null&#9;null&#10;article-card.com.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.less&#10;article-card.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html&#10;article-card&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card-full/article-card-full.component.html" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -212,12 +261,12 @@
       <option name="presentableId" value="Default" />
       <updated>1532178014057</updated>
       <workItem from="1532178016454" duration="1054000" />
-      <workItem from="1532179210774" duration="2767000" />
+      <workItem from="1532179210774" duration="4152000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3821000" />
+    <option name="totallyTimeSpent" value="5206000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -234,13 +283,13 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.178125" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="2" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="1" />
@@ -308,13 +357,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/side-menu/side-menu.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="41" column="81" selection-start-line="41" selection-start-column="81" selection-end-line="41" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/author/author-base-info/author-base-info.component.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -365,6 +407,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/side-menu/side-menu.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="41" column="81" selection-start-line="41" selection-start-column="81" selection-end-line="41" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/styles/variables.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="62" column="1" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/navbar/navbar.component.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/navbar/navbar.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1138">
+          <caret line="96" column="17" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -374,7 +451,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
+        <state relative-caret-position="867">
           <caret line="51" column="26" lean-forward="true" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
         </state>
       </provider>
@@ -386,6 +463,24 @@
           <folding>
             <element signature="e#0#72#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/views/home/home.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="93" column="46" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="46" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/views/home/home.component.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
         </state>
       </provider>
     </entry>
