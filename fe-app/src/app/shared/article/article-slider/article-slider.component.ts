@@ -18,14 +18,14 @@ export class ArticleSliderComponent implements OnInit {
   public articles: Article[];
   public authors: Author[];
 
-  //UI status
-  public articleLoading: boolean = true;
-  public authorLoading: boolean = true;
-  private alreadyLoaded: boolean = false;
+  // UI status
+  public articleLoading = true;
+  public authorLoading = true;
+  private alreadyLoaded = false;
 
   // Query params
-  private defaultArticleLimit: number = 4;
-  private defaultAuthorLimit: number = 5;
+  private defaultArticleLimit = 5;
+  private defaultAuthorLimit = 5;
 
   constructor(
     private articleService: ArticleService,
