@@ -427,6 +427,53 @@ export function getArticlesByFollowingCategories(event,context,callback){
     });
 }
 
+
+/**
+ * Get one articles from each categories
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export function getArticlesByCategories(event,context,callback){
+    context.callbackWaitsForEmptyEventLoop = false;
+
+    let header = parseHeader(event,callback);
+
+    getConnection()
+    .then((db)=>{
+        (async () =>{
+            const categoryCollection = db.collection('category');
+            const category  = await categoryCollection.find({},{name: 1}).toArray();
+            if(!category){
+                callback(null, failure("User undefined"));
+                return;
+            }
+            let categoryIds = [];
+            category.forEach((item)=>{
+                categoryIds.push(item._id);
+            })
+            const articlesColl = db.collection('note');
+            const articles = await articlesColl.aggregate([
+                {$match: {"category":{$in: categoryIds}}},
+                {$sort: { createdAt: -1 }},
+                {
+                    $group: {
+                        _id: "$category",
+                        note: { $first: "$$ROOT" }
+                    }
+                },
+                {$replaceRoot: { newRoot: "$note" }}
+            ],{allowDiskUse: true}).toArray();
+            callback(null, success(articles));
+        })()
+        .catch((err)=>{
+            callback(null, failure(err));
+        });
+    }).catch((err)=>{
+        callback(null, failure(err));
+    });
+}
+
 // PRIVATE
 
 function parseHeader(event,cb){
