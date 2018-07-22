@@ -113,7 +113,6 @@ export class ArticleSliderComponent implements OnInit {
     }).subscribe(data => {
       if (!this.originalArticles || this.originalArticles.length < 1) {
         const duplicatedData = data.slice();
-        console.log(duplicatedData);
         this.originalMainArticle = duplicatedData.shift();
         this.originalArticles = duplicatedData;
       }

@@ -46,7 +46,11 @@
                [(ngModel)]="articleSearchCriteria"
                type="text"
                placeholder="Buscar en esta categoria">
-        <i class="icon ion-md-search"></i>
+        <i *ngIf="!articleSearchCriteria"
+           class="icon ion-md-search"></i>
+        <i *ngIf="articleSearchCriteria"
+           (click)="cleanSearch()"
+           class="icon ion-md-close"></i>
       </div>
 
     </div>
@@ -56,7 +60,10 @@
     <div>
 
       <div class="padding-top-half" *ngIf="mainArticle">
-        <app-article-card-horizontal [article]="mainArticle" [isGiant]="true"></app-article-card-horizontal>
+        <app-article-card-horizontal
+            [article]="mainArticle"
+            [isGiant]="true"
+            [loadDetails]="true"></app-article-card-horizontal>
       </div>
 
       <div class="article-slider__cards">

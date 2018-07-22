@@ -132,8 +132,6 @@ export class ArticleService extends BaseService {
       currentSavedArticleIdList = [];
       currentSavedArticleIdList.push(article._id);
       await this.localStorage.setItem('savedArticleIdList', currentSavedArticleIdList).toPromise();
-      // currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
-      // console.log(currentSavedArticleIdList);
       return true;
     }
 
@@ -142,14 +140,10 @@ export class ArticleService extends BaseService {
       const articleIdIndex = currentSavedArticleIdList.indexOf(article._id);
       currentSavedArticleIdList.splice(articleIdIndex, 1);
       await this.localStorage.setItem('savedArticleIdList', currentSavedArticleIdList).toPromise();
-      // currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
-      // console.log(currentSavedArticleIdList);
       return false;
     } else {
       currentSavedArticleIdList.push(article._id);
       await this.localStorage.setItem('savedArticleIdList', currentSavedArticleIdList).toPromise();
-      // currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
-      // console.log(currentSavedArticleIdList);
       return true;
     }
 
