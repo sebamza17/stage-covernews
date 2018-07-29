@@ -1,0 +1,131 @@
+/* Author header info */
+@import "base/helpers";
+@import "base/backgrounds";
+@import "base/flex";
+@import "variables";
+@import "base/fonts";
+
+.author-header__wrapper {
+  // Author Header default
+  .author-header {
+    .fw;
+    .bg-color-white-darken-2;
+    .padding-vertical-quarter;
+    .padding-horizontal-half;
+    // Avatar
+    .author-header__avatar {
+      .image-ratio;
+      .image-ratio-1-1;
+      .bg-color-white-darken-4;
+      .border--full;
+      background-position: center center;
+      width: 60px;
+      flex-shrink: 0;
+    }
+    .author-header__info {
+      .padding-left-half;
+      .fw;
+      .fw--j-space-around;
+      flex-direction: column;
+
+      // Name
+      .author-header__name {
+        .font-weight-bold;
+        .font-size-s--2;
+      }
+
+      .author-header__icon-add {
+        display: none;
+      }
+
+      // Button
+      .author-header__button {
+        .font-weight-bold;
+        .margin-top-quarter;
+      }
+    }
+
+    .author-header__articles-info{
+      display: none;
+    }
+
+  }
+
+  // Variation => Author header full version
+  &.author-header--full {
+    padding-left: initial;
+    .width-full;
+
+    .author-header {
+      .padding-vertical-half;
+      .padding-left-none;
+      background-color: transparent;
+      .fw;
+      .fw--a-center;
+      .fw--j-space-between;
+      .width-full;
+
+      // Avatar
+      .author-header__avatar {
+        width: 80px;
+        border: none;
+      }
+
+      .author-header__info {
+
+        // Name
+        .author-header__name {
+          .font-color-white;
+          .font-weight-normal;
+          .font-size-l;
+        }
+
+        // Icon add
+        .author-header__icon--add {
+          display: inline-block;
+        }
+
+        // Button
+        .author-header__button {
+          .font-size-s--2;
+        }
+      }
+
+      // Articles info
+      .author-header__articles-info {
+        .fw;
+        .fw--a-center;
+        .padding-horizontal-half;
+        .font-color-white;
+        .font-size-s--2;
+        .border--left;
+        border-color: #717171;
+
+        i {
+          .font-size-l;
+        }
+        .author-header__articles-number {
+          .bg-color-brand-red;
+          width: 30px;
+          height: 30px;
+          .padding-eighth;
+          .margin-left-quarter;
+          border-radius: 50%;
+          .font-color-white;
+          .font-weight-bold;
+          .fw;
+          .fw--a-center;
+          .fw--j-center;
+        }
+        .author-header__articles-item {
+          .fw;
+          .fw--a-center;
+          .margin-left-half;
+        }
+      }
+
+    }
+
+  }
+
+}

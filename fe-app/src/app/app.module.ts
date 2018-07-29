@@ -33,6 +33,7 @@ import { ArticleContentComponent } from './shared/article/article-content/articl
 import { AuthorBaseInfoComponent } from './shared/author/author-base-info/author-base-info.component';
 import { LandingBannerComponent } from './components/landing-banner/landing-banner.component';
 import { DictiozFeaturesComponent } from './components/dictioz-features/dictioz-features.component';
+import { AuthorHeaderComponent } from './components/author-header/author-header.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { DictiozFeaturesComponent } from './components/dictioz-features/dictioz-
     ArticleComponent,
     SafeHtmlPipe,
     LandingBannerComponent,
-    DictiozFeaturesComponent
+    DictiozFeaturesComponent,
+    AuthorHeaderComponent
   ],
   imports: [
     FilterPipeModule,

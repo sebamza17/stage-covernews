@@ -31,6 +31,8 @@
       .dictioz-features-card {
         .padding-horizontal-full;
         .border--right;
+        .fw;
+        flex-direction: column;
         width: 100%/6;
 
         &:last-of-type {
@@ -39,7 +41,31 @@
 
         // Image
         .dictioz-feature-card__image {
+          height: 50px;
+          width: 50px;
+          background-image: url('../../../assets/images/star.svg');
+          background-size: contain;
+          background-position: center center;
 
+          &.feature-card--chat{
+            background-image: url('../../../assets/images/chat.svg');
+          }
+
+          &.feature-card--heart{
+            background-image: url('../../../assets/images/heart.svg');
+          }
+
+          &.feature-card--alarm{
+            background-image: url('../../../assets/images/alarm.svg');
+          }
+
+          &.feature-card--user{
+            background-image: url('../../../assets/images/user.svg');
+          }
+
+          &.feature-card--share{
+            background-image: url('../../../assets/images/share.svg');
+          }
         }
 
         // Text
@@ -69,7 +95,6 @@
         }
       }
     }
-
 
   }
 
