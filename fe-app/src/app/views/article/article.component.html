@@ -1,19 +1,16 @@
 <div class="article-view">
 
-  <div class="bg-color-white-darken-16">
+  <div class="bg-color-white-darken-1">
 
-    <div class="container fw fw--a-center">
-    <!-- Header -->
-    <app-author-header class=""></app-author-header>
-
-    <!--<div class="margin-left-full article-view__date">Publicado el {{article.date}} 19 de Agosto de 2018 20:30 PM</div>
-
-    <div class="fw fw&#45;&#45;a-center">
-      <i class="icon ios-md-logo-facebook padding-horizontal-quarter"></i>
-      <i class="icon ios-md-logo-twitter padding-horizontal-quarter"></i>
-      <i class="icon ios-md&#45;&#45;logo-whatsapp padding-horizontal-quarter"></i>
-    </div>-->
-
+    <div class="container fw fw--a-center fw--j-space-between">
+      <!-- Header -->
+      <app-author-header></app-author-header>
+      <!-- Date -->
+      <div style="flex-grow: 1" class="margin-left-full article-view__date fw ">
+        <div class=" fw--a-center fw--j-start">Publicado el 19 de Agosto de 2018 20:30 PM</div>
+      </div>
+      <!-- Social Media -->
+      <app-social-media></app-social-media>
     </div>
 
   </div>

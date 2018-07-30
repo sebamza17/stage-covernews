@@ -34,6 +34,7 @@ import { AuthorBaseInfoComponent } from './shared/author/author-base-info/author
 import { LandingBannerComponent } from './components/landing-banner/landing-banner.component';
 import { DictiozFeaturesComponent } from './components/dictioz-features/dictioz-features.component';
 import { AuthorHeaderComponent } from './components/author-header/author-header.component';
+import { SocialMediaComponent } from './components/social-media/social-media.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AuthorHeaderComponent } from './components/author-header/author-header.
     SafeHtmlPipe,
     LandingBannerComponent,
     DictiozFeaturesComponent,
-    AuthorHeaderComponent
+    AuthorHeaderComponent,
+    SocialMediaComponent
   ],
   imports: [
     FilterPipeModule,
