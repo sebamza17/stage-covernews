@@ -42,16 +42,37 @@
 
     <div class="article-view__right-container">
 
-      <h2 class="main-title main-title--gray padding-vertical-half">RELACIONADAS</h2>
+      <h2 class="main-title main-title--gray padding-horizontal-half padding-vertical-half">MAS DEL AUTOR</h2>
 
-      <!-- <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
-       <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
-       <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
-       <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>
-       <app-article-card-horizontal [article]="article[1]" class="width-full margin-vertical-quarter"></app-article-card-horizontal>-->
+      <app-author-header></app-author-header>
+
+      <div class="padding-horizontal-half padding-vertical-quarter">
+        <app-article-card-horizontal [article]="article[1]"
+                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+        <app-article-card-horizontal [article]="article[1]"
+                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+        <app-article-card-horizontal [article]="article[1]"
+                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+        <app-article-card-horizontal [article]="article[1]"
+                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+        <app-article-card-horizontal [article]="article[1]"
+                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
+      </div>
+
     </div>
 
   </div>
   <!-- end Body -->
 
+  <!-- Related Articles -->
+  <div class="bg-color-white-darken-1 margin-vertical-full">
+    <div class="container">
+      <h2 class="main-title main-title--gray padding-horizontal-half padding-vertical-half">ARTICULOS RELACIONADOS</h2>
+
+      <div class="article-container" *ngFor="let article of articles">
+        <app-article-card [article]="article"></app-article-card>
+      </div>
+    </div>
+  </div>
+  <!-- end Related Articles -->
 </div>
