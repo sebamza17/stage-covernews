@@ -1,0 +1,30 @@
+@import "base/helpers";
+@import "base/backgrounds";
+@import "base/flex";
+@import "variables";
+@import "base/fonts";
+
+.articles__filters {
+  display: flex;
+  align-items: center;
+  width: 50%;
+
+  i {
+    .font-size-xl;
+    .padding-left-quarter;
+  }
+
+  .articles__search {
+    position: relative;
+    flex-grow: 1;
+
+    i {
+      position: absolute;
+      right: 0;
+      top: 0;
+      .font-size-xl;
+    }
+
+  }
+
+}
