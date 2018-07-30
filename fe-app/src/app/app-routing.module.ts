@@ -4,12 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeUserComponent } from './components/home-user/home-user.component';
 import { HomeComponent } from './views/home/home.component';
 import { ArticleComponent } from "./views/article/article.component";
+import {AuthorProfileComponent} from "./views/author-profile/author-profile.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'article/:articleId', component: ArticleComponent},
   {path: 'profile', component: HomeUserComponent},
+  {path: 'author', component: AuthorProfileComponent},
   {path: '**', redirectTo: '/home'}
 ];
 

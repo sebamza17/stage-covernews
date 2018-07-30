@@ -1,55 +1,46 @@
 <!-- Header -->
-<div class=" author-header__wrapper">
+<div [ngClass]="{'author-header--full': isFull}" class="author-header__wrapper">
 
   <div class="author-header">
 
-    <div>
+    <!-- Author profile -->
+    <div class="author-header__profile">
 
-      <!--Author info-->
-      <div class="fw fw--a-center">
-        <!-- Avatar -->
-        <div class="author-header__avatar">
-          {{avatar}}
+      <!-- Avatar -->
+      <div class="author-header__avatar">
+        {{avatar}}
+      </div>
+      <!-- end Avatar -->
+
+      <div class=" author-header__info">
+
+        <div class="fw fw--a-center">
+          <!-- Name -->
+          <div class="author-header__name">
+            Nombre y Apellido
+
+            <!-- Icon expand description -->
+            <i (click)="toggleInfo()"
+               *ngIf="!isDescriptionShown"
+               class="author-header__icon-add icon ion-md-add-circle-outline "></i>
+            <i (click)="toggleInfo()"
+               *ngIf="isDescriptionShown"
+               class="author-header__icon-add icon ion-md-remove-circle-outline font-size-xxl font-color-white-darken-10 padding-left-quarter clickable"></i>
+          </div>
         </div>
-        <!-- end Avatar -->
 
-        <div class=" author-header__info">
-
-          <div class="fw fw--a-center">
-            <!-- Name -->
-            <div class="author-header__name">
-              Nombre y Apellido
-
-              <!-- Icon expand description -->
-              <i
-                class="author-header__icon-add icon ion-md-add-circle-outline font-size-xxl font-color-white-darken-10 padding-left-quarter clickable"></i>
-            </div>
-          </div>
-
-          <!-- Follow button -->
-          <div>
-            <div class="author-header__button button button--red button--uppercase button--xs">seguir</div>
-          </div>
-          <!-- end Follow button -->
-
-          <!-- Author Description -->
-          <div class="author-header__description">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
-            urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
-            viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
-            potenti.
-          </div>
-          <!-- end Author Description -->
-
+        <!-- Follow button -->
+        <div>
+          <div class="author-header__button button button--red button--uppercase button--xs">seguir</div>
         </div>
+        <!-- end Follow button -->
 
       </div>
 
-      <div class="border-right fw"></div>
-
     </div>
+    <!-- end Author profile -->
 
-    <!--Author articles-->
+    <!-- Author articles -->
     <div class="author-header__articles-info">
 
       <!-- Articles number -->
@@ -88,8 +79,18 @@
       <!-- end Categories -->
 
     </div>
+    <!-- end Author articles -->
 
   </div>
+
+  <!-- Author Description -->
+  <div class="author-header__description">
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec
+    urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet
+    viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse
+    potenti.
+  </div>
+  <!-- end Author Description -->
 
 </div>
 

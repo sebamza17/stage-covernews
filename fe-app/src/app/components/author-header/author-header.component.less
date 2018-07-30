@@ -14,6 +14,11 @@
     .padding-vertical-quarter;
     .padding-horizontal-half;
 
+    .author-header__profile {
+      .fw;
+      .fw--a-center;
+    }
+
     // Avatar
     .author-header__avatar {
       .image-ratio;
@@ -55,11 +60,11 @@
       display: none;
     }
 
-    // Description
-    .author-header__description {
-      display: none;
-    }
+  }
 
+  // Description
+  .author-header__description {
+    display: none;
   }
 
   // Variation => Author header full version
@@ -76,14 +81,19 @@
       .fw--j-space-between;
       .width-full;
 
+      .author-header__profile {
+        width: 50%;
+        .border--right;
+        flex-shrink: 0;
+      }
+
       // Avatar
       .author-header__avatar {
-        width: 130px;
+        width: 80px;
         border: none;
       }
 
       .author-header__info {
-        .border--right;
         // Name
         .author-header__name {
           .font-color-white;
@@ -93,6 +103,10 @@
           // Icon expand description
           i {
             display: inline-block;
+            .font-size-xxl ;
+            .font-color-white-darken-10;
+            .padding-left-quarter;
+            .clickable;
           }
         }
 
@@ -100,14 +114,6 @@
         .author-header__button {
           .font-size-s--2;
         }
-      }
-
-      // Description
-      .author-header__description {
-        .font-size-s--1;
-        .font-color-white;
-        .margin-top-half;
-        display: block;
       }
 
       // Articles info
@@ -118,7 +124,8 @@
         .font-color-white;
         .font-size-s--2;
         border-color: #717171;
-
+        flex-shrink: 0;
+        width: 50%;
         i {
           .font-size-l;
         }
@@ -142,6 +149,16 @@
         }
       }
 
+    }
+
+    // Description
+    .author-header__description {
+      .font-size-s--1;
+      .font-color-white;
+      width: 50%;
+      flex-shink: 0;
+      display: block;
+      .padding-bottom-half;
     }
 
   }

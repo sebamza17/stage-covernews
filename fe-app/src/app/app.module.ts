@@ -35,6 +35,7 @@ import { LandingBannerComponent } from './components/landing-banner/landing-bann
 import { DictiozFeaturesComponent } from './components/dictioz-features/dictioz-features.component';
 import { AuthorHeaderComponent } from './components/author-header/author-header.component';
 import { SocialMediaComponent } from './components/social-media/social-media.component';
+import { AuthorProfileComponent } from './views/author-profile/author-profile.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { SocialMediaComponent } from './components/social-media/social-media.com
     LandingBannerComponent,
     DictiozFeaturesComponent,
     AuthorHeaderComponent,
-    SocialMediaComponent
+    SocialMediaComponent,
+    AuthorProfileComponent
   ],
   imports: [
     FilterPipeModule,
