@@ -1,4 +1,5 @@
-<div class="author-card"
+<a class="author-card"
+     href="/author/{{author._id}}"
      (click)="follow(author._id)"
      [ngClass]="{'author-card--placeholder': !author._id}">
 
@@ -61,4 +62,4 @@
     </div>
     <!-- end Body -->
 
-</div>
+</a>

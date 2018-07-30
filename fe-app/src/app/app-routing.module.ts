@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'article/:articleId', component: ArticleComponent},
   {path: 'profile', component: HomeUserComponent},
-  {path: 'author', component: AuthorProfileComponent},
+  {path: 'author/:authorId', component: AuthorProfileComponent},
   {path: '**', redirectTo: '/home'}
 ];
 

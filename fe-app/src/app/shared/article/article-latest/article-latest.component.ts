@@ -27,7 +27,6 @@ export class ArticleLatestComponent implements OnInit {
 
     this.articleService.getLatestArticles()
       .subscribe(data => {
-        console.log(data);
         this.articles = data;
       });
   }
