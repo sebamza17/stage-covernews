@@ -23,6 +23,7 @@ export class ArticleService extends BaseService {
     getArticlesByCategory: '/article/category/{{categoryId}}',
     getLatestArticles: '/article/all',
     getArticlesByQuery: '/article/search/{{query}}',
+    getArticlesByAuthor: '/article/author/{{authorId}}',
   };
 
   constructor(
@@ -101,6 +102,15 @@ export class ArticleService extends BaseService {
     }
 
     return this.http.get<Article[]>(this.url(url));
+  }
+
+  /**
+   * Get articles by an authorId
+   * @param authorId
+   * @param options
+   */
+  public getArticlesByAuthor(authorId: string, options = null) {
+    return this.http.get<Article[]>(this.url(this.urls.getArticlesByAuthor.replace('{{authorId}}', authorId), options));
   }
 
   /**

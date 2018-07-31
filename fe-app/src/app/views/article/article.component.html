@@ -3,14 +3,21 @@
   <div class="bg-color-white-darken-1 margin-bottom-full">
 
     <div class="container fw fw--a-center fw--j-space-between">
+
       <!-- Header -->
-      <app-author-header></app-author-header>
+      <app-author-header [author]="author"></app-author-header>
+      <!-- end Header -->
+
       <!-- Date -->
       <div style="flex-grow: 1" class="margin-left-full article-view__date fw ">
         <div class=" fw--a-center fw--j-start">Publicado el 19 de Agosto de 2018 20:30 PM</div>
       </div>
+      <!-- end Date -->
+
       <!-- Social Media -->
       <app-social-media></app-social-media>
+      <!-- end Social Media -->
+
     </div>
 
   </div>
@@ -27,7 +34,7 @@
 
   <!-- Image card -->
   <div class="container">
-    <app-article-card-full [article]="article"></app-article-card-full>
+    <app-article-card-full [article]="article" [category]="category"></app-article-card-full>
   </div>
   <!-- end Image card -->
 
@@ -44,18 +51,11 @@
 
       <h2 class="main-title main-title--gray padding-horizontal-half padding-vertical-half">MAS DEL AUTOR</h2>
 
-      <app-author-header></app-author-header>
+      <app-author-header [author]="author"></app-author-header>
 
       <div class="padding-horizontal-half padding-vertical-quarter">
-        <app-article-card-horizontal [article]="article[1]"
-                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
-        <app-article-card-horizontal [article]="article[1]"
-                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
-        <app-article-card-horizontal [article]="article[1]"
-                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
-        <app-article-card-horizontal [article]="article[1]"
-                                     class="width-full margin-vertical-quarter"></app-article-card-horizontal>
-        <app-article-card-horizontal [article]="article[1]"
+        <app-article-card-horizontal *ngFor="let article of relatedArticles"
+                                     [article]="article"
                                      class="width-full margin-vertical-quarter"></app-article-card-horizontal>
       </div>
 
@@ -66,13 +66,19 @@
 
   <!-- Related Articles -->
   <div class="bg-color-white-darken-1 margin-vertical-full">
+
     <div class="container">
+
       <h2 class="main-title main-title--gray padding-horizontal-half padding-vertical-half">ARTICULOS RELACIONADOS</h2>
 
-      <div class="article-container" *ngFor="let article of articles">
-        <app-article-card [article]="article"></app-article-card>
+      <div class="row">
+        <div class="article-container" *ngFor="let article of relatedArticles">
+          <app-article-card [article]="article"></app-article-card>
+        </div>
       </div>
+
     </div>
   </div>
   <!-- end Related Articles -->
+
 </div>

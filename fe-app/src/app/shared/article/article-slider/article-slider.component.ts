@@ -15,7 +15,7 @@ export class ArticleSliderComponent implements OnInit {
   @Input() lazyLoad: boolean;
   @Input() loadFlag: boolean;
   @Input() category: Category;
-  public articles: Article[];
+  @Input() articles: Article[];
   public authors: Author[];
   public mainArticle: Article;
 
@@ -85,6 +85,15 @@ export class ArticleSliderComponent implements OnInit {
   }
 
   /**
+   * Cleans the current search
+   */
+  public cleanSearch() {
+    this.articleLoading = false;
+    this.mainArticle = this.originalMainArticle;
+    this.articles = this.originalArticles;
+  }
+
+  /**
    * Set articles as placeholders while view loads
    */
   private setPlaceholders() {
@@ -108,6 +117,11 @@ export class ArticleSliderComponent implements OnInit {
    * Also assigns a set of articles as the original ones so we have something to show when search is empty
    */
   private getArticles() {
+
+    if (!this.category) {
+      return;
+    }
+
     this.articleService.getArticlesByCategory(this.category._id, {
       limit: this.defaultArticleLimit,
     }).subscribe(data => {

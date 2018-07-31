@@ -1,10 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
 import BaseService from '../base-service/base.service';
 import { Author } from './Author';
-import { Category } from "../category/Category";
 import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -17,6 +15,7 @@ export class AuthorService extends BaseService {
   // Define all service URLs
   urls = {
     getAll: '/author/all',
+    getById: '/author/show/{{authorId}}',
     getByCategory: '/author/category/{{categoryId}}',
     follow: '/author/follow',
   };
@@ -33,6 +32,14 @@ export class AuthorService extends BaseService {
    */
   public getAllAuthors(): Observable<Author[]> {
     return this.http.get<Author[]>(this.url(this.urls.getAll));
+  }
+
+  /**
+   * Get author by id from API
+   * @param authorId
+   */
+  public getAuthorById(authorId): Observable<Author> {
+    return this.http.get<Author>(this.url(this.urls.getById.replace('{{authorId}}', authorId)));
   }
 
   /**

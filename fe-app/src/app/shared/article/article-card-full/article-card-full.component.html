@@ -13,7 +13,8 @@
       <div>
 
         <!-- Category -->
-        <div class="article-card-full__category">
+        <div *ngIf="category"
+             class="article-card-full__category">
           {{category.name}}
         </div>
         <!-- Category -->

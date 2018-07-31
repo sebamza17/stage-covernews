@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Article } from "../Article";
+import { Article } from '../Article';
+import { Category } from '../../category/Category';
 
 @Component({
   selector: 'app-article-card-full',
@@ -8,6 +9,7 @@ import { Article } from "../Article";
 })
 export class ArticleCardFullComponent implements OnInit {
   @Input() article: Article;
+  @Input() category: Category;
 
   constructor() {
   }

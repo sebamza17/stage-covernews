@@ -3,8 +3,10 @@
   <div class="bg-color-white-darken-16 margin-bottom-full">
 
     <div class="container">
+
       <!-- Author Header Profile -->
-      <app-author-header [isFull]="true"></app-author-header>
+      <app-author-header [isFull]="true" [author]="author"></app-author-header>
+      <!-- end Author Header Profile -->
 
     </div>
 
@@ -12,8 +14,10 @@
 
   <!-- Title -->
   <div class="container">
+
     <!-- Title wrapper -->
     <div class="fw fw--a-center fw--j-space-between width-full">
+
       <!--Title-->
       <h2 class="main-title main-title--gray width-half">
         ULTIMAS NOTAS
@@ -21,6 +25,7 @@
 
       <!--Filters-->
       <div class="articles__filters">
+
         <!-- Most Read -->
         <div class="padding-horizontal-quarter">
           <span>Mas Leidas</span>
@@ -50,13 +55,13 @@
 
     <!-- Articles -->
     <div class="margin-top-full">
-      <app-article-card-horizontal [isGiant]="true"></app-article-card-horizontal>
+      <app-article-card-horizontal [isGiant]="true" [article]="mainArticle"></app-article-card-horizontal>
     </div>
 
-    <app-article-slider [lazyLoad]="true"
-                        [loadFlag]="selectedCategory._id === category._id">
+    <!--<app-article-slider [lazyLoad]="true"-->
+    <!--[loadFlag]="selectedCategory._id === category._id">-->
 
-    </app-article-slider>
+    <!--</app-article-slider>-->
     <!-- end Articles -->
 
   </div>
@@ -64,16 +69,15 @@
   <!-- Author slider -->
   <div class="bg-color-white-darken-1">
     <div class="container">
-      <app-author-slider [authors]="authors"></app-author-slider>
+      <!--<app-author-slider [authors]="authors"></app-author-slider>-->
     </div>
   </div>
   <!-- end Author slider -->
 
   <div class="container">
-    <app-article-slider [lazyLoad]="true"
-                        [loadFlag]="selectedCategory._id === category._id">
-
-    </app-article-slider>
+    <!--<app-article-slider [lazyLoad]="true"-->
+    <!--[loadFlag]="selectedCategory._id === category._id">-->
+    <!--</app-article-slider>-->
   </div>
 
 </div>

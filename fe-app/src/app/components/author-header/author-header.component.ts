@@ -1,4 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Author } from '../../shared/author/Author';
 
 @Component({
   selector: 'app-author-header',
@@ -6,18 +7,19 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./author-header.component.less']
 })
 export class AuthorHeaderComponent implements OnInit {
-  @Input() isFull: boolean = false;
+  @Input() isFull = false;
+  @Input() author: Author;
   public isDescriptionShown = false;
 
   constructor() {
   }
 
   ngOnInit() {
-    $(".author-header__description").hide();
+    $('.author-header__description').hide();
   }
 
   public toggleInfo() {
-    $(".author-header__description").toggle(400);
+    $('.author-header__description').toggle(400);
     this.isDescriptionShown = !this.isDescriptionShown;
   }
 
