@@ -1,20 +1,16 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Article } from '../Article';
-import { ArticleService } from '../article.service';
+import { ArticleBaseComponent } from '../article-base/article-base.component';
 
 @Component({
   selector: 'app-article-card-horizontal',
   templateUrl: './article-card-horizontal.component.html',
   styleUrls: ['./article-card-horizontal.component.less']
 })
-export class ArticleCardHorizontalComponent implements OnInit {
+export class ArticleCardHorizontalComponent extends ArticleBaseComponent implements OnInit {
   @Input() article: Article;
   @Input() isGiant: boolean;
   @Input() loadDetails: boolean;
-
-  constructor(
-    private articleService: ArticleService) {
-  }
 
   ngOnInit() {
   }

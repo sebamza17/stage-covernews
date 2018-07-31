@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ae7c3a2-20e9-4dee-8da9-cb50ad869456" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/author-header/author-header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/author-header/author-header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/author-header/author-header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/author-header/author-header.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/article/article.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/article/article.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/author/author-card/author-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/author/author-card/author-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/author/author.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/author/author.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/views/article/article.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/views/article/article.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/views/article/article.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/views/article/article.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,32 +43,32 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="13" />
+          <entry key="html" value="16" />
           <entry key="json" value="1" />
           <entry key="less" value="1" />
-          <entry key="ts" value="25" />
+          <entry key="ts" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="13" />
+          <entry key="HTML" value="16" />
           <entry key="JSON" value="1" />
           <entry key="Less" value="1" />
-          <entry key="TypeScript" value="25" />
+          <entry key="TypeScript" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="289" />
           <entry key="less" value="10" />
-          <entry key="ts" value="1787" />
+          <entry key="ts" value="1836" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="289" />
           <entry key="Less" value="10" />
-          <entry key="TypeScript" value="1787" />
+          <entry key="TypeScript" value="1836" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.rename.constructor" />
@@ -102,6 +92,27 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#72#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="765">
+              <caret line="45" column="17" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -111,7 +122,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/views/article/article.component.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="636">
@@ -135,11 +146,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+            <state relative-caret-position="204">
+              <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -148,7 +168,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>asd</find>
       <find>notas guardad</find>
       <find>deta</find>
       <find>console</find>
@@ -172,12 +191,13 @@
       <find>background-image</find>
       <find>card-full</find>
       <find>article-card</find>
-      <find>&quot;</find>
       <find>rel</find>
       <find>related</find>
       <find>slider</find>
       <find>reate</find>
       <find>bootstrap</find>
+      <find>read</find>
+      <find>&quot;</find>
     </findStrings>
     <replaceStrings>
       <replace>authorId</replace>
@@ -219,7 +239,6 @@
         <option value="$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.less" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.html" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-content/article-content.component.less" />
-        <option value="$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.html" />
         <option value="$PROJECT_DIR$/src/tslint.json" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-latest/article-latest.component.ts" />
@@ -236,9 +255,11 @@
         <option value="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.html" />
         <option value="$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.html" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.ts" />
         <option value="$PROJECT_DIR$/src/app/views/article/article.component.html" />
         <option value="$PROJECT_DIR$/src/app/views/article/article.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts" />
       </list>
     </option>
   </component>
@@ -345,7 +366,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="index&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/index.html&#10;home&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;article-slider&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.ts&#10;article.component.ts&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/article/article.component.ts&#10;article.com&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/article/article.component.html&#10;article.compon&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/article/article.component.ts&#10;author-slider&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author-slider/author-slider.component.ts&#10;home.&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;article.ser&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;base&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/base-service/base.service.ts&#10;article.serv&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;author-profile&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/author-profile/author-profile.component.ts&#10;author-profile.&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/author-profile/author-profile.component.html&#10;article-s&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.ts&#10;authorService&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author.service.ts&#10;AuthorCardCom&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author-card/author-card.component.ts&#10;views/article&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/article/article.component.ts&#10;routes&#9;null&#9;null&#10;author-card.less&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author-card/author-card.component.less&#10;article-card&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html&#10;author-card&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author-card/author-card.component.ts&#10;slider&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.ts&#10;views/&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views&#10;article-sli&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.ts&#10;home.com&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home.c&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home/.c&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home.con&#9;null&#9;null&#10;articleslider&#9;null&#9;null&#10;navbar&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/components/navbar/navbar.component.less&#10;vari&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/styles/variables.less&#10;variables&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/styles/variables.less&#10;side&#9;null&#9;null&#10;arti&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.html&#10;latest&#9;null&#9;null&#10;app.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.component.html&#10;articl&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;category.ser&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/category/category.service.ts&#10;category.seri&#9;null&#9;null&#10;navba&#9;null&#9;null&#10;home.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.less&#10;sidemenu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/side-menu/side-menu.component.html&#10;material&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/material.module.ts&#10;article-hori&#9;null&#9;null&#10;app&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;app.modu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;article-card.com.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.less&#10;article-card.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html" />
+    <property name="SearchEverywhereHistoryKey" value="article-card-full&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card-full/article-card-full.component.ts&#10;article-card.component.ts&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.ts&#10;article-card&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts&#10;index&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/index.html&#10;home&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;article-slider&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.ts&#10;article.component.ts&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/article/article.component.ts&#10;article.com&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/article/article.component.html&#10;article.compon&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/article/article.component.ts&#10;author-slider&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author-slider/author-slider.component.ts&#10;home.&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;article.ser&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;base&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/base-service/base.service.ts&#10;article.serv&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;author-profile&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/author-profile/author-profile.component.ts&#10;author-profile.&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/author-profile/author-profile.component.html&#10;article-s&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.ts&#10;authorService&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author.service.ts&#10;AuthorCardCom&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author-card/author-card.component.ts&#10;views/article&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/views/article/article.component.ts&#10;routes&#9;null&#9;null&#10;author-card.less&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author-card/author-card.component.less&#10;author-card&#9;FILE&#9;file://C:/xampp/htdocs/covernews/fe-app/src/app/shared/author/author-card/author-card.component.ts&#10;slider&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.ts&#10;views/&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views&#10;article-sli&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.ts&#10;home.com&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home.c&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home/.c&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.html&#10;home.con&#9;null&#9;null&#10;articleslider&#9;null&#9;null&#10;navbar&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/components/navbar/navbar.component.less&#10;vari&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/styles/variables.less&#10;variables&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/styles/variables.less&#10;side&#9;null&#9;null&#10;arti&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-slider/article-slider.component.html&#10;latest&#9;null&#9;null&#10;app.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.component.html&#10;articl&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article.service.ts&#10;category.ser&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/category/category.service.ts&#10;category.seri&#9;null&#9;null&#10;navba&#9;null&#9;null&#10;home.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/views/home/home.component.less&#10;sidemenu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/side-menu/side-menu.component.html&#10;material&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/material.module.ts&#10;article-hori&#9;null&#9;null&#10;app&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;app.modu&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/app.module.ts&#10;article-card.com.less&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.less&#10;article-card.ht&#9;FILE&#9;file://F:/xampp/htdocs/covernews/fe-app/src/app/shared/article/article-card/article-card.component.html" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/node_modules/tslint" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -380,12 +401,12 @@
       <workItem from="1532178016454" duration="1054000" />
       <workItem from="1532179210774" duration="19106000" />
       <workItem from="1532971122321" duration="1414000" />
-      <workItem from="1533004000715" duration="3862000" />
+      <workItem from="1533004000715" duration="4263000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25436000" />
+    <option name="totallyTimeSpent" value="25837000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -421,9 +442,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-base/article-base.component.less">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1209">
@@ -459,13 +477,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -580,13 +591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-content/article-content.component.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -601,13 +605,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-base/article-base.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -693,30 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="26" column="3" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
@@ -731,16 +704,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -748,20 +711,6 @@
           <folding>
             <element signature="e#0#72#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/views/article/article.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="44" column="55" lean-forward="true" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -781,6 +730,88 @@
           <caret line="77" column="49" selection-start-line="77" selection-start-column="49" selection-end-line="77" selection-end-column="49" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="45" column="17" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/views/article/article.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="44" column="55" lean-forward="true" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-base/article-base.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="47" lean-forward="true" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#72#0" expanded="true" />
           </folding>
         </state>
       </provider>
