@@ -87,9 +87,9 @@ export function search(event,context,callback){
     }
 
     let criteria = decodeURI(event.pathParameters.criteria);
-
+    console.log("Criteria "+criteria);
     let queryString = parseQueryString(event);
-    
+    console.log(queryString);
     let limit = 5;
     let skip = 0;
 
@@ -121,6 +121,48 @@ export function search(event,context,callback){
             }
             callback(null, success(doc));
         });
+    }).catch((err)=>{
+        callback(null, failure(err));
+    });
+}
+
+/**
+ * Search author by category
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export function searchByCategory(event,context,callback){
+    context.callbackWaitsForEmptyEventLoop = false;
+
+    if(!event.pathParameters.categoryId){
+        callback(null, failure("Category undefined"));
+        return;
+    }
+
+    let category = decodeURI(event.pathParameters.categoryId);
+    let queryString = parseQueryString(event);
+    let limit = 15;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
+
+    getConnection()
+    .then((db)=>{
+        const authors = db.collection('journalist');
+        authors.find({ 'categories.categoryId': category },{limit: limit, skip: skip}).project({ name: 1, __v: 1, _id: 0 }).toArray((err,doc) =>{
+            if(err){
+                callback(null, failure(err));
+                return;
+            }
+            callback(null, success(doc));
+        })
     }).catch((err)=>{
         callback(null, failure(err));
     });
