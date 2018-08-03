@@ -87,9 +87,8 @@ export function search(event,context,callback){
     }
 
     let criteria = decodeURI(event.pathParameters.criteria);
-    console.log("Criteria "+criteria);
     let queryString = parseQueryString(event);
-    console.log(queryString);
+    
     let limit = 5;
     let skip = 0;
 
