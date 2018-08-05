@@ -1,84 +1,107 @@
-<div class="dictioz-features__wrapper">
+<div class="dictioz-features__wrapper"
+     [ngClass]="{'dictioz-features__wrapper--is-open': isOpen}">
 
+  <!-- Header -->
   <div class="dictioz-features__header">
 
     <div class="container fw fw--a-center fw--j-space-between">
-      <div class="font-color-white font-size-l">Registrate y accede a todos los beneficios que te brinda DICTIOZ News!
-      </div>
 
-      <i class="icon ion-md-close-circle-outline font-color-white font-size-xxl"></i>
+      <!-- Title -->
+      <div class="font-color-white font-size-l">
+        Registrate y accede a todos los beneficios que te brinda DICTIOZ News!
+      </div>
+      <!-- end Title -->
+
+      <!-- Close button -->
+      <a class="padding-quarter clickable"
+         (click)="toggle()">
+        <i class="icon ion-md-close-circle-outline font-color-white font-size-xxl"></i>
+      </a>
+      <!-- end Close button -->
+
     </div>
 
   </div>
+  <!-- end Header -->
 
+  <!-- Features -->
   <div class="dictioz-features__body">
 
     <div class="container">
 
-      <!--Cards container-->
-      <div class="dictioz-features__cards fw">
-        <!--Each card-->
+      <!-- Cards container -->
+      <div class="dictioz-features__cards">
+
+        <!-- Feature card -->
         <div class="dictioz-features-card">
 
-          <div class="fw fw--a-center fw--j-center margin-bottom-full">
-            <div class="dictioz-feature-card__image">
-            </div>
-          </div>
+          <div class="dictioz-feature-card__image"></div>
 
           <div class="dictioz-feature-card__text">
             Organizamos tus notas por categorias favoritas
           </div>
         </div>
+        <!-- end Feature card -->
 
+        <!-- Feature card -->
         <div class="dictioz-features-card">
-          <div class="fw fw--a-center fw--j-center margin-bottom-full">
-            <div class="dictioz-feature-card__image feature-card--chat"></div>
-          </div>
+
+          <div class="dictioz-feature-card__image feature-card--chat"></div>
 
           <div class="dictioz-feature-card__text">
             Guarda tus notas y leelas mas tarde
           </div>
         </div>
+        <!-- end Feature card -->
 
+        <!-- Feature card -->
         <div class="dictioz-features-card">
-          <div class="fw fw--a-center fw--j-center margin-bottom-full">
-            <div class="dictioz-feature-card__image feature-card--heart"></div>
-          </div>
+
+          <div class="dictioz-feature-card__image feature-card--heart"></div>
+
           <div class="dictioz-feature-card__text">
             Segui a tus autores favoritos
           </div>
         </div>
+        <!-- end Feature card -->
 
+        <!-- Feature card -->
         <div class="dictioz-features-card">
-          <div class="fw fw--a-center fw--j-center margin-bottom-full">
-            <div class="dictioz-feature-card__image feature-card--alarm"></div>
-          </div>
+
+          <div class="dictioz-feature-card__image feature-card--alarm"></div>
+
           <div class="dictioz-feature-card__text">
             Se el primero en recibir las novedades de tus autores y temas preferidos
           </div>
         </div>
+        <!-- end Feature card -->
 
+        <!-- Feature card -->
         <div class="dictioz-features-card">
-          <div class="fw fw--a-center fw--j-center margin-bottom-full">
-            <div class="dictioz-feature-card__image feature-card--user"></div>
-          </div>
+
+          <div class="dictioz-feature-card__image feature-card--user"></div>
+
           <div class="dictioz-feature-card__text">
             Personaliza tu perfil y filtra tu contenido como quieras
           </div>
         </div>
+        <!-- end Feature card -->
 
+        <!-- Feature card -->
         <div class="dictioz-features-card">
-          <div class="fw fw--a-center fw--j-center margin-bottom-full">
-            <div class="dictioz-feature-card__image feature-card--share"></div>
-          </div>
+
+          <div class="dictioz-feature-card__image feature-card--share"></div>
+
           <div class="dictioz-feature-card__text">
             Comparti contenido en todo momento
           </div>
         </div>
+        <!-- end Feature card -->
 
       </div>
+      <!-- end Cards container -->
 
-      <!--Button signup-->
+      <!-- Options -->
       <div class="dictioz-features-button__wrapper">
 
         <button class="button button--red button--uppercase margin-right-half">
@@ -90,9 +113,11 @@
         </div>
 
       </div>
+      <!-- end Options -->
 
     </div>
 
   </div>
+  <!-- end Features -->
 
 </div>

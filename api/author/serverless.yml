@@ -69,6 +69,23 @@ functions:
                 - Token
               allowCredentials: false
             authorizer: false
+  authorsByCategory:
+    handler: author.searchByCategory
+    stageVariables: 
+        - stage : ${opt:stage, 'test'}
+    events:
+        - http:
+            path: author/category/{categoryId}
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+            authorizer: false
   updateAuthor:
       handler: author-admin.update
       stageVariables: 

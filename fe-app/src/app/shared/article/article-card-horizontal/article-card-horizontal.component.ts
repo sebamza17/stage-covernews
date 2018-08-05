@@ -22,6 +22,10 @@ export class ArticleCardHorizontalComponent extends ArticleBaseComponent impleme
     }
   }
 
+  /**
+   * Get article details
+   * @returns {Promise<void>}
+   */
   private async getDetails() {
     this.article.content = '██████ ███ █████████ ██████ ████████████ ███ ██ ██████ ██ ██████ ████ ████████ ██ ██'
     const articleDetails = await this.articleService.getArticleFullById(this.article._id);
