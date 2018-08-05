@@ -1,8 +1,12 @@
 <div class="home">
 
-  <app-dictioz-features></app-dictioz-features>
-
+  <!-- Landing banner -->
   <app-landing-banner></app-landing-banner>
+  <!-- end Landing banner -->
+
+  <!-- Feature list for not logged users -->
+  <app-dictioz-features [isLoggedIn]="false"></app-dictioz-features>
+  <!-- end Feature list for not logged users -->
 
   <!-- Latest news -->
   <div class="latest-news">

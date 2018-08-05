@@ -1,15 +1,30 @@
 /*Features modal*/
+@import "variables";
 @import "base/helpers";
 @import "base/backgrounds";
 @import "base/flex";
-@import "variables";
 @import "base/fonts";
 
 .dictioz-features__wrapper {
   .width-full;
   .bg-color-white;
-  .dictioz-features {
+  .z-depth-2;
+  z-index: @navbar-z-index - 1;
+  position: fixed;
+  top: @navbar-height-medium-up;
+  left: 0;
+  transition: all 400ms ease;
+  transform: translateY(-100%);
+  opacity: 0;
 
+  @media (max-width: @breakpoint-s) {
+    top: @navbar-height-small-down;
+  }
+
+  // Status => Is open
+  &.dictioz-features__wrapper--is-open {
+    transform: translateY(0);
+    opacity: 1;
   }
 
   //Header
@@ -20,50 +35,71 @@
 
   //Body
   .dictioz-features__body {
+
     // Card
     .dictioz-features__cards {
       .bg-color-white;
       .padding-vertical-full;
       .fw;
 
+      @media (max-width: @breakpoint-l) {
+        flex-wrap: wrap;
+        .margin-bottom-half;
+      }
+
       // Each feature card
       .dictioz-features-card {
         .padding-horizontal-full;
         .border--right;
-        .fw;
+        display: flex;
+        align-items: center;
         flex-direction: column;
-        width: 100%/6;
+        width: 100% / 6;
+
+        @media (max-width: @breakpoint-l) {
+          min-width: 100% / 3;
+          flex-shrink: 0;
+        }
 
         &:last-of-type {
           border-right: none;
+          @media (max-width: @breakpoint-l) {
+            .border--right;
+          }
         }
 
         // Image
         .dictioz-feature-card__image {
+          .margin-top-half;
           height: 50px;
           width: 50px;
-          background-image: url('../../../assets/images/star.svg');
+          background-image: url('../../../assets/images/icon-star.svg');
           background-size: contain;
           background-position: center center;
+          background-repeat: no-repeat;
 
-          &.feature-card--chat{
-            background-image: url('../../../assets/images/chat.svg');
+          @media (max-width: @breakpoint-l) {
+            .margin-bottom-half;
           }
 
-          &.feature-card--heart{
-            background-image: url('../../../assets/images/heart.svg');
+          &.feature-card--chat {
+            background-image: url('../../../assets/images/icon-chat.svg');
           }
 
-          &.feature-card--alarm{
-            background-image: url('../../../assets/images/alarm.svg');
+          &.feature-card--heart {
+            background-image: url('../../../assets/images/icon-heart.svg');
           }
 
-          &.feature-card--user{
-            background-image: url('../../../assets/images/user.svg');
+          &.feature-card--alarm {
+            background-image: url('../../../assets/images/icon-alarm.svg');
           }
 
-          &.feature-card--share{
-            background-image: url('../../../assets/images/share.svg');
+          &.feature-card--user {
+            background-image: url('../../../assets/images/icon-user.svg');
+          }
+
+          &.feature-card--share {
+            background-image: url('../../../assets/images/icon-share-2.svg');
           }
         }
 
