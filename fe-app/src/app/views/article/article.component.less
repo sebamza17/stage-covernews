@@ -4,7 +4,7 @@
 
 .article-view {
 
-  .article-view__date{
+  .article-view__date {
     .font-size-s--2;
     .font-weight-light;
     .font-color-white-darken-10;
@@ -16,20 +16,54 @@
     .font-weight-bold;
   }
 
-  // Containers
+  // Main container
+  .article-view__main-container {
+    .padding-top-full;
+    display: flex;
+    @media (max-width: @breakpoint-s) {
+      display: block;
+    }
+  }
+
+  // Left container
   .article-view__left-container {
     width: 70%;
     flex-shrink: 0;
     flex-grow: 0;
     .padding-right-full;
+
+    @media (max-width: @breakpoint-s) {
+      width: 100%;
+    }
   }
+
+  // Right container
   .article-view__right-container {
-    display: flex;
-    flex-direction: column;
+    .bg-color-white-darken-1;
+    .padding-half;
     width: 30%;
     flex-shrink: 0;
     flex-grow: 0;
-    .bg-color-white-darken-1;
+
+    @media (max-width: @breakpoint-s) {
+      width: 100%;
+    }
+
+    // More articles list
+    .more-articles {
+      position: sticky;
+      top: @navbar-height-medium-up;
+
+      @media (max-width: @breakpoint-s) {
+        top: @navbar-height-small-down;
+      }
+    }
+
+    // Each article container
+    .article-container {
+      .margin-bottom-half;
+    }
+
   }
 
   // Content

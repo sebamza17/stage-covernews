@@ -67,6 +67,7 @@ export class ArticleComponent implements OnInit {
       console.log(this.article);
       this.loading = false;
       this.getAuthor();
+      this.category.name = this.article.categoryObject.name;
     });
   }
 
