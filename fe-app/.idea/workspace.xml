@@ -95,8 +95,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
+            <state relative-caret-position="493">
+              <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
               <folding>
                 <element signature="e#0#72#0" expanded="true" />
               </folding>
@@ -262,13 +262,8 @@
         <option value="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.html" />
         <option value="$PROJECT_DIR$/src/app/views/author-profile/author-profile.component.html" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/views/article/article.component.html" />
-        <option value="$PROJECT_DIR$/src/app/views/article/article.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/shared/article/article-card-full/article-card-full.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/shared/article/article-slider/article-slider.component.html" />
         <option value="$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.html" />
-        <option value="$PROJECT_DIR$/src/app/shared/article/article-card/article-card.component.html" />
       </list>
     </option>
   </component>
@@ -287,9 +282,6 @@
     <packageJsonPaths>
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
-  </component>
-  <component name="PhpServers">
-    <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-13" />
@@ -408,14 +400,12 @@
       <option name="presentableId" value="Default" />
       <updated>1532178014057</updated>
       <workItem from="1532178016454" duration="1054000" />
-      <workItem from="1532179210774" duration="19106000" />
-      <workItem from="1532971122321" duration="1414000" />
-      <workItem from="1533004000715" duration="5014000" />
+      <workItem from="1532179210774" duration="20086000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26588000" />
+    <option name="totallyTimeSpent" value="21140000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -796,8 +786,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/article/article-card-horizontal/article-card-horizontal.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
+        <state relative-caret-position="493">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
           <folding>
             <element signature="e#0#72#0" expanded="true" />
           </folding>

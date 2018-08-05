@@ -46,3 +46,5 @@ fe-app/testem.log
 Thumbs.db
 fe-app/.DS_Store
 fe-app/Thumbs.db
+
+fe-app/\.idea/
