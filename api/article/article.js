@@ -379,7 +379,6 @@ export function getArticlesByFollowingAuthors(event,context,callback){
     });
 }
 
-
 /**
  * Get articles for following categories
  * @param {*} event 
@@ -427,7 +426,6 @@ export function getArticlesByFollowingCategories(event,context,callback){
     });
 }
 
-
 /**
  * Get one articles from each categories
  * @param {*} event 
@@ -443,18 +441,13 @@ export function getArticlesByCategories(event,context,callback){
     .then((db)=>{
         (async () =>{
             const categoryCollection = db.collection('category');
-            const category  = await categoryCollection.find({},{name: 1}).toArray();
-            if(!category){
-                callback(null, failure("User undefined"));
-                return;
-            }
-            let categoryIds = [];
-            category.forEach((item)=>{
-                categoryIds.push(item._id);
-            })
+            
+            const category  = await categoryCollection.distinct("_id");   
+
             const articlesColl = db.collection('note');
+            
             const articles = await articlesColl.aggregate([
-                {$match: {"category":{$in: categoryIds}}},
+                {$match: {"category":{$in: category}}},
                 {$sort: { createdAt: -1 }},
                 {
                     $group: {
@@ -464,6 +457,7 @@ export function getArticlesByCategories(event,context,callback){
                 },
                 {$replaceRoot: { newRoot: "$note" }}
             ],{allowDiskUse: true}).toArray();
+            
             callback(null, success(articles));
         })()
         .catch((err)=>{
