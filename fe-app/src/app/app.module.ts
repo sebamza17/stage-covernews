@@ -24,11 +24,11 @@ import { ArticleLatestComponent } from './shared/article/article-latest/article-
 import { ArticleCardHorizontalComponent } from './shared/article/article-card-horizontal/article-card-horizontal.component';
 import { SideMenuComponent } from './shared/side-menu/side-menu.component';
 import { ArticleBaseComponent } from './shared/article/article-base/article-base.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { ArticleComponent } from './views/article/article.component';
 import { ArticleCardFullComponent } from './shared/article/article-card-full/article-card-full.component';
-import { SafeHtmlPipe } from '../app/pipes/safe-html.pipe';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ArticleContentComponent } from './shared/article/article-content/article-content.component';
 import { AuthorBaseInfoComponent } from './shared/author/author-base-info/author-base-info.component';
 import { LandingBannerComponent } from './components/landing-banner/landing-banner.component';
@@ -36,6 +36,7 @@ import { DictiozFeaturesComponent } from './components/dictioz-features/dictioz-
 import { AuthorHeaderComponent } from './components/author-header/author-header.component';
 import { SocialMediaComponent } from './components/social-media/social-media.component';
 import { AuthorProfileComponent } from './views/author-profile/author-profile.component';
+import { CheckoutComponent } from './views/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -60,11 +61,13 @@ import { AuthorProfileComponent } from './views/author-profile/author-profile.co
     DictiozFeaturesComponent,
     AuthorHeaderComponent,
     SocialMediaComponent,
-    AuthorProfileComponent
+    AuthorProfileComponent,
+    CheckoutComponent,
   ],
   imports: [
     FilterPipeModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,

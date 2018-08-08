@@ -1,0 +1,145 @@
+<div class="container payment-box">
+  <div class="payment-box-body">
+    <div class="row wizard-row checkout">
+      <div class="col-md-12 fuelux">
+        <div class="process" style="display:none"><span>Procesando, por favor espere...</span></div>
+        <div class="block-wizard">
+          <div id="wizard1" class="wizard wizard-ux" style="display:none">
+            <ul class="steps">
+              <li data-target="#step1" class="active">Paso 1<span class="chevron"></span></li>
+              <li data-target="#step2">Paso 2<span class="chevron"></span></li>
+            </ul>
+          </div>
+          <div class="step-content">
+            <form id="pay" class="form-horizontal group-border-dashed" [formGroup]="checkoutForm" (ngSubmit)="submitForm(checkoutForm.value)" novalidate="">
+              <div class="step-pane active" id="step1">
+                <div class="form-group no-padding">
+                  <div class="col-sm-9 col-sm-offset-1">
+                    <h4 class="hthin">Ingresá tus datos</h4>
+                    <div class="alert alert-error alert-danger" style="display:none"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Nombre Completo</label>
+                  <div class="col-sm-6">
+                    <input type="text" formControlName="payer_name" id="cardholderName" data-checkout="cardholderName" value="{{payment.payer_name}}" class="form-control" placeholder="Nombre">
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Email</label>
+                  <div class="col-sm-6">
+                    <input type="text" formControlName="payer_email" id="email" value="{{payment.payer_email}}" class="form-control" placeholder="Email">
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Documento</label>
+                  <div class="col-sm-3">
+                    <select formControlName="payer_identification_type" id="docType" data-checkout="docType" class="form-control" value="{{payment.payer_identification_number}}">
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <input formControlName="payer_identification_number" type="text" id="docNumber" data-checkout="docNumber" placeholder="Documento" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-9 col-sm-offset-1">
+                    <h4 class="hthin">Elige el medio de pago</h4>
+                    <div class="alert alert-error alert-danger" style="display:none"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Importe</label>
+                  <div class="col-sm-6">
+                    <input type="text" formControlName="amount" id="amount" value="{{payment.amount}}" class="form-control" placeholder="Importe">
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Medio de pago</label>
+                  <div class="col-sm-3">
+                    <select formControlName="payment_method_id" id="paymentMethodId" name="paymentMethodId" class="form-control">
+                      <option value="">Seleccione...</option>
+                    </select>
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Número de tarjeta</label>
+                  <div class="col-sm-6">
+                    <input type="text" formControlName="card_number" id="cardNumber" data-checkout="cardNumber" placeholder="Número" class="form-control" value="{{payment.card_number}}">
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Fecha de vencimiento</label>
+                  <div class="col-sm-3">
+                    <select id="cardExpirationMonth" formControlName="card_expiration_month" data-checkout="cardExpirationMonth" class="form-control">
+                      <option value="">Mes</option>
+                      <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <select id="cardExpirationYear" formControlName="card_expiration_year" data-checkout="cardExpirationYear" class="form-control">
+                      <option value="">Año</option>
+                      <option *ngFor="let key of objectKeys(years)" [value]="key">{{years[key]}}</option>
+                    </select>
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Código de seguridad</label>
+                  <div class="col-sm-3">
+                    <input type="text" formControlName="card_security_code" id="securityCode" value="{{payment.card_security_code}}" data-checkout="securityCode" placeholder="Código" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group issuer-field">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Banco</label>
+                  <div class="col-sm-6">
+                    <select formControlName="issuer_id" id="issuer" data-checkout="cardIssuerId" class="form-control">
+                      <option value="">Seleccione...</option>
+                    </select>
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Cuotas</label>
+                  <div class="col-sm-6">
+                    <select formControlName="installments" id="installments" data-checkout="cardInstallmentId" class="form-control">
+                      <option value="">Seleccione...</option>
+                    </select>
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-sm-3 col-sm-offset-1 control-label">Total a pagar</label>
+                  <div class="col-sm-3">
+                    <p class="totalWrapper">$ <span class="total">{{payment.amount}}</span></p>
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <div class="col-sm-offset-4 col-sm-8">
+                    <button data-wizard="#wizard1" type="submit" class="btn btn-primary wizard-confirm">
+                      Confirmar pago
+                    </button>
+                  </div>
+                </div>  
+              </div>
+              <div class="step-pane confirmation hidden" id="step2">
+                <div class="form-group no-padding">
+                  <div class="col-sm-10 col-sm-offset-1">
+                    <h4 class="hthin">Confirmación del pago</h4>
+                    <div class="alert alert-success">
+                      El pago fue realizado con éxito.
+                    </div>
+                    <div class="alert alert-danger">
+                      Ha ocurrido un error al realizar el pago. Por favor intente nuevamente más tarde.
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-10 col-sm-offset-1">
+                    <a href="/subcriptions/complete" class="btn btn-primary wizard-end">Finalizar</a>
+                  </div>
+                </div>  
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
