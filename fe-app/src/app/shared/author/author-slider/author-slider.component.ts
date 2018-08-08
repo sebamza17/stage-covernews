@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Author } from "../../author/Author";
+import { Author } from '../Author';
 
 @Component({
   selector: 'app-author-slider',

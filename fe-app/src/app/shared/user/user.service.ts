@@ -76,9 +76,8 @@ export class UserService extends BaseService {
         this.registerUserToken(this.user.refreshToken);
         return this.user;
       }).catch(function (error) {
-        //TODO: Manage error of user authetication
+        // TODO: Manage error of user authetication
       });
-    ;
   }
 
   /**
@@ -94,7 +93,7 @@ export class UserService extends BaseService {
         return this.user;
       })
       .catch((error) => {
-        //TODO: Manage error
+        // TODO: Manage error
       });
   }
 
@@ -111,7 +110,7 @@ export class UserService extends BaseService {
         return this.user;
       })
       .catch((error) => {
-        //TODO: Manage error
+        // TODO: Manage error
       });
   }
 
@@ -125,6 +124,6 @@ export class UserService extends BaseService {
     this.http.post(this.url(this.urls.token), {user: this.user, refreshToken: token})
       .subscribe((data) => {
         cb(data);
-      })
+      });
   }
 }

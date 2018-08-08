@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { HomeService } from './home.service';
 import { Category } from '../../shared/category/Category';
-import { CategoryService } from "../../shared/category/category.service";
+import { CategoryService } from '../../shared/category/category.service';
 import { Author } from '../../shared/author/Author';
-import { AuthorService } from "../../shared/author/author.service";
-import { Article } from "../../shared/article/Article";
-import { ArticleService } from "../../shared/article/article.service";
+import { AuthorService } from '../../shared/author/author.service';
+import { Article } from '../../shared/article/Article';
+import { ArticleService } from '../../shared/article/article.service';
 
 @Component({
   selector: 'app-home',

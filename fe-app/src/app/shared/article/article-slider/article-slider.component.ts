@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { Article } from '../../article/Article';
-import { ArticleService } from '../../article/article.service';
+import { Article } from '../Article';
+import { ArticleService } from '../article.service';
 import { Author } from '../../author/Author';
 import { AuthorService } from '../../author/author.service';
 import { Category } from '../../category/Category';
