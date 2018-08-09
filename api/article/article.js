@@ -428,37 +428,50 @@ export function getArticlesByFollowingCategories(event,context,callback){
 
 /**
  * Get one articles from each categories
+ * ToDo: esta operacion es muy costosa, agregar algún motor de BD en memoria (por ej redis)
  * @param {*} event 
  * @param {*} context 
  * @param {*} callback 
  */
 export function getArticlesByCategories(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
-
     let header = parseHeader(event,callback);
-
     getConnection()
     .then((db)=>{
         (async () =>{
+            //busco las categorias
             const categoryCollection = db.collection('category');
+            const categoryList  = await categoryCollection.find({},{ projection:{name: 1} }).toArray();
             
-            const category  = await categoryCollection.distinct("_id");   
+            //genero un arrays de ids de categoria
+            const categoryIds = categoryList.map(function(e) { 
+                return e._id;
+            });
 
+            //busco una nota por categoria ordenadas por fecha de creacion de forma descendente
             const articlesColl = db.collection('note');
-            
             const articles = await articlesColl.aggregate([
-                {$match: {"category":{$in: category}}},
-                {$sort: { createdAt: -1 }},
+                { $match: { "category":{$in: categoryIds }}},
+                { $sort: { createdAt: -1 }},
                 {
                     $group: {
                         _id: "$category",
-                        note: { $first: "$$ROOT" }
+                        note: { $first: "$$ROOT"}
                     }
                 },
-                {$replaceRoot: { newRoot: "$note" }}
+                { $replaceRoot: { newRoot: "$note" } },
+                { $project : { _id : 1 ,title : 1, image : 1, category:1} }
             ],{allowDiskUse: true}).toArray();
             
-            callback(null, success(articles));
+            callback(null, success(
+                //reemplazo los category id con el nombre
+                articles.map(
+                    function(doc){
+                        doc.categoryName = categoryList.find( e => e._id.equals(doc.category)).name;
+                        return doc;
+                    }
+                )
+            ));
         })()
         .catch((err)=>{
             callback(null, failure(err));
