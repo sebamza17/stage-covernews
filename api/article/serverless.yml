@@ -87,6 +87,23 @@ functions:
                 - Token
               allowCredentials: false
           authorizer: false
+  getArticlesByAuthors:
+    handler: article.getArticlesByAuthor
+    stageVariables:
+      - stage : ${opt:stage, 'test'}
+    events:
+      - http:
+          path: article/each/authors
+          method: post
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
   showArticle:
     handler: article.show
     stageVariables: 

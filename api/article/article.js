@@ -481,6 +481,53 @@ export function getArticlesByCategories(event,context,callback){
     });
 }
 
+/**
+*Get one article from each author
+* @param { array de ids de autores ej: {"authors" :  [ "id1", "id2"]}} event.body   
+* @param {*} context 
+* @param {*} callback 
+*/
+export function getArticlesByAuthor(event, context, callback) {
+
+    if (!JSON.parse(event.body).authors) {
+        callback(null, failure("authors array undefined"));
+        return;
+    }
+    getConnection()
+        .then((db) => {
+            (async () => {
+                
+                //convierto los strigs en objIds de Mongo para buscar
+                const authorsIds = JSON.parse(event.body).authors.map(e => {
+                    return mongodb.ObjectId(e);
+                });
+                
+                const articlesColl = db.collection('note');
+                const articles = await articlesColl.aggregate([
+                    {$match: { "authorId": { $in: authorsIds } }},
+                    {
+                       "$group": {
+                           "_id": "$authorId",
+                           "noteId": { "$last": "$_id" },
+                           "image": { "$last": "$image" },
+                           "title": { "$last": "$title" },
+                           "createdAt": { "$last": "$createdAt" },
+                           "authorName": {"$last": "$authorName"},
+                       }
+                    },
+                    {$project: { _id: 0}} 
+                ]).toArray();
+                
+                callback(null, success(articles));
+            })()
+                .catch((err) => {
+                    callback(null, failure(err));
+                });
+        }).catch((err) => {
+            callback(null, failure(err));
+        });
+}
+
 // PRIVATE
 
 function parseHeader(event,cb){
