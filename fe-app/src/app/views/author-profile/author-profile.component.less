@@ -4,14 +4,41 @@
 @import "variables";
 @import "base/fonts";
 
+.author-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: @breakpoint-l) {
+    display: block;
+  }
+}
+
 .articles__filters {
   display: flex;
   align-items: center;
   width: 50%;
 
-  i {
-    .font-size-xl;
-    .padding-left-quarter;
+  @media (max-width: @breakpoint-l) {
+    .padding-top-half;
+    width: 100%;
+  }
+
+  @media (max-width: @breakpoint-s) {
+    display: block;
+  }
+
+  .articles__filter {
+    .margin-right-half;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+
+    i {
+      .font-size-xl;
+      .padding-left-quarter;
+    }
   }
 
   .articles__search {
