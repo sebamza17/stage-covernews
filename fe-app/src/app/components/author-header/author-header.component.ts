@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Author } from '../../shared/author/Author';
+import { AuthorService } from '../../shared/author/author.service';
 
 @Component({
   selector: 'app-author-header',
@@ -11,10 +12,16 @@ export class AuthorHeaderComponent implements OnInit {
   @Input() author: Author;
   public isDescriptionShown = false;
 
-  constructor() {
+  constructor(
+    private authorService: AuthorService) {
   }
 
   ngOnInit() {
+    this.author = <Author>this.authorService.generatePlaceholders(1, {
+      name: '███ ██████',
+      avatar: '',
+      description: '██ ███ ████████ ███ ████████ ███ ████████ ███ ████████ ███ ████████ ███ ██████'
+    });
     $('.author-header__description').hide();
   }
 

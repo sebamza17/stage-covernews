@@ -84,12 +84,18 @@ export class ArticleComponent implements OnInit {
       this.author.name = this.article.authorName;
       return;
     }
+    console.log(this.article.authorId);
     this.authorService.getAuthorById(this.article.authorId).subscribe((author) => {
       this.author = author;
+      console.log(author);
 
-      this.articleService.getArticlesByAuthor(this.author._id).subscribe((articles) => {
-        this.authorArticles = articles;
-      });
+      if (this.author && this.author._id) {
+        this.articleService.getArticlesByAuthor(this.author._id).subscribe((articles) => {
+          this.authorArticles = articles;
+        });
+      } else {
+        console.log('WARNING: this.author._id null');
+      }
 
     });
   }

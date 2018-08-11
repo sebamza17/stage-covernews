@@ -1,5 +1,7 @@
 <!-- Header -->
-<div [ngClass]="{'author-header--full': isFull}" class="author-header__wrapper">
+<div [ngClass]="{'author-header--full': isFull}"
+     *ngIf="author"
+     class="author-header__wrapper">
 
   <div class="author-header">
 
