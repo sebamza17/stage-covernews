@@ -23,4 +23,5 @@ export class Article {
   title: String;
   watson: Object;
   categoryObject: Category;
+  categoryName: String;
 }

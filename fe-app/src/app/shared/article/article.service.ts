@@ -21,7 +21,7 @@ export class ArticleService extends BaseService {
     getArticle: '/article/show/{{articleId}}',
     getArticleFull: '/article/showFull/{{articleId}}',
     getArticlesByCategory: '/article/category/{{categoryId}}',
-    getLatestArticles: '/article/all',
+    getLatestArticles: '/article/each/categories',
     getArticlesByQuery: '/article/search/{{query}}',
     getArticlesByAuthor: '/article/author/{{authorId}}',
   };

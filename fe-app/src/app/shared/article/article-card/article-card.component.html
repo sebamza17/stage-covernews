@@ -5,8 +5,8 @@
    [ngClass]="{'article-card--placeholder': !article._id, 'article-card--transparent': isTransparent}">
 
   <!-- Category -->
-  <div class="article-card__category" *ngIf="category">
-    {{category.displayName}}
+  <div class="article-card__category" *ngIf="article.categoryName">
+    {{article.categoryName}}
   </div>
   <!-- end Category -->
 
