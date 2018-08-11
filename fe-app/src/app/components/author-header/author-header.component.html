@@ -83,7 +83,7 @@
   </div>
 
   <!-- Author Description -->
-  <div class="author-header__description">
+  <div class="author-header__description" *ngIf="author && author.description">
     {{author.description}}
   </div>
   <!-- end Author Description -->
