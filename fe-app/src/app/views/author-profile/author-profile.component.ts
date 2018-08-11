@@ -17,6 +17,7 @@ export class AuthorProfileComponent implements OnInit {
   public articles: Article[];
 
   // UI Status
+  public hasArticles = true;
   public loading = true;
 
   // Private variables
@@ -74,8 +75,12 @@ export class AuthorProfileComponent implements OnInit {
     }
     this.articleService.getArticlesByAuthor(this.author._id).subscribe((articles) => {
       this.loading = false;
-      this.mainArticle = articles.shift();
-      this.articles = articles;
+      if (articles.length > 0) {
+        this.mainArticle = articles.shift();
+        this.articles = articles;
+      } else {
+        this.hasArticles = false;
+      }
     });
   }
 

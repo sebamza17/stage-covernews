@@ -41,17 +41,23 @@
         <i class="icon ion-md-calendar"></i>
       </div>
 
+      <!-- Search -->
       <div class="article-slider__search">
+
         <input (change)="searchForArticles()"
                [(ngModel)]="articleSearchCriteria"
                type="text"
                placeholder="Buscar en esta categoria">
+
         <i *ngIf="!articleSearchCriteria"
            class="icon ion-md-search"></i>
+
         <i *ngIf="articleSearchCriteria"
            (click)="cleanSearch()"
            class="icon ion-md-close"></i>
+
       </div>
+      <!-- end Search -->
 
     </div>
     <!-- end Filters -->

@@ -12,36 +12,40 @@
 
   </div>
 
-  <!-- Title -->
-  <div class="container">
+  <!-- Articles -->
+  <div class="container" *ngIf="hasArticles">
 
     <!-- Title wrapper -->
-    <div class="fw fw--a-center fw--j-space-between width-full">
+    <div class="author-title-wrapper">
 
       <!--Title-->
-      <h2 class="main-title main-title--gray width-half">
-        ULTIMAS NOTAS
+      <h2 class="main-title main-title--gray">
+        Ultimos Articulos
       </h2>
 
       <!--Filters-->
       <div class="articles__filters">
 
-        <!-- Most Read -->
-        <div class="padding-horizontal-quarter">
-          <span>Mas Leidas</span>
-          <i class="icon ion-md-copy"></i>
-        </div>
-        <!-- Most Read -->
+        <div class="fw fw--wrap-none">
 
-        <!-- Date -->
-        <div class="padding-horizontal-quarter">
-          <span>Filtro por fecha</span>
-          <i class="icon ion-md-calendar"></i>
+          <!-- Most Read -->
+          <div class="articles__filter">
+            <span>Mas Leidas</span>
+            <i class="icon ion-md-copy"></i>
+          </div>
+          <!-- Most Read -->
+
+          <!-- Date -->
+          <div class="articles__filter">
+            <span>Filtro por fecha</span>
+            <i class="icon ion-md-calendar"></i>
+          </div>
+          <!-- end Date -->
+
         </div>
-        <!-- end Date -->
 
         <!-- Search -->
-        <div class="articles__search padding-left-full">
+        <div class="articles__search">
           <input class="rf-input rf-input--white">
           <i class="icon ion-ios-search search-icon"></i>
         </div>
@@ -58,13 +62,26 @@
       <app-article-card-horizontal [isGiant]="true" [article]="mainArticle"></app-article-card-horizontal>
     </div>
 
-    <!--<app-article-slider [lazyLoad]="true"-->
-    <!--[loadFlag]="selectedCategory._id === category._id">-->
-
-    <!--</app-article-slider>-->
-    <!-- end Articles -->
+    <app-article-vertical-card-list [articles]="articles"></app-article-vertical-card-list>
 
   </div>
+  <!-- Articles -->
+
+  <!-- No articles -->
+  <div *ngIf="!hasArticles"
+       class="container">
+
+    {{author.name}} no tiene ningun articulo.
+
+    <div class="margin-top-half">
+      <a href="/" class="button button--red">
+        <i class="icon ion-md-arrow-back"></i>
+        Volver a Home
+      </a>
+    </div>
+
+  </div>
+  <!-- end No articles -->
 
   <!-- Author slider -->
   <div class="bg-color-white-darken-1">

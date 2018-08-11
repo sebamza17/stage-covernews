@@ -65,6 +65,7 @@ export class ArticleComponent implements OnInit {
   private getArticle() {
     this.articleService.getArticleFullById(this.articleId).then((article) => {
       this.article = article;
+      console.log(article);
       this.loading = false;
       this.getAuthor();
       this.getRelatedArticles();

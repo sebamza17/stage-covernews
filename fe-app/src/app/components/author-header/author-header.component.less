@@ -9,14 +9,14 @@
 
   // Author Header default
   .author-header {
-    .fw;
     .bg-color-white-darken-2;
     .padding-vertical-quarter;
     .padding-horizontal-half;
+    display: flex;
 
     .author-header__profile {
-      .fw;
-      .fw--a-center;
+      display: flex;
+      align-items: center;
     }
 
     // Avatar
@@ -69,22 +69,35 @@
 
   // Variation => Author header full version
   &.author-header--full {
-    padding-left: initial;
     .width-full;
+    padding-left: 0;
+    padding-right: 0;
 
     .author-header {
-      .padding-vertical-half;
-      .padding-left-none;
-      background-color: transparent;
       .fw;
       .fw--a-center;
       .fw--j-space-between;
       .width-full;
+      .padding-vertical-half;
+      .padding-left-none;
+      padding-right: 0;
+      background-color: transparent;
+
+      @media (max-width: @breakpoint-s) {
+        display: block;
+      }
 
       .author-header__profile {
         width: 50%;
         .border--right;
         flex-shrink: 0;
+
+        @media (max-width: @breakpoint-s) {
+          .margin-bottom-half;
+          width: 100%;
+          border-right: none;
+        }
+
       }
 
       // Avatar
@@ -120,32 +133,54 @@
       .author-header__articles-info {
         .fw;
         .fw--a-center;
-        .padding-horizontal-half;
+        .fw--j-space-between;
+        .padding-left-half;
         .font-color-white;
         .font-size-s--2;
         border-color: #717171;
         flex-shrink: 0;
         width: 50%;
+
+        @media (max-width: @breakpoint-s) {
+          width: 100%;
+          padding: 0;
+          border: none;
+        }
+
         i {
           .font-size-l;
         }
+
+        // Numbers
         .author-header__articles-number {
-          .bg-color-brand-red;
-          width: 30px;
-          height: 30px;
-          .padding-eighth;
-          .margin-left-quarter;
-          border-radius: 50%;
-          .font-color-white;
-          .font-weight-bold;
           .fw;
           .fw--a-center;
           .fw--j-center;
+          .bg-color-brand-red;
+          .padding-eighth;
+          .margin-left-quarter;
+          .font-color-white;
+          .font-weight-bold;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
         }
+
+        // Each item inside header
         .author-header__articles-item {
           .fw;
           .fw--a-center;
-          .margin-left-half;
+          .margin-right-half;
+
+          &:last-of-type {
+            margin-right: 0;
+          }
+
+          // Variation => Wrapped item
+          &.author-header__articles-item--wrap {
+            flex-wrap: wrap;
+          }
+
         }
       }
 

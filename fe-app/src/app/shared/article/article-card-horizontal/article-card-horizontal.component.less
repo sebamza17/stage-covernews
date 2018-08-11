@@ -38,6 +38,10 @@
     .border--full;
     transition: all 200ms ease;
 
+    @media (max-width: @breakpoint-s) {
+      display: block;
+    }
+
   }
 
   // Status => Placeholder
@@ -166,6 +170,10 @@
       .bg-color-white-darken-1;
       align-items: initial;
 
+      @media (max-width: @breakpoint-s) {
+        display: block;
+      }
+
       &:hover, &:focus {
         .bg-color-brand-red;
       }
@@ -176,15 +184,23 @@
       .image-ratio;
       .image-ratio-16-9;
       width: 40%;
+
+      @media (max-width: @breakpoint-s) {
+        width: 100%;
+      }
     }
 
     // Content
     .article-card-horizontal__content {
-      .padding-half;
       .fw;
+      .padding-half;
       width: 60%;
       flex-direction: column;
       justify-content: space-between;
+
+      @media (max-width: @breakpoint-s) {
+        width: 100%;
+      }
     }
 
     // Summary

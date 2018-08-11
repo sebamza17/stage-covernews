@@ -12,17 +12,17 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${opt:stage, 'test'}
+  stage: ${opt:env, 'test'}
   region: us-east-1
   environment:
-    ENV: ${opt:stage}
+    ENV: ${opt:env}
 
 functions:
   # ARTICLES SECCION
   getArticles:
     handler: article.get
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/all
@@ -39,7 +39,7 @@ functions:
   getArticlesByFollowingAuthors:
     handler: article.getArticlesByFollowingAuthors
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/following/authors
@@ -56,7 +56,7 @@ functions:
   getArticlesByFollowingCategories:
     handler: article.getArticlesByFollowingCategories
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/following/categories
@@ -73,7 +73,7 @@ functions:
   getArticlesByCategories:
     handler: article.getArticlesByCategories
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/each/categories
@@ -90,7 +90,7 @@ functions:
   getArticlesByAuthors:
     handler: article.getArticlesByAuthor
     stageVariables:
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/each/authors
@@ -107,7 +107,7 @@ functions:
   showArticle:
     handler: article.show
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/show/{articleId}
@@ -124,7 +124,7 @@ functions:
   showFullArticle:
     handler: article.getFullArticle
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/showFull/{articleId}
@@ -141,7 +141,7 @@ functions:
   showArticleContent:
     handler: article.getArticleContent
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/content/{articleId}
@@ -158,7 +158,7 @@ functions:
   getByCanonical:
     handler: article.getByCanonical
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: article/canonical/{canonical}
@@ -175,7 +175,7 @@ functions:
   getArticlesByCategory:
       handler: article.getByCategory
       stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
       events:
         - http:
             path: article/category/{categoryId}
@@ -192,7 +192,7 @@ functions:
   getArticlesByAuthor:
       handler: article.getByAuthor
       stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
       events:
         - http:
             path: article/author/{authorId}
@@ -209,7 +209,7 @@ functions:
   searchArticles:
       handler: article.search
       stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
       events:
         - http:
             path: article/search/{criteria}

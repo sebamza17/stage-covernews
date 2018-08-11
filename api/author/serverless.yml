@@ -12,16 +12,16 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${opt:stage, 'test'}
+  stage: ${opt:env, 'test'}
   region: us-east-1
   environment:
-    ENV: ${opt:stage}
+    ENV: ${opt:env}
 
 functions:
   getAuthors:
     handler: author.get
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: author/all
@@ -38,7 +38,7 @@ functions:
   showAuthor:
     handler: author.show
     stageVariables: 
-      - stage : ${opt:stage, 'test'}
+      - stage : ${opt:env, 'test'}
     events:
       - http:
           path: author/show/{authorId}
@@ -55,7 +55,7 @@ functions:
   searchAuthors:
       handler: author.search
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: author/search/{criteria}
@@ -72,7 +72,7 @@ functions:
   authorsByCategory:
     handler: author.searchByCategory
     stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
     events:
         - http:
             path: author/category/{categoryId}
@@ -89,7 +89,7 @@ functions:
   updateAuthor:
       handler: author-admin.update
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: author/update/{authorId}
@@ -106,7 +106,7 @@ functions:
   removeAuthor:
       handler: author-admin.remove
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: author/remove/{authorId}
@@ -123,7 +123,7 @@ functions:
   addAuthor:
       handler: author-admin.add
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: author/add
@@ -140,7 +140,7 @@ functions:
   getFollowAuthors:
       handler: author-follow.get
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: author/follow
@@ -157,7 +157,7 @@ functions:
   followAuthor:
       handler: author-follow.follow
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: author/follow
@@ -174,7 +174,7 @@ functions:
   unFollowAuthor:
       handler: author-follow.unFollow
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: author/unfollow

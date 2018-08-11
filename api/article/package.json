@@ -4,7 +4,9 @@
   "description": "A Dictioz Start",
   "main": "handler.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "deploy-stage":"sls deploy --env stage",
+    "deploy-prod":"sls deploy --env prod"
   },
   "author": "",
   "license": "MIT",
