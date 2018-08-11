@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import BaseService from '../base-service/base.service';
 import { Category } from './Category';
 import 'rxjs/add/operator/map';
+import { reject } from '../../../../node_modules/@types/q';
 
 @Injectable({
   providedIn: 'root'

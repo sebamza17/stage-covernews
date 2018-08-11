@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-article-content',
@@ -11,9 +11,20 @@ export class ArticleContentComponent implements OnInit {
   @Input() isCleanText: boolean;
 
   constructor() {
+    
   }
 
   ngOnInit() {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    // If lazyLoad option is enabled, only load when loadFlag changes to true, start init process
+    if (changes['articleContent'] && changes['articleContent'].currentValue) {
+      this.parseContent();
+    }
+  }
+
+  parseContent(){
+    console.log(this.articleContent);
+  }
 }
