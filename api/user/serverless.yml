@@ -12,16 +12,16 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${opt:stage, 'test'}
+  stage: ${opt:env, 'test'}
   region: us-east-1
   environment:
-    ENV: ${opt:stage}
+    ENV: ${opt:env}
 
 functions:
   refreshToken:
       handler: user.refreshToken
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: user/refreshToken
@@ -38,7 +38,7 @@ functions:
   getByToken:
       handler: user.getByToken
       stageVariables: 
-        - stage : ${opt:stage, 'test'}
+        - stage : ${opt:env, 'test'}
       events:
         - http:
             path: user/getByToken
