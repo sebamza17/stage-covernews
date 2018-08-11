@@ -28,8 +28,8 @@
       </div>
 
       <!-- Source -->
-      <div class="article-card-full__source">
-        Fuente: {{article.newspaper}}
+      <div class="article-card-full__source" *ngIf="article.newspaperName">
+        Fuente: {{article.newspaperName}}
       </div>
       <!-- end Source -->
 

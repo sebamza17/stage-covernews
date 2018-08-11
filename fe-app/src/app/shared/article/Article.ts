@@ -1,4 +1,4 @@
-import { Category } from "../category/Category";
+import { Category } from '../category/Category';
 
 export class Article {
   _id: string;
@@ -17,11 +17,12 @@ export class Article {
   isInCover: boolean;
   keywords: [string];
   newspaper: string;
+  newspaperName: string;
   originalUrl: string;
   scrapedAt: Date;
   stats: boolean;
-  title: String;
+  title: string;
   watson: Object;
   categoryObject: Category;
-  categoryName: String;
+  categoryName: string;
 }
