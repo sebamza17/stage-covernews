@@ -31,7 +31,7 @@ export function get (event, context, callback) {
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.find({},{limit: limit, skip: skip}).toArray((err,doc)=>{
+        articles.find({},{limit: limit, skip: skip}).sort({createdAt: -1}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -138,7 +138,7 @@ export function getByCategory(event,context,callback){
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.find({category: categoryId},{limit: limit, skip: skip}).toArray((err,doc)=>{
+        articles.find({category: categoryId},{limit: limit, skip: skip}).sort({createdAt: -1}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -188,7 +188,7 @@ export function getByAuthor(event,context,callback){
                 return;
             }
 
-            articles.find({authorName: doc.name},{limit: limit, skip: skip}).toArray((err,doc)=>{
+            articles.find({authorName: doc.name},{limit: limit, skip: skip}).sort({createdAt: -1}).toArray((err,doc)=>{
                 if(err){
                     callback(null, failure(err));
                     return;
@@ -241,7 +241,7 @@ export function search(event,context,callback){
             $caseSensitive: false
         };
         
-        articles.find(query,{limit: limit, skip: skip}).toArray((err,doc)=>{
+        articles.find(query,{limit: limit, skip: skip}).sort({createdAt: -1}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -435,12 +435,12 @@ export function getArticlesByFollowingCategories(event,context,callback){
  */
 export function getArticlesByCategories(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
-    let header = parseHeader(event,callback);
 
+    let header = parseHeader(event,callback);
 
     let queryString = parseQueryString(event);
     
-    let limit = 10;
+    let limit = 8;
     let skip = 0;
 
     if(queryString.limit){
@@ -522,6 +522,7 @@ export function getArticlesByAuthor(event, context, callback) {
                 const articlesColl = db.collection('note');
                 const articles = await articlesColl.aggregate([
                     {$match: { "authorId": { $in: authorsIds } }},
+                    {$sort: {createdAt: -1}},
                     {
                        "$group": {
                            "_id": "$authorId",
