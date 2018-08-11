@@ -55,8 +55,10 @@ export class ArticleService extends BaseService {
     let url = this.urls.getArticleFull;
     url = url.replace('{{articleId}}', articleId);
     let article = await this.http.get<Article>(this.url(url)).toPromise();
-    const categoryObject = await this.categoryService.getCategoryById(article.category);
-    article.categoryObject = categoryObject;
+    if (article.category) {
+      const categoryObject = await this.categoryService.getCategoryById(article.category);
+      article.categoryObject = categoryObject;
+    }
     return article;
   }
 
