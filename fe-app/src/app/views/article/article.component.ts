@@ -65,9 +65,9 @@ export class ArticleComponent implements OnInit {
   private getArticle() {
     this.articleService.getArticleFullById(this.articleId).then((article) => {
       this.article = article;
-      console.log(this.article);
       this.loading = false;
       this.getAuthor();
+      this.getRelatedArticles();
       this.category.name = this.article.categoryObject.name;
     });
   }
@@ -87,6 +87,18 @@ export class ArticleComponent implements OnInit {
         this.authorArticles = articles;
       });
 
+    });
+  }
+
+  /**
+   * Get related articles for this article
+   * TODO: Change endpoint when ready
+   */
+  private getRelatedArticles() {
+    this.articleService.getRelatedArticles(this.article._id, {
+      limit: 4
+    }).subscribe((articles) => {
+      this.relatedArticles = articles;
     });
   }
 
