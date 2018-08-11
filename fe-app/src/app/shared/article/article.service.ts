@@ -22,6 +22,7 @@ export class ArticleService extends BaseService {
     getArticleFull: '/article/showFull/{{articleId}}',
     getArticlesByCategory: '/article/category/{{categoryId}}',
     getLatestArticles: '/article/each/categories',
+    getRelatedArticles: '/article/all',
     getArticlesByQuery: '/article/search/{{query}}',
     getArticlesByAuthor: '/article/author/{{authorId}}',
   };
@@ -111,6 +112,15 @@ export class ArticleService extends BaseService {
    */
   public getArticlesByAuthor(authorId: string, options = null) {
     return this.http.get<Article[]>(this.url(this.urls.getArticlesByAuthor.replace('{{authorId}}', authorId), options));
+  }
+
+  /**
+   * Get related articles by articleId
+   * @param articleId
+   * @param options
+   */
+  public getRelatedArticles(articleId: string, options = null) {
+    return this.http.get<Article[]>(this.url(this.urls.getRelatedArticles.replace('{{articleId}}', articleId), options));
   }
 
   /**

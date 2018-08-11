@@ -31,7 +31,6 @@
     </div>
 
   </div>
-
   <!-- end Header -->
 
   <!-- Title -->
@@ -88,21 +87,22 @@
     <!-- end Body -->
 
     <!-- Related Articles -->
-    <div class="bg-color-white-darken-1 margin-vertical-full">
+    <div class="margin-vertical-full">
 
-      <div class="container">
+      <h2 class="main-title main-title--gray padding-top-full">
+        Articulos Relacionados
+      </h2>
 
-        <h2 class="main-title main-title--gray padding-horizontal-half padding-vertical-half">
-          ARTICULOS RELACIONADOS
-        </h2>
-
-        <div class="row">
-          <div class="article-container" *ngFor="let article of relatedArticles">
-            <app-article-card [article]="article"></app-article-card>
-          </div>
-        </div>
-
+      <div>
+        <app-article-vertical-card-list [articles]="relatedArticles"></app-article-vertical-card-list>
       </div>
+
+      <!--<div class="row">-->
+      <!--<div class="article-container" *ngFor="let article of relatedArticles">-->
+      <!--<app-article-card [article]="article"></app-article-card>-->
+      <!--</div>-->
+      <!--</div>-->
+
     </div>
     <!-- end Related Articles -->
 

@@ -2,56 +2,25 @@
 @import "base/helpers";
 @import "base/fonts";
 @import "base/backgrounds";
+@import "base/flex";
 
-.article-latest {
+.article-vertical-card-list {
 
   @visible-cards: 4;
-  @visible-cards-l: 3.5;
+  @visible-cards-m: 3.5;
   @visible-cards-s: 2.5;
   @visible-cards-xs: 1.2;
 
-  // Top body
-  .article-latest__top {
-    .padding-top-half;
-
-    .wrapper {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      @media (max-width: @breakpoint-xxs--2) {
-        display: block;
-      }
-
-    }
-
-    // Button for more articles
-    .button {
-      .font-weight-bold;
-      @media (max-width: @breakpoint-xxs--2) {
-        display: block;
-      }
-    }
-
-  }
-
-  // Title
-  .main-title {
-    .font-color-white-darken-2;
-  }
-
   // Cards general container
-  .article-latest__cards {
+  .article-slider__cards {
     .padding-top-full;
     width: calc(100% + 30px);
     margin-left: -15px;
     display: flex;
-    //flex-wrap: wrap;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     overflow: auto;
 
-    @media (max-width: @breakpoint-l) {
+    @media (max-width: @breakpoint-m) {
       flex-wrap: nowrap;
     }
 
@@ -62,8 +31,8 @@
       width: ~"calc((100% / @{visible-cards}))";
       flex-shrink: 0;
 
-      @media (max-width: @breakpoint-l) {
-        width: ~"calc((100% / @{visible-cards-l}))";
+      @media (max-width: @breakpoint-m) {
+        width: ~"calc((100% / @{visible-cards-m}))";
       }
 
       @media (max-width: @breakpoint-s) {

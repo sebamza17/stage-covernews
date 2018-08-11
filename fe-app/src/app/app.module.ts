@@ -36,6 +36,7 @@ import { DictiozFeaturesComponent } from './components/dictioz-features/dictioz-
 import { AuthorHeaderComponent } from './components/author-header/author-header.component';
 import { SocialMediaComponent } from './components/social-media/social-media.component';
 import { AuthorProfileComponent } from './views/author-profile/author-profile.component';
+import { ArticleVerticalCardListComponent } from './shared/article/article-vertical-card-list/article-vertical-card-list.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AuthorProfileComponent } from './views/author-profile/author-profile.co
     ArticleCardComponent,
     ArticleCardFullComponent,
     ArticleCardHorizontalComponent,
+    ArticleVerticalCardListComponent,
     AuthorSliderComponent,
     AuthorCardComponent,
     AuthorBaseInfoComponent,
