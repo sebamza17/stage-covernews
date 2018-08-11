@@ -436,6 +436,21 @@ export function getArticlesByFollowingCategories(event,context,callback){
 export function getArticlesByCategories(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
     let header = parseHeader(event,callback);
+
+
+    let queryString = parseQueryString(event);
+    
+    let limit = 10;
+    let skip = 0;
+
+    if(queryString.limit){
+        limit = parseInt(queryString.limit);
+    }
+    
+    if(queryString.skip){
+        skip = parseInt(queryString.skip);
+    }
+
     getConnection()
     .then((db)=>{
         (async () =>{
@@ -460,7 +475,9 @@ export function getArticlesByCategories(event,context,callback){
                     }
                 },
                 { $replaceRoot: { newRoot: "$note" } },
-                { $project : { _id : 1 ,title : 1, image : 1, category:1} }
+                { $project : { _id : 1 ,title : 1, image : 1, category:1} },
+                { $skip: skip},
+                { $limit : limit }
             ],{allowDiskUse: true}).toArray();
             
             callback(null, success(

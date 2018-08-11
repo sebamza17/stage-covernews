@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService extends BaseService {
 
-  entity: 'user';
+  entity = 'user';
 
   provider: any;
   user: User;
@@ -121,6 +121,7 @@ export class UserService extends BaseService {
    */
   public registerUserToken(token: string, cb: Function = function () {
   }) {
+
     this.http.post(this.url(this.urls.token), {user: this.user, refreshToken: token})
       .subscribe((data) => {
         cb(data);

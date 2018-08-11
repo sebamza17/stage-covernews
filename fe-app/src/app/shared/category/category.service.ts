@@ -61,7 +61,6 @@ export class CategoryService extends BaseService {
       const foundCategory = CategoryService.staticCategories.find(category => {
         return category._id === categoryId;
       });
-      console.log(foundCategory);
       return foundCategory;
     }
 

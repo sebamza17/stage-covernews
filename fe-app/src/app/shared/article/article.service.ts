@@ -21,7 +21,7 @@ export class ArticleService extends BaseService {
     getArticle: '/article/show/{{articleId}}',
     getArticleFull: '/article/showFull/{{articleId}}',
     getArticlesByCategory: '/article/category/{{categoryId}}',
-    getLatestArticles: '/article/all',
+    getLatestArticles: '/article/each/categories',
     getRelatedArticles: '/article/all',
     getArticlesByQuery: '/article/search/{{query}}',
     getArticlesByAuthor: '/article/author/{{authorId}}',
@@ -111,7 +111,6 @@ export class ArticleService extends BaseService {
    * @param options
    */
   public getArticlesByAuthor(authorId: string, options = null) {
-    console.log(authorId);
     return this.http.get<Article[]>(this.url(this.urls.getArticlesByAuthor.replace('{{authorId}}', authorId), options));
   }
 
