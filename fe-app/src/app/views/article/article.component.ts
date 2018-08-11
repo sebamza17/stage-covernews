@@ -19,6 +19,7 @@ export class ArticleComponent implements OnInit {
   public category: Category;
   public author: Author;
   public relatedArticles: Article[];
+  public authorArticles: Article[];
 
   // UI status
   public loading = true;
@@ -81,6 +82,11 @@ export class ArticleComponent implements OnInit {
     }
     this.authorService.getAuthorById(this.article.authorId).subscribe((author) => {
       this.author = author;
+
+      this.articleService.getArticlesByAuthor(this.author._id).subscribe((articles) => {
+        this.authorArticles = articles;
+      });
+
     });
   }
 

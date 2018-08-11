@@ -4,10 +4,68 @@
 
 .article-view {
 
-  .article-view__date {
-    .font-size-s--2;
-    .font-weight-light;
-    .font-color-white-darken-10;
+  // Top author info
+  .article-view__top {
+    .bg-color-white-darken-1;
+    width: 100%;
+
+    // Container flex to block on s breakpoint
+    .container {
+      @media (max-width: @breakpoint-s) {
+        width: 100%;
+      }
+
+    }
+
+    // Wrapper
+    .article-view__top-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (max-width: @breakpoint-s) {
+        display: block;
+        text-align: center;
+      }
+
+      // Author info and date
+      .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: @breakpoint-xs) {
+          display: block;
+        }
+
+      }
+
+      // Social wrapper
+      .article-view__social {
+        .padding-half;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @media (max-width: @breakpoint-xs) {
+          .padding-quarter;
+        }
+      }
+
+    }
+
+    // Article date
+    .article-view__date {
+      .font-size-s--2;
+      .font-weight-light;
+      .font-color-white-darken-10;
+      .margin-left-half;
+      @media (max-width: @breakpoint-s) {
+        .padding-vertical-quarter;
+        .margin-right-half;
+        margin-left: 0;
+      }
+    }
+
   }
 
   // Title

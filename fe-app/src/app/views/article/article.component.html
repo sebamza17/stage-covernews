@@ -1,22 +1,32 @@
 <div class="article-view">
 
-  <div class="bg-color-white-darken-1 margin-bottom-full">
+  <div class="article-view__top">
 
-    <div class="container fw fw--a-center fw--j-space-between">
+    <div class="container">
 
-      <!-- Header -->
-      <app-author-header [author]="author"></app-author-header>
-      <!-- end Header -->
+      <div class="article-view__top-wrapper">
 
-      <!-- Date -->
-      <div style="flex-grow: 1" class="margin-left-full article-view__date fw ">
-        <div class=" fw--a-center fw--j-start">Publicado el 19 de Agosto de 2018 20:30 PM</div>
+        <div class="wrapper">
+
+          <!-- Header -->
+          <app-author-header [author]="author"></app-author-header>
+          <!-- end Header -->
+
+          <!-- Date -->
+          <div class="article-view__date">
+            {{article.articleDate | date: 'medium'}}
+          </div>
+          <!-- end Date -->
+
+        </div>
+
+        <!-- Social Media -->
+        <div class="article-view__social">
+          <app-social-media></app-social-media>
+        </div>
+        <!-- end Social Media -->
+
       </div>
-      <!-- end Date -->
-
-      <!-- Social Media -->
-      <app-social-media></app-social-media>
-      <!-- end Social Media -->
 
     </div>
 
@@ -63,7 +73,7 @@
           </div>
 
           <div class="article-container"
-               *ngFor="let article of relatedArticles">
+               *ngFor="let article of authorArticles">
             <app-article-card-horizontal
                 [article]="article"
                 class="width-full margin-vertical-quarter"></app-article-card-horizontal>
