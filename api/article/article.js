@@ -2,6 +2,7 @@ import mongodb from 'mongodb';
 import {success, failure} from './libs/response-lib';
 import {getConnection} from './libs/mongodb-connect';
 import AWS from 'aws-sdk';
+import request from 'request';
 
 const s3 = new AWS.S3();
 
@@ -279,21 +280,31 @@ export function getFullArticle(event,context, callback){
                 return;
             }
 
-            let params = {
-                Bucket: 'dictioznewz',
-                Key: 'articles/'+doc._id+'.json'
-            };
-        
-            s3.getObject(params, function (err, data) {
-                if (err){
-                    callback(null, failure(err));
-                    return;
+            // let params = {
+            //     Bucket: 'dictioznewz',
+            //     Key: 'articles/'+doc._id+'.json'
+            // };
+
+            let url = 'https://s3.amazonaws.com/dictioznewz/articles/'+doc._id+'.json';
+
+            request.get(url,function(status,response,body){
+
+                let resp = {};
+                if(typeof body === 'string'){
+                    try{
+                        resp = JSON.parse(body).content;
+                    }catch(e){
+                        resp = body;
+                    }
+                    
+                }else{
+                    resp = body;
                 }
 
-                let body = JSON.parse(data.Body.toString('utf-8'));
-                doc.content = body.content;
+                doc.content = resp;
                 callback(null, success(doc));
             });
+        
         })
     }).catch((err)=>{
         callback(null, failure(err));
