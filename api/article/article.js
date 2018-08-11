@@ -2,6 +2,7 @@ import mongodb from 'mongodb';
 import {success, failure} from './libs/response-lib';
 import {getConnection} from './libs/mongodb-connect';
 import AWS from 'aws-sdk';
+import request from 'request';
 
 const s3 = new AWS.S3();
 
@@ -31,7 +32,7 @@ export function get (event, context, callback) {
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.find({},{limit: limit, skip: skip}).toArray((err,doc)=>{
+        articles.find({},{limit: limit, skip: skip}).sort({createdAt: -1}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -138,7 +139,7 @@ export function getByCategory(event,context,callback){
     getConnection()
     .then((db)=>{
         const articles = db.collection('note');
-        articles.find({category: categoryId},{limit: limit, skip: skip}).toArray((err,doc)=>{
+        articles.find({category: categoryId},{limit: limit, skip: skip}).sort({createdAt: -1}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -188,7 +189,7 @@ export function getByAuthor(event,context,callback){
                 return;
             }
 
-            articles.find({authorName: doc.name},{limit: limit, skip: skip}).toArray((err,doc)=>{
+            articles.find({authorName: doc.name},{limit: limit, skip: skip}).sort({createdAt: -1}).toArray((err,doc)=>{
                 if(err){
                     callback(null, failure(err));
                     return;
@@ -241,7 +242,7 @@ export function search(event,context,callback){
             $caseSensitive: false
         };
         
-        articles.find(query,{limit: limit, skip: skip}).toArray((err,doc)=>{
+        articles.find(query,{limit: limit, skip: skip}).sort({createdAt: -1}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;
@@ -279,21 +280,31 @@ export function getFullArticle(event,context, callback){
                 return;
             }
 
-            let params = {
-                Bucket: 'dictioznewz',
-                Key: 'articles/'+doc._id+'.json'
-            };
-        
-            s3.getObject(params, function (err, data) {
-                if (err){
-                    callback(null, failure(err));
-                    return;
+            // let params = {
+            //     Bucket: 'dictioznewz',
+            //     Key: 'articles/'+doc._id+'.json'
+            // };
+
+            let url = 'https://s3.amazonaws.com/dictioznewz/articles/'+doc._id+'.json';
+
+            request.get(url,function(status,response,body){
+
+                let resp = {};
+                if(typeof body === 'string'){
+                    try{
+                        resp = JSON.parse(body).content;
+                    }catch(e){
+                        resp = body;
+                    }
+                    
+                }else{
+                    resp = body;
                 }
 
-                let body = JSON.parse(data.Body.toString('utf-8'));
-                doc.content = body.content;
+                doc.content = resp;
                 callback(null, success(doc));
             });
+        
         })
     }).catch((err)=>{
         callback(null, failure(err));
@@ -435,12 +446,12 @@ export function getArticlesByFollowingCategories(event,context,callback){
  */
 export function getArticlesByCategories(event,context,callback){
     context.callbackWaitsForEmptyEventLoop = false;
-    let header = parseHeader(event,callback);
 
+    let header = parseHeader(event,callback);
 
     let queryString = parseQueryString(event);
     
-    let limit = 10;
+    let limit = 8;
     let skip = 0;
 
     if(queryString.limit){
@@ -522,6 +533,7 @@ export function getArticlesByAuthor(event, context, callback) {
                 const articlesColl = db.collection('note');
                 const articles = await articlesColl.aggregate([
                     {$match: { "authorId": { $in: authorsIds } }},
+                    {$sort: {createdAt: -1}},
                     {
                        "$group": {
                            "_id": "$authorId",
