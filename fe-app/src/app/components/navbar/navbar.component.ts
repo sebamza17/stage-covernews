@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../shared/user/user.service'
+import { UserService } from '../../shared/user/user.service';
+import { ModalService } from '../../components/modal/modal.service';
 
 @Component({
   selector: 'ui-navbar',
@@ -10,13 +11,13 @@ export class NavbarComponent implements OnInit {
 
   public status: Boolean = false;
 
-  constructor(private user: UserService) {
+  constructor(private user: UserService, public modalSvc: ModalService) {
   }
 
   public toggle() {
     console.log(this.status);
     this.status = !this.status;
-  };
+  }
 
   ngOnInit() {
   }
@@ -36,5 +37,9 @@ export class NavbarComponent implements OnInit {
    */
   onLogout() {
     this.user.logout();
+  }
+
+  openModal(id: string) {
+    this.modalSvc.open(id);
   }
 }

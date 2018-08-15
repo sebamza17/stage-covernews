@@ -3,6 +3,7 @@ import { auth } from 'firebase';
 import { UserService} from './shared/user/user.service';
 import { User } from './shared/user/User';
 import { UserDataService } from './shared/user/user-data.service';
+import { ModalService } from './components/modal/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { UserDataService } from './shared/user/user-data.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(public userSvc: UserService, public userData: UserDataService) {}
+  constructor(public userSvc: UserService, public userData: UserDataService, public modalSvc: ModalService) {}
 
   ngOnInit() {
     auth().onAuthStateChanged((user) => {
@@ -27,4 +28,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+  closeModal(id: string) {
+    this.modalSvc.close(id);
+  }
 }

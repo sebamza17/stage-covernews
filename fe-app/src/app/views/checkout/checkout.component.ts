@@ -53,11 +53,16 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm = this.formBuilder.group({
       payer_name: ['', Validators.compose([Validators.required])],
       payer_email: ['', Validators.compose([Validators.email])],
+      payer_identification_type: ['', Validators.compose([Validators.required])],
+      payer_identification_number: ['', Validators.compose([Validators.required])],
+      payment_method_id: ['', Validators.compose([Validators.required])],
       amount: ['', Validators.compose([Validators.required])],
       card_number: ['', Validators.compose([Validators.required])],
       card_expiration_month: ['', Validators.compose([Validators.required])],
       card_expiration_year: ['', Validators.compose([Validators.required])],
       card_security_code: ['', Validators.compose([Validators.required])],
+      issuer_id: [''],
+      installments: [''],
     });
   }
 
@@ -83,7 +88,8 @@ export class CheckoutComponent implements OnInit {
 
   getBin() {
     const cardSelector = document.querySelector('#cardId') as HTMLSelectElement;
-    if (cardSelector && cardSelector[cardSelector.options.selectedIndex].value !== '-1') {
+    // if (cardSelector && cardSelector[cardSelector.options.selectedIndex].value !== '-1') {
+    if (cardSelector && cardSelector.value !== '-1') {
       return cardSelector[cardSelector.options.selectedIndex].getAttribute('first_six_digits');
     }
     const ccNumber = document.querySelector('input[data-checkout="cardNumber"]') as HTMLInputElement;
@@ -191,7 +197,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   showCardIssuers(status, issuers) {
-    $('.issuer-field').show();
+    // $('.issuer-field').show();
     const issuersSelector = document.querySelector('#issuer') as HTMLSelectElement,
     fragment = document.createDocumentFragment();
 
@@ -229,6 +235,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   setInstallmentInfo(status, response) {
+    // $('.installments-field').show();
     const selectorInstallments = document.querySelector('#installments') as HTMLSelectElement,
     fragment = document.createDocumentFragment();
 
@@ -253,32 +260,36 @@ export class CheckoutComponent implements OnInit {
     const cardSelector = document.querySelector('#cardId') as HTMLSelectElement;
     const amount = (document.querySelector('#amount') as HTMLInputElement).value;
 
-    if (cardSelector && cardSelector[cardSelector.options.selectedIndex].value !== '-1') {
+    // if (cardSelector && cardSelector[cardSelector.options.selectedIndex].value !== '-1') {
+    if (cardSelector && cardSelector.value !== '-1') {
       const bin = cardSelector[cardSelector.options.selectedIndex].getAttribute('first_six_digits');
       Mercadopago.getPaymentMethod({ bin }, (status, response) => this.setPaymentMethodInfo(status, response));
     }
   }
 
   submitForm(formData) {
-    $('.wizard-confirm').attr('disabled', 'disabled');
-    $('.checkout .process').show();
+    $('.btn-submit').attr('disabled', 'disabled');
+    // $('.checkout .process').show();
     const $form = document.querySelector('#pay');
     Mercadopago.createToken($form, (status, response) => this.responseHandler(formData, status, response));
     return false;
   }
 
   responseHandler(formData, status, response) {
-    $('.alert-error').html('').hide();
+    $('.alert-warning').hide();
+    $('.alert-error').hide();
     if (status !== 200 && status !== 201) {
       if (response.cause !== undefined) {
         const errors = [];
         $.each(response.cause, function(i, item) {
           errors.push(this.getTokenError(item.code));
         });
-        $('.alert-error').html(errors.join('<br>')).show();
+        $('.alert-error').show().find('p').html(errors.join('<br>'));
+      } else {
+        $('.alert-warning').show();
       }
-      $('.wizard-confirm').removeAttr('disabled');
-      $('.checkout .process').hide();
+      $('.btn-submit').removeAttr('disabled');
+      // $('.checkout .process').hide();
     } else {
       const form = document.querySelector('#pay');
       const card = document.createElement('input');
@@ -295,26 +306,29 @@ export class CheckoutComponent implements OnInit {
       $('#docType').removeAttr('name');
       $('#cardholderName').removeAttr('name');
 
+      // TEST
+      $('.step1').addClass('hidden');
+      $('.step2').removeClass('hidden');
+
       /*
       this.mercadopagoService.createPayment(formData)
         .subscribe((res: any) => {
-          $('.wizard-confirm').removeAttr('disabled');
+          $('.btn-submit').removeAttr('disabled');
           $('.checkout .process').hide();
           const payment = res.payment.response;
           if (payment.status === 'approved' || payment.status === 'in_process') {
-            $('#step2 .alert-success').show().text(this.getPaymentStatus(payment.status, payment.status_detail));
-            $('.step-pane').removeClass('active');
-            $('#step2').addClass('active');
+            $('.step1').hide();
+            $('.step2').show();
             setTimeout(function() {
-              location.href = '/payments/index';
+              location.href = '/';
             }, 5000);
           } else {
-            $('.alert-error').html(this.getPaymentStatus(payment.status, payment.status_detail)).show();
+            $('.alert-error').show().find('p').html(this.getPaymentStatus(payment.status, payment.status_detail));
           }
         }, () => {
-          $('.alert-error').html('Ha ocurrido un error. Intente nuevamente más tarde.').show();
-          $('.wizard-confirm').removeAttr('disabled');
-          $('.checkout .process').hide();
+          $('.alert-error').show();
+          $('.btn-submit').removeAttr('disabled');
+          // $('.checkout .process').hide();
         });
       */
     }

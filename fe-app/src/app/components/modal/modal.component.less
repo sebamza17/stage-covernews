@@ -1,0 +1,39 @@
+﻿app-modal {
+  display: none;
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    z-index: 2000;
+    overflow: auto;
+    width: 765px;
+    min-height: 580px;
+    
+    .modal-body {
+      /* margin exposes part of the modal background */
+      // margin: 20px;
+      // padding: 20px;
+    }
+  }
+  
+  .modal-background {
+    /* modal background fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1900;
+    background-color: #000;
+    opacity: 0.75;
+  }
+}
+
+body.modal-open {
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden;
+}
