@@ -13,7 +13,6 @@ const routes: Routes = [
   {path: 'article/:articleId', component: ArticleComponent},
   {path: 'profile', component: HomeUserComponent},
   {path: 'author/:authorId', component: AuthorProfileComponent},
-  {path: 'subscriptions/checkout', component: CheckoutComponent},
   {path: '**', redirectTo: '/home'}
 ];
 

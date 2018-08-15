@@ -7,7 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Payment } from '../../views/checkout/Payment';
+import { Payment } from './Payment';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
 const httpOptions = {
@@ -31,7 +31,7 @@ export class MercadopagoService {
   public createPayment(payment: Payment): Observable<Payment> {
     const payload = {
       token: payment.token,
-      payment_method_id: payment.method_id,
+      payment_method_id: payment.payment_method_id,
       payer: {
         email: payment.payer_email,
       },

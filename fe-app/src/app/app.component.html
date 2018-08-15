@@ -1,7 +1,10 @@
 <ui-navbar></ui-navbar>
 
 <div class="main-wrapper">
-
-    <router-outlet></router-outlet>
-
+  <router-outlet></router-outlet>
 </div>
+
+<app-modal id="checkout-modal">
+  <app-checkout></app-checkout>
+  <!-- <button (click)="closeModal('checkout-modal');">Cerrar</button> -->
+</app-modal>

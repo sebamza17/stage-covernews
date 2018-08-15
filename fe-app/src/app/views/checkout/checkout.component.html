@@ -1,144 +1,117 @@
-<div class="container payment-box">
-  <div class="payment-box-body">
-    <div class="row wizard-row checkout">
-      <div class="col-md-12 fuelux">
-        <div class="process" style="display:none"><span>Procesando, por favor espere...</span></div>
-        <div class="block-wizard">
-          <div id="wizard1" class="wizard wizard-ux" style="display:none">
-            <ul class="steps">
-              <li data-target="#step1" class="active">Paso 1<span class="chevron"></span></li>
-              <li data-target="#step2">Paso 2<span class="chevron"></span></li>
-            </ul>
+<div class="checkout">
+  <div class="checkout-sidebar">
+    <div class="checkout-premium-box">PREMIUM</div>
+    <div class="step step-1">
+      <div class="checkout-amount">
+        <div class="amount-row">
+          <span class="amount-value">2</span>
+          <span class="amount-currency">USD</span>
+        </div>
+        <div class="amount-row">
+          <span class="amount-period">PAGO MENSUAL</span>
+        </div>
+        <div class="amount-row">
+          <span class="amount-promo">Primer mes gratis</span>
+        </div>
+      </div>
+      <ul class="checkout-premium-items">
+        <li><span class="premium-icon premium-icon1"></span> <p>Colabora con autores de todo el mundo</p></li>
+        <li><span class="premium-icon premium-icon2"></span> <p>Organizamos tus notas por categorías favoritas</p></li>
+        <li><span class="premium-icon premium-icon3"></span> <p>Guarda tus notas y leelas cuando quieras</p></li>
+        <li><span class="premium-icon premium-icon4"></span> <p>Seguí a tus autores favoritos</p></li>
+        <li><span class="premium-icon premium-icon5"></span> <p>Personalizá tu perﬁl y ﬁltra tu contenido como quieras</p></li>
+      </ul>
+    </div>
+    <div class="step step-2 hidden">
+      <div class="bg"></div>
+      <h2>Te damos la bienvenida<br><b>Dictioz Premium</b></h2>
+    </div>
+  </div>
+  <div class="checkout-main">
+    <div class="process" style="display:none"><span>Procesando, por favor espere...</span></div>
+    <div class="step step-1">
+      <form id="pay" class="form-horizontal group-border-dashed" [formGroup]="checkoutForm" (ngSubmit)="submitForm(checkoutForm.value)" novalidate="">
+        <h2>Pago seguro</h2>
+        <p>Completa tus datos de pago para comenzar a disfrutar de Dictioz Premium</p>
+        <div class="alert alert-warning" style="display: none"><span class="alert-icon alert-icon-warning"></span> <p><b>UPS!</b> En este momento no podemos procesar tu pago.<br>Reintenta nuevamente en unos minutos.</p></div>
+        <div class="alert alert-error" style="display: none"><span class="alert-icon alert-icon-error"></span> <p>No se pudo procesar tu pago.<br>Asegurate de colocar correctamente los datos.</p></div>
+        <div class="form-group hidden">
+          <label class="control-label">Medio de pago</label>
+          <select formControlName="payment_method_id" id="paymentMethodId" name="paymentMethodId" class="form-control">
+            <option value="">Seleccione...</option>
+          </select>
+        </div>  
+        <div class="form-group">
+          <label class="control-label">Número de tarjeta <span class="card-icon card-icon1"></span></label>
+          <input type="text" formControlName="card_number" id="cardNumber" data-checkout="cardNumber" placeholder="Número" class="form-control" value="{{payment.card_number}}">
+        </div>  
+        <div class="form-group">
+          <label class="control-label">Código de seguridad <span class="card-icon card-icon2"></span></label>
+          <input type="text" formControlName="card_security_code" id="securityCode" value="{{payment.card_security_code}}" data-checkout="securityCode" placeholder="Código" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="control-label">Fecha de vencimiento</label>
+          <div class="col">
+            <select id="cardExpirationMonth" formControlName="card_expiration_month" data-checkout="cardExpirationMonth" class="form-control">
+              <option value="">Mes</option>
+              <option *ngFor="let month of months" [value]="month">{{month}}</option>
+            </select>
           </div>
-          <div class="step-content">
-            <form id="pay" class="form-horizontal group-border-dashed" [formGroup]="checkoutForm" (ngSubmit)="submitForm(checkoutForm.value)" novalidate="">
-              <div class="step-pane active" id="step1">
-                <div class="form-group no-padding">
-                  <div class="col-sm-9 col-sm-offset-1">
-                    <h4 class="hthin">Ingresá tus datos</h4>
-                    <div class="alert alert-error alert-danger" style="display:none"></div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Nombre Completo</label>
-                  <div class="col-sm-6">
-                    <input type="text" formControlName="payer_name" id="cardholderName" data-checkout="cardholderName" value="{{payment.payer_name}}" class="form-control" placeholder="Nombre">
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Email</label>
-                  <div class="col-sm-6">
-                    <input type="text" formControlName="payer_email" id="email" value="{{payment.payer_email}}" class="form-control" placeholder="Email">
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Documento</label>
-                  <div class="col-sm-3">
-                    <select formControlName="payer_identification_type" id="docType" data-checkout="docType" class="form-control" value="{{payment.payer_identification_number}}">
-                    </select>
-                  </div>
-                  <div class="col-sm-3">
-                    <input formControlName="payer_identification_number" type="text" id="docNumber" data-checkout="docNumber" placeholder="Documento" class="form-control">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-9 col-sm-offset-1">
-                    <h4 class="hthin">Elige el medio de pago</h4>
-                    <div class="alert alert-error alert-danger" style="display:none"></div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Importe</label>
-                  <div class="col-sm-6">
-                    <input type="text" formControlName="amount" id="amount" value="{{payment.amount}}" class="form-control" placeholder="Importe">
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Medio de pago</label>
-                  <div class="col-sm-3">
-                    <select formControlName="payment_method_id" id="paymentMethodId" name="paymentMethodId" class="form-control">
-                      <option value="">Seleccione...</option>
-                    </select>
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Número de tarjeta</label>
-                  <div class="col-sm-6">
-                    <input type="text" formControlName="card_number" id="cardNumber" data-checkout="cardNumber" placeholder="Número" class="form-control" value="{{payment.card_number}}">
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Fecha de vencimiento</label>
-                  <div class="col-sm-3">
-                    <select id="cardExpirationMonth" formControlName="card_expiration_month" data-checkout="cardExpirationMonth" class="form-control">
-                      <option value="">Mes</option>
-                      <option *ngFor="let month of months" [value]="month">{{month}}</option>
-                    </select>
-                  </div>
-                  <div class="col-sm-3">
-                    <select id="cardExpirationYear" formControlName="card_expiration_year" data-checkout="cardExpirationYear" class="form-control">
-                      <option value="">Año</option>
-                      <option *ngFor="let key of objectKeys(years)" [value]="key">{{years[key]}}</option>
-                    </select>
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Código de seguridad</label>
-                  <div class="col-sm-3">
-                    <input type="text" formControlName="card_security_code" id="securityCode" value="{{payment.card_security_code}}" data-checkout="securityCode" placeholder="Código" class="form-control">
-                  </div>
-                </div>
-                <div class="form-group issuer-field">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Banco</label>
-                  <div class="col-sm-6">
-                    <select formControlName="issuer_id" id="issuer" data-checkout="cardIssuerId" class="form-control">
-                      <option value="">Seleccione...</option>
-                    </select>
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Cuotas</label>
-                  <div class="col-sm-6">
-                    <select formControlName="installments" id="installments" data-checkout="cardInstallmentId" class="form-control">
-                      <option value="">Seleccione...</option>
-                    </select>
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <label class="col-sm-3 col-sm-offset-1 control-label">Total a pagar</label>
-                  <div class="col-sm-3">
-                    <p class="totalWrapper">$ <span class="total">{{payment.amount}}</span></p>
-                  </div>
-                </div>  
-                <div class="form-group">
-                  <div class="col-sm-offset-4 col-sm-8">
-                    <button data-wizard="#wizard1" type="submit" class="btn btn-primary wizard-confirm">
-                      Confirmar pago
-                    </button>
-                  </div>
-                </div>  
-              </div>
-              <div class="step-pane confirmation hidden" id="step2">
-                <div class="form-group no-padding">
-                  <div class="col-sm-10 col-sm-offset-1">
-                    <h4 class="hthin">Confirmación del pago</h4>
-                    <div class="alert alert-success">
-                      El pago fue realizado con éxito.
-                    </div>
-                    <div class="alert alert-danger">
-                      Ha ocurrido un error al realizar el pago. Por favor intente nuevamente más tarde.
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-10 col-sm-offset-1">
-                    <a href="/subcriptions/complete" class="btn btn-primary wizard-end">Finalizar</a>
-                  </div>
-                </div>  
-              </div>
-            </form>
+          <div class="col">
+            <select id="cardExpirationYear" formControlName="card_expiration_year" data-checkout="cardExpirationYear" class="form-control">
+              <option value="">Año</option>
+              <option *ngFor="let key of objectKeys(years)" [value]="key">{{years[key]}}</option>
+            </select>
+          </div>
+        </div>  
+        <!-- <div class="form-group hidden issuer-field">
+          <label class="control-label">Banco</label>
+          <select formControlName="issuer_id" id="issuer" data-checkout="cardIssuerId" class="form-control">
+            <option value="1">Seleccione...</option>
+          </select>
+        </div>  
+        <div class="form-group hidden installments-field">
+          <label class="control-label">Cuotas</label>
+          <select formControlName="installments" id="installments" data-checkout="cardInstallmentId" class="form-control">
+            <option value="1">Seleccione...</option>
+          </select>
+        </div>   -->
+        <div class="form-group">
+          <label class="control-label">Titular</label>
+          <input type="text" formControlName="payer_name" id="cardholderName" data-checkout="cardholderName" value="{{payment.payer_name}}" class="form-control" placeholder="Nombre">
+        </div>  
+        <div class="form-group">
+          <label class="control-label">Documento</label>
+          <div class="col">
+            <select formControlName="payer_identification_type" id="docType" data-checkout="docType" class="form-control" value="{{payment.payer_identification_number}}">
+            </select>
+          </div>
+          <div class="col">
+            <input formControlName="payer_identification_number" type="text" id="docNumber" data-checkout="docNumber" placeholder="Documento" class="form-control">
           </div>
         </div>
+        <div class="form-group form-footer">
+          <div class="mp-logo"></div>
+          <button type="submit" class="btn btn-submit">
+            TERMINAR
+          </button>
+        </div>  
+        <input type="hidden" formControlName="payer_email" id="email" value="{{payment.payer_email}}" class="form-control" placeholder="Email">
+        <input type="hidden" formControlName="amount" id="amount" value="{{payment.amount}}" class="form-control" placeholder="Importe">
+        <input type="hidden" value="1" data-checkout="cardIssuerId">
+        <input type="hidden" value="1" data-checkout="cardInstallmentId">
+      </form>
+    </div>
+    <div class="step step-2 hidden">
+      <div class="success-icon"></div>
+      <p class="success-txt">Ya estás suscripto al plan <b>Premium</b></p>
+      <h3>¡Que disfrutes tu experiencia!</h3>
+      <p>Gracias a los usuarios como tu podemos colaborar con autores de todo el mundo</p>
+      <div>
+        <a [routerLink]="['/']" class="btn btn-start">COMENZAR</a>
+      </div>
+      <div>
+        <a [routerLink]="['/profile']" class="link">Ir a mi cuenta</a>
       </div>
     </div>
   </div>

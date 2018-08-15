@@ -15,6 +15,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { MaterialModule } from './shared/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { ModalService } from './components/modal/modal.service';
 import { ArticleSliderComponent } from './shared/article/article-slider/article-slider.component';
 import { ArticleCardComponent } from './shared/article/article-card/article-card.component';
 import { HomeUserComponent } from './components/home-user/home-user.component';
@@ -43,6 +45,7 @@ import { CheckoutComponent } from './views/checkout/checkout.component';
     AppComponent,
     HomeComponent,
     NavbarComponent,
+    ModalComponent,
     ArticleLatestComponent,
     ArticleSliderComponent,
     ArticleBaseComponent,
@@ -62,7 +65,7 @@ import { CheckoutComponent } from './views/checkout/checkout.component';
     AuthorHeaderComponent,
     SocialMediaComponent,
     AuthorProfileComponent,
-    CheckoutComponent,
+    CheckoutComponent
   ],
   imports: [
     FilterPipeModule,
@@ -84,7 +87,8 @@ import { CheckoutComponent } from './views/checkout/checkout.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    ModalService
   ],
   bootstrap: [AppComponent]
 })
