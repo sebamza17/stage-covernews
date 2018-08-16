@@ -1,0 +1,11 @@
+{
+    "body":{
+        "admin":{
+            "email": "test@test.com",
+            "password": "test"
+        }
+    },
+    "headers":{
+        "token":"AK2wQ-wCcsHYjmuHNkTn4YzqNLtCtqYFkvqbO1infSV4klxN2B3q8oLQa3xMPUZlzWJakVTfHf317WZHUYMpNmuiRisxwvs4DaOrjjrWYUUeNsNroz2k_Dwiomwe2C98N1N4IYTlUoquVdXFDIv_2xH8phcbMQAVT2xH9OktPzdVEbx7hmTMV7Y0prWxhmgjUdPfN0V_k1itDZ87FUArzykHoklk8BkixYnZItG5ibSHuFgZRyAWASuJW_rDqFJ5hr8BpJiePJCqzAbtiQJHHzSBYLEoSzx3deTyuQnX6ChlcSKvt3Gu6zBU3CpzZyQpt_KCQkSDd9Sr"
+    }
+}
