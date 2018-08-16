@@ -1,0 +1,39 @@
+service: serverless-article
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:env, 'test'}
+  region: us-east-1
+  environment:
+    ENV: ${opt:env}
+
+functions:
+  # PAYMENT SECCION
+  getArticles:
+    handler: payment.get
+    stageVariables: 
+      - stage : ${opt:env, 'test'}
+    events:
+      - http:
+          path: payment/all
+          method: get
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  
