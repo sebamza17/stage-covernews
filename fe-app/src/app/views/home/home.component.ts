@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { HomeService } from './home.service';
 import { Category } from '../../shared/category/Category';
-import { CategoryService } from "../../shared/category/category.service";
+import { CategoryService } from '../../shared/category/category.service';
 import { Author } from '../../shared/author/Author';
-import { AuthorService } from "../../shared/author/author.service";
-import { Article } from "../../shared/article/Article";
-import { ArticleService } from "../../shared/article/article.service";
+import { AuthorService } from '../../shared/author/author.service';
+import { Article } from '../../shared/article/Article';
+import { ArticleService } from '../../shared/article/article.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
   public readLaterArticleListLoading = false;
 
   constructor(
+    public globals: Globals,
     private homeService: HomeService,
     private categoryService: CategoryService,
     private authorService: AuthorService,
@@ -51,6 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.globals);
     this.walkThrough();
   }
 
