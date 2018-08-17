@@ -5,8 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "jest",
-    "deploy-stage":"sls deploy --env stage",
-    "deploy-prod":"sls deploy --env prod"
+    "deploy-stage": "sls deploy --env stage",
+    "deploy-prod": "sls deploy --env prod"
   },
   "author": "",
   "license": "MIT",
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "mercadopago": "^1.0.19",
     "mongodb": "^3.0.10",
     "mongoose": "^5.1.5",
     "request": "^2.88.0",
