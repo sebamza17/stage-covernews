@@ -11,7 +11,7 @@ export class ArticleContentComponent implements OnInit {
   @Input() isCleanText: boolean;
 
   constructor() {
-    
+
   }
 
   ngOnInit() {
@@ -24,17 +24,16 @@ export class ArticleContentComponent implements OnInit {
     }
   }
 
-  parseContent(){
-    if(!this.articleContent){
+  parseContent() {
+    if (!this.articleContent) {
       return;
     }
-    if(this.articleContent.indexOf('{"content":"') !== -1){
-      this.articleContent = this.articleContent.replace('{"content":"','');
+    if (this.articleContent.indexOf('{"content":"') !== -1) {
+      this.articleContent = this.articleContent.replace('{"content":"', '');
     }
-    if(this.articleContent.indexOf('}') !== -1){
-      this.articleContent = this.articleContent.replace('{"content":"','');
+    if (this.articleContent.indexOf('}') !== -1) {
+      this.articleContent = this.articleContent.replace('{"content":"', '');
     }
-    this.articleContent = this.articleContent.replace('}','');
-    console.log(this.articleContent);
+    this.articleContent = this.articleContent.replace('}', '');
   }
 }
