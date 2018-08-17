@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user/user.service';
 import { ModalService } from '../../components/modal/modal.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'ui-navbar',
@@ -11,7 +12,11 @@ export class NavbarComponent implements OnInit {
 
   public status: Boolean = false;
 
-  constructor(private user: UserService, public modalSvc: ModalService) {
+  constructor(
+    private globals: Globals,
+    private user: UserService,
+    private modalSvc: ModalService
+  ) {
   }
 
   public toggle() {
@@ -26,10 +31,26 @@ export class NavbarComponent implements OnInit {
    * Login action
    */
   onLogin() {
-    const user = this.user.socialLogin('facebook');
-    user.then((data) => {
-      console.log(data);
-    });
+    this.user.socialLogin('facebook')
+      .then((data) => {
+        var user = <any>data;
+
+        // Set values on globals
+        this.globals.setValue('user', 'user', {
+          displayName: user.displayName,
+          email: user.email,
+          emailVerified: user.emailVerified,
+          phoneNumber: user.phoneNumber,
+          photoUrl: user.photoUrl,
+          refreshToken: user.refreshToken,
+          uid: user.uid,
+        });
+        this.globals.setValue('user', 'isLoggedIn', true);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('Login: Failed');
+      });
   }
 
   /**

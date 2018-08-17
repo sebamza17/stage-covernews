@@ -25,6 +25,24 @@ provider:
     mp_plan_id: ${self:custom.environment.MP.plan_id}
 
 functions:
+  # NOTIFICATION SECCION
+  notification:
+    handler: notification.post
+    stageVariables: 
+      - stage : ${opt:env, 'test'}
+    events:
+      - http:
+          path: notify
+          method: post
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
   # PAYMENT SECCION
   addPayment:
     handler: payment.add

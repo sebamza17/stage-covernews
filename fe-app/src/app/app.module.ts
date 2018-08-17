@@ -13,6 +13,8 @@ import { TokenInterceptor } from './shared/interceptor.service';
 import { HttpErrorHandler } from './shared/http-error-handler.service';
 import { MessageService } from './shared/message.service';
 
+import { Globals } from './globals'
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { MaterialModule } from './shared/material.module';
@@ -87,6 +89,7 @@ import { CheckoutComponent } from './views/checkout/checkout.component';
     AppRoutingModule
   ],
   providers: [
+    Globals,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

@@ -7,6 +7,7 @@ import { Author } from '../../shared/author/Author';
 import { AuthorService } from '../../shared/author/author.service';
 import { Article } from '../../shared/article/Article';
 import { ArticleService } from '../../shared/article/article.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
   public readLaterArticleListLoading = false;
 
   constructor(
+    public globals: Globals,
     private homeService: HomeService,
     private categoryService: CategoryService,
     private authorService: AuthorService,
@@ -51,6 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.globals);
     this.walkThrough();
   }
 
@@ -108,7 +111,6 @@ export class HomeComponent implements OnInit {
   private getPopularAuthors() {
     this.authorService.getAllAuthors()
       .subscribe(data => {
-        console.log(data);
         this.authors = data;
       });
   }
