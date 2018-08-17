@@ -10,6 +10,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from './shared/interceptor.service';
+import { HttpErrorHandler } from './shared/http-error-handler.service';
+import { MessageService } from './shared/message.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -90,6 +92,8 @@ import { CheckoutComponent } from './views/checkout/checkout.component';
       useClass: TokenInterceptor,
       multi: true
     },
+    HttpErrorHandler,
+    MessageService,
     ModalService
   ],
   bootstrap: [AppComponent]

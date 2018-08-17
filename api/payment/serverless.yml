@@ -1,13 +1,15 @@
-service: serverless-article
+service: serverless-payment
 
 plugins:
   - serverless-webpack
   - serverless-offline
 
 custom:
+  stage: ${opt:stage, self:provider.stage}
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  environment: ${file(./env.yml):${self:custom.stage}, file(./env.yml):default}
 
 provider:
   name: aws
@@ -16,17 +18,39 @@ provider:
   region: us-east-1
   environment:
     ENV: ${opt:env}
+    mp_sandbox: ${self:custom.environment.MP.sandbox}
+    mp_public_key: ${self:custom.environment.MP.public_key}
+    mp_access_token: ${self:custom.environment.MP.access_token}
+    mp_notification_url: ${self:custom.environment.MP.notification_url}
+    mp_plan_id: ${self:custom.environment.MP.plan_id}
 
 functions:
   # PAYMENT SECCION
-  getArticles:
-    handler: payment.get
+  addPayment:
+    handler: payment.add
     stageVariables: 
       - stage : ${opt:env, 'test'}
     events:
       - http:
-          path: payment/all
-          method: get
+          path: payment/add
+          method: post
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  refundPayment:
+    handler: payment.refund
+    stageVariables: 
+      - stage : ${opt:env, 'test'}
+    events:
+      - http:
+          path: payment/refund
+          method: post
           cors:
               origin: '*'
               headers:

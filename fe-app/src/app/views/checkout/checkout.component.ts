@@ -5,18 +5,20 @@ import '../../shared/mercadopago/mercadopago-client';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-// import { MercadopagoService } from '../../shared/mercadopago/mercadopago.service';
+import { MercadopagoService } from '../../shared/mercadopago/mercadopago.service';
 
 declare const Mercadopago: any;
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  // providers: [ MercadopagoService ],
+  providers: [ MercadopagoService ],
   styleUrls: ['./checkout.component.less']
 })
 export class CheckoutComponent implements OnInit {
   env = environment.mercadopago.sandbox ? 'test' : 'prod';
+  notificationUrl = environment.mercadopago[this.env].notificationUrl;
+  planId = environment.mercadopago[this.env].planId;
   objectKeys = Object.keys;
   months = Array(12).fill(0).map((x, i) => {
     const str = '' + (i + 1), pad = '00';
@@ -33,15 +35,14 @@ export class CheckoutComponent implements OnInit {
   })();
   checkoutForm: FormGroup;
   payment = {
-    id: 1,
     amount: 10,
     payer_name: 'APRO',
-    payer_email: 'test@test.com',
+    payer_email: 'marcos0x@gmail.com',
     payer_identification_type: 'dni',
     payer_identification_number: '11222333',
   };
 
-  constructor(/* private mercadopagoSvc: MercadopagoService, */ private formBuilder: FormBuilder) {
+  constructor(private mercadopagoSvc: MercadopagoService, private formBuilder: FormBuilder) {
     this.createForm();
   }
 
@@ -291,28 +292,12 @@ export class CheckoutComponent implements OnInit {
       $('.btn-submit').removeAttr('disabled');
       // $('.checkout .process').hide();
     } else {
-      const form = document.querySelector('#pay');
-      const card = document.createElement('input');
-      card.setAttribute('name', 'token');
-      card.setAttribute('type', 'hidden');
-      card.setAttribute('value', response.id);
-      form.appendChild(card);
+      // TODO / In progress...
+      formData.token = response.id;
+      formData.user_id = 1;
 
-      $('#cardNumber').removeAttr('name');
-      $('#cardExpirationMonth').removeAttr('name');
-      $('#cardExpirationYear').removeAttr('name');
-      $('#securityCode').removeAttr('name');
-      $('#docNumber').removeAttr('name');
-      $('#docType').removeAttr('name');
-      $('#cardholderName').removeAttr('name');
-
-      // TEST
-      $('.step1').addClass('hidden');
-      $('.step2').removeClass('hidden');
-
-      /*
       this.mercadopagoSvc.createPayment(formData)
-        .subscribe((res: any) => {
+        .then((res: any) => {
           $('.btn-submit').removeAttr('disabled');
           $('.checkout .process').hide();
           const payment = res.payment.response;
@@ -323,14 +308,18 @@ export class CheckoutComponent implements OnInit {
               location.href = '/';
             }, 5000);
           } else {
-            $('.alert-error').show().find('p').html(this.mercadopagoSvc.getPaymentStatus(payment));
+            $('.alert-error').show().find('p').html(this.mercadopagoSvc.getPaymentStatus({ ...payment, ...{
+              paymentMethod: $('[name=paymentMethodId] option:selected').text(),
+              amount: $('#amount').val(),
+              installments: $('#installments').val(),
+            }}));
           }
-        }, () => {
+        })
+        .catch((error) => {
           $('.alert-error').show();
           $('.btn-submit').removeAttr('disabled');
           // $('.checkout .process').hide();
         });
-      */
     }
   }
 

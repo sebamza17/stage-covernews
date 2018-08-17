@@ -8,7 +8,8 @@ export const environment = {
     article: 'https://5cufvngwok.execute-api.us-east-1.amazonaws.com/stage',
     author: 'https://breb1wv546.execute-api.us-east-1.amazonaws.com/stage',
     category: 'https://cdr12lpah1.execute-api.us-east-1.amazonaws.com/stage',
-    user: 'https://mjxdq979n3.execute-api.us-east-1.amazonaws.com/stage'
+    user: 'https://mjxdq979n3.execute-api.us-east-1.amazonaws.com/stage',
+    payment: 'https://mjxdq979n3.execute-api.us-east-1.amazonaws.com/stage'
   },
   firebase: {
     apiKey: 'AIzaSyD7nmlxbZyPyOoWFrIiKHfS1ryeBWtcu_U',
@@ -20,17 +21,18 @@ export const environment = {
   },
   mercadopago: {
     sandbox: true,
-    basic: {
-      clientId: '1739500474548132',
-      clientSecret: 'Aip9ODxx34dql2Vx3mt3OUuOGz2jzglR',
+    appId: '341515166',
+    client: {
+      clientId: '1187827521471485',
+      clientSecret: '99vCgsrco2cUoSpQ7yEZxlUlnvrJcU7Y'
     },
     test: {
-      publicKey: 'TEST-033f92fb-f736-4d57-8b29-f626896344af',
-      accessToken: 'TEST-1739500474548132-062914-1fa4eb39460345a789af695826f80419__LC_LD__-57621646',
+      publicKey: 'TEST-23fb62d3-a998-4697-9415-2a8bbc60e908',
+      accessToken: 'TEST-1187827521471485-080614-cd5ff36a09002eb14ad58b860e7c9fb3-341515166'
     },
     prod: {
-      publicKey: 'APP_USR-a41a05e4-be71-4665-9849-3659d99a140a',
-      accessToken: 'APP_USR-1739500474548132-062914-c0409ae9942fafd2be202aba600079f8__LD_LC__-57621646'
+      publicKey: 'APP_USR-5563c161-17da-44f8-8a98-c7381adf5e10',
+      accessToken: 'APP_USR-1187827521471485-080614-3557ae141d2084640f8a0fe91d7fccd6-341515166'
     },
   },
 };
