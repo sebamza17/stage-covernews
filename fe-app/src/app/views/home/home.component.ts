@@ -108,7 +108,6 @@ export class HomeComponent implements OnInit {
   private getPopularAuthors() {
     this.authorService.getAllAuthors()
       .subscribe(data => {
-        console.log(data);
         this.authors = data;
       });
   }

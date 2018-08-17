@@ -17,6 +17,13 @@
 
   animation: gradientAnim 10s ease infinite;
 
+  @media (max-width: @breakpoint-s) {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   @keyframes gradientAnim {
     0% {
       background-position: 0 50%;
@@ -36,11 +43,27 @@
     width: 100%;
     height: 100%;
 
+    @media (max-width: @breakpoint-s) {
+      display: block;
+    }
+
+    // Image
     .landing-banner__image-wrapper {
+      .padding-vertical-full;
       width: 40%;
       flex-shrink: 0;
       flex-grow: 0;
-      .padding-vertical-full;
+
+      @media (max-width: @breakpoint-s) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+      }
+
+      @media (max-width: @breakpoint-xs) {
+        .padding-vertical-half;
+        width: 80%;
+      }
 
       .landing-banner__image {
         .image-ratio;
@@ -49,35 +72,91 @@
         background-repeat: no-repeat;
         background-position: center left;
         background-size: contain;
+
+        @media (max-width: @breakpoint-s) {
+          background-position: center center;
+        }
+
       }
     }
 
+    // Text
     .landing-banner__text {
-      .font-color-white;
       .fw;
       .fw--j-center;
       .fw--a-center;
+      .font-color-white;
+      .padding-left-full;
       flex-grow: 0;
       flex-shrink: 0;
       width: 60%;
       flex-direction: column;
-      .padding-left-full;
+
+      @media (max-width: @breakpoint-s) {
+        display: block;
+        width: 100%;
+        padding-left: 0;
+      }
 
       .landing-banner__button {
         .fw;
         .fw--j-center;
         .padding-top-full;
+
+        @media (max-width: @breakpoint-s) {
+          .padding-top-half;
+        }
+
+        .button {
+          @media (max-width: @breakpoint-s) {
+            .font-size-xxl;
+            .padding-bottom-quarter;
+          }
+
+          @media (max-width: @breakpoint-xs) {
+            .font-size-l;
+          }
+        }
+
       }
 
       .landing-banner__title {
         .font-weight-bold;
         margin-bottom: 0;
+        text-align: center;
+
+        @media (max-width: @breakpoint-s) {
+          .margin-top-half;
+        }
       }
 
       .landing-banner__subtitle {
         .font-weight-light;
+        @media (max-width: @breakpoint-s) {
+          text-align: center;
+        }
       }
 
+    }
+
+    // Logo
+    .landing-banner__logo {
+      display: none;
+      text-align: center;
+
+      @media (max-width: @breakpoint-s) {
+        display: block;
+        margin: 0 auto;
+      }
+
+      img {
+        width: 300px;
+
+        @media (max-width: @breakpoint-xs) {
+          width: 200px;
+        }
+
+      }
     }
 
   }
