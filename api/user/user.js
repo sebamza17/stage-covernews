@@ -1,29 +1,30 @@
-import {success, failure} from './libs/response-lib';
-import {getConnection} from './libs/mongodb-connect';
+import { success, failure } from './libs/response-lib';
+import { getConnection } from './libs/mongodb-connect';
+import { AWSCognito } from 'aws-sdk';
 
 /**
- * Get 20 authors
+ * Refresh the user token
  * @param {*} event 
  * @param {*} context 
  * @param {*} callback 
  */
-export function refreshToken (event, context, callback) {
+export function refreshToken(event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
     let body = event.body;
 
-    if(typeof body == "string"){
-        try{
+    if (typeof body == "string") {
+        try {
             body = JSON.parse(body);
-        }catch(e){
+        } catch (e) {
             callback(null, failure(e));
             return;
         }
     }
 
-    if(!body.user){
-        callback(null, failure("Author is udenfined"));
+    if (!body.user) {
+        callback(null, failure("User is udenfined"));
         return;
     }
 
@@ -31,22 +32,22 @@ export function refreshToken (event, context, callback) {
     userObj.refreshToken = body.refreshToken;
 
     getConnection()
-    .then((db)=>{
-        const user = db.collection('user');
-        user.update(
-            {uid: userObj.uid},
-            {$set:userObj},
-            {upsert: true, new: true},
-            (err,doc)=>{
-                if(err){
-                    callback(null, failure(err));
-                    return;
-                }
-                callback(null, success(doc));
-        })
-    }).catch((err)=>{
-        callback(null, failure(err));
-    });
+        .then((db) => {
+            const user = db.collection('user');
+            user.update(
+                { uid: userObj.uid },
+                { $set: userObj },
+                { upsert: true, new: true },
+                (err, doc) => {
+                    if (err) {
+                        callback(null, failure(err));
+                        return;
+                    }
+                    callback(null, success(doc));
+                })
+        }).catch((err) => {
+            callback(null, failure(err));
+        });
 };
 
 
@@ -56,22 +57,22 @@ export function refreshToken (event, context, callback) {
  * @param {*} context 
  * @param {*} callback 
  */
-export function getByToken (event, context, callback) {
+export function getByToken(event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
     let header = event.headers;
 
-    if(typeof header == "string"){
-        try{
+    if (typeof header == "string") {
+        try {
             header = JSON.parse(header);
-        }catch(e){
+        } catch (e) {
             callback(null, failure(e));
             return;
         }
     }
 
-    if(!header.token){
+    if (!header.token) {
         callback(null, failure("Token is udenfined"));
         return;
     }
@@ -79,19 +80,35 @@ export function getByToken (event, context, callback) {
     let token = header.token;
 
     getConnection()
-    .then((db)=>{
-        const user = db.collection('user');
-        user.findOne(
-            {refreshToken: token},
-            {uid: 1},
-            (err,doc)=>{
-                if(err){
-                    callback(null, failure(err));
-                    return;
-                }
-                callback(null, success(doc));
-        })
-    }).catch((err)=>{
-        callback(null, failure(err));
-    });
+        .then((db) => {
+            const user = db.collection('user');
+            user.findOne(
+                { refreshToken: token },
+                { uid: 1 },
+                (err, doc) => {
+                    if (err) {
+                        callback(null, failure(err));
+                        return;
+                    }
+                    callback(null, success(doc));
+                })
+        }).catch((err) => {
+            callback(null, failure(err));
+        });
+};
+
+
+/**
+ * Get username from IdToken Cognito 
+ * @param {*} event 
+ * @param {*} context 
+ * @param {*} callback 
+ */
+export function getUsernameFromCognito(event, context, callback) {
+
+    context.callbackWaitsForEmptyEventLoop = false;
+    
+    var username = event.requestContext.authorizer.claims.email;
+
+    callback(null, success("Ingresaste correctamente con el user: " + username));
 };
