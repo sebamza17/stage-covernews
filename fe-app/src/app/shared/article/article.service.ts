@@ -161,6 +161,9 @@ export class ArticleService extends BaseService {
 
     // If article is already on the list, remove it and save list, if not just save it and return
     if (currentSavedArticleIdList.includes(article._id)) {
+      if (!article) {
+        return false
+      }
       const articleIdIndex = currentSavedArticleIdList.indexOf(article._id);
       currentSavedArticleIdList.splice(articleIdIndex, 1);
       await this.localStorage.setItem('savedArticleIdList', currentSavedArticleIdList).toPromise();
@@ -179,6 +182,9 @@ export class ArticleService extends BaseService {
    * @returns {Promise<boolean>}
    */
   public async isOnReadLaterList(article: Article) {
+    if (!article) {
+      return false
+    }
     const currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
     return currentSavedArticleIdList.indexOf(article._id) > -1;
   }
