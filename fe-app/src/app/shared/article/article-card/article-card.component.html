@@ -12,10 +12,10 @@
 
   <!-- Wrapper -->
   <div class="article-card__wrapper">
-
     <!-- Image -->
     <div *ngIf="article.image && article.image !== 'undefined'"
-         class="article-card__image" [style.background-image]="'url(' + article.image + ')'"></div>
+    [ngStyle]='{"background-image": "URL(\""+article.image+"\")"}'
+         class="article-card__image"></div>
 
     <div *ngIf="!(article.image && article.image !== 'undefined')"
          class="article-card__image article-card__image--placeholder"></div>
