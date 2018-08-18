@@ -1,65 +1,63 @@
 <a class="author-card"
-     href="/author/{{author._id}}"
-     (click)="follow(author._id)"
-     [ngClass]="{'author-card--placeholder': !author._id}">
+   href="/author/{{author._id}}"
+   (click)="follow(author._id)"
+   [ngClass]="{'author-card--placeholder': !author._id}">
 
-    <!-- Head -->
-    <div class="author-card__head">
+  <!-- Head -->
+  <div class="author-card__head">
 
-        <!-- Note count -->
-        <div>
-            <i class="icon ion-md-copy"></i> 1125
-        </div>
-        <!-- end Note count -->
-
-        <!-- Notification count -->
-        <div>
-            3
-        </div>
-        <!-- end Notification count -->
-
+    <!-- Note count -->
+    <div>
+      <i class="icon ion-md-copy"></i> 1125
     </div>
-    <!-- end Head -->
+    <!-- end Note count -->
 
-    <!-- Body -->
-    <div class="author-card__body">
+    <!-- Notification count -->
+    <div>
+      3
+    </div>
+    <!-- end Notification count -->
 
-        <!-- Avatar -->
-        <div class="author-card__avatar">
+  </div>
+  <!-- end Head -->
 
+  <!-- Body -->
+  <div class="author-card__body">
+
+    <!-- Avatar -->
+    <div class="author-card__avatar" [style.background-image]="'url(' + author.avatar + ')'"></div>
+    <!-- end Avatar -->
+
+    <!-- Right info -->
+    <div class="author-card__info">
+
+      <div class="wrapper">
+
+        <div class="author-card__name">
+          {{author.name}}
         </div>
-        <!-- end Avatar -->
 
-        <!-- Right info -->
-        <div class="author-card__info">
+        <div class="fw fw--a-center fw--j-space-between width-full">
 
-            <div class="wrapper">
+          <a class="button button--outline button--red button--uppercase button--xs">
+            Seguir
+          </a>
 
-                <div class="author-card__name">
-                    {{author.name}}
-                </div>
-
-                <div class="fw fw--a-center fw--j-space-between width-full">
-
-                    <a class="button button--outline button--red button--uppercase button--xs">
-                        Seguir
-                    </a>
-
-                    <div class="fw fw--a-center">
-                        <i class="icon ion-md-heart font-color-brand-red"></i>
-                        <div class="padding-left-eighth">
-                            182
-                        </div>
-                    </div>
-
-                </div>
-
+          <div class="fw fw--a-center">
+            <i class="icon ion-md-heart font-color-brand-red"></i>
+            <div class="padding-left-eighth">
+              182
             </div>
+          </div>
 
         </div>
-        <!-- end Right info -->
+
+      </div>
 
     </div>
-    <!-- end Body -->
+    <!-- end Right info -->
+
+  </div>
+  <!-- end Body -->
 
 </a>
