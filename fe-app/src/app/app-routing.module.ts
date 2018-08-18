@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 
 import { HomeUserComponent } from './components/home-user/home-user.component';
 import { HomeComponent } from './views/home/home.component';
 import { ArticleComponent } from "./views/article/article.component";
-import {AuthorProfileComponent} from "./views/author-profile/author-profile.component";
+import { AuthorProfileComponent } from "./views/author-profile/author-profile.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -16,7 +16,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, <ExtraOptions>{
+    scrollPositionRestoration: true,
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
