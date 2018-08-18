@@ -11,8 +11,7 @@ export class ArticleCardComponent extends ArticleBaseComponent {
   @Input() isTransparent: boolean;
 
   ngOnInit() {
-    if (this.showCategory && !this.article.categoryName) {
-      console.log("Call");
+    if (this.showCategory && !this.article.categoryName && this.article.category) {
       this.getCategory();
     }
     this.checkIfIsReadLaterList();

@@ -17,6 +17,12 @@ export class ArticleLatestComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.articles = <Article[]>this.articleService.generatePlaceholders(8, {
+      title: '██ ███ ██████',
+      authorName: '██ ██████',
+      content: '██████ ███ █████████ ██████ ████████████ ███ ██ ██████ ██ ██████ ████ ████████ ██ ██',
+      categoryName: '█████████'
+    });
     this.getLatestArticles();
   }
 

@@ -12,13 +12,12 @@ export class NavbarComponent implements OnInit {
   public status: Boolean = false;
 
   constructor(
-    private globals: Globals,
+    public globals: Globals,
     private user: UserService
   ) {
   }
 
   public toggle() {
-    console.log(this.status);
     this.status = !this.status;
   };
 
@@ -56,5 +55,6 @@ export class NavbarComponent implements OnInit {
    */
   onLogout() {
     this.user.logout();
+    this.globals.setValue('user', 'isLoggedIn', false);
   }
 }

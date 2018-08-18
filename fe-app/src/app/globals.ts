@@ -19,13 +19,26 @@ export class Globals {
   public misc = {};
 
   /**
+   * Init for globals vars
+   * Retrieve all data from LS and sets it on static keys
+   */
+  public async init() {
+    this.user = await this.getGroup('user') || {
+      user: null,
+      isLoggedIn: false,
+    };
+    this.misc = await this.getGroup('misc');
+  }
+
+  /**
    * Set a specific value on global variables
    * @param group
    * @param key
    * @param value
    */
   public setValue(group: string = 'misc', key, value) {
-    this[group][key] = value;
+    let groupObject = this[group] || {};
+    groupObject[key] = value;
     this.localStorage.setItem(group, this[group]).toPromise()
       .then(() => {
         console.log('Globals: Setting ' + key + ': ');
@@ -40,10 +53,60 @@ export class Globals {
    */
   public async getValue(group: string = 'misc', key) {
     const groupValue = await this.localStorage.getItem(group).toPromise();
-
     console.log('Globals: Getting ' + key + ': ');
     console.log(groupValue[key]);
+    if (!groupValue) {
+      this[group] = null;
+      return false;
+    }
+    if (!groupValue[key]) {
+      this[group][key] = null;
+      return false;
+    }
+    this[group][key] = groupValue[key];
     return groupValue[key];
+  }
+
+  /**
+   * Removes a value from global variables
+   * @param group
+   * @param key
+   */
+  public async removeValue(group: string, key = null) {
+    if (key) {
+
+      // Copy current group to store it on LS
+      let groupObject = Object.assign(this[group], {});
+      delete groupObject[key];
+
+      // Set to null local group
+      if (this[group] && this[group][key]) {
+        this[group][key] = null;
+      }
+
+      // Store on LS
+      this.localStorage.setItem(group, this[group]).toPromise()
+        .then(() => {
+          console.log('Globals: Removed key: ' + key + ' from: ' + group);
+          console.log(groupObject);
+        });
+
+    } else {
+
+      this[group] = null;
+      this.localStorage.removeItemSubscribe(group);
+      console.log('Globals: Removed group: ' + group);
+
+    }
+  }
+
+  /**
+   *
+   * @param group
+   */
+  public async getGroup(group) {
+    const groupValue = await this.localStorage.getItem(group).toPromise();
+    return groupValue;
   }
 
 }
