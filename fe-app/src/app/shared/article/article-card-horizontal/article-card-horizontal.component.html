@@ -8,7 +8,8 @@
 
     <!-- Image -->
     <div *ngIf="article.image && article.image !== 'undefined'"
-         class="article-card-horizontal__image" [style.background-image]="'url(' + article.image + ')'"></div>
+    [ngStyle]='{"background-image": "URL(\""+article.image+"\")"}'
+         class="article-card-horizontal__image"></div>
     <div *ngIf="!article.image"
          class="article-card-horizontal__image article-card-horizontal__image--placeholder"></div>
     <!-- end Image -->
