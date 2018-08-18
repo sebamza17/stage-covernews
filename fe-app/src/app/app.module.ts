@@ -39,6 +39,7 @@ import { AuthorHeaderComponent } from './components/author-header/author-header.
 import { SocialMediaComponent } from './components/social-media/social-media.component';
 import { AuthorProfileComponent } from './views/author-profile/author-profile.component';
 import { ArticleVerticalCardListComponent } from './shared/article/article-vertical-card-list/article-vertical-card-list.component';
+import { SafeStylePipe } from './pipes/safe-style.pipe';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ArticleVerticalCardListComponent } from './shared/article/article-verti
     DictiozFeaturesComponent,
     AuthorHeaderComponent,
     SocialMediaComponent,
-    AuthorProfileComponent
+    AuthorProfileComponent,
+    SafeStylePipe
   ],
   imports: [
     FilterPipeModule,

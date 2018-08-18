@@ -150,6 +150,10 @@ export class ArticleService extends BaseService {
    */
   public async toggleArticleFromReadLater(article: Article) {
 
+    if (!article._id) {
+      return false;
+    }
+
     // Get current article list, if none, creates an empty one
     let currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
     if (!currentSavedArticleIdList) {
@@ -184,6 +188,9 @@ export class ArticleService extends BaseService {
   public async isOnReadLaterList(article: Article) {
     if (!article) {
       return false
+    }
+    if (!article._id) {
+      return false;
     }
     const currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
     return currentSavedArticleIdList.indexOf(article._id) > -1;
