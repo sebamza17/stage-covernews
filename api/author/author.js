@@ -29,7 +29,7 @@ export function get (event, context, callback) {
     .then((db)=>{
         const authors = db.collection('journalist');
         authors.find({
-            $avatar: {
+            avatar: {
                 $exists: true
             }
         },{limit: limit, skip: skip}).toArray((err,doc)=>{

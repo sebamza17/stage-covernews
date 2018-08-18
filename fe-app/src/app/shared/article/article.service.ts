@@ -193,6 +193,9 @@ export class ArticleService extends BaseService {
       return false;
     }
     const currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
+    if(!currentSavedArticleIdList){
+      return false;
+    }
     return currentSavedArticleIdList.indexOf(article._id) > -1;
   }
 
