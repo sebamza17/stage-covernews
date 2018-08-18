@@ -2,6 +2,10 @@ import mongodb from 'mongodb';
 import {success, failure} from './libs/response-lib';
 import {getConnection} from './libs/mongodb-connect';
 
+let categories = false;
+
+clearMemoryCache();
+
 /**
  * Get 20 category
  * @param {*} event 
@@ -25,6 +29,11 @@ export function get (event, context, callback) {
         skip = parseInt(queryString.skip);
     }
 
+    if(categories){
+        callback(null, success(categories));
+        return;
+    }
+
     getConnection()
     .then((db)=>{
         const category = db.collection('category');
@@ -33,6 +42,7 @@ export function get (event, context, callback) {
                 callback(null, failure(err));
                 return;
             }
+            categories = doc;
             callback(null, success(doc));
         })
     }).catch((err)=>{
@@ -148,4 +158,13 @@ function parseQueryString(event,cb){
     }
 
     return query;
+}
+
+/**
+ * Clear Memory cache
+ */
+function clearMemoryCache(){
+    setTimeout(()=>{
+        categories = false;
+    },180000);
 }
