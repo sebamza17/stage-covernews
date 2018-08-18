@@ -6,6 +6,11 @@ import request from 'request';
 
 const s3 = new AWS.S3();
 
+let eachNoteByCategories = false;
+let eachNoteByAuthor = false;
+
+clearMemoryCache();
+
 /**
  * Get last articles
  * @param {*} event 
@@ -462,6 +467,11 @@ export function getArticlesByCategories(event,context,callback){
         skip = parseInt(queryString.skip);
     }
 
+    if(eachNoteByCategories){
+        callback(null, success(eachNoteByCategories));
+        return;
+    }
+
     getConnection()
     .then((db)=>{
         (async () =>{
@@ -477,8 +487,13 @@ export function getArticlesByCategories(event,context,callback){
             //busco una nota por categoria ordenadas por fecha de creacion de forma descendente
             const articlesColl = db.collection('note');
             const articles = await articlesColl.aggregate([
-                { $match: { "category":{$in: categoryIds }}},
-                { $sort: { createdAt: -1 }},
+                { 
+                    $match: { 
+                        "category":{
+                            $in: categoryIds 
+                        }
+                    }
+                },
                 {
                     $group: {
                         _id: "$category",
@@ -486,20 +501,24 @@ export function getArticlesByCategories(event,context,callback){
                     }
                 },
                 { $replaceRoot: { newRoot: "$note" } },
-                { $project : { _id : 1 ,title : 1, image : 1, category:1} },
+                { $project : { _id : 1 ,title : 1, image : 1, category:1, newspaperName: 1, authorName: 1, createdAt: 1} },
+                { $sort: { createdAt: -1 }},
                 { $skip: skip},
                 { $limit : limit }
             ],{allowDiskUse: true}).toArray();
-            
-            callback(null, success(
-                //reemplazo los category id con el nombre
-                articles.map(
-                    function(doc){
+
+            eachNoteByCategories = articles.map(
+                function(doc){
+                    if(categoryList && categoryList.length > 0 && doc && doc.category){
                         doc.categoryName = categoryList.find( e => e._id.equals(doc.category)).name;
-                        return doc;
+                    }else{
+                        doc.categoryName = "Otras"
                     }
-                )
-            ));
+                    return doc;
+                }
+            );
+            
+            callback(null, success(eachNoteByCategories));
         })()
         .catch((err)=>{
             callback(null, failure(err));
@@ -521,6 +540,12 @@ export function getArticlesByAuthor(event, context, callback) {
         callback(null, failure("authors array undefined"));
         return;
     }
+
+    if(eachNoteByAuthor){
+        callback(null, success(eachNoteByAuthor));
+        return;
+    }
+
     getConnection()
         .then((db) => {
             (async () => {
@@ -542,11 +567,14 @@ export function getArticlesByAuthor(event, context, callback) {
                            "title": { "$last": "$title" },
                            "createdAt": { "$last": "$createdAt" },
                            "authorName": {"$last": "$authorName"},
+                           "newspaperName": {"$last": "$newspaperName"},
                        }
                     },
                     {$project: { _id: 0}} 
                 ]).toArray();
                 
+                eachNoteByAuthor = articles;
+
                 callback(null, success(articles));
             })()
                 .catch((err) => {
@@ -615,4 +643,14 @@ function parseQueryString(event,cb){
     }
 
     return query;
+}
+
+/**
+ * Clear Memory cache
+ */
+function clearMemoryCache(){
+    setTimeout(()=>{
+        eachNoteByAuthor = false;
+        eachNoteByCategories = false;
+    },180000);
 }
