@@ -44,6 +44,7 @@ import { SocialMediaComponent } from './components/social-media/social-media.com
 import { AuthorProfileComponent } from './views/author-profile/author-profile.component';
 import { ArticleVerticalCardListComponent } from './shared/article/article-vertical-card-list/article-vertical-card-list.component';
 import { CheckoutComponent } from './views/checkout/checkout.component';
+import { SafeStylePipe } from './pipes/safe-style.pipe';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { CheckoutComponent } from './views/checkout/checkout.component';
     AuthorHeaderComponent,
     SocialMediaComponent,
     AuthorProfileComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    SafeStylePipe
   ],
   imports: [
     FilterPipeModule,

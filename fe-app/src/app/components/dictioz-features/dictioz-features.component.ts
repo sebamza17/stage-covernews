@@ -14,11 +14,13 @@ export class DictiozFeaturesComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.isLoggedIn) {
-      setTimeout(() => {
-        this.isOpen = true;
-      }, 5000);
-    }
+    setTimeout(() => {
+      if (!this.isLoggedIn) {
+        setTimeout(() => {
+          this.isOpen = true;
+        }, 3000);
+      }
+    }, 2000);
   }
 
   public toggle() {

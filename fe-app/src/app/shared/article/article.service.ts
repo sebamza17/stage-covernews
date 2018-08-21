@@ -150,6 +150,10 @@ export class ArticleService extends BaseService {
    */
   public async toggleArticleFromReadLater(article: Article) {
 
+    if (!article._id) {
+      return false;
+    }
+
     // Get current article list, if none, creates an empty one
     let currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
     if (!currentSavedArticleIdList) {
@@ -161,6 +165,9 @@ export class ArticleService extends BaseService {
 
     // If article is already on the list, remove it and save list, if not just save it and return
     if (currentSavedArticleIdList.includes(article._id)) {
+      if (!article) {
+        return false
+      }
       const articleIdIndex = currentSavedArticleIdList.indexOf(article._id);
       currentSavedArticleIdList.splice(articleIdIndex, 1);
       await this.localStorage.setItem('savedArticleIdList', currentSavedArticleIdList).toPromise();
@@ -179,7 +186,16 @@ export class ArticleService extends BaseService {
    * @returns {Promise<boolean>}
    */
   public async isOnReadLaterList(article: Article) {
+    if (!article) {
+      return false
+    }
+    if (!article._id) {
+      return false;
+    }
     const currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
+    if(!currentSavedArticleIdList){
+      return false;
+    }
     return currentSavedArticleIdList.indexOf(article._id) > -1;
   }
 

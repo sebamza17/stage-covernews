@@ -4,7 +4,7 @@
   <div class="article-card-full__wrapper">
 
     <!-- Image -->
-    <div class="article-card-full__image" [style.background-image]="'url(' + article.image + ')'"></div>
+    <div class="article-card-full__image" [ngStyle]='{"background-image": "URL(\""+article.image+"\")"}'></div>
     <!-- end Image -->
 
     <!-- Content -->
@@ -21,7 +21,7 @@
 
         <!--Summary-->
         <div class="article-card-full__summary margin-vertical-half">
-          <app-article-content [articleContent]="article.content"></app-article-content>
+          <app-article-content [articleContent]="article.content" [isCleanText]="true"></app-article-content>
         </div>
         <!--end Summary-->
 

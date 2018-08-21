@@ -7,7 +7,11 @@
   <div class="article-card-horizontal__wrapper">
 
     <!-- Image -->
-    <div class="article-card-horizontal__image" [style.background-image]="'url(' + article.image + ')'"></div>
+    <div *ngIf="article.image && article.image !== 'undefined'"
+    [ngStyle]='{"background-image": "URL(\""+article.image+"\")"}'
+         class="article-card-horizontal__image"></div>
+    <div *ngIf="!article.image"
+         class="article-card-horizontal__image article-card-horizontal__image--placeholder"></div>
     <!-- end Image -->
 
     <!-- Content -->

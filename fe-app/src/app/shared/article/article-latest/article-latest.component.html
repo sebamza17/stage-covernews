@@ -1,35 +1,35 @@
 <div class="article-latest">
 
-    <!-- Top -->
-    <div class="article-latest__top">
-        <div class="container">
-            <div class="wrapper">
-
-                <h2 class="main-title">
-                    ULTIMAS NOTICIAS
-                </h2>
-
-                <a href="" class="button button--outline button--red-light button--uppercase">
-                    + Categorias
-                </a>
-
-            </div>
-        </div>
-    </div>
-    <!-- end Top -->
-
-    <!-- Articles -->
+  <!-- Top -->
+  <div class="article-latest__top">
     <div class="container">
+      <div class="wrapper">
 
-        <div class="article-latest__cards">
+        <h2 class="main-title">
+          Ultimas noticias
+        </h2>
 
-            <div class="article-container" *ngFor="let article of articles">
-                <app-article-card [article]="article" [showCategory]="true" [isTransparent]="true"></app-article-card>
-            </div>
+        <a href="" class="button button--outline button--red-light button--uppercase">
+          + Categorias
+        </a>
 
-        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end Top -->
+
+  <!-- Articles -->
+  <div class="container">
+
+    <div class="article-latest__cards">
+
+      <div class="article-container" *ngFor="let article of articles">
+        <app-article-card [article]="article" [showCategory]="true" [isTransparent]="true"></app-article-card>
+      </div>
 
     </div>
-    <!-- end Articles -->
+
+  </div>
+  <!-- end Articles -->
 
 </div>

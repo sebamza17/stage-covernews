@@ -5,7 +5,7 @@
   <!-- end Landing banner -->
 
   <!-- Feature list for not logged users -->
-  <app-dictioz-features [isLoggedIn]="globals.isLoggedIn"></app-dictioz-features>
+  <app-dictioz-features [isLoggedIn]="globals.user.isLoggedIn"></app-dictioz-features>
   <!-- end Feature list for not logged users -->
 
   <!-- Latest news -->
@@ -93,7 +93,7 @@
       <a *ngFor="let category of categories"
          class="category-carousel__selector"
          (click)="selectCategory(category)"
-         [ngClass]="{'selected': selectedCategory._id === category._id}">
+         [ngClass]="{'selected': category._id && (selectedCategory._id === category._id)}">
         {{category.name}}
       </a>
 
@@ -108,7 +108,7 @@
            attr.category="{{category._id}}">
         <app-article-slider [category]="category"
                             [lazyLoad]="true"
-                            [loadFlag]="selectedCategory._id === category._id"></app-article-slider>
+                            [loadFlag]="category._id && (selectedCategory._id === category._id)"></app-article-slider>
       </div>
 
     </div>

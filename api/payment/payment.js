@@ -56,7 +56,7 @@ export function add (event, context, callback) {
             // console.log({ response });
             callback(null, success(response))
           })
-          .catch(error => failure(null, failure(error)));
+          .catch(error => callback(null, failure(error)));
       });
     }).catch((error) => {
       callback(null, failure(error));

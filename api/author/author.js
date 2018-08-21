@@ -28,7 +28,11 @@ export function get (event, context, callback) {
     getConnection()
     .then((db)=>{
         const authors = db.collection('journalist');
-        authors.find({},{limit: limit, skip: skip}).toArray((err,doc)=>{
+        authors.find({
+            avatar: {
+                $exists: true
+            }
+        },{limit: limit, skip: skip}).toArray((err,doc)=>{
             if(err){
                 callback(null, failure(err));
                 return;

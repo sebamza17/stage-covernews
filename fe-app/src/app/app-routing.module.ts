@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 
 import { HomeUserComponent } from './components/home-user/home-user.component';
 import { HomeComponent } from './views/home/home.component';
@@ -17,7 +17,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, <ExtraOptions>{
+    scrollPositionRestoration: true,
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

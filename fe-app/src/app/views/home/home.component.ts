@@ -7,6 +7,7 @@ import { Author } from '../../shared/author/Author';
 import { AuthorService } from '../../shared/author/author.service';
 import { Article } from '../../shared/article/Article';
 import { ArticleService } from '../../shared/article/article.service';
+import { LocalStorageSync } from '../../shared/local-storage-sync';
 import { Globals } from '../../globals';
 
 @Component({
@@ -53,7 +54,16 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.globals);
+    this.categories = <Category[]>this.categoryService.generatePlaceholders(10, {
+      name: '██ ███ ██████',
+      url: '',
+      _id: null,
+      displayName: '██ ███ ██████',
+    });
+    this.authors = <Author[]>this.authorService.generatePlaceholders(5, {
+      name: '███ ██████',
+      description: '███ █████ ████ ██'
+    });
     this.walkThrough();
   }
 

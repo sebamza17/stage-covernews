@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
   }
 
   public toggle() {
-    console.log(this.status);
     this.status = !this.status;
   }
 
@@ -58,6 +57,7 @@ export class NavbarComponent implements OnInit {
    */
   onLogout() {
     this.user.logout();
+    this.globals.setValue('user', 'isLoggedIn', false);
   }
 
   openModal(id: string) {
