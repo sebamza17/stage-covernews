@@ -1,16 +1,10 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { auth } from 'firebase';
-<<<<<<< HEAD
 import { UserService} from './shared/user/user.service';
 import { User } from './shared/user/User';
 import { UserDataService } from './shared/user/user-data.service';
-import { ModalService } from './components/modal/modal.service';
-=======
-import { UserService } from './shared/user/user.service'
-import { User } from './shared/user/User';
-import { UserDataService } from './shared/user/user-data.service';
 import { Globals } from './globals';
->>>>>>> master
+import { ModalService } from './components/modal/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -19,30 +13,20 @@ import { Globals } from './globals';
 })
 export class AppComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor(public userSvc: UserService, public userData: UserDataService, public modalSvc: ModalService) {}
-
-  ngOnInit() {
-    auth().onAuthStateChanged((user) => {
-      if (!user) {
-        // TODO: Manage logout
-=======
   constructor(
     public userSvc: UserService,
     public userData: UserDataService,
-    private globals: Globals
+    private globals: Globals,
+    public modalSvc: ModalService
   ) {
   }
 
   ngOnInit() {
-
     this.globals.init();
 
     auth().onAuthStateChanged((user) => {
-
       if (!user) {
-        //TODO: Manage logout
->>>>>>> master
+        // TODO: Manage logout
         return;
       }
       this.userSvc.user = user as User;
