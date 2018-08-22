@@ -37,7 +37,7 @@
         <div class="alert alert-error" style="display: none"><span class="alert-icon alert-icon-error"></span> <p>No se pudo procesar tu pago.<br>Asegurate de colocar correctamente los datos.</p></div>
         <div class="form-group hidden">
           <label class="control-label">Medio de pago</label>
-          <select formControlName="payment_method_id" id="paymentMethodId" name="paymentMethodId" class="form-control">
+          <select formControlName="payment_method_id" id="paymentMethodId" class="form-control">
             <option value="">Seleccione...</option>
           </select>
         </div>  
@@ -85,7 +85,7 @@
         <div class="form-group">
           <label class="control-label">Documento</label>
           <div class="col">
-            <select formControlName="payer_identification_type" id="docType" data-checkout="docType" class="form-control" value="{{payment.payer_identification_number}}">
+            <select formControlName="payer_identification_type" id="docType" data-checkout="docType" class="form-control">
             </select>
           </div>
           <div class="col">
@@ -100,8 +100,7 @@
         </div>  
         <input type="hidden" formControlName="payer_email" id="email" value="{{payment.payer_email}}">
         <input type="hidden" formControlName="amount" id="amount" value="{{payment.amount}}">
-        <input type="hidden" value="1" data-checkout="cardIssuerId">
-        <input type="hidden" value="1" data-checkout="cardInstallmentId">
+        <input type="hidden" formControlName="currency_id" value="ARS" id="currencyId">
       </form>
     </div>
     <div class="step step-2 hidden">

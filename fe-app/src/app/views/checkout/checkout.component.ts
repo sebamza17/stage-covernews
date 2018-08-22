@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { MercadopagoService } from '../../shared/mercadopago/mercadopago.service';
+import { Globals } from '../../globals';
 
 declare const Mercadopago: any;
 
@@ -36,18 +37,21 @@ export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   payment = {
     amount: 10,
-    payer_name: 'APRO',
-    payer_email: 'marcos0x@gmail.com',
-    payer_identification_type: 'dni',
-    payer_identification_number: '11222333',
+    currency_id: 'ARS',
   };
 
-  constructor(private mercadopagoSvc: MercadopagoService, private formBuilder: FormBuilder) {
+  constructor(
+    private globals: Globals,
+    private mercadopagoSvc: MercadopagoService,
+    private formBuilder: FormBuilder
+  ) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.initMP();
+    $(window).on('load', () => {
+      this.initMP();
+    });
   }
 
   createForm() {
@@ -57,13 +61,14 @@ export class CheckoutComponent implements OnInit {
       payer_identification_type: ['', Validators.compose([Validators.required])],
       payer_identification_number: ['', Validators.compose([Validators.required])],
       payment_method_id: ['', Validators.compose([Validators.required])],
-      amount: ['', Validators.compose([Validators.required])],
+      amount: [0, Validators.compose([Validators.required])],
+      currency_id: [1],
       card_number: ['', Validators.compose([Validators.required])],
       card_expiration_month: ['', Validators.compose([Validators.required])],
       card_expiration_year: ['', Validators.compose([Validators.required])],
       card_security_code: ['', Validators.compose([Validators.required])],
-      issuer_id: [''],
-      installments: [''],
+      issuer_id: [1],
+      installments: [1],
     });
   }
 
@@ -87,6 +92,16 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  fireEvent(el, eventName) {
+    if ('createEvent' in document) {
+      const evt = document.createEvent('HTMLEvents');
+      evt.initEvent(eventName, false, true);
+      el.dispatchEvent(evt);
+    } else {
+      el.fireEvent('on' + eventName);
+    }
+  }
+
   getBin() {
     const cardSelector = document.querySelector('#cardId') as HTMLSelectElement;
     // if (cardSelector && cardSelector[cardSelector.options.selectedIndex].value !== '-1') {
@@ -103,21 +118,21 @@ export class CheckoutComponent implements OnInit {
       // $('.issuer-field').hide();
       const selectorIssuer = document.querySelector('#issuer') as HTMLSelectElement;
       let fragment = document.createDocumentFragment();
-      let option = new Option('', '');
+      let option = new Option('', '1');
 
       selectorIssuer.options.length = 0;
       fragment.appendChild(option);
       selectorIssuer.appendChild(fragment);
-      selectorIssuer.setAttribute('disabled', 'disabled');
+      // selectorIssuer.setAttribute('disabled', 'disabled');
 
       const selectorInstallments = document.querySelector('#installments') as HTMLSelectElement;
       fragment = document.createDocumentFragment();
-      option = new Option('', '-1');
+      option = new Option('', '1');
 
       selectorInstallments.options.length = 0;
       fragment.appendChild(option);
       selectorInstallments.appendChild(fragment);
-      selectorInstallments.setAttribute('disabled', 'disabled');
+      // selectorInstallments.setAttribute('disabled', 'disabled');
     }
   }
 
@@ -129,7 +144,7 @@ export class CheckoutComponent implements OnInit {
         Mercadopago.getPaymentMethod({ bin }, (status, response) => this.setPaymentMethodInfo(status, response));
       }
     } else {
-      setTimeout(function() {
+      setTimeout(() => {
         if (bin != null && bin.length >= 6) {
           Mercadopago.getPaymentMethod({ bin }, (status, response) => this.setPaymentMethodInfo(status, response));
         }
@@ -140,6 +155,10 @@ export class CheckoutComponent implements OnInit {
   setPaymentMethods() {
     Mercadopago.getAllPaymentMethods((status, response) => {
       if (status === 200) {
+        setTimeout(() => {
+          this.fireEvent(document.querySelector('#docType'), 'change');
+        }, 2000);
+
         const selectorPaymentMethod = document.querySelector('#paymentMethodId') as HTMLSelectElement;
         selectorPaymentMethod.innerHTML = '';
         const fragment = document.createDocumentFragment();
@@ -165,17 +184,20 @@ export class CheckoutComponent implements OnInit {
   setPaymentMethodInfo(status, response) {
     if (status === 200) {
       const form = document.querySelector('#pay') as HTMLFormElement;
-      const paymentMethodId = document.querySelector('[name=paymentMethodId]') as HTMLSelectElement;
+      const paymentMethodId = document.querySelector('#paymentMethodId') as HTMLSelectElement;
 
       if (paymentMethodId == null) {
         const paymentMethod = document.createElement('input');
-        paymentMethod.setAttribute('name', 'paymentMethodId');
+        paymentMethod.setAttribute('id', 'paymentMethodId');
+        paymentMethod.setAttribute('name', 'payment_method_id');
         paymentMethod.setAttribute('type', 'hidden');
         paymentMethod.setAttribute('value', response[0].id);
         form.appendChild(paymentMethod);
       } else {
         paymentMethodId.value = response[0].id;
       }
+
+      this.fireEvent(paymentMethodId, 'change');
 
       const cardConfiguration = response[0].settings;
       const bin = this.getBin();
@@ -190,9 +212,9 @@ export class CheckoutComponent implements OnInit {
         }
       }
 
-      Mercadopago.getInstallments({ bin, amount }, this.setInstallmentInfo);
-      Mercadopago.getIssuers(response[0].id, this.showCardIssuers);
-      this.addEvent(document.querySelector('#issuer'), 'change', this.setInstallmentsByIssuerId);
+      Mercadopago.getInstallments({ bin, amount }, () => this.setInstallmentInfo);
+      Mercadopago.getIssuers(response[0].id, () => this.showCardIssuers);
+      this.addEvent(document.querySelector('#issuer'), 'change', () => this.setInstallmentsByIssuerId);
     }
 
   }
@@ -214,9 +236,13 @@ export class CheckoutComponent implements OnInit {
       }
       fragment.appendChild(option);
     }
+
     issuersSelector.appendChild(fragment);
     issuersSelector.removeAttribute('disabled');
-    document.querySelector('#issuer').removeAttribute('style');
+    issuersSelector.removeAttribute('style');
+    issuersSelector.value = '1';
+
+    this.fireEvent(issuersSelector, 'change');
   }
 
   setInstallmentsByIssuerId(status, response) {
@@ -232,7 +258,7 @@ export class CheckoutComponent implements OnInit {
       bin,
       amount,
       issuer_id: issuerId
-    }, this.setInstallmentInfo);
+    }, () => this.setInstallmentInfo);
   }
 
   setInstallmentInfo(status, response) {
@@ -243,7 +269,7 @@ export class CheckoutComponent implements OnInit {
     selectorInstallments.options.length = 0;
 
     if (response.length > 0) {
-      let option = new Option('Seleccione...', '-1');
+      let option = new Option('Seleccione...', '1');
       const payerCosts = response[0].payer_costs;
 
       fragment.appendChild(option);
@@ -254,6 +280,10 @@ export class CheckoutComponent implements OnInit {
       selectorInstallments.appendChild(fragment);
       selectorInstallments.removeAttribute('disabled');
     }
+
+    selectorInstallments.value = '1';
+
+    this.fireEvent(selectorInstallments, 'change');
   }
 
   cardsHandler() {
@@ -273,7 +303,6 @@ export class CheckoutComponent implements OnInit {
     // $('.checkout .process').show();
     const $form = document.querySelector('#pay');
     Mercadopago.createToken($form, (status, response) => this.responseHandler(formData, status, response));
-    return false;
   }
 
   responseHandler(formData, status, response) {
@@ -282,7 +311,7 @@ export class CheckoutComponent implements OnInit {
     if (status !== 200 && status !== 201) {
       if (response.cause !== undefined) {
         const errors = [];
-        $.each(response.cause, function(i, item) {
+        $.each(response.cause, (i, item) => {
           errors.push(this.mercadopagoSvc.getTokenError(item.code));
         });
         $('.alert-error').show().find('p').html(errors.join('<br>'));
@@ -292,21 +321,23 @@ export class CheckoutComponent implements OnInit {
       $('.btn-submit').removeAttr('disabled');
       // $('.checkout .process').hide();
     } else {
-      // TODO / In progress...
+      formData.amount = this.payment.amount;
+      formData.currency_id = this.payment.currency_id;
       formData.token = response.id;
-      formData.user_id = 1;
+      formData.uid = this.globals.user.user.uid || false;
+      formData.payer_name = this.globals.user.user.displayName || '';
+      formData.payer_email = this.globals.user.user.email || '';
 
       this.mercadopagoSvc.createPayment(formData)
-        .then((res: any) => {
+        .then((payment: any) => {
           $('.btn-submit').removeAttr('disabled');
           $('.checkout .process').hide();
-          const payment = res.payment.response;
           if (payment.status === 'approved' || payment.status === 'in_process') {
-            $('.step1').hide();
-            $('.step2').show();
-            setTimeout(function() {
-              location.href = '/';
-            }, 5000);
+            $('.step-1').hide();
+            $('.step-2').show();
+            // setTimeout(() => {
+            //   location.href = '/';
+            // }, 5000);
           } else {
             $('.alert-error').show().find('p').html(this.mercadopagoSvc.getPaymentStatus({ ...payment, ...{
               paymentMethod: $('[name=paymentMethodId] option:selected').text(),
