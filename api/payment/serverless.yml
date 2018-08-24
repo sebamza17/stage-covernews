@@ -61,21 +61,3 @@ functions:
                 - Token
               allowCredentials: false
           authorizer: false
-  refundPayment:
-    handler: payment.refund
-    stageVariables: 
-      - stage : ${opt:env, 'test'}
-    events:
-      - http:
-          path: payment/refund
-          method: post
-          cors:
-              origin: '*'
-              headers:
-                - Content-Type
-                - Access-Control-Allow-Headers
-                - Access-Control-Allow-Origin
-                - Token
-              allowCredentials: false
-          authorizer: false
-  

@@ -4,8 +4,11 @@ import '../../shared/mercadopago/mercadopago-client';
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { UserService } from '../../shared/user/user.service';
 import { MercadopagoService } from '../../shared/mercadopago/mercadopago.service';
+import { ModalService } from '../../components/modal/modal.service';
 import { Globals } from '../../globals';
 
 declare const Mercadopago: any;
@@ -42,8 +45,11 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private globals: Globals,
+    private user: UserService,
     private mercadopagoSvc: MercadopagoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalSvc: ModalService,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -321,14 +327,19 @@ export class CheckoutComponent implements OnInit {
       $('.btn-submit').removeAttr('disabled');
       // $('.checkout .process').hide();
     } else {
-      formData.amount = this.payment.amount;
-      formData.currency_id = this.payment.currency_id;
-      formData.token = response.id;
-      formData.uid = this.globals.user.user.uid || false;
-      formData.payer_name = this.globals.user.user.displayName || '';
-      formData.payer_email = this.globals.user.user.email || '';
 
-      this.mercadopagoSvc.createPayment(formData)
+      const payload = {
+        ...formData,
+        amount: this.payment.amount,
+        currency_id: this.payment.currency_id,
+        token: response.id,
+        uid: this.globals.user.user.uid || false,
+        payer_name: this.globals.user.user.displayName || '',
+        payer_email: this.globals.user.user.email || '',
+        description: 'Validación de Tarjeta',
+      };
+
+      this.mercadopagoSvc.createPayment(payload)
         .then((payment: any) => {
           $('.btn-submit').removeAttr('disabled');
           $('.checkout .process').hide();
@@ -352,6 +363,34 @@ export class CheckoutComponent implements OnInit {
           // $('.checkout .process').hide();
         });
     }
+  }
+
+  onLogin(network) {
+    this.user.socialLogin(network)
+      .then((data) => {
+        const user = <any>data;
+
+        // Set values on globals
+        this.globals.setValue('user', 'user', {
+          displayName: user.displayName,
+          email: user.email,
+          emailVerified: user.emailVerified,
+          phoneNumber: user.phoneNumber,
+          photoUrl: user.photoUrl,
+          refreshToken: user.refreshToken,
+          uid: user.uid,
+        });
+        this.globals.setValue('user', 'isLoggedIn', true);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('Login: Failed');
+      });
+  }
+
+  goTo(path) {
+    this.modalSvc.close('checkout-modal');
+    this.router.navigateByUrl(path);
   }
 
 }

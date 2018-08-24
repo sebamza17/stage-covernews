@@ -22,20 +22,33 @@
         <li><span class="premium-icon premium-icon5"></span> <p>Personalizá tu perﬁl y ﬁltra tu contenido como quieras</p></li>
       </ul>
     </div>
-    <div class="step step-2 hidden">
+    <div class="step step-2 display-none">
       <div class="bg"></div>
       <h2>Te damos la bienvenida<br><b>Dictioz Premium</b></h2>
     </div>
   </div>
   <div class="checkout-main">
     <div class="process" style="display:none"><span>Procesando, por favor espere...</span></div>
-    <div class="step step-1">
+    <div class="step step-1" *ngIf="!globals.user.isLoggedIn">
+      <div class="login">
+        <div class="login-main">
+          <h2>Iniciar sesión</h2>
+          <div class="network">
+            <a (click)="onLogin('facebook')" class="btn btn-start">FACEBOOK</a>
+          </div>
+          <div class="network">
+            <a (click)="onLogin('google')" class="btn btn-start">GOOGLE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step step-1" *ngIf="globals.user.isLoggedIn">
       <form id="pay" class="form-horizontal group-border-dashed" [formGroup]="checkoutForm" (ngSubmit)="submitForm(checkoutForm.value)" novalidate="">
         <h2>Pago seguro</h2>
         <p>Completa tus datos de pago para comenzar a disfrutar de Dictioz Premium</p>
         <div class="alert alert-warning" style="display: none"><span class="alert-icon alert-icon-warning"></span> <p><b>UPS!</b> En este momento no podemos procesar tu pago.<br>Reintenta nuevamente en unos minutos.</p></div>
         <div class="alert alert-error" style="display: none"><span class="alert-icon alert-icon-error"></span> <p>No se pudo procesar tu pago.<br>Asegurate de colocar correctamente los datos.</p></div>
-        <div class="form-group hidden">
+        <div class="form-group display-none">
           <label class="control-label">Medio de pago</label>
           <select formControlName="payment_method_id" id="paymentMethodId" class="form-control">
             <option value="">Seleccione...</option>
@@ -64,14 +77,14 @@
             </select>
           </div>
         </div>
-        <div class="hidden">
-          <div class="form-group hidden issuer-field">
+        <div class="display-none">
+          <div class="form-group display-none issuer-field">
             <label class="control-label">Banco</label>
             <select formControlName="issuer_id" id="issuer" data-checkout="cardIssuerId" class="form-control">
               <option value="1">Seleccione...</option>
             </select>
           </div>  
-          <div class="form-group hidden installments-field">
+          <div class="form-group display-none installments-field">
             <label class="control-label">Cuotas</label>
             <select formControlName="installments" id="installments" data-checkout="cardInstallmentId" class="form-control">
               <option value="1">Seleccione...</option>
@@ -103,16 +116,16 @@
         <input type="hidden" formControlName="currency_id" value="ARS" id="currencyId">
       </form>
     </div>
-    <div class="step step-2 hidden">
+    <div class="step step-2 display-none">
       <div class="success-icon"></div>
       <p class="success-txt">Ya estás suscripto al plan <b>Premium</b></p>
       <h3>¡Que disfrutes tu experiencia!</h3>
       <p>Gracias a los usuarios como tu podemos colaborar con autores de todo el mundo</p>
       <div>
-        <a [routerLink]="['/']" class="btn btn-start">COMENZAR</a>
+        <a (click)="goTo('/')" class="btn btn-start">COMENZAR</a>
       </div>
       <div>
-        <a [routerLink]="['/profile']" class="link">Ir a mi cuenta</a>
+        <a (click)="goTo('/profile')" class="link">Ir a mi cuenta</a>
       </div>
     </div>
   </div>

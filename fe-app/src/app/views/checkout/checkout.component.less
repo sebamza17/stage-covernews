@@ -1,7 +1,7 @@
-// @import 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800';
+// @import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800';
 @import 'variables';
 @import 'base/helpers';
+@import 'mixins/gradient';
 
 @color1: #41398A;
 @color2: #A8316B;
@@ -17,7 +17,7 @@
   height: 580px;
   border-radius: 2px;
   border: 1px solid #ddd;
-  font-family: 'Open Sans';
+  font-family: 'Raleway';
 
   *,
   *:before,
@@ -151,6 +151,37 @@
       }
     }
   }
+
+    .login {
+      text-align: center;
+      height: 100%;
+
+      &:after {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        content: '';
+      }
+
+      .login-main {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      h2 {
+        margin-bottom: 40px;
+      }
+
+      .network {
+        & + .network {
+          margin-top: 20px;
+        }
+
+        a {
+          min-width: 150px;
+        }
+      }
+    }
 
     .col {
       float: left;
@@ -292,6 +323,10 @@
     .btn-submit {
       float: right;
       margin: 12px 0 0;
+    }
+
+    .checkout-main .step {
+      height: 100%;
     }
 
     .checkout-main .step-2 {

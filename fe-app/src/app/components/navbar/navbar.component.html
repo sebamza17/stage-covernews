@@ -23,8 +23,9 @@
       <div class="navbar__links">
         <a>Home</a>
         <a>Autores</a>
-        <a (click)="openModal('checkout-modal')" *ngIf="globals.user.isLoggedIn">Suscripción</a>
-        <a (click)="onLogin()" *ngIf="!globals.user.isLoggedIn">Login</a>
+        <!-- <a (click)="openModal('checkout-modal')" *ngIf="globals.user.isLoggedIn">Suscripción</a> -->
+        <!-- <a (click)="onLogin()" *ngIf="!globals.user.isLoggedIn">Login</a> -->
+        <a (click)="openModal('checkout-modal')" *ngIf="!globals.user.isLoggedIn">Login</a>
         <a *ngIf="globals.user.isLoggedIn">Mi cuenta</a>
         <a (click)="onLogout()" *ngIf="globals.user.isLoggedIn">Cerrar Sesion</a>
       </div>
