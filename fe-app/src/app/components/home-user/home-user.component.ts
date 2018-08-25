@@ -14,26 +14,27 @@ export class HomeUserComponent implements OnInit {
   public test = null;
 
   constructor(
-    private _ngZone: NgZone, 
-    public authorSvc: AuthorService, 
-    public userSvc: UserService) { }
+    private _ngZone: NgZone,
+    public authorSvc: AuthorService,
+    public userSvc: UserService) {
+  }
 
   ngOnInit() {
-    this.userSvc.event.subscribe((item)=>{  
-      this._ngZone.run(() =>{
-        this.getFollowAuthors();
-      }); 
+    this.userSvc.event.subscribe((item) => {
+      this._ngZone.run(() => {
+        this.getFollowedAuthors();
+      });
     });
   }
 
   /**
    * Get All Authors that the user follow
    */
-  public getFollowAuthors(){
-    this.authorSvc.getFollowAuthors()
-    .subscribe(data=>{
-      this.authors = data;
-      console.log(this.authors);
-    })
+  public getFollowedAuthors() {
+    this.authorSvc.getFollowedAuthors()
+      .subscribe(data => {
+        this.authors = data;
+        console.log(this.authors);
+      })
   }
 }

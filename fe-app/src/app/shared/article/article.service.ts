@@ -166,7 +166,7 @@ export class ArticleService extends BaseService {
     // If article is already on the list, remove it and save list, if not just save it and return
     if (currentSavedArticleIdList.includes(article._id)) {
       if (!article) {
-        return false
+        return false;
       }
       const articleIdIndex = currentSavedArticleIdList.indexOf(article._id);
       currentSavedArticleIdList.splice(articleIdIndex, 1);
@@ -193,7 +193,7 @@ export class ArticleService extends BaseService {
       return false;
     }
     const currentSavedArticleIdList = await this.localStorage.getItem('savedArticleIdList').toPromise();
-    if(!currentSavedArticleIdList){
+    if (!currentSavedArticleIdList) {
       return false;
     }
     return currentSavedArticleIdList.indexOf(article._id) > -1;

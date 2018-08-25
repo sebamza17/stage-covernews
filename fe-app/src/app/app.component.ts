@@ -3,7 +3,7 @@ import { auth } from 'firebase';
 import { UserService } from './shared/user/user.service'
 import { User } from './shared/user/User';
 import { UserDataService } from './shared/user/user-data.service';
-import { Globals } from './globals';
+import { InitService } from "./init/init.service";
 
 @Component({
   selector: 'app-root',
@@ -15,13 +15,13 @@ export class AppComponent implements OnInit {
   constructor(
     public userSvc: UserService,
     public userData: UserDataService,
-    private globals: Globals
+    private inits: InitService
   ) {
   }
 
   ngOnInit() {
 
-    this.globals.init();
+    this.inits.init();
 
     auth().onAuthStateChanged((user) => {
 

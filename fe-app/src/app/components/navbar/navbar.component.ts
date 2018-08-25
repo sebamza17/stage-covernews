@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
 
   public toggle() {
     this.status = !this.status;
-  };
+  }
 
   ngOnInit() {
   }
