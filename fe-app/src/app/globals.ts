@@ -36,9 +36,17 @@ export class Globals {
    * @param key
    * @param value
    */
-  public setValue(group: string = 'misc', key, value) {
+  public async setValue(group: string = 'misc', key, value) {
     let groupObject = this[group] || {};
     groupObject[key] = value;
+
+    // Check if item exists on LS, if exists remove it
+    const currentGroup = await this.localStorage.getItem(group).toPromise();
+    if (currentGroup) {
+      await this.localStorage.removeItem(group).toPromise();
+    }
+
+    // Set item
     this.localStorage.setItem(group, this[group]).toPromise()
       .then(() => {
         console.log('Globals: Setting ' + key + ': ');
@@ -74,7 +82,6 @@ export class Globals {
    */
   public async removeValue(group: string, key = null) {
     if (key) {
-
       // Copy current group to store it on LS
       let groupObject = Object.assign(this[group], {});
       delete groupObject[key];
@@ -90,13 +97,10 @@ export class Globals {
           console.log('Globals: Removed key: ' + key + ' from: ' + group);
           console.log(groupObject);
         });
-
     } else {
-
       this[group] = null;
       this.localStorage.removeItemSubscribe(group);
       console.log('Globals: Removed group: ' + group);
-
     }
   }
 
