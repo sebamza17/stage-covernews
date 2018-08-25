@@ -2,74 +2,81 @@
 <div class="side-menu__wrapper"
      [ngClass]="{'side-menu-wrapper--is-open': isOpen}">
 
-    <!-- Header -->
-    <div class="side-menu-header__wrapper">
+  <!-- Header -->
+  <div class="side-menu-header__wrapper">
 
-        <div class="side-menu-header">
+    <div class="side-menu-header">
 
-            <div class="main-title main-title--gray font-transform-uppercase">
-                Articulos
-            </div>
-            <a (click)="toggle()">
-                <i class="icon ion-ios-close-circle-outline font-size-xxl"></i>
-            </a>
-
-        </div>
-
-        <div class="side-menu-header__search">
-            <input class="rf-input rf-input--white" [(ngModel)]="articleFilter.title">
-            <i class="icon ion-ios-search search-icon"></i>
-        </div>
+      <div class="main-title main-title--gray font-transform-uppercase">
+        Articulos
+      </div>
+      <a (click)="toggle()">
+        <i class="icon ion-ios-close-circle-outline font-size-xxl"></i>
+      </a>
 
     </div>
-    <!-- end Header -->
 
-    <!-- Article list -->
-    <div class="side-menu__content">
+    <div class="side-menu-header__search">
+      <input class="rf-input rf-input--white" [(ngModel)]="articleFilter.title">
+      <i class="icon ion-ios-search search-icon"></i>
+    </div>
 
-        <div *ngFor="let article of articles | filterBy: articleFilter"
-             class="side-menu__article-container">
-            <app-article-card-horizontal [article]="article"></app-article-card-horizontal>
-        </div>
+  </div>
+  <!-- end Header -->
 
-        <!-- Message if no articles -->
-        <div *ngIf="(articles | filterBy: articleFilter).length === 0"
-             class="text-center padding-vertical-full margin-bottom-half bg-color-white">
+  <!-- Article list -->
+  <div class="side-menu__content">
 
-            No se encontraron articulos.
+    <div *ngFor="let article of articles | filterBy: articleFilter"
+         class="side-menu__article-container">
+      <app-article-card-horizontal [article]="article"></app-article-card-horizontal>
+    </div>
 
-            <span *ngIf="!articleFilter.title"
-                  class="font-weight-bold display-inline-block padding-top-half">
+    <!-- Message if no articles -->
+    <div *ngIf="(articles | filterBy: articleFilter).length === 0"
+         class="text-center padding-vertical-full margin-bottom-half bg-color-white">
+
+      No se encontraron articulos.
+
+      <span *ngIf="!articleFilter.title"
+            class="font-weight-bold display-inline-block padding-top-half">
                 Guarda las notas que te interesen para leer mas tarde, haciendo click en
                 <i class="icon ion-md-bookmark"></i>
             </span>
 
-            <div class="padding-top-half" *ngIf="articleFilter.title">
-                <button (click)="cleanFilter()"
-                        class="button button--outline button--grey button--uppercase">
-                    Limpiar filtro
-                </button>
-            </div>
-
-        </div>
-        <!-- end Message if no articles -->
-
-    </div>
-    <!-- end Article list -->
-
-    <!-- Options -->
-    <div class="button-wrapper"
-         *ngIf="loadFlag"
-         [ngClass]="{'fw fw--j-center': !articleFilter.title, 'fw fw--j-space-between': articleFilter.title}">
-        <button *ngIf="articleFilter.title"
-                (click)="cleanFilter()"
+      <div class="padding-top-half" *ngIf="articleFilter.title">
+        <button (click)="cleanFilter()"
                 class="button button--outline button--grey button--uppercase">
-            Limpiar filtro
+          Limpiar filtro
         </button>
-        <button class="button button--outline button--red button--uppercase">
-            Ver todos
-        </button>
+      </div>
+
     </div>
-    <!-- end Options -->
+    <!-- end Message if no articles -->
+
+  </div>
+  <!-- end Article list -->
+
+  <!-- Options -->
+  <div class="button-wrapper"
+       *ngIf="loadFlag"
+       [ngClass]="{'fw fw--j-center': !articleFilter.title, 'fw fw--j-space-between': articleFilter.title}">
+    <button *ngIf="articleFilter.title"
+            (click)="cleanFilter()"
+            class="button button--outline button--grey button--uppercase">
+      Limpiar filtro
+    </button>
+    <button class="button button--outline button--red button--uppercase">
+      Ver todos
+    </button>
+  </div>
+  <!-- end Options -->
 
 </div>
+<!-- end Wrapper -->
+
+<!-- Overlay -->
+<div class="side-menu__overlay"
+     (click)="toggle()"
+     [ngClass]="{'side-menu__overlay--is-open': isOpen}"></div>
+<!-- end Overlay -->
