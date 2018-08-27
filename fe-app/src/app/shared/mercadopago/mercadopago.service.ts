@@ -22,7 +22,8 @@ export class MercadopagoService extends BaseService {
   // Define all service URLs
   urls = {
     addPayment: '/payment/add',
-    refundPayment: '/payment/refund/{{paymentId}}',
+    getSubscription: '/payment/get_subscription',
+    cancelSubscription: '/payment/cancel_subscription',
   };
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
@@ -34,8 +35,12 @@ export class MercadopagoService extends BaseService {
     return await this.http.post(this.url(this.urls.addPayment, options), JSON.stringify(payment), httpOptions).toPromise();
   }
 
-  public async refundPayment(paymentId) {
-    return await this.http.get(this.url(this.urls.refundPayment.replace('{{paymentId}}', paymentId))).toPromise();
+  public async getSubscription(data: any, options = null) {
+    return await this.http.post(this.url(this.urls.getSubscription, options), JSON.stringify(data), httpOptions).toPromise();
+  }
+
+  public async cancelSubscription(data: any, options = null) {
+    return await this.http.post(this.url(this.urls.cancelSubscription, options), JSON.stringify(data), httpOptions).toPromise();
   }
 
   public getPaymentStatus({ status, status_detail, paymentMethod, amount, installments }) {

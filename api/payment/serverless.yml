@@ -61,3 +61,37 @@ functions:
                 - Token
               allowCredentials: false
           authorizer: false
+  getSubscription:
+    handler: payment.get_subscription
+    stageVariables: 
+      - stage : ${opt:env, 'test'}
+    events:
+      - http:
+          path: payment/get_subscription
+          method: post
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false
+  cancelSubscription:
+    handler: payment.cancel_subscription
+    stageVariables: 
+      - stage : ${opt:env, 'test'}
+    events:
+      - http:
+          path: payment/cancel_subscription
+          method: post
+          cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+              allowCredentials: false
+          authorizer: false

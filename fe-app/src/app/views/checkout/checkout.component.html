@@ -29,7 +29,7 @@
   </div>
   <div class="checkout-main">
     <div class="process" style="display:none"><span>Procesando, por favor espere...</span></div>
-    <div class="step step-1" *ngIf="!globals.user.isLoggedIn">
+    <div class="step step-1" [ngStyle]="{ 'display': globals.user.isLoggedIn ? 'none' : 'block' }">
       <div class="login">
         <div class="login-main">
           <h2>Iniciar sesión</h2>
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="step step-1" *ngIf="globals.user.isLoggedIn">
+    <div class="step step-1" [ngStyle]="{ 'display': globals.user.isLoggedIn ? 'block' : 'none' }">
       <form id="pay" class="form-horizontal group-border-dashed" [formGroup]="checkoutForm" (ngSubmit)="submitForm(checkoutForm.value)" novalidate="">
         <h2>Pago seguro</h2>
         <p>Completa tus datos de pago para comenzar a disfrutar de Dictioz Premium</p>

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import {success, failure} from './libs/response-lib';
-import {getConnection} from './libs/mongodb-connect';
+import { success, failure } from './libs/response-lib';
+import { getConnection } from './libs/mongodb-connect';
 import * as mercadopago from 'mercadopago';
 
 mercadopago.configure({
@@ -20,6 +20,7 @@ const MP = {
   card: {},
   plan: {},
   subscription: {},
+  subscriptionCancelled: {},
 
   paymentCreate: data => new Promise((resolve, reject) =>
     mercadopago.payment.create({
@@ -92,23 +93,23 @@ const MP = {
       .then(response => {
         MP.card = response.body;
         MP.customer.default_card = MP.card.id;
-        MP.customer.cards = (MP.customer.cards || (MP.customer.cards = [])).push(MP.card);
+        (MP.customer.cards || (MP.customer.cards = [])).push(MP.card);
         return resolve(MP.card);
       })
       .catch(error => reject(handleError(error)))
   }),
 
-  planFindById: (id) => new Promise((resolve, reject) =>
-    mercadopago.get(`/v1/plans/${id}`)
+  planFindById: (planId) => new Promise((resolve, reject) =>
+    mercadopago.get(`/v1/plans/${planId}`)
       .then(response => {
         MP.plan = response.body;
         return resolve(MP.plan);
       })
       .catch(error => reject(handleError(error)))),
 
-  subscriptionsCreate: data => new Promise((resolve, reject) =>
+  subscriptionsCreate: planId => new Promise((resolve, reject) =>
     mercadopago.post('/v1/subscriptions', {
-      plan_id: data.plan_id,
+      plan_id: planId,
       payer: {
         id: MP.customer.id
       }
@@ -118,10 +119,35 @@ const MP = {
         return resolve(MP.subscription);
       })
       .catch(error => reject(handleError(error)))),
+
+  subscriptionsCancel: id => new Promise((resolve, reject) =>
+    mercadopago.put(`/v1/subscriptions/${id}`, { status: 'cancelled' })
+      .then(response => {
+        MP.subscriptionCancelled = response.body;
+        return resolve(MP.subscriptionCancelled);
+      })
+      .catch(error => reject(handleError(error)))),
 };
 
 const DB = {
   payment: {},
+
+  findByEmail: (col, email) => new Promise((resolve, reject) => {
+    return col.findOne({ email }, { sort: { sort_id: -1 } }, (error, res) => {
+      if (error) {
+        return reject(handleError(error));
+      }
+      DB.payment = res;
+      MP.payment = DB.payment.mp_payment || {};
+      MP.paymentRefunded = DB.payment.mp_payment_refunded || {};
+      MP.customer = DB.payment.mp_customer || {};
+      MP.card = DB.payment.mp_card || {};
+      MP.plan = DB.payment.mp_plan || {};
+      MP.subscription = DB.payment.mp_subscription || {};
+      MP.subscriptionCancelled = DB.payment.mp_subscription_cancelled || {};
+      return resolve(DB.payment);
+    });
+  }),
 
   insert: (col, data) => new Promise((resolve, reject) => {
     const doc = {
@@ -135,10 +161,14 @@ const DB = {
       },
       amount: _.toNumber(data.amount),
       currency_id: data.currency_id,
-      mpPayment: { status: 'pending' },
-      mpPaymentRefunded: {},
-      mpCustomer: {},
-      mpCard: {},
+      mp_payment: { status: 'pending' },
+      mp_payment_refunded: {},
+      mp_customer: {},
+      mp_card: {},
+      mp_plan: {},
+      mp_subscription: {},
+      mp_subscription_cancelled: {},
+      sort_id: 0,
       created: currentDateTime()
     };
 
@@ -153,10 +183,14 @@ const DB = {
 
   update: (col) => new Promise((resolve, reject) => {
     const doc = {
-      mpPayment: MP.payment,
-      mpPaymentRefunded: MP.paymentRefunded,
-      mpCustomer: MP.customer, 
-      mpCard: MP.card,
+      mp_payment: MP.payment,
+      mp_payment_refunded: MP.paymentRefunded,
+      mp_customer: MP.customer, 
+      mp_card: MP.card,
+      mp_plan: MP.plan,
+      mp_subscription: MP.subscription,
+      mp_subscription_cancelled: MP.subscriptionCancelled,
+      sort_id: MP.payment.id,
       updated: currentDateTime()
     };
 
@@ -188,7 +222,7 @@ export function add (event, context, callback) {
     .then(() => MP.customerCreate(data))
     .then(() => MP.cardCreate({ token: data.token }))
     .then(() => MP.planFindById(data.plan_id))
-    .then(() => MP.subscriptionsCreate({ plan_id: data.plan_id }))
+    .then(() => MP.subscriptionsCreate(data.plan_id))
     .then(() => DB.update(payment))
     .then(() => callback(null, success(MP.payment)))
     .catch(error => callback(null, failure(error)));
@@ -197,5 +231,35 @@ export function add (event, context, callback) {
     .then(db => chain({
       payment: db.collection('payment'),
     }))
-    .catch((error) => callback(null, failure(error)));
+    .catch(error => callback(null, failure(error)));
+};
+
+export function get_subscription (event, context, callback) {
+  const data = _.isString(event.body) ? JSON.parse(event.body) : event.body;
+
+  const chain = ({ payment }) => DB.findByEmail(payment, data.email)
+    .then(() => callback(null, success(DB.payment.mp_subscription)))
+    .catch(error => callback(null, failure(error)));
+
+  getConnection()
+    .then(db => chain({
+      payment: db.collection('payment'),
+    }))
+    .catch(error => callback(null, failure(error)));
+};
+
+export function cancel_subscription (event, context, callback) {
+  const data = _.isString(event.body) ? JSON.parse(event.body) : event.body;
+
+  const chain = ({ payment }) => DB.findByEmail(payment, data.email)
+    .then(payment => MP.subscriptionsCancel(MP. subscription.id))
+    .then(() => DB.update(payment))
+    .then(() => callback(null, success(MP.subscriptionCancelled)))
+    .catch(error => callback(null, failure(error)));
+
+  getConnection()
+    .then(db => chain({
+      payment: db.collection('payment'),
+    }))
+    .catch(error => callback(null, failure(error)));
 };
