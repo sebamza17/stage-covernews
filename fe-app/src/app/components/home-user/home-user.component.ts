@@ -19,8 +19,8 @@ export class HomeUserComponent implements OnInit {
 
   constructor(
     private globals: Globals,
-    private _ngZone: NgZone,
     private mercadopagoSvc: MercadopagoService,
+    private _ngZone: NgZone,
     public authorSvc: AuthorService,
     public userSvc: UserService
   ) { }
@@ -38,7 +38,7 @@ export class HomeUserComponent implements OnInit {
    * Get All Authors that the user follow
    */
   public getFollowAuthors() {
-    this.authorSvc.getFollowAuthors()
+    this.authorSvc.getFollowedAuthors()
     .subscribe(data => {
       this.authors = data;
       console.log(this.authors);

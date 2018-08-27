@@ -46,7 +46,7 @@ export class ArticleBaseComponent implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
     this.isOnReadLaterList = await this.articleService.toggleArticleFromReadLater(this.article);
-    // This stops the proopagation for this event
+    // This stops the propagation for this event
     return false;
   }
 

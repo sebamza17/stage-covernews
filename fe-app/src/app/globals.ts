@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
+import { AuthorService } from './shared/author/author.service';
 
 @Injectable()
 export class Globals {
@@ -13,6 +14,7 @@ export class Globals {
   public user = {
     user: null,
     isLoggedIn: false,
+    followedAuthors: [],
   };
 
   // Misc keys
@@ -26,6 +28,7 @@ export class Globals {
     this.user = await this.getGroup('user') || {
       user: null,
       isLoggedIn: false,
+      followedAuthors: []
     };
     this.misc = await this.getGroup('misc');
   }
@@ -36,9 +39,18 @@ export class Globals {
    * @param key
    * @param value
    */
-  public setValue(group: string = 'misc', key, value) {
+  public async setValue(group: string = 'misc', key, value) {
     let groupObject = this[group] || {};
     groupObject[key] = value;
+
+    // Check if item exists on LS, if exists remove it
+    const currentGroup = await this.localStorage.getItem(group).toPromise();
+    console.log(currentGroup);
+    if (currentGroup) {
+      await this.localStorage.removeItem(group).toPromise();
+    }
+
+    // Set item
     this.localStorage.setItem(group, this[group]).toPromise()
       .then(() => {
         console.log('Globals: Setting ' + key + ': ');
@@ -52,7 +64,7 @@ export class Globals {
    * @param key
    */
   public async getValue(group: string = 'misc', key) {
-    const groupValue = await this.localStorage.getItem(group).toPromise();
+    const groupValue = await this.localStorage.getItem(group).toPromise() || this[group];
     console.log('Globals: Getting ' + key + ': ');
     console.log(groupValue[key]);
     if (!groupValue) {
@@ -74,7 +86,6 @@ export class Globals {
    */
   public async removeValue(group: string, key = null) {
     if (key) {
-
       // Copy current group to store it on LS
       let groupObject = Object.assign(this[group], {});
       delete groupObject[key];
@@ -90,13 +101,10 @@ export class Globals {
           console.log('Globals: Removed key: ' + key + ' from: ' + group);
           console.log(groupObject);
         });
-
     } else {
-
       this[group] = null;
       this.localStorage.removeItemSubscribe(group);
       console.log('Globals: Removed group: ' + group);
-
     }
   }
 

@@ -1,6 +1,5 @@
 <a class="author-card"
    href="/author/{{author._id}}"
-   (click)="follow(author._id)"
    [ngClass]="{'author-card--placeholder': !author._id}">
 
   <!-- Head -->
@@ -39,8 +38,12 @@
 
         <div class="fw fw--a-center fw--j-space-between width-full">
 
-          <a class="button button--outline button--red button--uppercase button--xs">
-            Seguir
+          <a class="button button--red button--uppercase button--xs"
+             [ngClass]="{'button--outline': userIsFollowing}"
+             (click)="follow($event)">
+            <span *ngIf="followLoading">Guardando...</span>
+            <span *ngIf="userIsFollowing && !followLoading">Siguiendo</span>
+            <span *ngIf="!userIsFollowing && !followLoading">Seguir</span>
           </a>
 
           <div class="fw fw--a-center">

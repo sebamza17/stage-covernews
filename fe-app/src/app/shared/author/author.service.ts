@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import BaseService from '../base-service/base.service';
 import { Author } from './Author';
+import { Globals } from '../../globals';
 import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -18,9 +19,11 @@ export class AuthorService extends BaseService {
     getById: '/author/show/{{authorId}}',
     getByCategory: '/author/category/{{categoryId}}',
     follow: '/author/follow',
+    followedAuthors: '/author/follow',
   };
 
   constructor(
+    private globals: Globals,
     private http: HttpClient
   ) {
     super();
@@ -43,19 +46,42 @@ export class AuthorService extends BaseService {
   }
 
   /**
-   * TODO: Add description to this method
+   * Get all authors being followed by the current user
    * @returns {Observable<Author[]>}
    */
-  public getFollowAuthors(): Observable<Author[]> {
-    return this.http.get<Author[]>(this.url(this.urls.follow));
+  public getFollowedAuthors(): Observable<Author[]> {
+    return this.http.get<Author[]>(this.url(this.urls.followedAuthors));
   }
 
   /**
-   * Follows a given author
+   * Follows a given author. Uses the logged user on back-end
    * @param author
    */
-  public followAuthor(author: string) {
-    return this.http.post(this.url(this.urls.follow), {follow: {author: author}});
+  public async followAuthor(author: Author) {
+    let returnValue = false;
+
+    if (!author || !author._id) {
+      return false;
+    }
+
+    const currentAuthors = await this.globals.getValue('user', 'followedAuthors') || [];
+
+    // Check if author already exists, if do, remove it, if do not, add it and save to LS
+    if (currentAuthors.length > 0 && currentAuthors.indexOf(author._id) > -1) {
+      currentAuthors.splice(currentAuthors.indexOf(author._id), 1);
+      returnValue = false;
+    } else {
+      const result = <any>await this.http.post(this.url(this.urls.follow), {
+        follow: {author: author._id}
+      }).toPromise();
+      if (!result.ok || result.ok !== 1) {
+        return false;
+      }
+      currentAuthors.push(author._id);
+      returnValue = true;
+    }
+    await this.globals.setValue('user', 'followedAuthors', currentAuthors);
+    return returnValue;
   }
 
   /**
