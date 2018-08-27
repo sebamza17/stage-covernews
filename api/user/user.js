@@ -1,6 +1,6 @@
 import { success, failure } from './libs/response-lib';
 import { getConnection } from './libs/mongodb-connect';
-import { AWSCognito } from 'aws-sdk';
+import { signIn,signUp } from './libs/cognito-helper';
 
 /**
  * Refresh the user token
@@ -97,18 +97,45 @@ export function getByToken(event, context, callback) {
         });
 };
 
-
 /**
+ * Loguear en cognito y luego hacer get con el atributo Authorization
+ * y el valor del IdToken desde 
  * Get username from IdToken Cognito 
  * @param {*} event 
  * @param {*} context 
  * @param {*} callback 
  */
-export function getUsernameFromCognito(event, context, callback) {
+export function cognitoAuthorizer(event, context, callback) {
 
-    context.callbackWaitsForEmptyEventLoop = false;
-    
-    var username = event.requestContext.authorizer.claims.email;
+    let body = event.body;
 
-    callback(null, success("Ingresaste correctamente con el user: " + username));
+    //Obtengo parametros de 
+    if (typeof body == "string") {
+        try {
+            body = JSON.parse(body);
+        } catch (e) {
+            callback(null, failure(e));
+            return;
+        }
+    }
+
+    signIn(body.email, function (err, result){
+        if(err){
+            console.log(err);
+            signUp(body, function(err, result){
+                if (err)
+                    callback(null, failure(err));
+                else{
+                    signIn(body.email, function (err, result){
+                        if(err)
+                            callback(null, failure(err));
+                        else
+                            callback(null, success(result));
+                    });
+                }
+            });
+        }else{
+            callback(null, success(result));
+        }
+    });
 };
