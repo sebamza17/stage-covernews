@@ -1,7 +1,7 @@
 import { success, failure } from './libs/response-lib';
 import { getConnection } from './libs/mongodb-connect';
 import { signIn,signUp } from './libs/cognito-helper';
-
+import { suscribeUserMailchimp } from './libs/mailchimp-helper';
 /**
  * Refresh the user token
  * @param {*} event 
@@ -119,13 +119,15 @@ export function cognitoAuthorizer(event, context, callback) {
         }
     }
 
+    /*TODO: agregar un helper que valide el token de firebase*/
     signIn(body.email, function (err, result){
         if(err){
             console.log(err);
             signUp(body, function(err, result){
                 if (err)
-                    callback(null, failure(err));
+                    callback(null, failure(err)); //TODO Resolver el bug de la 2ble llamada
                 else{
+                    suscribeUserMailchimp(body.email);
                     signIn(body.email, function (err, result){
                         if(err)
                             callback(null, failure(err));

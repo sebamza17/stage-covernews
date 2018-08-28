@@ -1,6 +1,4 @@
-import WindowMock from 'window-mock';
-global.window = {localStorage: new WindowMock().localStorage};
-global.navigator = () => null;
+global.fetch = require('node-fetch')
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 
 //Creo el pool obj (ToDo: Sacar esto a un env y traerlo como una variable del env)
