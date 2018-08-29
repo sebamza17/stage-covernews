@@ -16,6 +16,10 @@ provider:
   region: us-east-1
   environment:
     ENV: ${opt:env}
+    USER_POOL_ID: ${file(./env.yml):${opt:env}.USER_POOL_ID}
+    CLIENT_ID : ${file(./env.yml):${opt:env}.CLIENT_ID}
+    MC_LIST : ${file(./env.yml):${opt:env}.MC_LIST}
+    MC_APIKEY : ${file(./env.yml):${opt:env}.MC_APIKEY}
 
 functions:
   refreshToken:

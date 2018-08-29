@@ -1,10 +1,9 @@
-global.fetch = require('node-fetch')
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 
 //Creo el pool obj (ToDo: Sacar esto a un env y traerlo como una variable del env)
 var userPool = new CognitoUserPool({ 
-    UserPoolId : 'us-east-1_uxb3I6LmE',
-    ClientId : '4p7s9raeo0h2uqr7riikr4g69c'
+    UserPoolId : process.env.USER_POOL_ID,
+    ClientId : process.env.CLIENT_ID
 });
 
 /**
@@ -27,7 +26,7 @@ export function signUp(body, callback) {
 
     attributeList.push(attributeEmail);
 
-    //La funcion lambda "preSignupAutoconfirm" confirma el user automagicamente 
+    //La funcion lambda "preSignupAutoconfirm" confirma el user automagicamente (trigger de cognito)
     userPool.signUp(username, password, attributeList, null, function(err, result){
         if (err) {
           console.log(`Problem creating user ${JSON.stringify(err)}`);
@@ -35,7 +34,7 @@ export function signUp(body, callback) {
         }
         else{
           console.log(`User successfully created ${JSON.stringify(result)}`);
-          cognitoUser = result.user.username;
+          var cognitoUser = result.user.username;
           callback(null,cognitoUser);
         }
     });

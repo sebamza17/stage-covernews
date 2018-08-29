@@ -1,5 +1,5 @@
-const list = '152b88c595';
-const apikey = '666a1a677ea043f5b80bbc36a3babc1d-us18';
+const list = process.env.MC_LIST;
+const apikey = process.env.MC_APIKEY;
 var Mailchimp = require('mailchimp-api-v3');
 var mailchimp = new Mailchimp(apikey);
 /**

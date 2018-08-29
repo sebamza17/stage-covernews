@@ -125,7 +125,7 @@ export function cognitoAuthorizer(event, context, callback) {
             console.log(err);
             signUp(body, function(err, result){
                 if (err)
-                    callback(null, failure(err)); //TODO Resolver el bug de la 2ble llamada
+                    callback(null, failure(err));
                 else{
                     suscribeUserMailchimp(body.email);
                     signIn(body.email, function (err, result){
