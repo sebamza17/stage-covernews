@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   public status: Boolean = false;
 
   constructor(
-    private globals: Globals,
+    public globals: Globals,
     private user: UserService,
     private modalSvc: ModalService
   ) {

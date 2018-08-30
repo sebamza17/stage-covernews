@@ -17,7 +17,7 @@ export class UserService extends BaseService {
   @Output() public event: EventEmitter<any> = new EventEmitter();
 
   urls = {
-    token: '/user/refreshToken'
+    auth: '/user/authorize'
   };
 
   constructor(public fireAuth: AngularFireAuth, public http: HttpClient) {
@@ -73,7 +73,7 @@ export class UserService extends BaseService {
     return await this.fireAuth.auth.signInWithPopup(this.provider)
       .then((result) => {
         this.user = result.user;
-        this.registerUserToken(this.user.refreshToken);
+        this.authUser();
         return this.user;
       }).catch(function (error) {
         // TODO: Manage error of user authetication
@@ -89,7 +89,7 @@ export class UserService extends BaseService {
     return await auth().signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.user = result.user;
-        this.registerUserToken(this.user.refreshToken);
+        this.authUser();
         return this.user;
       })
       .catch((error) => {
@@ -106,7 +106,7 @@ export class UserService extends BaseService {
     return await auth().createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.user = result.user;
-        this.registerUserToken(this.user.refreshToken);
+        this.authUser();
         return this.user;
       })
       .catch((error) => {
@@ -118,10 +118,10 @@ export class UserService extends BaseService {
    * Register user token
    * @param token
    */
-  public registerUserToken(token: string, cb: Function = function () {
+  public authUser( cb: Function = function () {
   }) {
 
-    this.http.post(this.url(this.urls.token), {user: this.user, refreshToken: token})
+    this.http.post(this.url(this.urls.auth), {user: this.user})
       .subscribe((data) => {
         cb(data);
       });

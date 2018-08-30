@@ -57,6 +57,9 @@ export function signIn(user, callback){
         Username : user,
         Pool : userPool
     };
+    console.log('userData',userData);
+    console.log('user',user);
+    
     var cognitoUser = new CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {

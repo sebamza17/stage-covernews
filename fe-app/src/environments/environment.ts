@@ -8,7 +8,7 @@ export const environment = {
     article: 'https://5cufvngwok.execute-api.us-east-1.amazonaws.com/stage',
     author: 'https://breb1wv546.execute-api.us-east-1.amazonaws.com/stage',
     category: 'https://cdr12lpah1.execute-api.us-east-1.amazonaws.com/stage',
-    user: 'https://mjxdq979n3.execute-api.us-east-1.amazonaws.com/stage',
+    user: 'http://localhost:3001',
     payment: 'http://localhost:3000'
   },
   firebase: {

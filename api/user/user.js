@@ -118,17 +118,22 @@ export function cognitoAuthorizer(event, context, callback) {
             return;
         }
     }
-
+    console.log('body',body)
+    if(!body.user || !body.user.email) {
+        callback(null, failure(e));
+        return;
+    }
+    let user = body.user;
     /*TODO: agregar un helper que valide el token de firebase*/
-    signIn(body.email, function (err, result){
+    signIn(user.email, function (err, result){
         if(err){
             console.log(err);
-            signUp(body, function(err, result){
+            signUp(user, function(err, result){
                 if (err)
                     callback(null, failure(err));
                 else{
-                    suscribeUserMailchimp(body.email);
-                    signIn(body.email, function (err, result){
+                    suscribeUserMailchimp(user.email);
+                    signIn(user.email, function (err, result){
                         if(err)
                             callback(null, failure(err));
                         else
