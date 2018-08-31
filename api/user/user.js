@@ -1,7 +1,9 @@
 import { success, failure } from './libs/response-lib';
 import { getConnection } from './libs/mongodb-connect';
-import { signIn,signUp } from './libs/cognito-helper';
+import { signIn,signUp, updateUserId } from './libs/cognito-helper';
 import { suscribeUserMailchimp } from './libs/mailchimp-helper';
+import { saveUserinDb } from './libs/mongodb-helper';
+
 /**
  * Refresh the user token
  * @param {*} event 
@@ -48,7 +50,7 @@ export function refreshToken(event, context, callback) {
         }).catch((err) => {
             callback(null, failure(err));
         });
-};
+}
 
 
 /**
@@ -91,25 +93,29 @@ export function getByToken(event, context, callback) {
                         return;
                     }
                     callback(null, success(doc));
-                })
+                });
         }).catch((err) => {
             callback(null, failure(err));
         });
-};
+}
 
 /**
- * Loguear en cognito y luego hacer get con el atributo Authorization
- * y el valor del IdToken desde 
- * Get username from IdToken Cognito 
+ * Recibe los datos de firebase y hace un signup (sino existe el user) y luego un sign in 
+ * y devuelve los token para atorizar las llamadas a la API.
+ * 
+ * TODO: agregar un helper que valide el token de firebase
+ * No usar callbackWaitsForEmptyEventLoop porque corta la ejecucion cuando hace el callback 
+ * y detiene las operaciones (en mongo,mc, etc) que se procesan asincronamente
+ * 
  * @param {*} event 
  * @param {*} context 
  * @param {*} callback 
  */
 export function cognitoAuthorizer(event, context, callback) {
-
+    
     let body = event.body;
 
-    //Obtengo parametros de 
+    //Parseo los parametros del body
     if (typeof body == "string") {
         try {
             body = JSON.parse(body);
@@ -119,20 +125,36 @@ export function cognitoAuthorizer(event, context, callback) {
         }
     }
 
-    /*TODO: agregar un helper que valide el token de firebase*/
-    signIn(body.email, function (err, result){
+    //Intento loguear en cognito
+    signIn(body.email, null, function (err, result){
         if(err){
             console.log(err);
-            signUp(body, function(err, result){
+            //Sino existe,creo un nuevo user en cognito
+            signUp(body, function(err, resultUser){
+                
                 if (err)
                     callback(null, failure(err));
                 else{
-                    suscribeUserMailchimp(body.email);
-                    signIn(body.email, function (err, result){
-                        if(err)
+                    
+                    //Guardo el user en Mongo
+                    saveUserinDb(body, function(err, result){
+                        if(err){
+                            console.log("Error creating user in mongoDB: ", err);
                             callback(null, failure(err));
-                        else
-                            callback(null, success(result));
+                        }else{
+                            
+                            //Guardo el user en mailchimp
+                            suscribeUserMailchimp(body.email);
+
+                            //Logueo en Cognito y devuelvo los tokens de acceso  
+                            //Y aprobecho el signin para agregar como campo el id de mongo
+                            signIn(body.email,result, function (err, result){
+                                if(err)
+                                    callback(null, failure(err));
+                                else
+                                    callback(null, success(result));
+                            });
+                        }
                     });
                 }
             });
@@ -140,4 +162,4 @@ export function cognitoAuthorizer(event, context, callback) {
             callback(null, success(result));
         }
     });
-};
+}
