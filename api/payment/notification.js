@@ -1,3 +1,4 @@
+import { add as PaymentAdd } from './payment';
 import { success, failure } from './libs/response-lib';
 import { getConnection } from './libs/mongodb-connect';
 import * as mercadopago from 'mercadopago';
@@ -35,6 +36,7 @@ const MP = {
     mercadopago.payment.findById(id)
       .then(response => {
         MP.payment = response.body;
+        PaymentAdd({ body: { mp_payment_id: MP.payment.id } });
         return resolve(MP.payment);
       })
       .catch(error => reject(handleError(error)))),
@@ -78,7 +80,7 @@ const DB = {
         return reject(handleError(error));
       }
       DB.notification = doc;
-      return resolve(DB.payment);
+      return resolve(DB.notification);
     });
   }),
 }

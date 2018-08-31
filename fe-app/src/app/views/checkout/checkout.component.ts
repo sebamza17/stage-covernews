@@ -1,6 +1,5 @@
 import * as $ from 'jquery';
 import { environment } from '../../../environments/environment';
-import '../../shared/mercadopago/mercadopago-client';
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -306,7 +305,7 @@ export class CheckoutComponent implements OnInit {
 
   submitForm(formData) {
     $('.btn-submit').attr('disabled', 'disabled');
-    // $('.checkout .process').show();
+    $('.checkout .process').show();
     const $form = document.querySelector('#pay');
     Mercadopago.createToken($form, (status, response) => this.responseHandler(formData, status, response));
   }
@@ -325,7 +324,7 @@ export class CheckoutComponent implements OnInit {
         $('.alert-warning').show();
       }
       $('.btn-submit').removeAttr('disabled');
-      // $('.checkout .process').hide();
+      $('.checkout .process').hide();
     } else {
 
       const payload = {
@@ -343,24 +342,32 @@ export class CheckoutComponent implements OnInit {
         .then((payment: any) => {
           $('.btn-submit').removeAttr('disabled');
           $('.checkout .process').hide();
-          if (payment.status === 'approved' || payment.status === 'in_process') {
-            $('.step-1').hide();
-            $('.step-2').show();
-            // setTimeout(() => {
-            //   location.href = '/';
-            // }, 5000);
-          } else {
-            $('.alert-error').show().find('p').html(this.mercadopagoSvc.getPaymentStatus({ ...payment, ...{
-              paymentMethod: $('[name=paymentMethodId] option:selected').text(),
-              amount: $('#amount').val(),
-              installments: $('#installments').val(),
-            }}));
+          switch (payment.status) {
+            case 'approved':
+              $('.view-2').hide();
+              $('.view-3').show();
+              break;
+            case 'pending':
+              $('.checkout-main .view-2').hide();
+              $('.view-4').show();
+              break;
+            case 'rejected':
+              $('.checkout-main .view-2').hide();
+              $('.view-5').show();
+              break;
+            default:
+              $('.alert-error').show().find('p').html(this.mercadopagoSvc.getPaymentStatus({ ...payment, ...{
+                paymentMethod: $('[name=paymentMethodId] option:selected').text(),
+                amount: $('#amount').val(),
+                installments: $('#installments').val(),
+              }}));
+              break;
           }
         })
         .catch((error) => {
           $('.alert-error').show();
           $('.btn-submit').removeAttr('disabled');
-          // $('.checkout .process').hide();
+          $('.checkout .process').hide();
         });
     }
   }

@@ -57,8 +57,11 @@ const MP = {
   customerSearch: data => new Promise((resolve, reject) =>
     mercadopago.customers.search({ email: data.payer_email })
       .then(response => {
-        if (!_.isEmpty(response.body.results) && !_.isEmpty(response.body.results[0].id)) {
-          MP.customer = response.body.results[0];
+        if (!_.isEmpty(response.body.results)) {
+          const customer = _.find(response.body.results, { email: data.payer_email });
+          if (customer) {
+            MP.customer = customer;
+          }
         }
         return resolve(MP.customer);
       })
@@ -127,29 +130,45 @@ const MP = {
         return resolve(MP.subscriptionCancelled);
       })
       .catch(error => reject(handleError(error)))),
+
+  updateFromDB: () => {
+    MP.payment = DB.payment.mp_payment || {};
+    MP.paymentRefunded = DB.payment.mp_payment_refunded || {};
+    MP.customer = DB.payment.mp_customer || {};
+    MP.card = DB.payment.mp_card || {};
+    MP.plan = DB.payment.mp_plan || {};
+    MP.subscription = DB.payment.mp_subscription || {};
+    MP.subscriptionCancelled = DB.payment.mp_subscription_cancelled || {};
+  },
 };
 
 const DB = {
+  collections: {},
   payment: {},
 
-  findByEmail: (col, email) => new Promise((resolve, reject) => {
-    return col.findOne({ email }, { sort: { sort_id: -1 } }, (error, res) => {
+  findByMPId: (collection, id) => new Promise((resolve, reject) => {
+    return collection.findOne({ mp_payment_id: id }, (error, doc) => {
       if (error) {
         return reject(handleError(error));
       }
-      DB.payment = res;
-      MP.payment = DB.payment.mp_payment || {};
-      MP.paymentRefunded = DB.payment.mp_payment_refunded || {};
-      MP.customer = DB.payment.mp_customer || {};
-      MP.card = DB.payment.mp_card || {};
-      MP.plan = DB.payment.mp_plan || {};
-      MP.subscription = DB.payment.mp_subscription || {};
-      MP.subscriptionCancelled = DB.payment.mp_subscription_cancelled || {};
+      DB.payment = doc;
+      MP.updateFromDB();
       return resolve(DB.payment);
     });
   }),
 
-  insert: (col, data) => new Promise((resolve, reject) => {
+  findByEmail: (collection, email) => new Promise((resolve, reject) => {
+    return collection.findOne({ email }, { sort: { mp_payment_id: -1 } }, (error, doc) => {
+      if (error) {
+        return reject(handleError(error));
+      }
+      DB.payment = doc;
+      MP.updateFromDB();
+      return resolve(DB.payment);
+    });
+  }),
+
+  insert: (collection, data) => new Promise((resolve, reject) => {
     const doc = {
       token: data.token,
       uid: data.uid,
@@ -168,11 +187,11 @@ const DB = {
       mp_plan: {},
       mp_subscription: {},
       mp_subscription_cancelled: {},
-      sort_id: 0,
+      mp_payment_id: 0,
       created: currentDateTime()
     };
 
-    return col.insertOne(doc, (error, res) => {
+    return collection.insertOne(doc, (error, res) => {
       if (error) {
         return reject(handleError(error));
       }
@@ -181,7 +200,7 @@ const DB = {
     });
   }),
 
-  update: (col) => new Promise((resolve, reject) => {
+  update: (collection) => new Promise((resolve, reject) => {
     const doc = {
       mp_payment: MP.payment,
       mp_payment_refunded: MP.paymentRefunded,
@@ -190,11 +209,11 @@ const DB = {
       mp_plan: MP.plan,
       mp_subscription: MP.subscription,
       mp_subscription_cancelled: MP.subscriptionCancelled,
-      sort_id: MP.payment.id,
+      mp_payment_id: MP.payment.id,
       updated: currentDateTime()
     };
 
-    return col.updateOne({ _id: DB.payment._id }, { $set: doc }, { upsert: false }, (error, res) => {
+    return collection.updateOne({ _id: DB.payment._id }, { $set: doc }, { upsert: false }, (error, res) => {
       if (error) {
         return reject(handleError(error));
       }
@@ -202,6 +221,15 @@ const DB = {
       return resolve(DB.payment);
     });
   }),
+
+  connect: () => new Promise((resolve, reject) => getConnection()
+    .then(db => {
+      DB.collections = {
+        payment: db.collection('payment'),
+      };
+      resolve(db);
+    })
+    .catch(error => reject(handleError(error)))),
 }
 
 /**
@@ -211,55 +239,67 @@ const DB = {
  * @param {*} callback 
  */
 export function add (event, context, callback) {
-  const data = _.isString(event.body) ? JSON.parse(event.body) : event.body;
-  data.notification_url = process.env.mp_notification_url;
-  data.plan_id = process.env.mp_plan_id;
+  const data = {
+    ...(_.isString(event.body) ? JSON.parse(event.body) : event.body),
+    notification_url: process.env.mp_notification_url,
+    plan_id: process.env.mp_plan_id,
+  }
 
-  const chain = ({ payment }) => DB.insert(payment, data)
-    .then(() => MP.paymentCreate({ ...data, paymentId: DB.payment._id }))
-    .then(() => MP.paymentRefund(MP.payment))
+  const onApproved = () => MP.paymentRefund(MP.payment)
     .then(() => MP.customerSearch(data))
     .then(() => MP.customerCreate(data))
     .then(() => MP.cardCreate({ token: data.token }))
     .then(() => MP.planFindById(data.plan_id))
     .then(() => MP.subscriptionsCreate(data.plan_id))
-    .then(() => DB.update(payment))
-    .then(() => callback(null, success(MP.payment)))
-    .catch(error => callback(null, failure(error)));
+    .then(() => DB.update(DB.collections.payment))
+    .then(() => callback(null, success({ status: 'approved' })));
 
-  getConnection()
-    .then(db => chain({
-      payment: db.collection('payment'),
-    }))
+  const onPending = () => DB.update(DB.collections.payment)
+    .then(() => callback(null, success({ status: 'pending' })));
+
+  const onRejected = () => DB.update(DB.collections.payment)
+    .then(() => callback(null, success({ status: 'rejected' })));
+
+  const checkStatus = () => {
+    switch (MP.payment.status) {
+      case 'approved':
+        return onApproved();
+      case 'pending':
+      case 'in_process':
+        return onPending();
+      case 'rejected':
+      case 'cancelled':
+        return onRejected();
+    }
+  };
+
+  DB.connect()
+    .then(() => data.mp_payment_id
+      ? DB.findByMPId(data.mp_payment_id)
+      : DB.insert(DB.collections.payment, data)
+        .then(() => MP.paymentCreate({ ...data, paymentId: DB.payment._id })))
+    .then(() => checkStatus())
     .catch(error => callback(null, failure(error)));
 };
 
 export function get_subscription (event, context, callback) {
   const data = _.isString(event.body) ? JSON.parse(event.body) : event.body;
 
-  const chain = ({ payment }) => DB.findByEmail(payment, data.email)
+  DB.connect()
+    .then(() => DB.findByEmail(DB.collections.payment, data.email))
     .then(() => callback(null, success(DB.payment.mp_subscription)))
-    .catch(error => callback(null, failure(error)));
-
-  getConnection()
-    .then(db => chain({
-      payment: db.collection('payment'),
-    }))
     .catch(error => callback(null, failure(error)));
 };
 
 export function cancel_subscription (event, context, callback) {
   const data = _.isString(event.body) ? JSON.parse(event.body) : event.body;
 
-  const chain = ({ payment }) => DB.findByEmail(payment, data.email)
-    .then(payment => MP.subscriptionsCancel(MP. subscription.id))
+  DB.connect()
+    .then(() => DB.findByEmail(DB.collections.payment, data.email))
+    .then(payment => MP.subscriptionsCancel(MP.subscription.id))
     .then(() => DB.update(payment))
     .then(() => callback(null, success(MP.subscriptionCancelled)))
     .catch(error => callback(null, failure(error)));
 
-  getConnection()
-    .then(db => chain({
-      payment: db.collection('payment'),
-    }))
-    .catch(error => callback(null, failure(error)));
+  return DB.connect(() => onConnected(), callback);
 };

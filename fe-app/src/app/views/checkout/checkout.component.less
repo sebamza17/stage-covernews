@@ -111,7 +111,7 @@
       }
     }
 
-    .checkout-sidebar .step-2 {
+    .checkout-sidebar .view-3 {
       h2 {
         font-size: 23px;
         line-height: 1.5;
@@ -140,6 +140,11 @@
     height: 100%;
     padding: 30px 50px 0;
     overflow: auto;
+    position: relative;
+
+    & > div + div {
+      height: 100%;
+    }
 
     h2 {
       line-height: 1;
@@ -325,11 +330,13 @@
       margin: 12px 0 0;
     }
 
-    .checkout-main .step {
+    .checkout-main .view {
       height: 100%;
     }
 
-    .checkout-main .step-2 {
+    .checkout-main .view-3,
+    .checkout-main .view-4,
+    .checkout-main .view-5 {
       padding-top: 40px;
       text-align: center;
 
@@ -384,6 +391,35 @@
   .alert-error {
     color: @color7;
     border-color: @color7;
+  }
+
+  .process {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    background: rgba(255,255,255,0.8) url(/assets/images/loading.gif) center center no-repeat;
+    text-align: center;
+    display: none;
+
+    &:after {
+      display: inline-block;
+      content: '';
+      vertical-align: middle;
+      height: 100%;
+      width: 0;
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      color: #555;
+      font-size: 16px;
+      padding-top: 60px;
+      line-height: 1;
+    }
   }
 
 }
