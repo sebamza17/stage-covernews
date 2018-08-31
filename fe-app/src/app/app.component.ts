@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
         return;
       }
       this.userSvc.user = user as User;
-      this.userSvc.registerUserToken(user.refreshToken, () => {
+      this.userSvc.authUser(() => {
         this.userSvc.event.emit(user);
         this.userData.walkUserData();
       });

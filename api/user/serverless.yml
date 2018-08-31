@@ -16,6 +16,10 @@ provider:
   region: us-east-1
   environment:
     ENV: ${opt:env}
+    USER_POOL_ID: ${file(./env.yml):${opt:env}.USER_POOL_ID}
+    CLIENT_ID : ${file(./env.yml):${opt:env}.CLIENT_ID}
+    MC_LIST : ${file(./env.yml):${opt:env}.MC_LIST}
+    MC_APIKEY : ${file(./env.yml):${opt:env}.MC_APIKEY}
 
 functions:
   refreshToken:
@@ -52,3 +56,36 @@ functions:
                 - Token
               allowCredentials: false
             authorizer: false
+  getUsernameFromCognito:
+      handler: user.getUsernameFromCognito
+      stageVariables: 
+        - stage : ${opt:env, 'test'}
+      events:
+        - http:
+            path: user/getUsername
+            method: get
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token
+            authorizer:
+              name: authorizer
+              arn: arn:aws:cognito-idp:us-east-1:548886366175:userpool/us-east-1_uxb3I6LmE
+  cognitoAuthorizer:
+      handler: user.cognitoAuthorizer
+      stageVariables:
+        - stage : ${opt:env, 'test'}
+      events:
+        - http:
+            path: user/authorize
+            method: post
+            cors:
+              origin: '*'
+              headers:
+                - Content-Type
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Token

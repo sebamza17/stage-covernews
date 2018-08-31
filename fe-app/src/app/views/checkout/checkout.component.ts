@@ -37,13 +37,13 @@ export class CheckoutComponent implements OnInit {
     return years;
   })();
   checkoutForm: FormGroup;
-  payment = {
+  payment = <any>{
     amount: 10,
     currency_id: 'ARS',
   };
 
   constructor(
-    private globals: Globals,
+    public globals: Globals,
     private user: UserService,
     private mercadopagoSvc: MercadopagoService,
     private formBuilder: FormBuilder,
