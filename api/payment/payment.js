@@ -102,7 +102,7 @@ const MP = {
       .catch(error => reject(handleError(error)))
   }),
 
-  planFindById: (planId) => new Promise((resolve, reject) =>
+  planFindById: planId => new Promise((resolve, reject) =>
     mercadopago.get(`/v1/plans/${planId}`)
       .then(response => {
         MP.plan = response.body;
@@ -146,8 +146,8 @@ const DB = {
   collections: {},
   payment: {},
 
-  findByMPId: (collection, id) => new Promise((resolve, reject) => {
-    return collection.findOne({ mp_payment_id: id }, (error, doc) => {
+  findByMPId: id => new Promise((resolve, reject) => {
+    return DB.collections.payment.findOne({ mp_payment_id: id }, (error, doc) => {
       if (error) {
         return reject(handleError(error));
       }
@@ -157,8 +157,8 @@ const DB = {
     });
   }),
 
-  findByEmail: (collection, email) => new Promise((resolve, reject) => {
-    return collection.findOne({ email }, { sort: { mp_payment_id: -1 } }, (error, doc) => {
+  findByEmail: email => new Promise((resolve, reject) => {
+    return DB.collections.payment.findOne({ email }, { sort: { mp_payment_id: -1 } }, (error, doc) => {
       if (error) {
         return reject(handleError(error));
       }
@@ -168,7 +168,7 @@ const DB = {
     });
   }),
 
-  insert: (collection, data) => new Promise((resolve, reject) => {
+  insert: data => new Promise((resolve, reject) => {
     const doc = {
       token: data.token,
       uid: data.uid,
@@ -191,7 +191,7 @@ const DB = {
       created: currentDateTime()
     };
 
-    return collection.insertOne(doc, (error, res) => {
+    return DB.collections.payment.insertOne(doc, (error, res) => {
       if (error) {
         return reject(handleError(error));
       }
@@ -200,7 +200,7 @@ const DB = {
     });
   }),
 
-  update: (collection) => new Promise((resolve, reject) => {
+  update: () => new Promise((resolve, reject) => {
     const doc = {
       mp_payment: MP.payment,
       mp_payment_refunded: MP.paymentRefunded,
@@ -213,7 +213,7 @@ const DB = {
       updated: currentDateTime()
     };
 
-    return collection.updateOne({ _id: DB.payment._id }, { $set: doc }, { upsert: false }, (error, res) => {
+    return DB.collections.payment.updateOne({ _id: DB.payment._id }, { $set: doc }, { upsert: false }, (error, res) => {
       if (error) {
         return reject(handleError(error));
       }
@@ -251,13 +251,13 @@ export function add (event, context, callback) {
     .then(() => MP.cardCreate({ token: data.token }))
     .then(() => MP.planFindById(data.plan_id))
     .then(() => MP.subscriptionsCreate(data.plan_id))
-    .then(() => DB.update(DB.collections.payment))
+    .then(() => DB.update())
     .then(() => callback(null, success({ status: 'approved' })));
 
-  const onPending = () => DB.update(DB.collections.payment)
+  const onPending = () => DB.update()
     .then(() => callback(null, success({ status: 'pending' })));
 
-  const onRejected = () => DB.update(DB.collections.payment)
+  const onRejected = () => DB.update()
     .then(() => callback(null, success({ status: 'rejected' })));
 
   const checkStatus = () => {
@@ -276,8 +276,7 @@ export function add (event, context, callback) {
   DB.connect()
     .then(() => data.mp_payment_id
       ? DB.findByMPId(data.mp_payment_id)
-      : DB.insert(DB.collections.payment, data)
-        .then(() => MP.paymentCreate({ ...data, paymentId: DB.payment._id })))
+      : DB.insert(data).then(() => MP.paymentCreate({ ...data, paymentId: DB.payment._id })))
     .then(() => checkStatus())
     .catch(error => callback(null, failure(error)));
 };
@@ -286,7 +285,7 @@ export function get_subscription (event, context, callback) {
   const data = _.isString(event.body) ? JSON.parse(event.body) : event.body;
 
   DB.connect()
-    .then(() => DB.findByEmail(DB.collections.payment, data.email))
+    .then(() => DB.findByEmail(data.email))
     .then(() => callback(null, success(DB.payment.mp_subscription)))
     .catch(error => callback(null, failure(error)));
 };
@@ -295,9 +294,9 @@ export function cancel_subscription (event, context, callback) {
   const data = _.isString(event.body) ? JSON.parse(event.body) : event.body;
 
   DB.connect()
-    .then(() => DB.findByEmail(DB.collections.payment, data.email))
-    .then(payment => MP.subscriptionsCancel(MP.subscription.id))
-    .then(() => DB.update(payment))
+    .then(() => DB.findByEmail(data.email))
+    .then(() => MP.subscriptionsCancel(MP.subscription.id))
+    .then(() => DB.update())
     .then(() => callback(null, success(MP.subscriptionCancelled)))
     .catch(error => callback(null, failure(error)));
 
